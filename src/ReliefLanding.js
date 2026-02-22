@@ -317,7 +317,7 @@ const Sculpture = styled.svg`
 
   @media (max-width: 768px) {
     width: 95vw;
-    height: 70vh;
+    height: 95vh;
   }
 `;
 
