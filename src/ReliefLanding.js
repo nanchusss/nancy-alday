@@ -330,7 +330,7 @@ const Projects = styled.div`
 
   h4 {
     font-family: "Cormorant Garamond", serif;
-    font-size: 18px;
+    font-size: 21px;
     margin-bottom: 12px;
     color: #2f2c27;
   }
@@ -372,14 +372,14 @@ const CoreContent = styled.div`
 
   h3 {
     font-family: "Cormorant Garamond", serif;
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 12px;
     color: #2f2c27;
   }
 
   p {
     font-family: "IBM Plex Sans", sans-serif;
-    font-size: 13px;
+    font-size: 17px;
     line-height: 1.6;
     color: #4a4741;
   }
