@@ -7,6 +7,7 @@ export default function ReliefLanding() {
 
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [activeFacet, setActiveFacet] = useState(null);
+  const [hoveredFacet, setHoveredFacet] = useState(null);
   const [showBio, setShowBio] = useState(false);
   const [showContact, setShowContact] = useState(false);
 
@@ -29,7 +30,6 @@ export default function ReliefLanding() {
     setShowBio(true);
   };
 
-  // Dimensiones ahora salen del diccionario
   const dimensions = t.landing.dimensions;
 
   const facets = Array.from({ length: 16 }, (_, i) => ({
@@ -41,7 +41,6 @@ export default function ReliefLanding() {
   return (
     <Wrapper onMouseMove={handleMouseMove} onClick={handleBackgroundClick}>
       
-      {/* Idioma izquierda */}
       <LangLeft>
         <LangButton onClick={() => setLanguage("en")}>
           {t.landing.languageEN}
@@ -51,7 +50,6 @@ export default function ReliefLanding() {
         </LangButton>
       </LangLeft>
 
-      {/* Contact derecha */}
       <ContactButton onClick={() => setShowContact(true)}>
         {t.landing.contact}
       </ContactButton>
@@ -68,9 +66,9 @@ export default function ReliefLanding() {
         <g transform="translate(450 450) scale(1.3) translate(-450 -450)">
           <defs>
             <linearGradient id="facetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#f6f3ec" />
-              <stop offset="100%" stopColor="#ddd7cc" />
-            </linearGradient>
+  <stop offset="0%" stopColor="#e2dccf" />
+  <stop offset="100%" stopColor="#4040a1ff" />
+</linearGradient>
             <filter id="softShadow">
               <feDropShadow dx="0" dy="25" stdDeviation="35" floodOpacity="0.12"/>
             </filter>
@@ -79,6 +77,9 @@ export default function ReliefLanding() {
           {facets.map((facet) => {
             const isActive =
               activeFacet && activeFacet.title === facet.dimension.title;
+
+            const isHovered =
+              hoveredFacet && hoveredFacet.title === facet.dimension.title;
 
             return (
               <g
@@ -94,16 +95,21 @@ export default function ReliefLanding() {
                   "
                   fill="url(#facetGradient)"
                   filter="url(#softShadow)"
+                  onMouseEnter={() => setHoveredFacet(facet.dimension)}
+                  onMouseLeave={() => setHoveredFacet(null)}
                   onClick={() => {
                     setShowBio(false);
                     setActiveFacet(facet.dimension);
                   }}
                   style={{
                     cursor: "pointer",
-                    opacity: isActive ? 0.95 : 0.55,
+                    opacity: isActive || isHovered ? 1 : 0.5,
+                    filter: isHovered
+                      ? "brightness(1.2) drop-shadow(0 0 18px rgba(255,255,255,0.5))"
+                      : "none",
                     transform: isActive ? "scale(1.05)" : "scale(1)",
                     transformOrigin: "center",
-                    transition: "all 0.6s ease"
+                    transition: "all 0.25s ease"
                   }}
                 />
               </g>
@@ -234,7 +240,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   perspective: 1400px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 `;
 
@@ -242,13 +248,13 @@ const Sculpture = styled.svg`
   width: 80vw;
   height: 80vh;
   transition: transform 0.15s ease-out;
+  overflow: visible;
 
   @media (max-width: 768px) {
     width: 95vw;
     height: 95vh;
   }
 `;
-
 
 
 const CoreContent = styled.div`
