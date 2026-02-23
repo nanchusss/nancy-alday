@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
+import Header from "../components/common/Header";
 
 export default function ReliefLanding() {
   const { t } = useContext(LanguageContext);
@@ -12,6 +13,9 @@ export default function ReliefLanding() {
   const [showContact, setShowContact] = useState(false);
 
   const handleBackgroundClick = (e) => {
+    // Si el modal está abierto no hacemos nada
+    if (showContact) return;
+
     if (e.target === e.currentTarget) {
       setActiveFacet(null);
       setShowBio(false);
@@ -39,161 +43,166 @@ export default function ReliefLanding() {
   }));
 
   return (
-    <Wrapper onMouseMove={handleMouseMove} onClick={handleBackgroundClick}>
-      <Sculpture
-        viewBox="0 0 1000 1000"
-        style={{
-          transform: `
-            rotateX(${mouse.y * 5}deg)
-            rotateY(${mouse.x * -5}deg)
-          `,
-        }}
-      >
-        <g transform="translate(450 450) scale(1.3) translate(-450 -450)">
-          <defs>
-            <linearGradient
-              id="facetGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#e2dccf" />
-              <stop offset="100%" stopColor="#4040a1ff" />
-            </linearGradient>
+    <>
+      {/* HEADER CONECTADO */}
+      <Header onContactClick={() => setShowContact(true)} />
 
-            <filter id="softShadow">
-              <feDropShadow
-                dx="0"
-                dy="25"
-                stdDeviation="35"
-                floodOpacity="0.12"
-              />
-            </filter>
-          </defs>
-
-          {facets.map((facet) => {
-            const isActive =
-              activeFacet && activeFacet.title === facet.dimension.title;
-
-            const isHovered =
-              hoveredFacet && hoveredFacet.title === facet.dimension.title;
-
-            return (
-              <g
-                key={facet.id}
-                transform={`translate(500 500) rotate(${facet.rotate})`}
+      <Wrapper onMouseMove={handleMouseMove} onClick={handleBackgroundClick}>
+        <Sculpture
+          viewBox="0 0 1000 1000"
+          style={{
+            transform: `
+              rotateX(${mouse.y * 5}deg)
+              rotateY(${mouse.x * -5}deg)
+            `,
+          }}
+        >
+          <g transform="translate(450 450) scale(1.3) translate(-450 -450)">
+            <defs>
+              <linearGradient
+                id="facetGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
               >
-                <path
-                  d="
-                    M 0 -360
-                    Q -70 -280 -170 40
-                    Q 0 120 170 40
-                    Q 70 -280 0 -360
-                  "
-                  fill="url(#facetGradient)"
-                  filter="url(#softShadow)"
-                  onMouseEnter={() => setHoveredFacet(facet.dimension)}
-                  onMouseLeave={() => setHoveredFacet(null)}
-                  onClick={() => {
-                    setShowBio(false);
-                    setActiveFacet(facet.dimension);
-                  }}
-                  style={{
-                    cursor: "pointer",
-                    opacity: isActive || isHovered ? 1 : 0.5,
-                    filter: isHovered
-                      ? "brightness(1.2) drop-shadow(0 0 18px rgba(255,255,255,0.5))"
-                      : "none",
-                    transform: isActive ? "scale(1.05)" : "scale(1)",
-                    transformOrigin: "center",
-                    transition: "all 0.25s ease",
-                  }}
+                <stop offset="0%" stopColor="#e2dccf" />
+                <stop offset="100%" stopColor="#4040a1ff" />
+              </linearGradient>
+
+              <filter id="softShadow">
+                <feDropShadow
+                  dx="0"
+                  dy="25"
+                  stdDeviation="35"
+                  floodOpacity="0.12"
                 />
-              </g>
-            );
-          })}
+              </filter>
+            </defs>
 
-          <circle
-            cx="500"
-            cy="500"
-            r={activeFacet || showBio ? 190 : 150}
-            fill={activeFacet ? activeFacet.glow : "#ebe6dc"}
-            filter="url(#softShadow)"
-            style={{ transition: "all 0.6s ease" }}
-          />
+            {facets.map((facet) => {
+              const isActive =
+                activeFacet && activeFacet.title === facet.dimension.title;
 
-          {(activeFacet || showBio) && (
-            <foreignObject x="380" y="380" width="240" height="240">
-              <CoreContent>
-                {showBio ? (
-                  <>
-                    <h3>{t.landing.aboutTitle}</h3>
-                    <p>{t.landing.aboutText}</p>
-                  </>
-                ) : (
-                  <>
-                    <h3>{activeFacet.title}</h3>
-                    <p>{activeFacet.description}</p>
-                  </>
-                )}
-              </CoreContent>
-            </foreignObject>
-          )}
+              const isHovered =
+                hoveredFacet && hoveredFacet.title === facet.dimension.title;
 
-          {!activeFacet && !showBio && (
-            <text
-              x="500"
-              y="505"
-              textAnchor="middle"
-              fontSize="24"
-              fill="#5a574f"
-              onClick={handleNameClick}
-              style={{
-                letterSpacing: "6px",
-                fontWeight: 300,
-                cursor: "pointer",
-              }}
-            >
-              NANCY ALDAY
-            </text>
-          )}
-        </g>
-      </Sculpture>
+              return (
+                <g
+                  key={facet.id}
+                  transform={`translate(500 500) rotate(${facet.rotate})`}
+                >
+                  <path
+                    d="
+                      M 0 -360
+                      Q -70 -280 -170 40
+                      Q 0 120 170 40
+                      Q 70 -280 0 -360
+                    "
+                    fill="url(#facetGradient)"
+                    filter="url(#softShadow)"
+                    onMouseEnter={() => setHoveredFacet(facet.dimension)}
+                    onMouseLeave={() => setHoveredFacet(null)}
+                    onClick={() => {
+                      setShowBio(false);
+                      setActiveFacet(facet.dimension);
+                    }}
+                    style={{
+                      cursor: "pointer",
+                      opacity: isActive || isHovered ? 1 : 0.5,
+                      filter: isHovered
+                        ? "brightness(1.2) drop-shadow(0 0 18px rgba(255,255,255,0.5))"
+                        : "none",
+                      transform: isActive ? "scale(1.05)" : "scale(1)",
+                      transformOrigin: "center",
+                      transition: "all 0.25s ease",
+                    }}
+                  />
+                </g>
+              );
+            })}
 
-      {showContact && (
-        <ModalOverlay onClick={() => setShowContact(false)}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <h2>{t.landing.modalTitle}</h2>
-            <form
-              action="mailto:nanchusss@icloud.com"
-              method="POST"
-              encType="text/plain"
-            >
-              <Input
-                name="Name"
-                placeholder={t.landing.namePlaceholder}
-                required
-              />
-              <Input
-                name="Email"
-                type="email"
-                placeholder={t.landing.emailPlaceholder}
-                required
-              />
-              <Textarea
-                name="Message"
-                placeholder={t.landing.messagePlaceholder}
-                required
-              />
-              <SubmitButton type="submit">
-                {t.landing.send}
-              </SubmitButton>
-            </form>
-          </ModalContent>
-        </ModalOverlay>
-      )}
-    </Wrapper>
+            <circle
+              cx="500"
+              cy="500"
+              r={activeFacet || showBio ? 190 : 150}
+              fill={activeFacet ? activeFacet.glow : "#ebe6dc"}
+              filter="url(#softShadow)"
+              style={{ transition: "all 0.6s ease" }}
+            />
+
+            {(activeFacet || showBio) && (
+              <foreignObject x="380" y="380" width="240" height="240">
+                <CoreContent>
+                  {showBio ? (
+                    <>
+                      <h3>{t.landing.aboutTitle}</h3>
+                      <p>{t.landing.aboutText}</p>
+                    </>
+                  ) : (
+                    <>
+                      <h3>{activeFacet.title}</h3>
+                      <p>{activeFacet.description}</p>
+                    </>
+                  )}
+                </CoreContent>
+              </foreignObject>
+            )}
+
+            {!activeFacet && !showBio && (
+              <text
+                x="500"
+                y="505"
+                textAnchor="middle"
+                fontSize="24"
+                fill="#5a574f"
+                onClick={handleNameClick}
+                style={{
+                  letterSpacing: "6px",
+                  fontWeight: 300,
+                  cursor: "pointer",
+                }}
+              >
+                NANCY ALDAY
+              </text>
+            )}
+          </g>
+        </Sculpture>
+
+        {showContact && (
+          <ModalOverlay onClick={() => setShowContact(false)}>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
+              <h2>{t.landing.modalTitle}</h2>
+              <form
+                action="mailto:nanchusss@icloud.com"
+                method="POST"
+                encType="text/plain"
+              >
+                <Input
+                  name="Name"
+                  placeholder={t.landing.namePlaceholder}
+                  required
+                />
+                <Input
+                  name="Email"
+                  type="email"
+                  placeholder={t.landing.emailPlaceholder}
+                  required
+                />
+                <Textarea
+                  name="Message"
+                  placeholder={t.landing.messagePlaceholder}
+                  required
+                />
+                <SubmitButton type="submit">
+                  {t.landing.send}
+                </SubmitButton>
+              </form>
+            </ModalContent>
+          </ModalOverlay>
+        )}
+      </Wrapper>
+    </>
   );
 }
 
@@ -232,14 +241,15 @@ const CoreContent = styled.div`
   justify-content: center;
 
   h3 {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 25px;
-    margin-bottom: 12px;
-    color: #2f2c27;
-  }
+
+  font-size: 26px;
+  margin-bottom: 14px;
+  color: #2f2c27;
+  letter-spacing: 1px;
+}
 
   p {
-    font-family: "IBM Plex Sans", sans-serif;
+    
     font-size: 17px;
     line-height: 1.6;
     color: #4a4741;
@@ -265,10 +275,10 @@ const ModalContent = styled.div`
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
 
   h2 {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 30px;
-    margin-bottom: 24px;
-  }
+  font-family: "Prata", serif;
+  font-size: 32px;
+  margin-bottom: 28px;
+}
 `;
 
 const Input = styled.input`
@@ -297,7 +307,7 @@ const SubmitButton = styled.button`
   border-radius: 30px;
   border: none;
   background: #dcd5c7;
-  font-family: "Cormorant Garamond", serif;
+ 
   font-size: 16px;
   cursor: pointer;
 

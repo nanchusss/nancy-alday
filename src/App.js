@@ -4,19 +4,21 @@ import TechGrid from "./components/TechGrid";
 import ProjectsShowcase from "./components/ProjectPanels";
 import HowIBuild from "./components/HowIBuild";
 import { LanguageProvider } from "./components/LanguageContext"; 
-import Header from "./components/common/Header";
+import GlobalStyles from "./styles/GlobalStyles";
+
 
 
 
 function App() {
   return (
-    <LanguageProvider>
-      <Header />
-      <ReliefLanding />
-      <TechGrid />
-      <HowIBuild />
-      <ProjectsShowcase />
-    </LanguageProvider>
+   <LanguageProvider>
+  <GlobalStyles />
+ 
+  <ReliefLanding />
+  <TechGrid />
+  <HowIBuild />
+  <ProjectsShowcase />
+</LanguageProvider>
   );
 }
 

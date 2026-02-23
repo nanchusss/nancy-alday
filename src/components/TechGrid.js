@@ -20,7 +20,7 @@ import {
 } from "react-icons/si";
 
 export default function TechEcosystem() {
-  const { t } = useContext(LanguageContext);
+  const { t } = useContext(LanguageContext) || {};
 
   const stack = [
     { icon: <FaReact />, name: "React" },
@@ -36,13 +36,16 @@ export default function TechEcosystem() {
     { icon: <SiOpenai />, name: "OpenAI API" }
   ];
 
-  if (!t?.tech) return null;
+  const title = t?.tech?.title || "Tech Ecosystem";
+  const subtitle =
+    t?.tech?.subtitle ||
+    "Technologies and tools I use to build modern digital products.";
 
   return (
     <Section>
       <Container>
-        <Title>{t.tech.title}</Title>
-        <Subtitle>{t.tech.subtitle}</Subtitle>
+        <Title>{title}</Title>
+        <Subtitle>{subtitle}</Subtitle>
 
         <Wall>
           {stack.map((tech, index) => (
@@ -72,7 +75,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: "Cormorant Garamond", serif;
+
   font-size: 48px;
   font-weight: 400;
   color: #2f2c27;
@@ -81,7 +84,7 @@ const Title = styled.h2`
 `;
 
 const Subtitle = styled.p`
-  font-family: "IBM Plex Sans", sans-serif;
+ 
   font-size: 16px;
   color: #5a574f;
   opacity: 0.8;
@@ -130,7 +133,7 @@ const IconWrapper = styled.div`
 `;
 
 const TechName = styled.span`
-  font-family: "IBM Plex Sans", sans-serif;
+
   font-size: 14px;
   margin-top: 18px;
   letter-spacing: 1px;

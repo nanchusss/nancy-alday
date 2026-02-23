@@ -117,7 +117,7 @@ const LangButton = styled.button`
   background: none;
   border: none;
   padding: 0;
-  font-family: "IBM Plex Sans", sans-serif;
+  
   font-size: 17px;
   letter-spacing: 1px;
   color: #3a3732;
@@ -135,7 +135,7 @@ const ContactButton = styled.button`
   border: 1px solid rgba(60, 56, 50, 0.4);
   padding: 10px 22px;
   border-radius: 40px;
-  font-family: "Cormorant Garamond", serif;
+  
   font-size: 19px;
   letter-spacing: 1px;
   color: #3a3732;

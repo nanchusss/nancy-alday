@@ -39,7 +39,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: "Cormorant Garamond", serif;
+
   font-size: 48px;
   font-weight: 400;
   text-align: center;
@@ -64,14 +64,14 @@ const Block = styled.div`
 `;
 
 const BlockTitle = styled.h3`
-  font-family: "Cormorant Garamond", serif;
+ 
   font-size: 28px;
   margin-bottom: 20px;
   color: #3a3732;
 `;
 
 const BlockText = styled.p`
-  font-family: "IBM Plex Sans", sans-serif;
+  
   font-size: 16px;
   line-height: 1.7;
   color: #4a4741;

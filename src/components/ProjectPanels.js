@@ -87,7 +87,7 @@ const Content = styled.div`
 `;
 
 const ProjectTitle = styled.h3`
-  font-family: "Cormorant Garamond", serif;
+  
   font-size: 42px;
   font-weight: 400;
   margin-bottom: 25px;
@@ -95,7 +95,7 @@ const ProjectTitle = styled.h3`
 `;
 
 const Description = styled.p`
-  font-family: "IBM Plex Sans", sans-serif;
+  
   font-size: 16px;
   line-height: 1.7;
   margin-bottom: 25px;
@@ -103,7 +103,7 @@ const Description = styled.p`
 `;
 
 const Stack = styled.p`
-  font-family: "IBM Plex Sans", sans-serif;
+  
   font-size: 14px;
   letter-spacing: 1px;
   opacity: 0.7;
@@ -111,7 +111,7 @@ const Stack = styled.p`
 `;
 
 const ProjectLink = styled.a`
-  font-family: "IBM Plex Sans", sans-serif;
+  
   font-size: 14px;
   text-decoration: none;
   color: #3a3732;
