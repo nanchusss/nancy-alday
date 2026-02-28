@@ -166,6 +166,16 @@ const MainTitle = styled.h2`
 
     text-shadow: 0 0 18px rgba(200, 160, 220, 0.35);
   }
+      @media (max-width: 900px) {
+    font-size: 72px;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 56px;
+    letter-spacing: 1px;
+  }
+    
 `;
 
 const Underline = styled.div`
@@ -185,14 +195,25 @@ const IntroText = styled.p`
 
 const SnapContainer = styled.div`
   scroll-snap-type: y mandatory;
+
+  @media (max-width: 900px) {
+    scroll-snap-type: none;
+  }
 `;
 
 const Section = styled.section`
-  height: 100vh;
+  min-height: 100vh;
+  padding: 100px 0;
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 900px) {
+    min-height: auto;   /* 👈 clave */
+    padding: 140px 0;   /* más aire */
+    scroll-snap-align: none; /* 👈 quitamos snap solo en mobile */
+  }
 `;
 
 const Inner = styled.div`
@@ -231,6 +252,8 @@ const Image = styled.img`
 
 const Content = styled.div`
   flex: 1;
+  max-width: 650px;
+
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transform: ${({ visible, reverse }) =>
     visible
@@ -238,7 +261,13 @@ const Content = styled.div`
       : reverse
       ? "translateX(-120px)"
       : "translateX(120px)"};
+
   transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @media (max-width: 900px) {
+    padding: 0 24px;   /* 👈 aire lateral real */
+    max-width: 100%;
+  }
 `;
 
 const Title = styled.h3`
