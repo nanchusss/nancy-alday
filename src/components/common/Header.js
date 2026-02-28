@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { LanguageContext } from "../LanguageContext";
 
 export default function Header({ onContactClick }) {
@@ -16,7 +16,7 @@ export default function Header({ onContactClick }) {
               setOpen(false);
             }}
           >
-            {t.landing.languageEN}
+            EN
           </LangButton>
 
           <LangButton
@@ -25,9 +25,11 @@ export default function Header({ onContactClick }) {
               setOpen(false);
             }}
           >
-            {t.landing.languageES}
+            ES
           </LangButton>
         </Left>
+
+       
 
         <Right>
           <ContactButton
@@ -45,31 +47,46 @@ export default function Header({ onContactClick }) {
         </Right>
       </Inner>
 
-      {open && (
-        <MobileMenu>
-          <LangButton onClick={() => setLanguage("en")}>
-            {t.landing.languageEN}
-          </LangButton>
-
-          <LangButton onClick={() => setLanguage("es")}>
-            {t.landing.languageES}
-          </LangButton>
-
-          <ContactButton
-            onClick={() => {
-              onContactClick();
-              setOpen(false);
-            }}
-          >
-            {t.landing.contact}
-          </ContactButton>
-        </MobileMenu>
-      )}
+      <MobileMenu open={open}>
+        <LangButton onClick={() => setLanguage("en")}>EN</LangButton>
+        <LangButton onClick={() => setLanguage("es")}>ES</LangButton>
+        <ContactButton
+          onClick={() => {
+            onContactClick();
+            setOpen(false);
+          }}
+        >
+          {t.landing.contact}
+        </ContactButton>
+      </MobileMenu>
     </Container>
   );
 }
 
+/* ===================== */
+/* ANIMATIONS */
+/* ===================== */
+
+const fadeDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const gradientMove = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
+
+/* ===================== */
 /* STYLES */
+/* ===================== */
 
 const Container = styled.header`
   position: fixed;
@@ -80,8 +97,10 @@ const Container = styled.header`
   display: flex;
   align-items: center;
   z-index: 1000;
-  background: rgba(233, 228, 218, 0.85);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(18px);
+  background: rgba(233, 228, 218, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  animation: ${fadeDown} 0.8s ease;
 `;
 
 const Inner = styled.div`
@@ -100,7 +119,7 @@ const Inner = styled.div`
 
 const Left = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 22px;
 
   @media (max-width: 768px) {
     display: none;
@@ -113,38 +132,77 @@ const Right = styled.div`
   gap: 20px;
 `;
 
+const Logo = styled.div`
+  font-size: 20px;
+  letter-spacing: 6px;
+  font-weight: 600;
+  color: #2f2c28;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  transition: 0.4s ease;
+
+  &:hover {
+    letter-spacing: 10px;
+    opacity: 0.7;
+  }
+`;
+
 const LangButton = styled.button`
   background: none;
   border: none;
-  padding: 0;
-  
-  font-size: 17px;
-  letter-spacing: 1px;
+  font-size: 15px;
+  letter-spacing: 2px;
   color: #3a3732;
   cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+  position: relative;
+  padding-bottom: 4px;
+  transition: 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background: #0c0c0cff;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 
   &:hover {
-    opacity: 1;
+    opacity: 0.8;
   }
 `;
 
 const ContactButton = styled.button`
-  background: transparent;
-  border: 1px solid rgba(60, 56, 50, 0.4);
-  padding: 10px 22px;
+  padding: 11px 28px;
   border-radius: 40px;
-  
-  font-size: 19px;
-  letter-spacing: 1px;
-  color: #3a3732;
+  font-family: "Sora", sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
   cursor: pointer;
-  transition: all 0.4s ease;
+  border: none;
+  color: #f4f1ea;
+
+  background: #8C88B6;
+  transition: all 0.35s ease;
+
+  box-shadow: 0 6px 20px rgba(140, 136, 182, 0.25);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(60, 56, 50, 0.8);
+    background: #7671A3;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(118, 113, 163, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0px) scale(0.98);
   }
 
   @media (max-width: 768px) {
@@ -177,4 +235,8 @@ const MobileMenu = styled.div`
   flex-direction: column;
   gap: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  transform: ${({ open }) => (open ? "translateY(0)" : "translateY(-20px)")};
+  opacity: ${({ open }) => (open ? "1" : "0")};
+  pointer-events: ${({ open }) => (open ? "auto" : "none")};
+  transition: 0.4s ease;
 `;

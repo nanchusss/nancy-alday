@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
 
@@ -21,6 +21,26 @@ import {
 
 export default function TechEcosystem() {
   const { t } = useContext(LanguageContext) || {};
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    },
+    {
+      threshold: 0.3,
+      rootMargin: "0px 0px -100px 0px"
+    }
+  );
+
+  if (sectionRef.current) {
+    observer.observe(sectionRef.current);
+  }
+
+  return () => observer.disconnect();
+}, []);
 
   const stack = [
     { icon: <FaReact />, name: "React" },
@@ -42,14 +62,18 @@ export default function TechEcosystem() {
     "Technologies and tools I use to build modern digital products.";
 
   return (
-    <Section>
+    <Section ref={sectionRef}>
       <Container>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
+        <Title visible={isVisible}>{title}</Title>
+        <Subtitle visible={isVisible}>{subtitle}</Subtitle>
 
         <Wall>
           {stack.map((tech, index) => (
-            <TechItem key={index}>
+            <TechItem
+              key={index}
+              visible={isVisible}
+              delay={index * 0.1}
+            >
               <IconWrapper>{tech.icon}</IconWrapper>
               <TechName>{tech.name}</TechName>
             </TechItem>
@@ -75,21 +99,28 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-
   font-size: 48px;
   font-weight: 400;
   color: #2f2c27;
   letter-spacing: 3px;
   margin-bottom: 20px;
+
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transform: ${({ visible }) =>
+    visible ? "translateY(0px)" : "translateY(60px)"};
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
 `;
 
 const Subtitle = styled.p`
- 
   font-size: 16px;
   color: #5a574f;
-  opacity: 0.8;
   margin-bottom: 120px;
   letter-spacing: 0.5px;
+
+  opacity: ${({ visible }) => (visible ? 0.8 : 0)};
+  transform: ${({ visible }) =>
+    visible ? "translateY(0px)" : "translateY(60px)"};
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 `;
 
 const Wall = styled.div`
@@ -108,8 +139,16 @@ const TechItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.4s ease;
   cursor: default;
+
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transform: ${({ visible }) =>
+    visible ? "translateY(0px)" : "translateY(80px)"};
+
+  transition: opacity 1s ease,
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay: ${({ delay }) => delay}s;
 
   &:hover {
     transform: translateY(-8px);
@@ -126,14 +165,13 @@ const TechItem = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  font-size: 42px;
+  font-size: 62px;
   color: #5a574f;
   opacity: 0.65;
   transition: all 0.4s ease;
 `;
 
 const TechName = styled.span`
-
   font-size: 14px;
   margin-top: 18px;
   letter-spacing: 1px;

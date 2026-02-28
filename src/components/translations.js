@@ -87,6 +87,12 @@ export const translations = {
           description:
             "Digital landing experience built in React for early-stage startup positioning, featuring modular architecture, responsive systems, structured contact form integration, and AI-generated imagery tailored to reinforce brand identity.",
           stack: "React · Layout Architecture · UI Design"
+        },
+        {
+          title: "Finestra Serveis",
+          description:
+            "Corporate website built with React, JavaScript (ES6+) and Styled Components, featuring modular architecture and responsive layout systems. WhatsApp conversion button, and a custom domain contact form connected to structured backend workflows.",
+          stack: "UI Design · React · Styled Components · Node · Express"
         }
       ]
     },
@@ -212,6 +218,12 @@ tech: {
           title: "Base Mendoza",
           description:
             "Landing digital desarrollada en React para posicionamiento de startup en etapa temprana, con arquitectura modular, sistemas responsivos, integración estructurada de formulario de contacto e imágenes generadas con inteligencia artificial.",
+          stack: "React · Arquitectura de Layout · Diseño UI"
+        },
+         {
+          title: "Finestra Serveis",
+          description:
+            "Página Web desarrollada en React con diseño UI, con arquitectura modular, sistemas responsivos, botón de Whatsapp, ntegración estructurada de formulario de contacto e imágenes generadas con inteligencia artificial.",
           stack: "React · Arquitectura de Layout · Diseño UI"
         }
       ]
