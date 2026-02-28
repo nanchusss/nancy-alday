@@ -161,7 +161,7 @@ export default function ReliefLanding() {
                   y="505"
                   fontFamily="Coromant Garamond, serif"
                   textAnchor="middle"
-                  fontSize="24"
+                  fontSize="30"
                   fill="#5a574f"
                   onClick={handleNameClick}
                   style={{
@@ -224,14 +224,7 @@ const slowRotate = keyframes`
     transform: rotate(-360deg);
   }
 `;
-const HeroName = styled.h1`
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(42px, 6vw, 64px);
-  font-weight: 500;
-  letter-spacing: 8px;
-  text-align: center;
-  color: #2f2c28;
-`;
+
 
 const RotatingGroup = styled.g`
   transform-origin: 500px 500px;

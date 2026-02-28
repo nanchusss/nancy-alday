@@ -78,11 +78,7 @@ const fadeDown = keyframes`
   }
 `;
 
-const gradientMove = keyframes`
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-`;
+
 
 /* ===================== */
 /* STYLES */
@@ -132,22 +128,7 @@ const Right = styled.div`
   gap: 20px;
 `;
 
-const Logo = styled.div`
-  font-size: 20px;
-  letter-spacing: 6px;
-  font-weight: 600;
-  color: #2f2c28;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  transition: 0.4s ease;
 
-  &:hover {
-    letter-spacing: 10px;
-    opacity: 0.7;
-  }
-`;
 
 const LangButton = styled.button`
   background: none;

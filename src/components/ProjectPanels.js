@@ -35,10 +35,10 @@ export default function ProjectsShowcase() {
       <Intro>
         <Overline>Selected Work</Overline>
 
-        <MainTitle progress={progress}>
-          PRO
-          <span>YECTOS</span>
-        </MainTitle>
+    <MainTitle progress={progress}>
+  {t.projects.projectsPart1}
+  <span>{t.projects.projectsPart2}</span>
+</MainTitle>
 
         <Underline progress={progress} />
 
@@ -264,7 +264,7 @@ const Title = styled.h3`
 `;
 
 const Description = styled.p`
-  font-size: 18px;
+  font-size: 25px;
   line-height: 1.8;
   margin-bottom: 35px;
 
@@ -277,7 +277,7 @@ const Description = styled.p`
 `;
 
 const Stack = styled.p`
-  font-size: 15px;
+  font-size: 20px;
   letter-spacing: 1px;
   opacity: 0.6;
   margin-bottom: 60px;

@@ -68,6 +68,8 @@ export const translations = {
     },
 
     projects: {
+      projectsPart1: "Pro",
+      projectsPart2: "Jects",
       viewProject: "View Project →",
       items: [
         {
@@ -195,11 +197,14 @@ export const translations = {
       ]
     },
 tech: {
+  
   title: "Ecosistema Tecnológico",
   subtitle:
     "Sistemas construidos mediante arquitectura modular e integración estructurada."
 },
     projects: {
+      projectsPart1: "Pro",
+projectsPart2: "Yectos",
       viewProject: "Ver Proyecto →",
       items: [
         {
