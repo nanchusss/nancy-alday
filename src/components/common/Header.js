@@ -1,88 +1,56 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { LanguageContext } from "../LanguageContext";
 
 export default function Header({ onContactClick }) {
-  const { t, setLanguage } = useContext(LanguageContext);
-  const [open, setOpen] = useState(false);
+  const { setLanguage, t } = useContext(LanguageContext);
 
   return (
     <Container>
       <Inner>
-        <Left>
-          <LangButton
-            onClick={() => {
-              setLanguage("en");
-              setOpen(false);
-            }}
-          >
-            EN
-          </LangButton>
-
-          <LangButton
-            onClick={() => {
-              setLanguage("es");
-              setOpen(false);
-            }}
-          >
-            ES
-          </LangButton>
-        </Left>
-
-       
+        <Brand>
+          <Name>Nancy Alday</Name>
+          <Role>Visual Artist & Developer</Role>
+        </Brand>
 
         <Right>
-          <ContactButton
-            onClick={() => {
-              onContactClick();
-              setOpen(false);
-            }}
-          >
-            {t.landing.contact}
-          </ContactButton>
+          <LangGroup>
+            <LangButton onClick={() => setLanguage("en")}>
+              {t.landing.languageEN}
+            </LangButton>
 
-          <MobileToggle onClick={() => setOpen(!open)}>
-            {open ? "✕" : "⋯"}
-          </MobileToggle>
+            <LangButton onClick={() => setLanguage("es")}>
+              {t.landing.languageES}
+            </LangButton>
+          </LangGroup>
+
+          <ContactButton onClick={onContactClick}>
+            <StaticText>{t.landing.contact}</StaticText>
+
+            <MarqueeWrapper>
+              <MarqueeContent>
+                {t.landing.contact} — {t.landing.contact} — {t.landing.contact} —
+              </MarqueeContent>
+              <MarqueeContent>
+                {t.landing.contact} — {t.landing.contact} — {t.landing.contact} —
+              </MarqueeContent>
+            </MarqueeWrapper>
+          </ContactButton>
         </Right>
       </Inner>
-
-      <MobileMenu open={open}>
-        <LangButton onClick={() => setLanguage("en")}>EN</LangButton>
-        <LangButton onClick={() => setLanguage("es")}>ES</LangButton>
-        <ContactButton
-          onClick={() => {
-            onContactClick();
-            setOpen(false);
-          }}
-        >
-          {t.landing.contact}
-        </ContactButton>
-      </MobileMenu>
     </Container>
   );
 }
 
-/* ===================== */
-/* ANIMATIONS */
-/* ===================== */
 
-const fadeDown = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ================= ANIMATIONS ================= */
+
+const marqueeMove = keyframes`
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 `;
 
-
-
-/* ===================== */
-/* STYLES */
-/* ===================== */
+/* ================= STYLES ================= */
 
 const Container = styled.header`
   position: fixed;
@@ -90,134 +58,108 @@ const Container = styled.header`
   left: 0;
   width: 100%;
   height: 90px;
+  backdrop-filter: blur(18px);
+  background: rgba(243, 241, 236, 0.49);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(18px);
-  background: rgba(233, 228, 218, 0.6);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  animation: ${fadeDown} 0.8s ease;
 `;
 
 const Inner = styled.div`
   width: 100%;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
 `;
 
-const Left = styled.div`
+const Brand = styled.div`
   display: flex;
-  gap: 22px;
+  flex-direction: column;
+`;
 
-  @media (max-width: 768px) {
-    display: none;
-  }
+const Name = styled.div`
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #111;
+`;
+
+const Role = styled.div`
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #434242ff;
 `;
 
 const Right = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 `;
 
-
+const LangGroup = styled.div`
+  display: flex;
+  gap: 18px;
+`;
 
 const LangButton = styled.button`
   background: none;
   border: none;
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: 2px;
-  color: #3a3732;
+  color: #333;
   cursor: pointer;
-  position: relative;
-  padding-bottom: 4px;
-  transition: 0.3s ease;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0%;
-    background: #0c0c0cff;
-    transition: width 0.3s ease;
-  }
-
-  &:hover::after {
-    width: 100%;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 const ContactButton = styled.button`
-  padding: 11px 28px;
+  position: relative;
+  overflow: hidden;
+  padding: 12px 24px;
   border-radius: 40px;
-  font-family: "Sora", sans-serif;
-  font-size: 16px;
-  letter-spacing: 1.5px;
+  font-size: 17px;
+  border: 1px solid #111;
+  background: transparent;
   cursor: pointer;
-  border: none;
-  color: #f4f1ea;
-
-  background: #8C88B6;
-  transition: all 0.35s ease;
-
-  box-shadow: 0 6px 20px rgba(140, 136, 182, 0.25);
-
-  &:hover {
-    background: #7671A3;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(118, 113, 163, 0.35);
-  }
-
-  &:active {
-    transform: translateY(0px) scale(0.98);
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
+  width: 180px;
+  height: 44px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 2px;
 `;
 
-const MobileToggle = styled.button`
-  display: none;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #3a3732;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
-
-const MobileMenu = styled.div`
+const StaticText = styled.div`
   position: absolute;
-  top: 90px;
-  right: 20px;
-  background: rgba(248, 244, 238, 0.95);
-  backdrop-filter: blur(12px);
-  padding: 30px;
-  border-radius: 24px;
+  inset: 0;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-  transform: ${({ open }) => (open ? "translateY(0)" : "translateY(-20px)")};
-  opacity: ${({ open }) => (open ? "1" : "0")};
-  pointer-events: ${({ open }) => (open ? "auto" : "none")};
-  transition: 0.4s ease;
+  font-size: 17px;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+
+  ${ContactButton}:hover & {
+    opacity: 0;
+  }
+`;
+
+const MarqueeWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ${marqueeMove} 12s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  ${ContactButton}:hover & {
+    opacity: 1;
+  }
+`;
+
+const MarqueeContent = styled.div`
+  padding-right: 40px;
 `;

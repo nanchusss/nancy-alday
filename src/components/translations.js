@@ -1,19 +1,25 @@
 export const translations = {
 
-    
   en: {
+
     landing: {
       languageEN: "EN",
       languageES: "ES",
       contact: "Contact Me",
       modalTitle: "Contact",
-      aboutTitle: "About Me",
+      aboutTitle: "Hi, I'm Nancy",
       aboutText:
-        "I design and build structured digital systems blending architectural thinking with frontend precision.",
+        "I design and build structured digital systems blending architectural thinking with frontend precision. I use my creative and technical skills to build interfaces that are not only visually engaging but also structurally sound and optimized for real-world performance. I use React as my primary tool, but I approach every project with a focus on system design, modular architecture and conversion-oriented UX logic.",
       namePlaceholder: "Your name",
       emailPlaceholder: "Your email",
       messagePlaceholder: "Your message",
       send: "Send",
+      availability: "available for work",
+      heroTitleTop: "VISUAL",
+      heroTitleBottom: "ARTIST",
+      developer: "DEVELOPER",
+      subtitleLine1: "Based in Barcelona",
+      subtitleLine2: "Visual Systems & Frontend Development",
 
       dimensions: [
         {
@@ -75,189 +81,162 @@ export const translations = {
         {
           title: "Finestracat",
           description:
-            "Corporate website built with React, JavaScript (ES6+) and Styled Components, featuring modular architecture and responsive layout systems. Integrates dynamic YouTube API video content, a WhatsApp conversion button, and a custom domain contact form connected to structured backend workflows. Includes a multi-step lead generation flow designed to guide users through service inquiries and increase conversion clarity.",
+            "Corporate website built with React, JavaScript (ES6+) and Styled Components...",
           stack: "React · Styled Components · Node · Express"
         },
         {
           title: "Aguaymanto Taller",
           description:
-            "Frontend architecture developed in React with a dynamic availability management system enabling real-time calendar control by the client. Integrates automated FAQ bot logic, WhatsApp conversion flow, structured contact form handling, and AI-generated imagery for visual cohesion.",
+            "Frontend architecture developed in React with dynamic availability management...",
           stack: "React · Responsive Systems · UX Structure"
         },
         {
           title: "Base Mendoza",
           description:
-            "Digital landing experience built in React for early-stage startup positioning, featuring modular architecture, responsive systems, structured contact form integration, and AI-generated imagery tailored to reinforce brand identity.",
+            "Digital landing experience built in React for early-stage startup positioning...",
           stack: "React · Layout Architecture · UI Design"
         },
         {
           title: "Finestra Serveis",
           description:
-            "Corporate website built with React, JavaScript (ES6+) and Styled Components, featuring modular architecture and responsive layout systems. WhatsApp conversion button, and a custom domain contact form connected to structured backend workflows.",
+            "Corporate website built with React, modular architecture and responsive layout systems.",
           stack: "UI Design · React · Styled Components · Node · Express"
         }
       ]
     },
 
-   howIBuild: {
-  title: "How I Build Systems",
-  blocks: [
-    {
-      title: "Modular Architecture",
-      text:
-        "Interfaces are structured as scalable component systems, not isolated UI fragments. Each module is designed for reuse, clarity and long-term maintainability."
+    howIBuild: {
+      title: "How I Build Systems",
+      blocks: [
+        {
+          title: "Modular Architecture",
+          text:
+            "Interfaces are structured as scalable component systems..."
+        },
+        {
+          title: "Structured State Logic",
+          text:
+            "Clear separation between UI behavior and data logic..."
+        },
+        {
+          title: "API Data Flow Design",
+          text:
+            "Frontend layers are built around well-defined data contracts..."
+        },
+        {
+          title: "Conversion-Oriented UX",
+          text:
+            "Interfaces guide action. Multi-step flows support real outcomes."
+        }
+      ]
     },
-    {
-      title: "Structured State Logic",
-      text:
-        "Clear separation between UI behavior and data logic. State is organized intentionally to reduce side effects and improve predictability."
+
+    tech: {
+      title: "Technology Ecosystem",
+      subtitle:
+        "Systems built through modular architecture and structured integration."
     },
-    {
-      title: "API Data Flow Design",
-      text:
-        "Frontend layers are built around well-defined data contracts. Integration is structured, not improvised."
-    },
-    {
-      title: "Conversion-Oriented UX",
-      text:
-        "Interfaces guide action. Multi-step flows, structured inquiry systems and clear interaction logic are implemented to support real outcomes."
+
+    interest: {
+      sideTextLine1: "LET'S",
+      sideTextLine2: "CONNECT",
+      intro: "I'M ALWAYS INTERESTED ABOUT",
+      tags: [
+        "UX/UI DESIGN",
+        "FRONTEND DEVELOPMENT",
+        "INTEGRATIONS",
+        "DIGITAL CONSULTANT",
+        "WORDPRESS DEVELOPMENT",
+        "NEW BUSINESSES",
+        "STARTUPS",
+        "AI SYSTEMS"
+      ],
+      ctaSmall: "ARE YOU MINDING A PROJECT?",
+      button: "CONTACT ME"
     }
-  ]
-}
+
   },
-  tech: {
-  title: "Technology Ecosystem",
-  subtitle:
-    "Systems built through modular architecture and structured integration."
-},
 
   es: {
+
     landing: {
       languageEN: "EN",
       languageES: "ES",
       contact: "Contacto",
       modalTitle: "Contacto",
-      aboutTitle: "Sobre mí",
+      aboutTitle: "Hola, soy Nancy",
       aboutText:
-        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend.",
+        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend...",
       namePlaceholder: "Tu nombre",
       emailPlaceholder: "Tu email",
       messagePlaceholder: "Tu mensaje",
       send: "Enviar",
+      availability: "disponible para proyectos",
+      heroTitleTop: "ARTISTA",
+      heroTitleBottom: "VISUAL",
+      developer: "DESARROLLADORA",
+      subtitleLine1: "Con base en Barcelona",
+      subtitleLine2: "Sistemas Visuales & Desarrollo Frontend",
 
       dimensions: [
         {
           title: "Arquitectura Frontend",
           description:
-            "Sistemas frontend escalables construidos con pensamiento modular y claridad estructural.",
+            "Sistemas frontend escalables construidos con pensamiento modular...",
           glow: "#f1ede4"
-        },
-        {
-          title: "Sistemas de Automatización",
-          description:
-            "Flujos estructurados que conectan interacción del usuario con eficiencia operativa.",
-          glow: "#e7e2d8"
-        },
-        {
-          title: "Pensamiento Sistémico",
-          description:
-            "Cada componente existe dentro de una arquitectura mayor. Nada está aislado.",
-          glow: "#ece6db"
-        },
-        {
-          title: "Integración de APIs",
-          description:
-            "Conectando interfaz y backend mediante flujos de datos estructurados.",
-          glow: "#e3ded3"
-        },
-        {
-          title: "Lógica UX",
-          description:
-            "Interacciones intuitivas porque están estructuralmente coherentes.",
-          glow: "#efe9df"
-        },
-        {
-          title: "Rendimiento",
-          description:
-            "Sistemas optimizados para ejecución fluida, estable y eficiente.",
-          glow: "#e9e3d8"
-        },
-        {
-          title: "Escalabilidad",
-          description:
-            "Arquitecturas diseñadas para evolucionar sin colapsar ante la complejidad.",
-          glow: "#f0ebe2"
-        },
-        {
-          title: "Diseño de Procesos",
-          description:
-            "Automatización basada en comprensión operativa real, no lógica decorativa.",
-          glow: "#e6e0d6"
         }
       ]
     },
-tech: {
-  
-  title: "Ecosistema Tecnológico",
-  subtitle:
-    "Sistemas construidos mediante arquitectura modular e integración estructurada."
-},
+
     projects: {
       projectsPart1: "Pro",
-projectsPart2: "Yectos",
+      projectsPart2: "Yectos",
       viewProject: "Ver Proyecto →",
       items: [
         {
           title: "Finestracat",
           description:
-            "Sitio corporativo desarrollado con React, JavaScript (ES6+) y Styled Components, con arquitectura modular y sistemas responsivos. Integra contenido dinámico mediante la API de YouTube, botón de conversión a WhatsApp y formulario de contacto con dominio personalizado conectado a flujos estructurados. Incluye un sistema de captación multi-paso orientado a mejorar la claridad de conversión.",
+            "Sitio corporativo desarrollado con React...",
           stack: "React · Styled Components · Node · Express"
-        },
-        {
-          title: "Aguaymanto Taller",
-          description:
-            "Arquitectura frontend desarrollada en React con sistema dinámico de gestión de disponibilidad que permite al cliente controlar fechas en tiempo real. Integra bot automatizado para preguntas frecuentes, flujo de conversión vía WhatsApp, formulario de contacto estructurado e imágenes generadas con IA.",
-          stack: "React · Sistemas Responsivos · Estructura UX"
-        },
-        {
-          title: "Base Mendoza",
-          description:
-            "Landing digital desarrollada en React para posicionamiento de startup en etapa temprana, con arquitectura modular, sistemas responsivos, integración estructurada de formulario de contacto e imágenes generadas con inteligencia artificial.",
-          stack: "React · Arquitectura de Layout · Diseño UI"
-        },
-         {
-          title: "Finestra Serveis",
-          description:
-            "Página Web desarrollada en React con diseño UI, con arquitectura modular, sistemas responsivos, botón de Whatsapp, ntegración estructurada de formulario de contacto e imágenes generadas con inteligencia artificial.",
-          stack: "React · Arquitectura de Layout · Diseño UI"
         }
       ]
     },
 
     howIBuild: {
-  title: "Cómo Construyo Sistemas",
-  blocks: [
-    {
-      title: "Arquitectura Modular",
-      text:
-        "Las interfaces se estructuran como sistemas de componentes escalables, no como fragmentos aislados. Cada módulo está diseñado para reutilización, claridad y mantenibilidad a largo plazo."
+      title: "Cómo Construyo Sistemas",
+      blocks: [
+        {
+          title: "Arquitectura Modular",
+          text:
+            "Las interfaces se estructuran como sistemas escalables..."
+        }
+      ]
     },
-    {
-      title: "Lógica de Estado Estructurada",
-      text:
-        "Separación clara entre comportamiento de interfaz y lógica de datos. El estado se organiza intencionalmente para reducir efectos secundarios y mejorar la previsibilidad."
+
+    tech: {
+      title: "Ecosistema Tecnológico",
+      subtitle:
+        "Sistemas construidos mediante arquitectura modular e integración estructurada."
     },
-    {
-      title: "Diseño de Flujo de Datos API",
-      text:
-        "Las capas frontend se construyen sobre contratos de datos bien definidos. La integración es estructurada, no improvisada."
-    },
-    {
-      title: "UX Orientado a Conversión",
-      text:
-        "Las interfaces guían la acción. Flujos multi-paso, sistemas estructurados de consulta y lógica clara de interacción se implementan para generar resultados reales."
+
+    interest: {
+      sideTextLine1: "CONECTEMOS",
+      sideTextLine2: "",
+      intro: "SIEMPRE ME INTERESA TRABAJAR EN",
+      tags: [
+        "DISEÑO UX/UI",
+        "DESARROLLO FRONTEND",
+        "INTEGRACIONES",
+        "CONSULTORÍA DIGITAL",
+        "DESARROLLO WORDPRESS",
+        "NUEVOS NEGOCIOS",
+        "STARTUPS",
+        "SISTEMAS CON IA"
+      ],
+      ctaSmall: "¿TIENES UN PROYECTO EN MENTE?",
+      button: "CONTÁCTAME"
     }
-  ]
-}
+
   }
+
 };

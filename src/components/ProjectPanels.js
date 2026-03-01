@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
 
@@ -9,7 +9,6 @@ import finestra from "../IMAGES/finestra-serveis.png";
 
 export default function ProjectsShowcase() {
   const { t } = useContext(LanguageContext);
-  const [progress, setProgress] = useState(0);
 
   const images = [finestracat, aguaymanto, base, finestra];
   const urls = [
@@ -19,364 +18,166 @@ export default function ProjectsShowcase() {
     "https://www.finestraserveis.com"
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const max = 500;
-      const value = Math.min(window.scrollY / max, 1);
-      setProgress(value);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <Wrapper>
-      <Intro>
-        <Overline>Selected Work</Overline>
 
-    <MainTitle progress={progress}>
-  {t.projects.projectsPart1}
-  <span>{t.projects.projectsPart2}</span>
-</MainTitle>
+      <HeaderRow>
+        <Star>✺</Star>
+        <Overline>SELECTED CASES</Overline>
+      </HeaderRow>
 
-        <Underline progress={progress} />
+      {t.projects.items.map((project, index) => (
+        <ProjectRow
+          key={index}
+          reverse={index % 2 !== 0}
+        >
 
-        <IntroText>
-          Experiencias digitales donde la arquitectura técnica
-          se encuentra con el diseño y la conversión.
-        </IntroText>
-      </Intro>
+          {/* TEXT */}
+          <ProjectText reverse={index % 2 !== 0}>
+            <ProjectTitle
+              href={urls[index]}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {project.title}
+            </ProjectTitle>
 
-      <SnapContainer>
-        {t.projects.items.map((project, index) => (
-          <ProjectSection
-            key={index}
-            project={project}
-            image={images[index]}
-            url={urls[index]}
-            index={index}
-          />
-        ))}
-      </SnapContainer>
+            <ProjectMeta>
+              {project.stack}
+            </ProjectMeta>
+
+           
+          </ProjectText>
+
+          {/* IMAGE */}
+          <ProjectImageWrapper>
+            <ProjectImageLink
+              href={urls[index]}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ProjectImage
+                src={images[index]}
+                alt={project.title}
+              />
+            </ProjectImageLink>
+          </ProjectImageWrapper>
+
+        </ProjectRow>
+      ))}
+
     </Wrapper>
-  );
-}
-
-/* ================= PROJECT SECTION ================= */
-
-function ProjectSection({ project, image, url, index }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.4 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const enhancedDescription = project.description
-    .replace(/React/gi, "<highlight>React</highlight>")
-    .replace(/UI Design/gi, "<highlight>UI Design</highlight>")
-    .replace(/Integration/gi, "<highlight>Integration</highlight>")
-    .replace(/Landing/gi, "<highlight>Landing</highlight>");
-
-  return (
-    <Section ref={ref}>
-      <Inner reverse={index % 2 !== 0}>
-        <ImageWrapper visible={visible}>
-          <Image src={image} alt={project.title} />
-        </ImageWrapper>
-
-        <Content visible={visible} reverse={index % 2 !== 0}>
-          <Title visible={visible}>
-            {project.title.split(" ")[0]}{" "}
-            <span>
-              {project.title.split(" ").slice(1).join(" ")}
-            </span>
-          </Title>
-
-          <Description
-            dangerouslySetInnerHTML={{
-              __html: enhancedDescription.replace(
-                /<highlight>(.*?)<\/highlight>/g,
-                `<span class="highlight">$1</span>`
-              )
-            }}
-          />
-
-          <Stack>{project.stack}</Stack>
-
-          <CTA href={url} target="_blank" rel="noreferrer">
-            <span>Explorar proyecto</span>
-          </CTA>
-        </Content>
-      </Inner>
-    </Section>
   );
 }
 
 /* ================= STYLES ================= */
 
 const Wrapper = styled.section`
-  background: #f3efe7;
+  background: #0c0c0c;
+  color: #eae6df;
+  padding: 160px 0;
 `;
 
-const Intro = styled.div`
-  height: 90vh;
+const HeaderRow = styled.div`
+  width: 85%;
+  margin: 0 auto 140px auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 20px;
+`;
+
+const Star = styled.span`
+  font-size: 22px;
 `;
 
 const Overline = styled.span`
-  letter-spacing: 5px;
-  font-size: 13px;
+  font-size: 19px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   opacity: 0.6;
-  margin-bottom: 25px;
 `;
 
-const MainTitle = styled.h2`
-  font-size: 140px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  margin-bottom: 20px;
-  color: #2f2c27;
-  cursor: pointer;
+/* ===== PROJECT ROW ===== */
 
-  span {
-    display: inline-block;
-    color: #2f2c27;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                background 0.6s ease,
-                text-shadow 0.6s ease;
-  }
-
-  &:hover span {
-    transform: translateY(-25px);
-
-    background: linear-gradient(135deg, #b57edc, #e66aa8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow: 0 0 18px rgba(200, 160, 220, 0.35);
-  }
-      @media (max-width: 900px) {
-    font-size: 72px;
-    letter-spacing: 2px;
-  }
-
-  @media (max-width: 500px) {
-    font-size: 56px;
-    letter-spacing: 1px;
-  }
-    
-`;
-
-const Underline = styled.div`
-  width: ${({ progress }) => progress * 400}px;
-  height: 3px;
-  background: linear-gradient(90deg, #b57edc, #e66aa8);
-  margin-bottom: 50px;
-  transition: width 0.2s ease;
-`;
-
-const IntroText = styled.p`
-  max-width: 650px;
-  text-align: center;
-  font-size: 20px;
-  opacity: 0.7;
-`;
-
-const SnapContainer = styled.div`
-  scroll-snap-type: y mandatory;
-
-  @media (max-width: 900px) {
-    scroll-snap-type: none;
-  }
-`;
-
-const Section = styled.section`
-  min-height: 100vh;
-  padding: 100px 0;
-  scroll-snap-align: start;
+const ProjectRow = styled.div`
+  width: 85%;
+  margin: 0 auto 220px auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  @media (max-width: 900px) {
-    min-height: auto;   /* 👈 clave */
-    padding: 140px 0;   /* más aire */
-    scroll-snap-align: none; /* 👈 quitamos snap solo en mobile */
-  }
-`;
-
-const Inner = styled.div`
-  width: 90%;
-  max-width: 1400px;
-  display: flex;
-  align-items: center;
-  gap: 140px;
+  justify-content: space-between;
   flex-direction: ${({ reverse }) =>
     reverse ? "row-reverse" : "row"};
+  gap: 140px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
     gap: 60px;
   }
 `;
 
-const ImageWrapper = styled.div`
+const ProjectText = styled.div`
   flex: 1;
-  overflow: hidden;
-  border-radius: 30px;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: ${({ visible }) =>
-    visible ? "translateY(0)" : "translateY(100px)"};
-  transition: all 1.3s cubic-bezier(0.22, 1, 0.36, 1);
 `;
 
-const Image = styled.img`
-  width: 100%;
-  transition: transform 2s ease;
-
-  &:hover {
-    transform: scale(1.08);
-  }
-`;
-
-const Content = styled.div`
-  flex: 1;
-  max-width: 650px;
-
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: ${({ visible, reverse }) =>
-    visible
-      ? "translateX(0)"
-      : reverse
-      ? "translateX(-120px)"
-      : "translateX(120px)"};
-
-  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-
-  @media (max-width: 900px) {
-    padding: 0 24px;   /* 👈 aire lateral real */
-    max-width: 100%;
-  }
-`;
-
-const Title = styled.h3`
-  font-size: 78px;
-  font-weight: 500;
-  margin-bottom: 40px;
-  color: #2f2c27;
-
-  span {
-    position: relative;
-  }
-
-  span::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: ${({ visible }) => (visible ? "100%" : "0%")};
-    height: 5px;
-    background: linear-gradient(90deg, #b57edc, #e66aa8);
-    transition: width 1.2s ease 0.4s;
-  }
-`;
-
-const Description = styled.p`
-  font-size: 25px;
-  line-height: 1.8;
-  margin-bottom: 35px;
-
-  .highlight {
-    background: linear-gradient(135deg, #b57edc, #e66aa8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 500;
-  }
-`;
-
-const Stack = styled.p`
-  font-size: 20px;
-  letter-spacing: 1px;
-  opacity: 0.6;
-  margin-bottom: 60px;
-`;
-
-const CTA = styled.a`
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 22px 80px;
-  border-radius: 999px;
-
-  font-family: "Sora", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+const ProjectTitle = styled.a`
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(110px, 9vw, 180px);
+  line-height: 0.85;
+  margin: 0;
   text-decoration: none;
+  display: inline-block;
+  position: relative;
 
-  color: #2f2c27;
-  border: 1px solid rgba(47, 44, 39, 0.6);
-  background: transparent;
+  background: linear-gradient(
+    to right,
+    #C2185B 0%,
+    #e77fa8ff 50%,
+    #eae6df 50%,
+    #eae6df 100%
+  );
 
-  overflow: hidden;
-  isolation: isolate;
-  z-index: 0;
+  background-size: 200% 100%;
+  background-position: right bottom;
 
-  transition: 
-    color 0.6s ease,
-    transform 1s ease,
-    border 0.6s ease,
-    box-shadow 0.6s ease;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 
-  /* Relleno radial */
-  &::before {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
+  transition: background-position 4s cubic-bezier(0.65, 0, 0.35, 1);
 
-    background: radial-gradient(
-      circle,
-      rgba(197, 163, 218, 0.55) 0%,
-      rgba(217, 141, 183, 0.45) 60%,
-      rgba(217, 141, 183, 0.25) 100%
-    );
-
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-
-    z-index: -1;
-  }
-
-  &:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  /* Efecto hover principal */
   &:hover {
-    
-    border: none;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    box-shadow: 0 20px 60px rgba(180, 120, 170, 0.25);
-    transform: translateY(-4px);
+    background-position: left bottom;
   }
 `;
+
+const ProjectMeta = styled.div`
+  margin-top: 20px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.5;
+`;
+
+
+const ProjectImageWrapper = styled.div`
+  flex: 1;
+  max-width: 750px;
+`;
+
+const ProjectImageLink = styled.a`
+  display: block;
+`;
+
+const ProjectImage = styled.img`
+  width: 100%;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.6s ease;
+
+  &:hover {
+    filter: grayscale(0%);
+  }
+`;
+
