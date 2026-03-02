@@ -55,15 +55,26 @@ const scroll = keyframes`
 
 /* ================= STYLES ================= */
 
+/* ================= STYLES ================= */
+
 const Section = styled.section`
   background: #111;
   padding: 200px 0;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 120px 0 100px;
+  }
 `;
 
 const HeaderBlock = styled.div`
   text-align: center;
   margin-bottom: 140px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 70px;
+    padding: 0 20px;
+  }
 `;
 
 const Title = styled.h2`
@@ -73,13 +84,26 @@ const Title = styled.h2`
   letter-spacing: -6px;
   color: #fff;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 49px;
+    letter-spacing: -2px;
+    line-height: 1.1;
+  }
 `;
 
 const Subtitle = styled.p`
   font-size: 24px;
   color: #aaa;
+  font-family: "Inter", sans-serif;
   max-width: 800px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    font-size: 19px;
+    max-width: 100%;
+    line-height: 1.5;
+  }
 `;
 
 const TickerWrapper = styled.div`
@@ -92,6 +116,11 @@ const Ticker = styled.div`
   gap: 120px;
   width: max-content;
   animation: ${scroll} 25s linear infinite;
+
+  @media (max-width: 768px) {
+    gap: 60px;
+    animation: ${scroll} 35s linear infinite;
+  }
 `;
 
 const TechItem = styled.div`
@@ -104,5 +133,10 @@ const TechItem = styled.div`
 
   &:hover {
     color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 37px;
+    letter-spacing: -1px;
   }
 `;

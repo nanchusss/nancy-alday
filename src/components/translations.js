@@ -121,7 +121,7 @@ export const translations = {
         {
           title: "API Data Flow Design",
           text:
-            "Frontend layers are built around well-defined data contracts..."
+            "Frontend layers are built around well-defined data contracts."
         },
         {
           title: "Conversion-Oriented UX",
@@ -166,7 +166,7 @@ export const translations = {
       modalTitle: "Contacto",
       aboutTitle: "Hola, soy Nancy",
       aboutText:
-        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend...",
+        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend.",
       namePlaceholder: "Tu nombre",
       emailPlaceholder: "Tu email",
       messagePlaceholder: "Tu mensaje",

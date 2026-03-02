@@ -19,7 +19,7 @@ function App() {
       <TechGrid />
       <HowIBuild />
       <ProjectsShowcase />
-      <InterestSection />
+      <InterestSection onContactClick={() => setContactOpen(true)}/>
 
       <ContactModal
         isOpen={contactOpen}

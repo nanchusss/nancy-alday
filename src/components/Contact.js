@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
+import emailjs from "@emailjs/browser";
 
 export default function ContactModal({ isOpen, onClose }) {
   const { t } = useContext(LanguageContext);
@@ -11,11 +12,14 @@ export default function ContactModal({ isOpen, onClose }) {
     message: ""
   });
 
+  const [status, setStatus] = useState(""); // mensaje de estado
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      setStatus("");
     }
 
     return () => (document.body.style.overflow = "auto");
@@ -32,7 +36,32 @@ export default function ContactModal({ isOpen, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+
+    const templateParams = {
+      from_name: form.name,
+      from_email: form.email,
+      message: form.message
+    };
+
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setStatus("Mensaje enviado!");
+        setForm({
+          name: "",
+          email: "",
+          message: ""
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("Error al enviar. Intenta nuevamente.");
+      });
   };
 
   return (
@@ -72,6 +101,8 @@ export default function ContactModal({ isOpen, onClose }) {
           <Button type="submit">
             {t.landing.send}
           </Button>
+
+          {status && <StatusMessage>{status}</StatusMessage>}
         </Form>
       </Modal>
     </Overlay>
@@ -146,8 +177,17 @@ const Input = styled.input`
     outline: none;
     border-bottom: 1px solid #2E2A27;
   }
-`;
 
+  /* 🔥 Autofill fix */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #E8DED3 inset !important;
+    -webkit-text-fill-color: #2E2A27 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+`;
 const Textarea = styled.textarea`
   padding: 14px 0;
   border: none;
@@ -180,4 +220,10 @@ const Button = styled.button`
     background: #6F5A4E;
     color: #E8DED3;
   }
+`;
+
+const StatusMessage = styled.p`
+  margin-top: 12px;
+  font-size: 14px;
+  color: #2E2A27;
 `;

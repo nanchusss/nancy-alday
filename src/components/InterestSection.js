@@ -43,7 +43,13 @@ export default function InterestSection({ onContactClick }) {
 const Section = styled.section`
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  
+
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    padding: 80px 0 60px;
+  }
 `;
 
 const Background = styled.div`
@@ -70,6 +76,11 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    align-items: flex-start;
+  }
 `;
 
 const Center = styled.div`
@@ -83,6 +94,12 @@ const Intro = styled.p`
   font-family: "Inter", sans-serif;
   color: rgba(255,255,255,0.8);
   margin-bottom: 60px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
 `;
 
 const TagGroup = styled.div`
@@ -91,6 +108,11 @@ const TagGroup = styled.div`
   justify-content: center;
   gap: 18px 22px;
   margin-bottom: 90px;
+
+  @media (max-width: 768px) {
+    gap: 10px 12px;
+    margin-bottom: 40px;
+  }
 `;
 
 const Tag = styled.div`
@@ -102,10 +124,15 @@ const Tag = styled.div`
   color: white;
   backdrop-filter: blur(3px);
   transition: all 0.3s ease;
-cursor: pointer;
+  cursor: pointer;
 
   &:hover {
     background: rgba(255,255,255,0.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 8px 18px;
   }
 `;
 
@@ -114,12 +141,21 @@ const CTA = styled.div`
   align-items: center;
   justify-content: center;
   gap: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
 `;
 
 const Small = styled.p`
   font-size: 16px;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.8);
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const Button = styled.button`
@@ -137,11 +173,17 @@ const Button = styled.button`
     background: transparent;
     color: white;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 260px;
+    font-size: 14px;
+  }
 `;
 
 const SideText = styled.div`
   position: absolute;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
   left: -2%;
   bottom: 8%;
   font-size: clamp(120px, 14vw, 200px);
@@ -150,4 +192,8 @@ const SideText = styled.div`
   letter-spacing: -8px;
   color: rgba(255, 255, 255, 0.69);
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

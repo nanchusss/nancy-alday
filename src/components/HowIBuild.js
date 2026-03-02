@@ -101,11 +101,16 @@ export default function HowIBuild() {
 }
 
 /* ================= STYLES ================= */
+/* ================= STYLES ================= */
 
 const Wrapper = styled.section`
   padding: 220px 0;
   background: #0f0f0f;
   color: #f3efe7;
+
+  @media (max-width: 768px) {
+    padding: 120px 0;
+  }
 `;
 
 const Container = styled.div`
@@ -113,47 +118,78 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   gap: 120px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    flex-direction: column;
+    gap: 80px;
+  }
 `;
 
 const Left = styled.div`
   width: 35%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SmallTitle = styled.div`
   font-size: 25px;
   letter-spacing: 3px;
+  font-family: "Inter", sans-serif;
   text-transform: uppercase;
   opacity: 0.6;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
 `;
 
 const MainTitle = styled.h2`
-  font-size: 48px;
+  font-size: 46px;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 38px;
+    line-height: 1.3;
+  }
 `;
 
 const Right = styled.div`
   display: flex;
   flex: 1;
   gap: 80px;
+
+  @media (max-width: 768px) {
+    gap: 40px;
+  }
 `;
 
 const Timeline = styled.div`
   position: relative;
   width: 4px;
   height: 800px;
+
+  @media (max-width: 768px) {
+    width: 2px;
+    height: 100%;
+    min-height: 500px;
+  }
 `;
 
 const LineBase = styled.div`
   position: absolute;
-  width: 4px;
+  width: 100%;
   height: 100%;
   background: #3a3a3a;
 `;
 
 const LineFill = styled.div`
   position: absolute;
-  width: 4px;
+  width: 100%;
   background: #ffffff;
   top: 0;
   left: 0;
@@ -169,6 +205,11 @@ const Circle = styled.div`
   background: ${({ active }) =>
     active ? "#ffffff" : "#3a3a3a"};
   transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 `;
 
 const Content = styled.div`
@@ -178,15 +219,29 @@ const Content = styled.div`
 const Step = styled.div`
   margin-bottom: 140px;
 
+  @media (max-width: 768px) {
+    margin-bottom: 80px;
+  }
+
   h3 {
     font-size: 28px;
     margin-bottom: 12px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   p {
-  font-size: 24px;
+    font-size: 24px;
     max-width: 600px;
     line-height: 1.6;
     opacity: 0.7;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      max-width: 100%;
+      line-height: 1.5;
+    }
   }
 `;
