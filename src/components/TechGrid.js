@@ -86,7 +86,8 @@ const Title = styled.h2`
   margin-bottom: 20px;
 
   @media (max-width: 768px) {
-    font-size: 49px;
+    font-size: 65px;
+    
     letter-spacing: -2px;
     line-height: 1.1;
   }
@@ -102,6 +103,7 @@ const Subtitle = styled.p`
   @media (max-width: 768px) {
     font-size: 19px;
     max-width: 100%;
+    padding-left: 30px;
     line-height: 1.5;
   }
 `;

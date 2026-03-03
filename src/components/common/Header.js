@@ -64,6 +64,18 @@ const Container = styled.header`
   display: flex;
   align-items: center;
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    height: 70px;
+  }
+`;
+const Brand = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    gap: 2px;
+  }
 `;
 
 const Inner = styled.div`
@@ -74,11 +86,10 @@ const Inner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
 
-const Brand = styled.div`
-  display: flex;
-  flex-direction: column;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const Name = styled.div`
@@ -86,6 +97,11 @@ const Name = styled.div`
   font-weight: 600;
   font-size: 18px;
   color: #111;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    line-height: 1.1;
+  }
 `;
 
 const Role = styled.div`
@@ -94,17 +110,30 @@ const Role = styled.div`
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #434242ff;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+  }
 `;
 
 const Right = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
 `;
 
 const LangGroup = styled.div`
   display: flex;
   gap: 18px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 const LangButton = styled.button`
@@ -114,6 +143,11 @@ const LangButton = styled.button`
   letter-spacing: 2px;
   color: #333;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
 `;
 
 const ContactButton = styled.button`
@@ -129,6 +163,14 @@ const ContactButton = styled.button`
   height: 44px;
   font-family: "Inter", sans-serif;
   letter-spacing: 2px;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 36px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+  }
 `;
 
 const StaticText = styled.div`
@@ -142,6 +184,10 @@ const StaticText = styled.div`
 
   ${ContactButton}:hover & {
     opacity: 0;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 13px;
   }
 `;
 
@@ -158,8 +204,16 @@ const MarqueeWrapper = styled.div`
   ${ContactButton}:hover & {
     opacity: 1;
   }
+
+  @media (max-width: 768px) {
+    animation: ${marqueeMove} 18s linear infinite;
+  }
 `;
 
 const MarqueeContent = styled.div`
   padding-right: 40px;
+
+  @media (max-width: 768px) {
+    padding-right: 20px;
+  }
 `;

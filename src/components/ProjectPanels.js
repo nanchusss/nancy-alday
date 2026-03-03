@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
 
@@ -11,62 +11,86 @@ export default function ProjectsShowcase() {
   const { t } = useContext(LanguageContext);
 
   const images = [finestracat, aguaymanto, base, finestra];
-  const urls = [
-    "https://www.finestracat.com",
-    "https://www.eltaller-aguaymanto.com",
-    "https://www.base-mendoza.com",
-    "https://www.finestraserveis.com"
-  ];
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const openSlider = (index) => {
+    setActiveIndex(index);
+  };
+
+  const closeSlider = () => {
+    setActiveIndex(null);
+  };
+
+  const nextSlide = () => {
+    setActiveIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setActiveIndex((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
+    );
+  };
+
+  useEffect(() => {
+    if (activeIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [activeIndex]);
 
   return (
-    <Wrapper>
+    <>
+      <Wrapper>
+        <HeaderRow>
+          <Star>✺</Star>
+          <Overline>SELECTED CASES</Overline>
+        </HeaderRow>
 
-      <HeaderRow>
-        <Star>✺</Star>
-        <Overline>SELECTED CASES</Overline>
-      </HeaderRow>
+        {t.projects.items.map((project, index) => (
+          <ProjectRow
+            key={index}
+            reverse={index % 2 !== 0}
+          >
+            <ProjectText>
+              <ProjectTitle>
+                {project.title}
+              </ProjectTitle>
 
-      {t.projects.items.map((project, index) => (
-        <ProjectRow
-          key={index}
-          reverse={index % 2 !== 0}
-        >
+              <ProjectMeta>
+                {project.stack}
+              </ProjectMeta>
+            </ProjectText>
 
-          {/* TEXT */}
-          <ProjectText reverse={index % 2 !== 0}>
-            <ProjectTitle
-              href={urls[index]}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {project.title}
-            </ProjectTitle>
-
-            <ProjectMeta>
-              {project.stack}
-            </ProjectMeta>
-
-           
-          </ProjectText>
-
-          {/* IMAGE */}
-          <ProjectImageWrapper>
-            <ProjectImageLink
-              href={urls[index]}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <ProjectImageWrapper>
               <ProjectImage
                 src={images[index]}
                 alt={project.title}
+                onClick={() => openSlider(index)}
               />
-            </ProjectImageLink>
-          </ProjectImageWrapper>
+            </ProjectImageWrapper>
+          </ProjectRow>
+        ))}
+      </Wrapper>
 
-        </ProjectRow>
-      ))}
+      {activeIndex !== null && (
+        <SliderOverlay onClick={closeSlider}>
+          <SliderContent onClick={(e) => e.stopPropagation()}>
+            <CloseButton onClick={closeSlider}>×</CloseButton>
 
-    </Wrapper>
+            <NavButton left onClick={prevSlide}>‹</NavButton>
+
+            <SliderImage
+              src={images[activeIndex]}
+              alt=""
+            />
+
+            <NavButton onClick={nextSlide}>›</NavButton>
+          </SliderContent>
+        </SliderOverlay>
+      )}
+    </>
   );
 }
 
@@ -92,13 +116,10 @@ const Star = styled.span`
 
 const Overline = styled.span`
   font-size: 19px;
-  font-family: "Inter", sans-serif;
   letter-spacing: 4px;
   text-transform: uppercase;
   opacity: 0.6;
 `;
-
-/* ===== PROJECT ROW ===== */
 
 const ProjectRow = styled.div`
   width: 85%;
@@ -120,14 +141,14 @@ const ProjectText = styled.div`
   flex: 1;
 `;
 
-const ProjectTitle = styled.a`
+const ProjectTitle = styled.h2`
   font-family: "Bebas Neue", sans-serif;
   font-size: clamp(110px, 9vw, 180px);
   line-height: 0.85;
   margin: 0;
-  text-decoration: none;
-  display: inline-block;
   position: relative;
+  display: inline-block;
+  cursor: default;
 
   background: linear-gradient(
     to right,
@@ -151,7 +172,6 @@ const ProjectTitle = styled.a`
     background-position: left bottom;
   }
 `;
-
 const ProjectMeta = styled.div`
   margin-top: 20px;
   font-size: 14px;
@@ -160,24 +180,101 @@ const ProjectMeta = styled.div`
   opacity: 0.5;
 `;
 
-
 const ProjectImageWrapper = styled.div`
   flex: 1;
   max-width: 750px;
-`;
+  position: relative;
+  cursor: pointer;
+  isolation: isolate; /* 🔥 importante */
 
-const ProjectImageLink = styled.a`
-  display: block;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle,
+      rgba(194, 24, 91, 0.45) 0%,
+      rgba(231, 127, 168, 0.35) 40%,
+      transparent 70%
+    );
+    filter: blur(100px);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
 `;
 
 const ProjectImage = styled.img`
   width: 100%;
   display: block;
   filter: grayscale(100%);
-  transition: filter 0.6s ease;
+  border-radius: 3px;
+  transform: scale(1);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 
   &:hover {
     filter: grayscale(0%);
+    transform: scale(1.08);
   }
 `;
 
+/* ===== SLIDER ===== */
+
+const SliderOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+`;
+
+const SliderContent = styled.div`
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+`;
+
+const SliderImage = styled.img`
+  width: 100%;
+  display: block;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: -50px;
+  right: 0;
+  font-size: 40px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+`;
+
+const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  ${({ left }) => (left ? "left: -80px;" : "right: -80px;")}
+  transform: translateY(-50%);
+  font-size: 60px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+`;

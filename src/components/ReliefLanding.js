@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Header from "../components/common/Header";
 import { LanguageContext } from "../components/LanguageContext";
 import artwork from "../IMAGES/Extimidad.jpg";
+import portrait from "../IMAGES/retrato.jpeg";
+
 
 export default function ReliefLanding({ onContactClick }) {
   const { t, language } = useContext(LanguageContext);
@@ -87,7 +89,9 @@ export default function ReliefLanding({ onContactClick }) {
           <Title>
             {t.landing.heroTitleTop} <br />
             {t.landing.heroTitleBottom}
+        <Y>{t.landing.and}</Y>
           </Title>
+         
 
           <Developer>{t.landing.developer}</Developer>
 
@@ -97,14 +101,18 @@ export default function ReliefLanding({ onContactClick }) {
           </Subtitle>
         </Hero>
 
-        <AboutSection ref={aboutRef}>
-          <AboutInner>
-            <AboutText>
-              <h2>{t.landing.aboutTitle}</h2>
-              <p>{t.landing.aboutText}</p>
-            </AboutText>
-          </AboutInner>
-        </AboutSection>
+       <AboutSection ref={aboutRef}>
+  <AboutInner>
+    <PortraitWrapper>
+      <Portrait src={portrait} alt="Portrait" />
+    </PortraitWrapper>
+
+    <AboutText>
+      <h2>{t.landing.aboutTitle}</h2>
+      <p>{t.landing.aboutText}</p>
+    </AboutText>
+  </AboutInner>
+</AboutSection>
       </PageWrapper>
     </>
   );
@@ -171,23 +179,41 @@ const Title = styled.h1`
   color: #F5F2EE;
 
   @media (max-width: 768px) {
-    font-size: 112px;
+    font-size: 95px;
      letter-spacing: -14px;
     line-height: 0.9;
+  }
+`;
+const Y = styled.div`
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 10vw, 90px);
+  line-height: 0.78;
+ padding-top: 10px;
+
+  color: #e5db4bff;
+
+  @media (max-width: 768px) {
+    font-size: 62px;
+    letter-spacing: -14px;
+    line-height: 0.9;
+    margin: -12px 0;
   }
 `;
 
 const Developer = styled.div`
   font-family: "Inter", sans-serif;
   font-weight: 800;
+  margin-top: 10px;
   font-size: clamp(120px, 17vw, 150px);
   line-height: 0.78;
   margin: 0;
   color: #F5F2EE;
 
   @media (max-width: 768px) {
-    font-size: 102px;
-     letter-spacing: -14px;
+    font-size: 95px;
+    padding-top: 10px;
+     letter-spacing: -10px;
     line-height: 0.9;
   }
 `;
@@ -240,7 +266,7 @@ const Day = styled.div`
   color: #F5F2EE;
 
   @media (max-width: 768px) {
-    font-size: 28px;
+    font-size: 48px;
   }
 `;
 
@@ -277,8 +303,36 @@ const AboutInner = styled.div`
   max-width: 900px;
   padding: 0 40px;
 
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
   @media (max-width: 768px) {
+    flex-direction: column;
     padding: 0;
+    gap: 40px;
+  }
+`;
+const PortraitWrapper = styled.div`
+  flex-shrink: 0;
+`;
+
+const Portrait = styled.img`
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+
+  &:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    width: 180px;
+    height: 180px;
   }
 `;
 
@@ -294,6 +348,8 @@ const AboutText = styled.div`
 
     @media (max-width: 768px) {
       font-size: 62px;
+      padding-left: 30px;
+      padding-right: 20px;
       letter-spacing: -2px;
     }
   }
@@ -305,6 +361,9 @@ const AboutText = styled.div`
 
     @media (max-width: 768px) {
       font-size: 24px;
+      padding-left: 30px;
+      padding-right: 20px;
+      
       line-height: 1.6;
     }
   }

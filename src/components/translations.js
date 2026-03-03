@@ -17,6 +17,7 @@ export const translations = {
       availability: "available for work",
       heroTitleTop: "VISUAL",
       heroTitleBottom: "ARTIST",
+      and: "&",
       developer: "DEVELOPER",
       subtitleLine1: "Based in Barcelona",
       subtitleLine2: "Visual Systems & Frontend Development",
@@ -145,8 +146,8 @@ export const translations = {
         "UX/UI DESIGN",
         "FRONTEND DEVELOPMENT",
         "INTEGRATIONS",
-        "DIGITAL CONSULTANT",
-        "WORDPRESS DEVELOPMENT",
+        "FIGMA",
+        "UX/UI",
         "NEW BUSINESSES",
         "STARTUPS",
         "AI SYSTEMS"
@@ -166,7 +167,7 @@ export const translations = {
       modalTitle: "Contacto",
       aboutTitle: "Hola, soy Nancy",
       aboutText:
-        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend.",
+        "Diseño y desarrollo sistemas digitales estructurados combinando pensamiento arquitectónico con precisión frontend. Utilizo React como mi herramienta principal, pero abordo cada proyecto con un enfoque en diseño de sistemas, arquitectura modular y lógica UX orientada a la conversión. Mi objetivo es construir interfaces que no solo sean visualmente atractivas, sino también estructuralmente sólidas y optimizadas para el rendimiento en el mundo real. ",
       namePlaceholder: "Tu nombre",
       emailPlaceholder: "Tu email",
       messagePlaceholder: "Tu mensaje",
@@ -174,7 +175,8 @@ export const translations = {
       availability: "disponible para proyectos",
       heroTitleTop: "ARTISTA",
       heroTitleBottom: "VISUAL",
-      developer: "DESARROLLADORA",
+      and: "&",
+      developer: "FRONTEND",
       subtitleLine1: "Con base en Barcelona",
       subtitleLine2: "Sistemas Visuales & Desarrollo Frontend",
 
@@ -227,8 +229,8 @@ export const translations = {
         "DISEÑO UX/UI",
         "DESARROLLO FRONTEND",
         "INTEGRACIONES",
-        "CONSULTORÍA DIGITAL",
-        "DESARROLLO WORDPRESS",
+        "FIGMA",
+        "UX/UI",
         "NUEVOS NEGOCIOS",
         "STARTUPS",
         "SISTEMAS CON IA"
