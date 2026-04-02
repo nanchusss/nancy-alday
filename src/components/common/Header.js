@@ -2,16 +2,13 @@ import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { LanguageContext } from "../LanguageContext";
 
-export default function Header({ onContactClick }) {
+export default function Header({ onContactClick, isDark, toggleTheme }) {
   const { setLanguage, t } = useContext(LanguageContext);
 
   return (
     <Container>
       <Inner>
-        <Brand>
-          <Name>Nancy Alday</Name>
-          <Role>Visual Artist & Developer</Role>
-        </Brand>
+        
 
         <Right>
           <LangGroup>
@@ -36,7 +33,13 @@ export default function Header({ onContactClick }) {
               </MarqueeContent>
             </MarqueeWrapper>
           </ContactButton>
+
+       
         </Right>
+
+          <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
+  {isDark ? "☀" : "☾"}
+</ThemeToggle>
       </Inner>
     </Container>
   );
@@ -52,6 +55,29 @@ const marqueeMove = keyframes`
 
 /* ================= STYLES ================= */
 
+const ThemeToggle = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: ${({ theme }) => theme.text};
+  opacity: 0.7;
+  transition: all 0.25s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
 const Container = styled.header`
   position: fixed;
   top: 0;
@@ -59,9 +85,10 @@ const Container = styled.header`
   width: 100%;
   height: 90px;
   backdrop-filter: blur(18px);
-  background: rgba(243, 241, 236, 0.49);
+  background: rgba(243, 241, 236, 0);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
+  border-bottom: white 1px solid;
   align-items: center;
   z-index: 1000;
 
@@ -69,14 +96,7 @@ const Container = styled.header`
     height: 70px;
   }
 `;
-const Brand = styled.div`
-  display: flex;
-  flex-direction: column;
 
-  @media (max-width: 768px) {
-    gap: 2px;
-  }
-`;
 
 const Inner = styled.div`
   width: 100%;
@@ -92,30 +112,9 @@ const Inner = styled.div`
   }
 `;
 
-const Name = styled.div`
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #111;
 
-  @media (max-width: 768px) {
-    font-size: 15px;
-    line-height: 1.1;
-  }
-`;
 
-const Role = styled.div`
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #434242ff;
 
-  @media (max-width: 768px) {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-  }
-`;
 
 const Right = styled.div`
   display: flex;
@@ -153,10 +152,13 @@ const LangButton = styled.button`
 const ContactButton = styled.button`
   position: relative;
   overflow: hidden;
+  border: white 1px solid;
   padding: 12px 24px;
   border-radius: 40px;
   font-size: 17px;
-  border: 1px solid #111;
+  opacity: 0.5;
+  color: black;
+  border-color: black;
   background: transparent;
   cursor: pointer;
   width: 180px;
@@ -177,6 +179,9 @@ const StaticText = styled.div`
   position: absolute;
   inset: 0;
   display: flex;
+  color: white;
+  color: black;
+  opacity: 0.7;
   font-size: 17px;
   align-items: center;
   justify-content: center;
@@ -195,6 +200,7 @@ const MarqueeWrapper = styled.div`
   position: absolute;
   inset: 0;
   display: flex;
+  color: black; 
   align-items: center;
   white-space: nowrap;
   animation: ${marqueeMove} 12s linear infinite;

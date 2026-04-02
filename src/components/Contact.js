@@ -144,13 +144,11 @@ const Modal = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: transparent;
-  border: none;
-  font-size: 28px;
+  top: 10px;
+  right: 10px;
+  z-index: 10000; /* 🔥 más alto que todo */
+  pointer-events: auto;
   cursor: pointer;
-  color: #2E2A27;
 `;
 
 const Title = styled.h2`

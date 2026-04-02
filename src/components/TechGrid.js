@@ -12,24 +12,22 @@ export default function TechEcosystem() {
     "Node.js",
     "Express",
     "MongoDB",
-    "JWT Auth",
+    "JWT",
     "Git",
     "Postman",
     "Figma",
-    "OpenAI API"
+    "OpenAI"
   ];
 
-  const title = t?.tech?.title || "Tech Ecosystem";
-  const subtitle =
-    t?.tech?.subtitle ||
-    "Technologies and tools I use to build modern digital products.";
-
   return (
-    <Section>
-      <HeaderBlock>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
-      </HeaderBlock>
+    <Wrapper>
+      <Header>
+        <Title>{t?.tech?.title || "Tech Ecosystem"}</Title>
+        <Subtitle>
+          {t?.tech?.subtitle ||
+            "Technologies I use to build structured digital systems."}
+        </Subtitle>
+      </Header>
 
       <TickerWrapper>
         <Ticker>
@@ -38,107 +36,58 @@ export default function TechEcosystem() {
           ))}
         </Ticker>
       </TickerWrapper>
-    </Section>
+    </Wrapper>
   );
 }
 
-/* ================= ANIMATION ================= */
-
 const scroll = keyframes`
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 `;
 
-/* ================= STYLES ================= */
-
-/* ================= STYLES ================= */
-
-const Section = styled.section`
-  background: #111;
-  padding: 200px 0;
-  overflow: hidden;
-
-  @media (max-width: 768px) {
-    padding: 120px 0 100px;
-  }
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-const HeaderBlock = styled.div`
-  text-align: center;
-  margin-bottom: 140px;
-
-  @media (max-width: 768px) {
-    margin-bottom: 70px;
-    padding: 0 20px;
-  }
+const Header = styled.div`
+  margin-bottom: 40px;
 `;
 
 const Title = styled.h2`
-  font-size: clamp(80px, 10vw, 120px);
-  font-family: "Inter", sans-serif;
-  font-weight: 800;
-  letter-spacing: -6px;
-  color: #fff;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    font-size: 65px;
-    
-    letter-spacing: -2px;
-    line-height: 1.1;
-  }
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -1px;
 `;
 
 const Subtitle = styled.p`
-  font-size: 24px;
-  color: #aaa;
-  font-family: "Inter", sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    font-size: 19px;
-    max-width: 100%;
-    padding-left: 30px;
-    line-height: 1.5;
-  }
+  font-size: 14px;
+  opacity: 0.6;
+  max-width: 400px;
 `;
 
 const TickerWrapper = styled.div`
-  width: 100%;
   overflow: hidden;
+  width: 100%;
 `;
 
 const Ticker = styled.div`
   display: flex;
-  gap: 120px;
+  gap: 60px;
   width: max-content;
   animation: ${scroll} 25s linear infinite;
-
-  @media (max-width: 768px) {
-    gap: 60px;
-    animation: ${scroll} 35s linear infinite;
-  }
 `;
 
 const TechItem = styled.div`
-  font-size: clamp(60px, 8vw, 120px);
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
-  letter-spacing: -4px;
-  transition: color 0.4s ease;
+  font-size: clamp(24px, 3vw, 48px);
+  font-weight: 600;
+  opacity: 0.2;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 37px;
-    letter-spacing: -1px;
+    opacity: 1;
+    transform: scale(1.1);
   }
 `;

@@ -190,7 +190,7 @@ const LineBase = styled.div`
 const LineFill = styled.div`
   position: absolute;
   width: 100%;
-  background: #ffffff;
+  background: #e7dc05ff ;
   top: 0;
   left: 0;
 `;
@@ -203,7 +203,7 @@ const Circle = styled.div`
   height: 56px;
   border-radius: 50%;
   background: ${({ active }) =>
-    active ? "#ffffff" : "#3a3a3a"};
+    active ? "#e7dc05ff " : "#3a3a3a"};
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {

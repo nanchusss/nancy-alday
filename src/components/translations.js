@@ -19,8 +19,25 @@ export const translations = {
       heroTitleBottom: "ARTIST",
       and: "&",
       developer: "DEVELOPER",
-      subtitleLine1: "Based in Barcelona",
-      subtitleLine2: "Visual Systems & Frontend Development",
+      subtitleLine1: "Junior Frontend Developer",
+      subtitleLine2: "Crafting structured React interfaces with a design-driven mindset.",
+
+ editorialSlides: [
+  {
+    title: "NANCY",
+    subtitle: "FRONTEND DEVELOPER & ARTIST"
+  },
+  {
+    title: "VISUAL SYSTEMS",
+    subtitle: "Structured Interfaces"
+  },
+  {
+    title: "SELECTED WORK",
+    subtitle: "Digital Experiences 2023–2026"
+  }
+],
+
+viewDetails: "View details",
 
       dimensions: [
         {
@@ -179,6 +196,23 @@ export const translations = {
       developer: "FRONTEND",
       subtitleLine1: "Con base en Barcelona",
       subtitleLine2: "Sistemas Visuales & Desarrollo Frontend",
+
+      editorialSlides: [
+  {
+    title: "NANCY",
+    subtitle: "DESARROLLADORA FRONTEND & ARTISTA"
+  },
+  {
+    title: "SISTEMAS VISUALES",
+    subtitle: "Interfaces estructuradas"
+  },
+  {
+    title: "PROYECTOS",
+    subtitle: "Experiencias digitales 2023–2026"
+  }
+],
+
+viewDetails: "Ver más",
 
       dimensions: [
         {
