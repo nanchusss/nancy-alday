@@ -26,7 +26,7 @@ export default function ReliefLanding() {
 
   const [scrollX, setScrollX] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [aboutProgress, setAboutProgress] = useState(0);
+ 
 
   const [revealed, setRevealed] = useState(false);
   const [activeProject, setActiveProject] = useState(null);
@@ -34,8 +34,7 @@ export default function ReliefLanding() {
 
   const slides = t.landing.editorialSlides;
 
-  const [view, setView] = useState("gallery");
-// "intro" | "gallery" | "detail"
+
 
   const [showScrollHint, setShowScrollHint] = useState(true);
 
@@ -132,21 +131,7 @@ useEffect(() => {
 }, [activeProject, projects.length]);
 
 
-useEffect(() => {
-  if (!showScrollHint) return;
 
-  const handleScroll = () => {
-    setShowScrollHint(false);
-  };
-
-  window.addEventListener("wheel", handleScroll);
-  window.addEventListener("touchstart", handleScroll);
-
-  return () => {
-    window.removeEventListener("wheel", handleScroll);
-    window.removeEventListener("touchstart", handleScroll);
-  };
-}, [showScrollHint]);
 
 
 useEffect(() => {
@@ -245,8 +230,8 @@ useEffect(() => {
       const rect = document.getElementById("about")?.getBoundingClientRect();
       if (!rect) return;
 
-      const progress = Math.min(1, Math.max(0, 1 - rect.top / window.innerHeight));
-      setAboutProgress(progress);
+     
+     
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -407,7 +392,7 @@ useEffect(() => {
     // 🔥 SI NO → ABRE
     setSelectedIndex(i);
     setActiveProject(i);
-    setView("detail");
+    
   }}
 >
   <StackItemContainer>
