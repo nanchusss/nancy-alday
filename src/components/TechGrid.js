@@ -50,27 +50,60 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+    gap: 20px;
+  }
 `;
 
 const Header = styled.div`
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 const Title = styled.h2`
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(48px, 4vw, 58px);
   font-weight: 600;
   letter-spacing: -1px;
+  padding-bottom: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+    line-height: 1.2;
+    
+    letter-spacing: -0.5px;
+  }
 `;
 
 const Subtitle = styled.p`
-  font-size: 14px;
+  font-size: 34px;
   opacity: 0.6;
-  max-width: 400px;
+  max-width: 1200px;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-left: -20px;
+    line-height: 1.5;
+    padding: 20px;
+    letter-spacing: 1px;
+    max-width: 100%;
+    margin-top: 10px;
+  }
 `;
 
 const TickerWrapper = styled.div`
   overflow: hidden;
   width: 100%;
+  margin-bottom: 60px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const Ticker = styled.div`
@@ -78,6 +111,12 @@ const Ticker = styled.div`
   gap: 60px;
   width: max-content;
   animation: ${scroll} 25s linear infinite;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    gap: 32px; /* 🔥 menos separación */
+    animation: ${scroll} 35s linear infinite; /* 🔥 más lento (clave UX) */
+  }
 `;
 
 const TechItem = styled.div`
@@ -85,9 +124,17 @@ const TechItem = styled.div`
   font-weight: 600;
   opacity: 0.2;
   transition: all 0.3s ease;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
 
   &:hover {
     opacity: 1;
     transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+  padding:  10px;
+    font-size: 50px; /* 🔥 control real */
+    opacity: 0.35; /* 🔥 más visible en mobile */
   }
 `;

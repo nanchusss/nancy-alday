@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import ReliefLanding from "./components/ReliefLandingviejo";
+import ImageRunaway from "./components/ImageRunaway"; // 👈 NUEVO
+import ProjectDetail from "./components/ProjectDetail"; // 👈 NUEVO
+
 import Header from "./components/common/Header";
 import ContactModal from "./components/Contact";
 import { LanguageProvider } from "./components/LanguageContext";
 import GlobalStyles from "./styles/GlobalStyles";
 import Home from "./components/Home";
-import { ThemeProvider } from "styled-components";
 
+import { ThemeProvider } from "styled-components";
 import CustomCursor from "./components/CustomCursor";
 
 const lightTheme = {
@@ -18,9 +23,9 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  background: "#0b0b0c", // más profundo y elegante
-  text: "#F5F1EA", // blanco cálido (clave)
-  secondaryText: "rgba(245,241,234,0.65)", // legible pero suave
+  background: "#0b0b0c",
+  text: "#F5F1EA",
+  secondaryText: "rgba(245,241,234,0.65)",
   accent: "#d6bfa3",
   card: "#161616",
 };
@@ -37,27 +42,45 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <BrowserRouter>
+
         <CustomCursor />
-      <LanguageProvider>
-        <Header
-          isDark={isDark}
-          toggleTheme={toggleTheme}
-          onContactClick={() => setContactOpen(true)}
-          
-        />
 
-        <GlobalStyles />
-        <Home />
+        <LanguageProvider>
+          <Header
+            isDark={isDark}
+            toggleTheme={toggleTheme}
+            onContactClick={() => setContactOpen(true)}
+          />
 
-        <ReliefLanding onContactClick={() => setContactOpen(true)} />
+          <GlobalStyles />
 
-       
+          <Routes>
+            {/* LANDING */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Home />
+                  <ReliefLanding onContactClick={() => setContactOpen(true)} />
+                </>
+              }
+            />
 
-        <ContactModal
-          isOpen={contactOpen}
-          onClose={() => setContactOpen(false)}
-        />
-      </LanguageProvider>
+            {/* PASARELA */}
+            <Route path="/projects" element={<ImageRunaway />} />
+
+            {/* DETALLE */}
+            <Route path="/project/:id" element={<ProjectDetail />} />
+          </Routes>
+
+          <ContactModal
+            isOpen={contactOpen}
+            onClose={() => setContactOpen(false)}
+          />
+        </LanguageProvider>
+
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
