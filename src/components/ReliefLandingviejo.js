@@ -122,8 +122,9 @@ export default function ReliefLanding() {
           <ProjectStage>
             <Discover onClick={() => navigate("/projects")}>
               <Dot />
-              <span>View More</span>
+ <ViewMoreText>View More</ViewMoreText>
             </Discover>
+           
           </ProjectStage>
         )}
 
@@ -135,6 +136,46 @@ export default function ReliefLanding() {
 
 /* ================= STYLES ================= */
 
+const ViewMoreText = styled.span`
+  position: relative;
+
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: #1a1a1a;
+
+  cursor: pointer;
+
+  /* línea sutil debajo */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+
+    width: 100%;
+    height: 1px;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    transform: scaleX(0.6);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* micro interacción */
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -145,6 +186,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     height: auto; /* 🔥 clave */
     min-height: 100vh; /* opcional pero recomendable */
+    display: block; /* 🔥 resetea flex para evitar colapsos */
   }
 `;
 
@@ -154,7 +196,7 @@ const TopSection = styled.div`
 
    @media (max-width: 768px) {
     height: auto;
-    padding: 60px 20px 40px;
+    padding: 40px 20px 40px;
   }
 `;
 
@@ -166,10 +208,9 @@ const BottomSection = styled.div`
 
   @media (max-width: 768px) {
     height: auto;
-    @media (max-width: 768px) {
-  height: auto;
-  padding: 20px;
-}
+    padding: 40px 20px 60px;
+
+    display: block; /* 🔥 esto cambia TODO */
   }
 `;
 
@@ -177,6 +218,12 @@ const HorizontalTrack = styled.div`
   display: flex;
   height: 100%;
   overflow-x: auto;
+
+  scroll-snap-type: x mandatory;
+
+  @media (max-width: 768px) {
+    height: auto; /* 🔥 clave */
+  }
 `;
 
 const Panel = styled.div`
@@ -288,21 +335,18 @@ const Discover = styled.div`
   align-items: center;
   gap: 12px;
 
- @media (max-width: 768px) {
-  position: relative;
-  transform: none;
-  margin-top: 100px;
-  
+  @media (max-width: 768px) {
+    position: relative;
+    transform: none;
 
-  flex-direction: column;
-  gap: 10px;
+    margin-top: 60px;
 
-  align-items: center; /* 🔥 centra contenido interno */
-  text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  margin-left: auto;
-  margin-right: auto; /* 🔥 centra el bloque entero */
-}
+    width: 100%; /* 🔥 evita cortes */
+  }
 `;
 
 const Dot = styled.div`

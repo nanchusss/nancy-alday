@@ -226,7 +226,7 @@ const Image = styled.div`
   @media (max-width: 768px) {
     width: 400px;
     height: 520px;
-    margin-left: 100px;
+    
     align-items: center;
   }
 `;
