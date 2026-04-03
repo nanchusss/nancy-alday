@@ -3,16 +3,17 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../data/projects";
 
+/* 🔥 constantes FUERA (fix warning React) */
+const ITEM_WIDTH = 520;
+const GAP = 80;
+const STEP = ITEM_WIDTH + GAP;
+
 export default function ImageRunway() {
   const trackRef = useRef(null);
   const navigate = useNavigate();
 
   // 🔁 LOOP
   const loopedProjects = [...projects, ...projects, ...projects];
-
-  const ITEM_WIDTH = 520;
-  const GAP = 80;
-  const STEP = ITEM_WIDTH + GAP;
 
   const baseIndex = projects.length;
   const baseOffset = baseIndex * STEP;
@@ -48,7 +49,7 @@ export default function ImageRunway() {
       const total = projects.length;
       const loopSize = STEP * total;
 
-      // 🔁 LOOP CORRECTO
+      // 🔁 LOOP estable
       if (target.current < loopSize) {
         target.current += loopSize;
         current.current += loopSize;
@@ -108,7 +109,7 @@ export default function ImageRunway() {
     ((activeIndex % projects.length) + projects.length) %
     projects.length;
 
-  // 🔥 CLICK (ARREGLADO)
+  // 🔥 CLICK
   const handleClick = (i) => {
     const real =
       ((i % projects.length) + projects.length) %
@@ -122,20 +123,28 @@ export default function ImageRunway() {
   };
 
   return (
- <Wrapper onClick={() => navigate("/")}>
+    <Wrapper
+  onClick={(e) => {
+    if (!trackRef.current?.contains(e.target)) {
+      navigate("/");
+    }
+  }}
+>
       <TopBar>
         <ProjectTitle>{projects[realIndex]?.title}</ProjectTitle>
       </TopBar>
 
       <ScrollSpace />
 
-      <Track ref={trackRef} onClick={(e) => e.stopPropagation()}>
+      <Track
+        ref={trackRef}
+        onClick={(e) => e.stopPropagation()} // 🔥 evita cierre accidental
+      >
         {loopedProjects.map((p, i) => (
           <Item
             key={i}
             active={i === activeIndex}
             onClick={() => handleClick(i)}
-            
           >
             <Image src={p.image[0]} />
           </Item>
@@ -144,6 +153,8 @@ export default function ImageRunway() {
     </Wrapper>
   );
 }
+
+/* ---------------- STYLES ---------------- */
 
 /* ---------------- STYLES ---------------- */
 
@@ -211,4 +222,11 @@ const Image = styled.div`
   background-position: center;
 
   border-radius: 18px;
+
+  @media (max-width: 768px) {
+    width: 400px;
+    height: 520px;
+    margin-left: 100px;
+    align-items: center;
+  }
 `;
