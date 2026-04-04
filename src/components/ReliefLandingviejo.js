@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { LanguageContext } from "../components/LanguageContext";
 import { useNavigate } from "react-router-dom";
 
-import retrato from "../IMAGES/retrato.jpg";
 import TechEcosystem from "./TechGrid";
 import ScrollHint from "./ScrollHint";
 
@@ -156,7 +155,7 @@ export default function ReliefLanding() {
 
         {activeIndex === 0 && (
           <AboutStage>
-            <PortraitSmall src={retrato} />
+           
 
             <AboutContent>
               <AboutParagraph>
@@ -191,7 +190,6 @@ export default function ReliefLanding() {
   );
 }
 
-
 const ViewMoreText = styled.span`
   position: relative;
 
@@ -199,11 +197,10 @@ const ViewMoreText = styled.span`
   letter-spacing: 0.18em;
   text-transform: uppercase;
 
-  color: #1a1a1a;
+  color: ${({ theme }) => theme.text};
 
   cursor: pointer;
 
-  /* línea sutil debajo */
   &::after {
     content: "";
     position: absolute;
@@ -213,7 +210,10 @@ const ViewMoreText = styled.span`
     width: 100%;
     height: 1px;
 
-    background: rgba(0, 0, 0, 0.3);
+    background: ${({ theme }) =>
+      theme.background === "#0b0b0c"
+        ? "rgba(255,255,255,0.3)"
+        : "rgba(0,0,0,0.3)"};
 
     transform: scaleX(0.6);
     transform-origin: left;
@@ -224,14 +224,12 @@ const ViewMoreText = styled.span`
     transform: scaleX(1);
   }
 
-  /* micro interacción */
   transition: opacity 0.3s ease;
 
   &:hover {
     opacity: 0.7;
   }
 `;
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -297,7 +295,12 @@ const OutlineTitle = styled.h1`
   position: absolute;
   font-size: clamp(60px, 10vw, 140px);
   color: transparent;
-  -webkit-text-stroke: 1px black;
+  text-transform: uppercase;
+
+  -webkit-text-stroke: 1px
+    ${({ theme }) =>
+      theme.background === "#0b0b0c" ? "rgba(255,255,255,0.25)" : "black"};
+
   opacity: 0.2;
 `;
 
@@ -305,11 +308,10 @@ const MainTitle = styled.h1`
   font-size: clamp(60px, 10vw, 140px);
   margin-bottom: 20px;
   align-self: flex-start;
-  margin-left: -4px;
   text-transform: uppercase;
 
   @media (max-width: 768px) {
-    margin-bottom: 40px;
+    
   }
 `;
 
@@ -325,16 +327,16 @@ const AboutStage = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    text-align: center;
-    gap: 24px;
-    margin-top: 60px;
+    text-align: left;
+    gap: 12px;
+    margin-top: 0px;
   }
 `;
 
 const AboutContent = styled.div`
   max-width: 1200px;
   font-size: 33px;
-  color: black;
+  color: ${({ theme }) => theme.text};
 
   @media (max-width: 768px) {
     max-width: 90%;
@@ -350,22 +352,16 @@ const AboutParagraph = styled.p`
   transform: none;
 `;
 
-const PortraitSmall = styled.img`
-  width: 200px;
-
-  @media (max-width: 768px) {
-    width: 70%;
-    margint-top: 20px;
-    max-width: 260px;
-  }
-`;
-
 const ProjectStage = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-`;
 
+  display: flex;
+  align-items: flex-end; /* 👈 clave */
+
+  overflow: hidden;
+`;
 const Discover = styled.div`
   position: absolute;
   top: 50%;
@@ -395,7 +391,9 @@ const Discover = styled.div`
 const Dot = styled.div`
   width: 22px;
   height: 22px;
-  background: black;
+
+  background: ${({ theme }) => theme.text};
+
   border-radius: 50%;
 `;
 

@@ -163,8 +163,25 @@ export default function ImageRunway() {
 
 const Wrapper = styled.section`
   height: 300vh;
-  background: #f6f3ef;
+
+  background: ${({ theme }) => theme.background};
+
   overflow: hidden;
+  position: relative;
+
+  /* 🔥 profundidad en dark */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: ${({ theme }) =>
+      theme.background === "#0b0b0c"
+        ? "radial-gradient(circle at 50% 20%, rgba(255,255,255,0.04), transparent 60%)"
+        : "none"};
+
+    pointer-events: none;
+  }
 
   @media (max-width: 768px) {
     height: auto;
@@ -196,6 +213,8 @@ const ProjectTitle = styled.h2`
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 400;
+
+  color: ${({ theme }) => theme.secondaryText};
 `;
 
 const Track = styled.div`
@@ -208,6 +227,9 @@ const Track = styled.div`
 
   transform: translateY(-50%);
   will-change: transform;
+
+  /* 🔥 micro mejora */
+  transition: transform 0.1s linear;
 
   @media (max-width: 768px) {
     position: relative;
@@ -238,24 +260,29 @@ const Item = styled.div`
   opacity: ${({ active }) => (active ? 1 : 0.35)};
   z-index: ${({ active }) => (active ? 3 : 1)};
 
- @media (max-width: 768px) {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
+  /* 🔥 sombra SOLO en dark */
+  box-shadow: ${({ theme, active }) =>
+    theme.background === "#0b0b0c" && active
+      ? "0 40px 120px rgba(0,0,0,0.6)"
+      : "none"};
 
-  transform: translateY(40px) scale(0.96);
-  opacity: 0;
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
 
-  animation: reveal 0.6s ease forwards;
-  animation-delay: ${({ index }) => index * 0.1}s;
+    transform: translateY(40px) scale(0.96);
+    opacity: 0;
 
-  @keyframes reveal {
-    to {
-      transform: translateY(0) scale(1);
-      opacity: 1;
+    animation: reveal 0.6s ease forwards;
+    animation-delay: ${({ index }) => index * 0.1}s;
+
+    @keyframes reveal {
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
     }
-  }
-}
   }
 `;
 
@@ -268,6 +295,10 @@ const Image = styled.div`
   background-position: center;
 
   border-radius: 18px;
+
+  /* 🔥 mejora en dark */
+  filter: ${({ theme }) =>
+    theme.background === "#0b0b0c" ? "brightness(0.92)" : "none"};
 
   @media (max-width: 768px) {
     aspect-ratio: 4 / 5;
@@ -284,7 +315,9 @@ const MobileTitle = styled.div`
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    opacity: 0.6;
+
+    color: ${({ theme }) => theme.secondaryText};
+
     text-align: center;
   }
 `;

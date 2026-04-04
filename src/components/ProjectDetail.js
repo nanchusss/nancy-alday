@@ -152,7 +152,9 @@ const SidePanel = styled.div`
   right: 0;
   width: 50%;
   height: 100%;
-  background: #f7f7f5;
+
+  background: ${({ theme }) => theme.card};
+
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -162,7 +164,6 @@ const SidePanel = styled.div`
     position: relative;
     width: 100%;
     height: auto;
-
     border-radius: 0;
   }
 `;
@@ -171,21 +172,28 @@ const PanelHeader = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center; /* 👈 centra el resto */
+  justify-content: center;
 
   padding: 30px 40px;
+
+  border-bottom: 1px solid
+    ${({ theme }) =>
+      theme.background === "#0b0b0c"
+        ? "rgba(255,255,255,0.08)"
+        : "rgba(0,0,0,0.06)"};
 `;
 
 const CloseText = styled.span`
   position: absolute;
-  left: 40px; /* 👈 anclado real */
+  left: 40px;
   top: 50%;
   transform: translateY(-50%);
 
   cursor: pointer;
   font-size: 14px;
   letter-spacing: 1px;
-  color: rgba(0,0,0,0.7);
+
+  color: ${({ theme }) => theme.secondaryText};
 
   display: inline-flex;
   align-items: center;
@@ -211,12 +219,26 @@ const Visit = styled.a`
   transform: translateY(-50%);
 
   text-decoration: none;
-  border-bottom: 1px solid black;
-`;
 
+  color: ${({ theme }) => theme.text};
+
+  border-bottom: 1px solid
+    ${({ theme }) =>
+      theme.background === "#0b0b0c"
+        ? "rgba(255,255,255,0.3)"
+        : "rgba(0,0,0,0.4)"};
+
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
 const PanelBody = styled.div`
   padding: 0 60px;
   flex: 1;
+
+  color: ${({ theme }) => theme.text};
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -236,12 +258,18 @@ const Tags = styled.div`
 
 const Tag = styled.span`
   font-size: 14px;
-
   padding: 4px 8px;
-  background: #e6d9ff;
+
+  background: ${({ theme }) =>
+    theme.background === "#0b0b0c"
+      ? "rgba(255,255,255,0.08)"
+      : "#e6d9ff"};
+
+  color: ${({ theme }) => theme.text};
+
   border-radius: 4px;
 
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     padding: 10px;
   }
 `;
@@ -252,12 +280,16 @@ const BigTitle = styled.h1`
   line-height: 1.1;
   margin-top: 30px;
   margin-bottom: 16px;
+
+  color: ${({ theme }) => theme.text};
 `;
 
 const Paragraph = styled.p`
   font-size: 25px;
   line-height: 1.6;
   margin-bottom: 16px;
+
+  color: ${({ theme }) => theme.secondaryText};
 `;
 
 

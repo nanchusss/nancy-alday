@@ -12,6 +12,14 @@ import base4 from "../IMAGES/base4.png";
 import base5 from "../IMAGES/base5.png";
 import base6 from "../IMAGES/base6.png";
 
+
+import finestra1 from "../IMAGES/finestra1.png";
+import finestra2 from "../IMAGES/finestra2.png";
+import finestra3 from "../IMAGES/finestra3.png";
+import finestra4 from "../IMAGES/finestra4.png";
+import finestra5 from "../IMAGES/finestra5.png";
+import finestra6 from "../IMAGES/finestra6.png";
+
 export const projects = [
   {
     title: "El Taller Aguaymanto",
@@ -26,7 +34,7 @@ export const projects = [
   },
   {
     title: "Finestra Serveis",
-    image: [proyecto2],
+    image: [finestra1, finestra2, finestra3, finestra4, finestra5, finestra6, proyecto2],
     url: "https://finestraserveis.com",
     description: [
       "Web corporativa enfocada en conversión para servicios de aluminio y PVC.",
