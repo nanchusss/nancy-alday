@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { LanguageContext } from "../LanguageContext";
+import logo from "../../IMAGES/nanlogo.png"
+import { useNavigate } from "react-router-dom";
+
 
 export default function Header({ onContactClick, isDark, toggleTheme }) {
   const { setLanguage, t } = useContext(LanguageContext);
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -11,15 +15,8 @@ export default function Header({ onContactClick, isDark, toggleTheme }) {
         
 
         <Right>
-          <LangGroup>
-            <LangButton onClick={() => setLanguage("en")}>
-              {t.landing.languageEN}
-            </LangButton>
-
-            <LangButton onClick={() => setLanguage("es")}>
-              {t.landing.languageES}
-            </LangButton>
-          </LangGroup>
+          <Logo onClick={() => navigate("/")}><img src={logo} alt="Logo" /></Logo>
+       
 
           <ContactButton onClick={onContactClick}>
             <StaticText>{t.landing.contact}</StaticText>
@@ -40,11 +37,35 @@ export default function Header({ onContactClick, isDark, toggleTheme }) {
           <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
   {isDark ? "☀" : "☾"}
 </ThemeToggle>
+   <LangGroup>
+            <LangButton onClick={() => setLanguage("en")}>
+              {t.landing.languageEN}
+            </LangButton>
+
+            <LangButton onClick={() => setLanguage("es")}>
+              {t.landing.languageES}
+            </LangButton>
+          </LangGroup>
       </Inner>
     </Container>
   );
 }
 
+const Logo = styled.div`
+  width: 40px;
+  height: 40px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+`;
 
 /* ================= ANIMATIONS ================= */
 

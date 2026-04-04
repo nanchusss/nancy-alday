@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import retrato from "../IMAGES/retrato.jpg";
 import TechEcosystem from "./TechGrid";
+import ScrollHint from "./ScrollHint";
 
 export default function ReliefLanding() {
   const { t } = useContext(LanguageContext);
@@ -12,12 +13,28 @@ export default function ReliefLanding() {
 
   const horizontalRef = useRef(null);
 
+  const startX = useRef(0);
+  const endX = useRef(0);
+
+  const [hasEnteredRelief, setHasEnteredRelief] = useState(false);
   const [scrollX, setScrollX] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const slides = t.landing.editorialSlides;
 
-  /* ================= SCROLL HORIZONTAL ================= */
+  /* ================= SCROLL VERTICAL (flecha) ================= */
+  useEffect(() => {
+    const handleScroll = () => {
+      const triggerPoint = window.innerHeight * 0.8;
+
+      setHasEnteredRelief(window.scrollY > triggerPoint);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ================= SCROLL HORIZONTAL + TOUCH ================= */
   useEffect(() => {
     const el = horizontalRef.current;
     if (!el) return;
@@ -52,17 +69,57 @@ export default function ReliefLanding() {
       setActiveIndex(closestIndex);
     };
 
+    /* ===== TOUCH (mobile) ===== */
+    const handleTouchStart = (e) => {
+      startX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+      endX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+      const diff = startX.current - endX.current;
+
+      if (Math.abs(diff) < 50) return;
+
+      let newIndex = activeIndex;
+
+      if (diff > 0) {
+        newIndex = Math.min(activeIndex + 1, slides.length - 1);
+      } else {
+        newIndex = Math.max(activeIndex - 1, 0);
+      }
+
+      el.scrollTo({
+        left: newIndex * window.innerWidth,
+        behavior: "smooth",
+      });
+
+      setActiveIndex(newIndex);
+    };
+
     el.addEventListener("wheel", handleWheel, { passive: false });
     el.addEventListener("scroll", handleScroll);
+
+    el.addEventListener("touchstart", handleTouchStart);
+    el.addEventListener("touchmove", handleTouchMove);
+    el.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("scroll", handleScroll);
+
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchmove", handleTouchMove);
+      el.removeEventListener("touchend", handleTouchEnd);
     };
-  }, []);
+  }, [activeIndex, slides.length]);
 
   return (
     <Wrapper>
+
+      {hasEnteredRelief && <ScrollHint direction="right" />}
 
       {/* TOP */}
       <TopSection>
@@ -75,11 +132,15 @@ export default function ReliefLanding() {
               <Panel key={index}>
                 <PanelContent>
                   <TitleWrapper>
-                    <OutlineTitle style={{ transform: `translateX(${depthShift}px)` }}>
+                    <OutlineTitle
+                      style={{ transform: `translateX(${depthShift}px)` }}
+                    >
                       {index === 0 ? "About Me" : slide.title}
                     </OutlineTitle>
 
-                    <MainTitle style={{ transform: `translateX(${frontShift}px)` }}>
+                    <MainTitle
+                      style={{ transform: `translateX(${frontShift}px)` }}
+                    >
                       {index === 0 ? "About Me" : slide.title}
                     </MainTitle>
                   </TitleWrapper>
@@ -93,38 +154,34 @@ export default function ReliefLanding() {
       {/* BOTTOM */}
       <BottomSection>
 
-        {/* ABOUT */}
         {activeIndex === 0 && (
-          <AboutStage id="about">
+          <AboutStage>
             <PortraitSmall src={retrato} />
 
             <AboutContent>
-              <AboutParagraph delay={0}>
+              <AboutParagraph>
                 I'm a passionate frontend developer with a background in arts.
               </AboutParagraph>
 
-              <AboutParagraph delay={0.2}>
+              <AboutParagraph>
                 I enjoy creating interfaces that are visually appealing and intuitive.
               </AboutParagraph>
 
-              <AboutParagraph delay={0.4}>
+              <AboutParagraph>
                 If you're looking for creativity + execution, let's connect.
               </AboutParagraph>
             </AboutContent>
           </AboutStage>
         )}
 
-        {/* TECH */}
         {activeIndex === 1 && <TechEcosystem />}
 
-        {/* PROJECTS CTA */}
         {activeIndex === 2 && (
           <ProjectStage>
             <Discover onClick={() => navigate("/projects")}>
               <Dot />
- <ViewMoreText>View More</ViewMoreText>
+              <ViewMoreText>View More</ViewMoreText>
             </Discover>
-           
           </ProjectStage>
         )}
 
@@ -134,7 +191,6 @@ export default function ReliefLanding() {
   );
 }
 
-/* ================= STYLES ================= */
 
 const ViewMoreText = styled.span`
   position: relative;
@@ -201,17 +257,11 @@ const TopSection = styled.div`
 `;
 
 const BottomSection = styled.div`
-  height: 50%;
+  min-height: 50%;
+  height: auto;
   display: flex;
   align-items: center;
   padding: 4vh 6vw;
-
-  @media (max-width: 768px) {
-    height: auto;
-    padding: 40px 20px 60px;
-
-    display: block; /* 🔥 esto cambia TODO */
-  }
 `;
 
 const HorizontalTrack = styled.div`
@@ -220,10 +270,8 @@ const HorizontalTrack = styled.div`
   overflow-x: auto;
 
   scroll-snap-type: x mandatory;
-
-  @media (max-width: 768px) {
-    height: auto; /* 🔥 clave */
-  }
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 `;
 
 const Panel = styled.div`
@@ -272,16 +320,21 @@ const AboutStage = styled.div`
   width: 100%;
   margin-bottom: 40px;
 
+
+  transition: opacity 0.3s ease;
+
   @media (max-width: 768px) {
     flex-direction: column;
     text-align: center;
     gap: 24px;
-    margin-top: 60px; /* 🔥 AQUÍ ESTÁ EL CAMBIO BUENO */
+    margin-top: 60px;
   }
 `;
 
 const AboutContent = styled.div`
   max-width: 1200px;
+  font-size: 33px;
+  color: black;
 
   @media (max-width: 768px) {
     max-width: 90%;
@@ -291,20 +344,10 @@ const AboutContent = styled.div`
 const AboutParagraph = styled.p`
   font-size: 33px;
   margin-bottom: 16px;
-  
   max-width: 100%;
 
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s ease forwards;
-  animation-delay: ${({ delay }) => delay}s;
-
-  @media (max-width: 768px) {
-  margin-top: 20px;
-    font-size: 27px;
-    line-height: 1.6;
-    letter-spacing: 0.2px;
-  }
+  opacity: 1;
+  transform: none;
 `;
 
 const PortraitSmall = styled.img`
@@ -355,3 +398,6 @@ const Dot = styled.div`
   background: black;
   border-radius: 50%;
 `;
+
+
+
