@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import ReliefLanding from "./components/ReliefLandingviejo";
-import ImageRunaway from "./components/ImageRunaway"; // 👈 NUEVO
 import ProjectDetail from "./components/ProjectDetail"; // 👈 NUEVO
 
 import Header from "./components/common/Header";
 import ContactModal from "./components/Contact";
 import { LanguageProvider } from "./components/LanguageContext";
 import GlobalStyles from "./styles/GlobalStyles";
-import Home from "./components/Home";
+
+
+import HowIThink from "./components/HowIThink/Images/HowIThink";
 
 import { ThemeProvider } from "styled-components";
-import CustomCursor from "./components/CustomCursor";
+import CustomCursor from "./components/cursor/CustomCursor";
+import CursorTrail from "./components/cursor/CursorTrail";
+
+import ScrollRevealSection from "./components/TransitionScroll";
+
 
 const lightTheme = {
   background: "#f5f1eb",
@@ -43,15 +47,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-
+<CursorTrail />
         <CustomCursor />
 
         <LanguageProvider>
-          <Header
-            isDark={isDark}
-            toggleTheme={toggleTheme}
-            onContactClick={() => setContactOpen(true)}
-          />
+         
 
           <GlobalStyles />
 
@@ -61,14 +61,22 @@ function App() {
               path="/"
               element={
                 <>
-                  <Home />
-                  <ReliefLanding onContactClick={() => setContactOpen(true)} />
+               
+                 
+                    <ScrollRevealSection /> {/* 🔥 AQUÍ */}
+                      
+                       <HowIThink />
+
+                        <Header
+            isDark={isDark}
+            toggleTheme={toggleTheme}
+            onContactClick={() => setContactOpen(true)}
+          />
                 </>
               }
             />
 
-            {/* PASARELA */}
-            <Route path="/projects" element={<ImageRunaway />} />
+           
 
             {/* DETALLE */}
             <Route path="/project/:id" element={<ProjectDetail />} />

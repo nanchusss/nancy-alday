@@ -1,0 +1,237 @@
+import React, { useRef } from "react";
+import { useScroll, useSpring, animated } from "@react-spring/web";
+import styled from "styled-components";
+
+export default function HowIThink() {
+  const ref = useRef();
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  const progress = useSpring({
+    p: scrollYProgress,
+    config: { tension: 120, friction: 30 },
+  });
+
+  /* ================= BACKGROUNDS ================= */
+
+  const yellowReveal = progress.p.to((p) => {
+    const t = Math.max(0, Math.min(1, (p - 0.2) / 0.25));
+    return `circle(${t * 150}% at 50% 50%)`;
+  });
+
+  const orangeReveal = progress.p.to((p) => {
+    const t = Math.max(0, Math.min(1, (p - 0.6) / 0.3));
+    return `circle(${t * 150}% at 50% 50%)`;
+  });
+
+  /* ================= OPACITY ================= */
+
+ const opacity1 = progress.p.to((p) => {
+  if (p < 0.2) return 1;
+  if (p > 0.3) return 0;
+  return 1 - (p - 0.2) / 0.1;
+});
+
+const opacity2 = progress.p.to((p) => {
+  if (p < 0.35) return 0;
+  if (p >= 0.35 && p <= 0.45) return (p - 0.35) / 0.1; // entra
+  if (p > 0.45 && p < 0.55) return 1; // visible
+  if (p >= 0.55 && p <= 0.65) return 1 - (p - 0.55) / 0.1; // sale
+  return 0;
+});
+
+const opacity3 = progress.p.to((p) => {
+  if (p < 0.6) return 0;
+  if (p > 0.8) return 1;
+  return (p - 0.6) / 0.2;
+});
+
+  /* ================= SHAPES ================= */
+
+  const shapes = [
+    { angle: -150, color: "#E4572E", size: 150, path: "M60,10 C90,20 110,60 80,90 C50,120 10,100 10,60 C10,30 30,0 60,10 Z" },
+    { angle: -165, color: "#6FA8DC", size: 120, path: "M50,10 C80,20 90,60 60,80 C30,100 0,80 10,50 C20,20 30,0 50,10 Z" },
+    { angle: 0, color: "#F2C94C", size: 150, path: "M70,10 C110,30 120,80 80,110 C40,140 0,110 10,60 C20,20 40,0 70,10 Z" },
+    { angle: 45, color: "#3A7D44", size: 120, path: "M40,10 C60,20 80,50 60,70 C40,90 10,80 10,50 C10,20 20,0 40,10 Z" },
+    { angle: 90, color: "#111111", size: 120, path: "M35,10 C60,20 70,50 50,70 C30,90 0,70 10,40 C20,20 20,0 35,10 Z" },
+  ];
+
+  return (
+    <Wrapper ref={ref}>
+      <Sticky>
+
+        {/* BACKGROUNDS */}
+        <YellowOverlay style={{ clipPath: yellowReveal }} />
+        <OrangeOverlay style={{ clipPath: orangeReveal }} />
+
+        {/* BLOBS */}
+        <SemiCircle>
+          {shapes.map((shape, i) => (
+            <BlobWrapper
+              key={i}
+              style={{
+                transform: progress.p.to((p) => {
+                  const baseRadius = 180;
+                  const rad = (shape.angle * Math.PI) / 180;
+
+                  const reveal = Math.max(
+                    0,
+                    Math.min(1, (p - i * 0.1) * 2)
+                  );
+
+                  const radius = baseRadius * reveal;
+
+                  const x = Math.cos(rad) * radius;
+                  const y = Math.sin(rad) * radius;
+
+                  return `translate(${x}px, ${y}px) scale(${0.6 + reveal * 0.5})`;
+                }),
+                opacity: progress.p.to((p) =>
+                  Math.max(0, Math.min(1, (p - i * 0.1) * 2))
+                ),
+              }}
+            >
+              <BlobSVG viewBox="0 0 120 120" style={{ width: shape.size, height: shape.size }}>
+                <path d={shape.path} fill={shape.color} />
+              </BlobSVG>
+            </BlobWrapper>
+          ))}
+        </SemiCircle>
+
+        {/* TEXT */}
+        <Content>
+
+         <Section
+  style={{
+    opacity: opacity1,
+    transform: progress.p.to((p) => {
+      if (p < 0.15) return "translateY(0px)";
+      if (p > 0.35) return "translateY(-40px)";
+      return `translateY(${-(p - 0.15) * 200}px)`;
+    }),
+    color: "#111",
+  }}
+>
+            <h2>How I think</h2>
+            <p>
+              I approach design through visual sensitivity and structural thinking.
+              I care deeply about color harmony and proportion,
+              but I always aim for clarity, usability and simplicity.
+            </p>
+          </Section>
+
+          <Section
+  style={{
+    opacity: opacity2,
+    transform: progress.p.to((p) => {
+      if (p < 0.3) return "translateY(40px)";
+      if (p > 0.6) return "translateY(0px)";
+      return `translateY(${(1 - (p - 0.3) / 0.3) * 40}px)`;
+    }),
+    color: "#111",
+  }}
+>
+            <h2>Clarity first</h2>
+            <p>
+              When everything is reduced to essentials,
+              design becomes stronger, quieter and more intentional.
+            </p>
+          </Section>
+
+         <Section
+  style={{
+    opacity: opacity3,
+    transform: progress.p.to((p) => {
+      if (p < 0.6) return "translateY(40px)";
+      if (p > 0.9) return "translateY(0px)";
+      return `translateY(${(1 - (p - 0.6) / 0.3) * 40}px)`;
+    }),
+    color: "#fff",
+  }}
+>
+            <h2>Then emotion</h2>
+            <p>
+              Color and form create the feeling behind the interface.
+            </p>
+          </Section>
+
+        </Content>
+
+      </Sticky>
+    </Wrapper>
+  );
+}
+
+/* ================= STYLES ================= */
+
+const Wrapper = styled.section`
+  height: 300vh;
+  background: #f6f3ef;
+`;
+
+const Sticky = styled.div`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+`;
+
+const Content = styled.div`
+  position: relative;
+  height: 100%;
+  z-index: 5;
+`;
+
+const Section = styled(animated.div)`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
+  max-width: 600px;
+
+  h2 {
+    font-size: clamp(48px, 8vw, 80px);
+    font-family: "Canela", serif;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+`;
+
+const YellowOverlay = styled(animated.div)`
+  position: absolute;
+  inset: 0;
+  background: #F2C94C;
+  z-index: 0;
+`;
+
+const OrangeOverlay = styled(animated.div)`
+  position: absolute;
+  inset: 0;
+  background: #E4572E;
+  z-index: 1;
+`;
+
+const SemiCircle = styled.div`
+  position: absolute;
+  z-index: 2;
+  width: 70vw;
+  height: 30vw;
+`;
+
+const BlobWrapper = styled(animated.div)`
+  position: absolute;
+  left: 50%;
+  top: 20%;
+`;
+
+const BlobSVG = styled(animated.svg)`
+  display: block;
+`;

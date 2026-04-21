@@ -5,8 +5,8 @@ import taller4 from "../IMAGES/eltaller4.png";
 
 import proyecto2 from "../IMAGES/finestra-serveis.png";
 
-import base1 from "../IMAGES/base1.png";
-import base2 from "../IMAGES/base2.png";
+
+import base1 from "../IMAGES/base2.png";
 import base3 from "../IMAGES/base3.png";
 import base4 from "../IMAGES/base4.png";
 import base5 from "../IMAGES/base5.png";
@@ -45,7 +45,7 @@ export const projects = [
   },
   {
     title: "Base Mendoza",
-    image: [base1, base2, base3, base4, base5, base6],
+    image: [base1, base3, base4, base5, base6],
     url: "https://base-mendoza.com",
     description: [
       "Proyecto para empresa de logística y transporte.",
