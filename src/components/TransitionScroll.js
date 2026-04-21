@@ -76,7 +76,7 @@ const HeroImageWrapper = styled.div`
   /* MOBILE */
   @media (max-width: 768px) {
     left: 50%;
-    top: 40%;
+    top: 50%;
     width: 130%;
     transform: translate(-50%, -50%);
     opacity: 0.9;

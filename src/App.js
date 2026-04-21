@@ -16,6 +16,7 @@ import CustomCursor from "./components/cursor/CustomCursor";
 import CursorTrail from "./components/cursor/CursorTrail";
 
 import ScrollRevealSection from "./components/TransitionScroll";
+import ProjectsSection from "./components/proyectos/Proyectos";
 
 
 const lightTheme = {
@@ -66,7 +67,7 @@ function App() {
                     <ScrollRevealSection /> {/* 🔥 AQUÍ */}
                       
                        <HowIThink />
-
+<ProjectsSection />
                         <Header
             isDark={isDark}
             toggleTheme={toggleTheme}
