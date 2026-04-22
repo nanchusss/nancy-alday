@@ -10,9 +10,7 @@ export default function ProjectsSection() {
 
   const navigate = useNavigate();
 
-  const handleProjectClick = (id) => {
-    navigate(`/projects/${id}`);
-  };
+ 
 
   /* ================= CURSOR ================= */
 
@@ -380,30 +378,3 @@ const Cursor = styled.div`
   opacity: 0;
 `;
 
-const Overlay = styled.div`
-  pointer-events: none; /* 🔥 CLAVE */
-
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(0,0,0,0.3);
-  opacity: 0;
-  transition: 0.3s;
-
-  span {
-    color: white;
-    font-size: 14px;
-  }
-
-  ${ItemWrapper}:hover & {
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    opacity: 1;
-  }
-`;

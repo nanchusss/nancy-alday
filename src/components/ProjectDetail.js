@@ -259,17 +259,6 @@ const PanelBody = styled.div`
 }
 `;
 
-const Tags = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-
-    @media (max-width: 768px) {
-      margin-top: 0px;
-    }
-`;
-
 const Tag = styled.span`
   position: relative;
   display: inline-block;
