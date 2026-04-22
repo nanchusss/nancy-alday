@@ -2,6 +2,7 @@ export const translations = {
 
   en: {
 
+
     landing: {
       languageEN: "EN",
       languageES: "ES",
@@ -23,6 +24,17 @@ export const translations = {
       subtitleLine2: "Crafting structured React interfaces with a design-driven mindset.",
 
     viewDetails: "View",
+
+
+    hero: {
+  title: `I design digital experiences
+shaped by art, structure
+and emotion.`,
+  subtitle: `From art and music to frontend — 
+a multidisciplinary approach to building interfaces.`,
+  signatureName: "Nancy Alday",
+  signatureRole: "Frontend Developer · Barcelona"
+},
 
       dimensions: [
         {
@@ -152,6 +164,7 @@ export const translations = {
 
   es: {
 
+
     landing: {
       languageEN: "EN",
       languageES: "ES",
@@ -185,7 +198,18 @@ export const translations = {
     title: "PROYECTOS",
     subtitle: "Experiencias digitales 2023–2026"
   }
+  
 ],
+
+   hero: {
+  title: `Diseño experiencias digitales
+moldeadas por arte, estructura
+y emoción.`,
+  subtitle: `Del arte y la música al frontend — 
+un enfoque multidisciplinar para construir interfaces.`,
+  signatureName: "Nancy Alday",
+  signatureRole: "Frontend Developer · Barcelona"
+},
 
 viewDetails: "Ver más",
 

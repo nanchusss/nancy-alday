@@ -2,8 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import image from "./images/fondo.png";
 import mobileimage from "./images/fondomobile.png";
+import { useContext } from "react";
+import { LanguageContext } from "../LanguageContext";
 
 export default function HeroSection() {
+
+  const { t } = useContext(LanguageContext);
   return (
     <Wrapper>
 
@@ -17,21 +21,16 @@ export default function HeroSection() {
       <Content>
 
         <TextBlock>
-          <Title>
-            I design digital experiences
-            shaped by art, structure
-            and emotion.
-          </Title>
+        <Title>{t.landing.hero.title}</Title>
 
           <Subtitle>
-            From art and music to frontend — 
-            a multidisciplinary approach to building interfaces.
+            {t.landing.hero.subtitle}
           </Subtitle>
         </TextBlock>
 
         <Signature>
-          Nancy Alday
-          <span>Frontend Developer · Barcelona</span>
+          {t.landing.hero.signatureName}
+          <span>{t.landing.hero.signatureRole}</span>
         </Signature>
 
       </Content>
