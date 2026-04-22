@@ -82,7 +82,7 @@ a multidisciplinary approach to building interfaces.`,
         {
           title: "Process Design",
           description:
-            "Automation grounded in real operational understanding, not decorative logic.",
+            "Automation grounded in real operational understanding, not decorative logic .",
           glow: "#e6e0d6"
         }
       ]
