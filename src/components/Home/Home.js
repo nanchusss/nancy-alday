@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import image from "../proyectos/images/fondo.png";
-import mobileimage from "./images/fondomobile.png";
+import mobileimage from "../proyectos/images/fondomobile.png";
 import { useContext } from "react";
 import { LanguageContext } from "../LanguageContext";
 
