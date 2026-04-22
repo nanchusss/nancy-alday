@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import taller1 from "./images/taller1.png";
-import taller2 from "./images/taller2.png";
-import taller3 from "./images/taller3.png";
+import { useNavigate } from "react-router-dom";
 
+import { projects } from "../../data/projects";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
   const [mode, setMode] = useState("gallery");
 
-  const projects = [
-    { title: "El Taller — Aguaymanto", image: taller1, subtitle: "Lorem ipsum dolor sit amet." },
-    { title: "Finestra Serveis", image: taller2, subtitle: "Lorem ipsum dolor sit amet." },
-    { title: "Base Mendoza", image: taller3, subtitle: "Lorem ipsum dolor sit amet." },
-  ];
+  const navigate = useNavigate();
+
+  const handleProjectClick = (id) => {
+    navigate(`/projects/${id}`);
+  };
 
   /* ================= CURSOR ================= */
 
@@ -58,88 +57,67 @@ export default function ProjectsSection() {
   const offset1 = useRef(0);
   const offset2 = useRef(0);
 
-  const ITEM_HEIGHT = 260;
+  const ITEM_HEIGHT = 420;
 
   useEffect(() => {
-    let raf;
-    const isMobile = window.innerWidth < 768;
+  let raf;
+  const isMobile = window.innerWidth < 768;
 
-    // ===== DESKTOP LOOP
+  let last = performance.now();
+  const speed = isMobile ? 0.02 : 0.03;
+
+  const loop = (now) => {
+    const delta = now - last;
+    last = now;
+
+    // columna 1 SIEMPRE
+    offset1.current -= delta * speed * 0.5;
+
+    // columna 2 SOLO desktop
     if (!isMobile) {
-      let last = performance.now();
-      const speed = 0.03;
-
-      const loop = (now) => {
-        const delta = now - last;
-        last = now;
-
-        // izquierda más lenta
-        offset1.current -= delta * speed * 0.5;
-
-        // derecha normal
-        offset2.current += delta * speed;
-
-        const limit = 3 * ITEM_HEIGHT;
-
-        if (offset1.current < -limit) offset1.current = 0;
-        if (offset2.current > 0) offset2.current = -limit;
-
-        if (track1.current) {
-          track1.current.style.transform = `translateY(${offset1.current}px)`;
-        }
-
-        if (track2.current) {
-          track2.current.style.transform = `translateY(${offset2.current}px)`;
-        }
-
-        raf = requestAnimationFrame(loop);
-      };
-
-      raf = requestAnimationFrame(loop);
-      return () => cancelAnimationFrame(raf);
+      offset2.current += delta * speed;
     }
 
-    // ===== MOBILE (scroll + inercia)
-    let target = 0;
-    let currentY = 0;
+    const limit = 3 * ITEM_HEIGHT;
 
-    const handleScroll = () => {
-      target = window.scrollY;
-    };
+    if (offset1.current < -limit) offset1.current = 0;
+    if (!isMobile && offset2.current > 0) offset2.current = -limit;
 
-    const animate = () => {
-      currentY += (target - currentY) * 0.08;
+    if (track1.current) {
+      track1.current.style.transform = `translateY(${offset1.current}px)`;
+    }
 
-      if (track1.current) {
-        track1.current.style.transform = `translateY(${-currentY * 0.4}px)`;
-      }
+    if (!isMobile && track2.current) {
+      track2.current.style.transform = `translateY(${offset2.current}px)`;
+    }
 
-      if (track2.current) {
-        track2.current.style.transform = `translateY(${currentY * 0.4}px)`;
-      }
+    raf = requestAnimationFrame(loop);
+  };
 
-      raf = requestAnimationFrame(animate);
-    };
+  raf = requestAnimationFrame(loop);
 
-    window.addEventListener("scroll", handleScroll);
-    raf = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  return () => cancelAnimationFrame(raf);
+}, []);
 
   return (
     <Wrapper>
 
+      {/* SWITCH */}
       <Switch>
-        <button className={mode === "gallery" ? "active" : ""} onClick={() => setMode("gallery")}>
-          GALLERY
-        </button>
-        <button className={mode === "list" ? "active" : ""} onClick={() => setMode("list")}>
-          LIST
-        </button>
+        <Toggle>
+          <button
+            className={mode === "gallery" ? "active" : ""}
+            onClick={() => setMode("gallery")}
+          >
+            GALLERY
+          </button>
+          <button
+            className={mode === "list" ? "active" : ""}
+            onClick={() => setMode("list")}
+          >
+            LIST
+          </button>
+        </Toggle>
       </Switch>
 
       {mode === "gallery" ? (
@@ -150,33 +128,45 @@ export default function ProjectsSection() {
 
             <Column>
               <Track ref={track1}>
-                {[...projects, ...projects].map((p, i) => (
-                  <ItemWrapper
+                {[...projects, ...projects].map((_, i) => {
+                  const p = projects[i % projects.length];
+
+                  return (
+                    <ItemWrapper
   key={i}
   onMouseEnter={() => setHovered(i)}
   onMouseLeave={() => setHovered(null)}
+  onClick={() => navigate(`/projects/${p.id}`)}
 >
-                    <Item style={{ backgroundImage: `url(${p.image})` }} />
-                    <ItemMeta>
-                      <ItemTitle>{p.title}</ItemTitle>
-                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
-                    </ItemMeta>
-                  </ItemWrapper>
-                ))}
+                      <Item style={{ backgroundImage: `url(${p.image[0]})` }} />
+                      <ItemMeta>
+                        <ItemTitle>{p.title}</ItemTitle>
+                        <ItemSubtitle>{p.subtitle}</ItemSubtitle>
+                      </ItemMeta>
+                    </ItemWrapper>
+                  );
+                })}
               </Track>
             </Column>
 
             <Column>
               <Track ref={track2}>
-                {[...projects, ...projects].map((p, i) => (
-                  <ItemWrapper key={i}>
-                    <Item style={{ backgroundImage: `url(${p.image})` }} />
-                    <ItemMeta>
-                      <ItemTitle>{p.title}</ItemTitle>
-                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
-                    </ItemMeta>
-                  </ItemWrapper>
-                ))}
+                {[...projects, ...projects].map((_, i) => {
+                  const p = projects[i % projects.length];
+
+                  return (
+                    <ItemWrapper
+                      key={i}
+                      onClick={() => navigate(`/projects/${p.id}`)}
+                    >
+                     <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
+                      <ItemMeta>
+                        <ItemTitle>{p.title}</ItemTitle>
+                        <ItemSubtitle>{p.subtitle}</ItemSubtitle>
+                      </ItemMeta>
+                    </ItemWrapper>
+                  );
+                })}
               </Track>
             </Column>
 
@@ -184,7 +174,10 @@ export default function ProjectsSection() {
 
           <Right>
             <TitleWrapper>
-              <Title>LOREM IPSUM LOREM IPSUM</Title>
+              <TitleTrack>
+                <Title>{projects[0]?.title}</Title>
+                <Title>{projects[hovered]?.title}</Title>
+              </TitleTrack>
             </TitleWrapper>
 
             <Subtitle>
@@ -197,20 +190,21 @@ export default function ProjectsSection() {
         </Layout>
 
       ) : (
+
         <ListView>
           {projects.map((p, i) => (
-            <ListRow key={i}>{p.title}</ListRow>
+            <ListRow
+              key={i}
+              onClick={() => navigate(`/project/${p.id}`)}
+            >
+              {p.title}
+            </ListRow>
           ))}
         </ListView>
+
       )}
 
       <Cursor ref={cursorRef}>VIEW ↗</Cursor>
-
-    {hovered !== null && projects[hovered % projects.length] && (
-  <Preview style={{ transform: `translate(${mouse.current.x + 60}px, ${mouse.current.y}px)` }}>
-    <img src={projects[hovered % projects.length].image} alt="" />
-  </Preview>
-)}
 
     </Wrapper>
   );
@@ -223,12 +217,6 @@ const Wrapper = styled.section`
   height: 100vh;
   background: #fff;
   overflow: hidden;
-
-
-  @media (max-width: 768px) {
-    height: auto;
-    overflow: visible;
-  }
 `;
 
 const Layout = styled.div`
@@ -238,6 +226,7 @@ const Layout = styled.div`
 
   @media (max-width: 768px) {
     display: block;
+    width: 100%;
   }
 `;
 
@@ -248,6 +237,7 @@ const Left = styled.div`
   overflow: hidden;
 
   @media (max-width: 768px) {
+    width: 100%;
     height: 200vh;
   }
 `;
@@ -255,6 +245,12 @@ const Left = styled.div`
 const Column = styled.div`
   flex: 1;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    &:nth-child(2) {
+      display: none;
+    }
+  }
 `;
 
 const Track = styled.div`
@@ -264,9 +260,7 @@ const Track = styled.div`
 `;
 
 const ItemWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  cursor: pointer;
 `;
 
 const Item = styled.div`
@@ -295,14 +289,21 @@ const Right = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 6vw;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const TitleWrapper = styled.div`
   overflow: hidden;
+`;
+
+const TitleTrack = styled.div`
+  display: flex;
+  width: max-content;
+  animation: scrollTitle 20s linear infinite;
+
+  @keyframes scrollTitle {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 `;
 
 const Title = styled.h1`
@@ -324,15 +325,49 @@ const Switch = styled.div`
   top: 120px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
+`;
+
+const Toggle = styled.div`
+  display: flex;
+  background: #eee;
+  border-radius: 999px;
+  padding: 6px;
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .active {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
 `;
 
 const ListView = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 `;
 
 const ListRow = styled.div`
-  font-size: 60px;
+  font-size: clamp(40px, 6vw, 80px);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.3;
+    transform: translateX(10px);
+  }
 `;
 
 const Cursor = styled.div`
@@ -345,15 +380,30 @@ const Cursor = styled.div`
   opacity: 0;
 `;
 
-const Preview = styled.div`
-  position: fixed;
-  width: 260px;
-  height: 280px;
-  pointer-events: none;
+const Overlay = styled.div`
+  pointer-events: none; /* 🔥 CLAVE */
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: 0.3s;
+
+  span {
+    color: white;
+    font-size: 14px;
+  }
+
+  ${ItemWrapper}:hover & {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 1;
   }
 `;

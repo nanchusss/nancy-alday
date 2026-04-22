@@ -15,8 +15,9 @@ import { ThemeProvider } from "styled-components";
 import CustomCursor from "./components/cursor/CustomCursor";
 import CursorTrail from "./components/cursor/CursorTrail";
 
-import ScrollRevealSection from "./components/TransitionScroll";
+import ScrollRevealSection from "./components/Home/Home";
 import ProjectsSection from "./components/proyectos/Proyectos";
+
 
 
 const lightTheme = {
@@ -80,7 +81,7 @@ function App() {
            
 
             {/* DETALLE */}
-            <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
           </Routes>
 
           <ContactModal

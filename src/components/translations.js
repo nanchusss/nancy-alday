@@ -22,22 +22,7 @@ export const translations = {
       subtitleLine1: "Junior Frontend Developer",
       subtitleLine2: "Crafting structured React interfaces with a design-driven mindset.",
 
- editorialSlides: [
-  {
-    title: "NANCY",
-    subtitle: "FRONTEND DEVELOPER & ARTIST"
-  },
-  {
-    title: "VISUAL SYSTEMS",
-    subtitle: "Structured Interfaces"
-  },
-  {
-    title: "SELECTED WORK",
-    subtitle: "Digital Experiences 2023–2026"
-  }
-],
-
-viewDetails: "View details",
+    viewDetails: "View",
 
       dimensions: [
         {
@@ -90,64 +75,54 @@ viewDetails: "View details",
         }
       ]
     },
+    projectsData: {
+  taller: {
+    title: "El Taller Aguaymanto",
+    description: [
+      "Digital platform for an artistic studio focused on contemporary ceramics.",
+      "I designed a visual experience combining editorial narrative with clear navigation.",
+      "Built in React with a strong focus on performance and visual refinement."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
+  },
 
-    projects: {
-      projectsPart1: "Pro",
-      projectsPart2: "Jects",
-      viewProject: "View Project →",
-      items: [
-        {
-          title: "Finestracat",
-          description:
-            "Corporate website built with React, JavaScript (ES6+) and Styled Components...",
-          stack: "React · Styled Components · Node · Express"
-        },
-        {
-          title: "Aguaymanto Taller",
-          description:
-            "Frontend architecture developed in React with dynamic availability management...",
-          stack: "React · Responsive Systems · UX Structure"
-        },
-        {
-          title: "Base Mendoza",
-          description:
-            "Digital landing experience built in React for early-stage startup positioning...",
-          stack: "React · Layout Architecture · UI Design"
-        },
-        {
-          title: "Finestra Serveis",
-          description:
-            "Corporate website built with React, modular architecture and responsive layout systems.",
-          stack: "UI Design · React · Styled Components · Node · Express"
-        }
-      ]
-    },
+  finestra: {
+    title: "Finestra Serveis",
+    description: [
+      "Corporate website focused on conversion for aluminum and PVC services.",
+      "I optimized visual hierarchy to improve clarity and user understanding.",
+      "Developed in React with a strong emphasis on structure and usability."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components"]
+  },
 
-    howIBuild: {
-      title: "How I Build Systems",
-      blocks: [
-        {
-          title: "Modular Architecture",
-          text:
-            "Interfaces are structured as scalable component systems..."
-        },
-        {
-          title: "Structured State Logic",
-          text:
-            "Clear separation between UI behavior and data logic..."
-        },
-        {
-          title: "API Data Flow Design",
-          text:
-            "Frontend layers are built around well-defined data contracts."
-        },
-        {
-          title: "Conversion-Oriented UX",
-          text:
-            "Interfaces guide action. Multi-step flows support real outcomes."
-        }
-      ]
+  mendoza: {
+    title: "Base Mendoza",
+    description: [
+      "Project developed for a logistics and transportation company.",
+      "Exploration of interaction, typography and visual rhythm.",
+      "Frontend development focused on user experience and clarity."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components"]
+  }
+},
+
+   howIThink: {
+  sections: [
+    {
+      title: "How I think",
+      text: "I approach design through visual sensitivity and structural thinking. I care deeply about color harmony and proportion, but I always aim for clarity, usability and simplicity."
     },
+    {
+      title: "Clarity first",
+      text: "When everything is reduced to essentials, design becomes stronger, quieter and more intentional."
+    },
+    {
+      title: "Then emotion",
+      text: "Color and form create the feeling behind the interface."
+    }
+  ]
+},
 
     tech: {
       title: "Technology Ecosystem",
@@ -238,22 +213,54 @@ viewDetails: "Ver más",
       ]
     },
 
-    howIBuild: {
-      title: "Cómo Construyo Sistemas",
-      blocks: [
-        {
-          title: "Arquitectura Modular",
-          text:
-            "Las interfaces se estructuran como sistemas escalables..."
-        }
-      ]
-    },
+    projectsData: {
+  taller: {
+    title: "El Taller Aguaymanto",
+    description: [
+      "Plataforma digital para un estudio artístico centrado en cerámica contemporánea.",
+      "Diseñé una experiencia visual que combina narrativa editorial con navegación clara.",
+      "Desarrollado en React con foco en rendimiento y estética."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
+  },
 
-    tech: {
-      title: "Ecosistema Tecnológico",
-      subtitle:
-        "Sistemas construidos mediante arquitectura modular e integración estructurada."
+  finestra: {
+    title: "Finestra Serveis",
+    description: [
+      "Web corporativa enfocada en conversión para servicios de aluminio y PVC.",
+      "Optimicé la jerarquía visual para mejorar la comprensión del usuario.",
+      "Implementación en React con foco en claridad y estructura."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components"]
+  },
+
+  mendoza: {
+    title: "Base Mendoza",
+    description: [
+      "Proyecto para una empresa de logística y transporte.",
+      "Exploración de interacción, tipografía y ritmo visual.",
+      "Desarrollo frontend orientado a la experiencia de usuario."
+    ],
+    tags: ["React", "UX/UI", "Design", "Styled Components"]
+  }
+},
+
+    howIThink: {
+  sections: [
+    {
+      title: "Cómo pienso",
+      text: "Abordo el diseño desde la sensibilidad visual y el pensamiento estructural. Me importa profundamente la armonía del color y la proporción, pero siempre busco claridad, usabilidad y simplicidad."
     },
+    {
+      title: "Primero claridad",
+      text: "Cuando todo se reduce a lo esencial, el diseño se vuelve más fuerte, silencioso e intencional."
+    },
+    {
+      title: "Luego emoción",
+      text: "El color y la forma crean la sensación detrás de la interfaz."
+    }
+  ]
+},
 
     interest: {
       sideTextLine1: "CONECTEMOS",

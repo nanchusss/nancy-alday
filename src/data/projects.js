@@ -22,36 +22,24 @@ import finestra6 from "../IMAGES/finestra6.png";
 
 export const projects = [
   {
-    title: "El Taller Aguaymanto",
+    id: "taller",
+    title: "EL TALLER de Aguaymanto",
     image: [taller1, taller2, taller3, taller4],
     url: "https://eltaller-aguaymanto.com",
-    description: [
-      "Plataforma digital para un estudio artístico centrado en cerámica contemporánea.",
-      "Diseñé una experiencia visual que mezcla narrativa editorial con navegación clara.",
-      "Desarrollado en React priorizando rendimiento y estética."
-    ],
     tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
   },
   {
+    id: "finestra",
     title: "Finestra Serveis",
     image: [finestra1, finestra2, finestra3, finestra4, finestra5, finestra6, proyecto2],
     url: "https://finestraserveis.com",
-    description: [
-      "Web corporativa enfocada en conversión para servicios de aluminio y PVC.",
-      "Optimicé la jerarquía visual para mejorar la comprensión del usuario.",
-      "Implementación en React con foco en claridad y estructura."
-    ],
     tags: ["React", "UX/UI", "Design", "Styled Components"]
   },
   {
+    id: "base",
     title: "Base Mendoza",
     image: [base1, base3, base4, base5, base6],
     url: "https://base-mendoza.com",
-    description: [
-      "Proyecto para empresa de logística y transporte.",
-      "Exploración de interacción, tipografía y ritmo visual.",
-      "Desarrollo frontend orientado a experiencia de usuario."
-    ],
     tags: ["React", "UX/UI", "Design", "Styled Components"]
   }
 ];

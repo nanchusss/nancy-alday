@@ -1,144 +1,172 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
+import image from "./images/fondo.png";
+import mobileimage from "./images/fondomobile.png";
 
-
-export default function Home() {
-  const textRef = useRef(null);
-
-  useEffect(() => {
-    const el = textRef.current;
-    if (!el) return;
-
-    const handleMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-
-      const x = (e.clientX / innerWidth - 0.5) * 60;
-      const y = (e.clientY / innerHeight - 0.5) * 60;
-
-      // 👉 movimiento 3D
-      el.style.transform = `
-        rotateX(${y * 0.08}deg)
-        rotateY(${x * 0.08}deg)
-        translate(${x}px, ${y}px)
-      `;
-
-      // 👉 variables para capas
-      el.style.setProperty("--x", `${x}px`);
-      el.style.setProperty("--y", `${y}px`);
-    };
-
-    window.addEventListener("mousemove", handleMove);
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, []);
-
+export default function HeroSection() {
   return (
     <Wrapper>
-      <Hero>
-        <Inner>
-          <NameWrapper ref={textRef}>
-            <LayerBack>Projects</LayerBack>
-            <LayerColor>Projects</LayerColor>
-            <Name>Projects</Name>
-          </NameWrapper>
 
-          <Bottom>
-            Crafting digital spaces with emotion & precision
-          </Bottom>
-        </Inner>
-      </Hero>
+      <HeroImageWrapper>
+        <picture>
+          <source media="(max-width: 768px)" srcSet={mobileimage} />
+          <img src={image} alt="" />
+        </picture>
+      </HeroImageWrapper>
 
-   
+      <Content>
+
+        <TextBlock>
+          <Title>
+            I design digital experiences
+            shaped by art, structure
+            and emotion.
+          </Title>
+
+          <Subtitle>
+            From art and music to frontend — 
+            a multidisciplinary approach to building interfaces.
+          </Subtitle>
+        </TextBlock>
+
+        <Signature>
+          Nancy Alday
+          <span>Frontend Developer · Barcelona</span>
+        </Signature>
+
+      </Content>
+
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
-  background: ${({ theme }) => theme.background};
-`;
+/* ================= STYLES ================= */
 
-const Hero = styled.section`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Wrapper = styled.section`
+  position: relative;
+  background: #f9f8f3ff;
+
+  /* MOBILE FIRST */
+  min-height: 100svh;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    height: 100vh;
+  }
 `;
 
-const Inner = styled.div`
-  width: 100%;
-  max-width: 1400px;
-  padding: 0 8vw;
+/* IMAGEN */
+const HeroImageWrapper = styled.div`
+  position: absolute;
+
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90%;
+  max-width: 1200px;
+
+  opacity: 0.95;
+  pointer-events: none;
+
+  picture,
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    width: 120%;
+    top: 48%;
+    opacity: 0.9;
+  }
+`;
+
+/* CONTENIDO */
+const Content = styled.div`
+  position: relative;
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  justify-content: space-between;
+
+  min-height: 100svh;
+  padding: 6vh 8vw;
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
 `;
 
-const NameWrapper = styled.div`
-  position: relative;
-  perspective: 800px;
-  transform-style: preserve-3d;
+/* TEXTO */
+const TextBlock = styled.div`
+  max-width: 720px;
+  margin-top: 20px;
 
-  --x: 0px;
-  --y: 0px;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
-/* BASE */
-const BaseText = `
-  position: absolute;
-  inset: 0;
+/* TITLE */
+const Title = styled.h1`
+  font-size: clamp(42px, 6vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 
   font-family: "Canela", serif;
-  font-size: clamp(120px, 14vw, 280px);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
+  color: #111;
+
+  margin: 20px 20px 0px 0;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
-/* 🔴 CAPA PROFUNDIDAD (más separada, menos blur) */
-const LayerBack = styled.h1`
-  ${BaseText};
-
-  color: rgba(0, 0, 0, 0.25);
-
-  transform: translate(60px, 50px);
-  filter: blur(6px);
-  opacity: 0.6;
-`;
-
-/* 🔵 CAPA COLOR (editorial real) */
-const LayerColor = styled.h1`
-  ${BaseText};
-
-  color: #6fa8dc;
-  mix-blend-mode: multiply;
-
-  transform: translate(
-    calc(var(--x) * -0.2 + 10px),
-    calc(var(--y) * -0.2 - 10px)
-  );
-`;
-
-/* ⚫ TEXTO PRINCIPAL */
-const Name = styled.h1`
-  position: relative;
-
-  font-family: "Canela", serif;
-  font-size: clamp(120px, 14vw, 280px);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-
-  margin: 0;
-  color: ${({ theme }) => theme.text};
-
-  transform: translateZ(20px);
-
-  text-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-`;
-
-const Bottom = styled.div`
-  font-size: 36px;
-  max-width: 600px;
+/* SUB */
+const Subtitle = styled.p`
+  font-size: 18px;
   line-height: 1.6;
+  color: #555;
 
-  color: ${({ theme }) => theme.secondaryText};
+  max-width: 520px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+/* FIRMA */
+const Signature = styled.div`
+  align-self: flex-end;
+
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: #111;
+
+  span {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 768px) {
+    align-self: flex-start;
+    margin-top: 40px;
+
+    color: white;
+
+    span {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
 `;

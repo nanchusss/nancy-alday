@@ -2,12 +2,16 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { projects } from "../data/projects";
+import { useContext } from "react";
+import { LanguageContext } from "../components/LanguageContext";
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useContext(LanguageContext);
 
-  const project = projects[id];
+  const project = projects.find(p => p.id === id);
+  const content = t?.projectsData?.[project.id];
 
   if (!project) return <div>Not found</div>;
 
@@ -34,17 +38,17 @@ export default function ProjectDetail() {
 
         <PanelBody>
 
-          <Tags>
-            {project.tags.map((tag, i) => (
-              <Tag key={i}>{tag}</Tag>
-            ))}
-          </Tags>
+         {project.tags.map((tag, i) => (
+  <Tag key={i} index={i}>
+    {tag}
+  </Tag>
+))}
 
-          <BigTitle>{project.title}</BigTitle>
+          <BigTitle>{content?.title || project.title}</BigTitle>
 
-          {project.description.map((text, i) => (
-            <Paragraph key={i}>{text}</Paragraph>
-          ))}
+          {(content?.description || project.description).map((text, i) => (
+  <Paragraph key={i}>{text}</Paragraph>
+))}
 
         </PanelBody>
 
@@ -240,9 +244,19 @@ const PanelBody = styled.div`
 
   color: ${({ theme }) => theme.text};
 
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
+ @media (max-width: 768px) {
+  padding: 20px;
+
+  background: ${({ theme }) => theme.highlight || "#e6d9ff"};
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+   /* Efecto de vidrio esmerilado */
+  background: rgba(255, 255, 255, 0.1);
+
+  backdrop-filter: blur(6px);
+}
 `;
 
 const Tags = styled.div`
@@ -257,20 +271,38 @@ const Tags = styled.div`
 `;
 
 const Tag = styled.span`
-  font-size: 14px;
-  padding: 4px 8px;
+  position: relative;
+  display: inline-block;
 
-  background: ${({ theme }) =>
-    theme.background === "#0b0b0c"
-      ? "rgba(255,255,255,0.08)"
-      : "#e6d9ff"};
+  padding: 10px 16px;
+  font-size: 13px;
 
   color: ${({ theme }) => theme.text};
 
-  border-radius: 4px;
+  /* 👇 FORMA ORGÁNICA */
+  border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
 
-  @media (max-width: 768px) {
-    padding: 10px;
+  /* 👇 COLORES VARIADOS */
+  background: ${({ index, theme }) =>
+    [
+      theme.highlight || "#e6d9ff",
+      "#d9f5e6",
+      "#fde2e4",
+      "#e0f0ff",
+      "#fef3c7"
+    ][index % 5]
+  };
+
+  /* 👇 MOVIMIENTO SUAVE */
+  animation: float 6s ease-in-out infinite;
+
+  /* cada uno distinto */
+  animation-delay: ${({ index }) => index * 0.5}s;
+
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
   }
 `;
 
@@ -294,14 +326,16 @@ const Paragraph = styled.p`
 
 
 
-
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   @media (max-width: 768px) {
     height: auto;
+
+    /* 👇 CLAVE */
+    flex-direction: column-reverse;
   }
 `;
 

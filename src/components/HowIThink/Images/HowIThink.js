@@ -1,13 +1,15 @@
 import React, { useRef } from "react";
 import { useScroll, useSpring, animated } from "@react-spring/web";
 import styled from "styled-components";
+import { useContext } from "react";
+import { LanguageContext } from "../../LanguageContext";
 
 export default function HowIThink() {
   const ref = useRef();
-
+const { t } = useContext(LanguageContext);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+   offset: ["start 80%", "end 20%"],
   });
 
   const progress = useSpring({
@@ -73,25 +75,28 @@ const opacity3 = progress.p.to((p) => {
             <BlobWrapper
               key={i}
               style={{
-                transform: progress.p.to((p) => {
-                  const baseRadius = 180;
-                  const rad = (shape.angle * Math.PI) / 180;
+               transform: progress.p.to((p) => {
+  const reveal = Math.max(
+    0,
+    Math.min(1, (p - i * 0.08) * 3.5)
+  );
 
-                  const reveal = Math.max(
-                    0,
-                    Math.min(1, (p - i * 0.1) * 2)
-                  );
+  // 👉 posición base (top-left)
+  const baseX = -120;
+  const baseY = -120;
 
-                  const radius = baseRadius * reveal;
+  // 👉 desplazamiento orgánico (cada uno distinto)
+  const x = baseX + i * 60 + reveal * 180;
+  const y = baseY + i * 40 + reveal * 220;
 
-                  const x = Math.cos(rad) * radius;
-                  const y = Math.sin(rad) * radius;
+  // 👉 escala MUCHO más agresiva
+  const scale = 0.4 + reveal * 2.2;
 
-                  return `translate(${x}px, ${y}px) scale(${0.6 + reveal * 0.5})`;
-                }),
+  return `translate(${x}px, ${y}px) scale(${scale})`;
+}),
                 opacity: progress.p.to((p) =>
-                  Math.max(0, Math.min(1, (p - i * 0.1) * 2))
-                ),
+  Math.max(0, Math.min(1, (p - i * 0.06) * 3))
+),
               }}
             >
               <BlobSVG viewBox="0 0 120 120" style={{ width: shape.size, height: shape.size }}>
@@ -114,13 +119,8 @@ const opacity3 = progress.p.to((p) => {
     }),
     color: "#111",
   }}
->
-            <h2>How I think</h2>
-            <p>
-              I approach design through visual sensitivity and structural thinking.
-              I care deeply about color harmony and proportion,
-              but I always aim for clarity, usability and simplicity.
-            </p>
+><h2>{t.howIThink.sections[0].title}</h2>
+<p>{t.howIThink.sections[0].text}</p>
           </Section>
 
           <Section
@@ -134,11 +134,8 @@ const opacity3 = progress.p.to((p) => {
     color: "#111",
   }}
 >
-            <h2>Clarity first</h2>
-            <p>
-              When everything is reduced to essentials,
-              design becomes stronger, quieter and more intentional.
-            </p>
+           <h2>{t.howIThink.sections[1].title}</h2>
+<p>{t.howIThink.sections[1].text}</p>
           </Section>
 
          <Section
@@ -152,10 +149,8 @@ const opacity3 = progress.p.to((p) => {
     color: "#fff",
   }}
 >
-            <h2>Then emotion</h2>
-            <p>
-              Color and form create the feeling behind the interface.
-            </p>
+            <h2>{t.howIThink.sections[2].title}</h2>
+<p>{t.howIThink.sections[2].text}</p>
           </Section>
 
         </Content>
