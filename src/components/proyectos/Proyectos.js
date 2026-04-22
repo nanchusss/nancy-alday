@@ -212,9 +212,13 @@ export default function ProjectsSection() {
 
 const Wrapper = styled.section`
   position: relative;
-  height: 100vh;
-  background: #fff;
-  overflow: hidden;
+  min-height: 80svh;
+
+  background: linear-gradient(
+    to bottom,
+    #E4572E 20%,
+    #ffffff 40%
+  );
 `;
 
 const Layout = styled.div`
@@ -236,7 +240,7 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: 200vh;
+    height: auto;
   }
 `;
 
@@ -287,6 +291,10 @@ const Right = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 6vw;
+
+  @media (max-width: 768px) {
+    visibility: hidden;
+  }
 `;
 
 const TitleWrapper = styled.div`

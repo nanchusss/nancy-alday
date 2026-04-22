@@ -43,7 +43,7 @@ export default function HeroSection() {
 
 const Wrapper = styled.section`
   position: relative;
-  background: #f9f8f3ff;
+  background: #FCF1E7;
 
   /* MOBILE FIRST */
   min-height: 100svh;

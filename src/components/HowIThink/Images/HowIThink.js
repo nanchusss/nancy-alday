@@ -9,46 +9,57 @@ export default function HowIThink() {
 const { t } = useContext(LanguageContext);
   const { scrollYProgress } = useScroll({
     target: ref,
-   offset: ["start 80%", "end 20%"],
+   offset: ["start start", "end end"]
   });
 
   const progress = useSpring({
     p: scrollYProgress,
     config: { tension: 120, friction: 30 },
   });
+  
 
   /* ================= BACKGROUNDS ================= */
 
   const yellowReveal = progress.p.to((p) => {
     const t = Math.max(0, Math.min(1, (p - 0.2) / 0.25));
-    return `circle(${t * 150}% at 50% 50%)`;
+    return `circle(${t * 200}% at 50% 50%)`;
   });
 
   const orangeReveal = progress.p.to((p) => {
-    const t = Math.max(0, Math.min(1, (p - 0.6) / 0.3));
+    const t = Math.max(0, Math.min(1, (p - 0.32) / 0.3));
     return `circle(${t * 150}% at 50% 50%)`;
   });
 
   /* ================= OPACITY ================= */
 
  const opacity1 = progress.p.to((p) => {
-  if (p < 0.2) return 1;
-  if (p > 0.3) return 0;
-  return 1 - (p - 0.2) / 0.1;
+  if (p < 0.18) return 1;
+  if (p > 0.26) return 0;
+  return 1 - (p - 0.18) / 0.08;
 });
 
 const opacity2 = progress.p.to((p) => {
-  if (p < 0.35) return 0;
-  if (p >= 0.35 && p <= 0.45) return (p - 0.35) / 0.1; // entra
-  if (p > 0.45 && p < 0.55) return 1; // visible
-  if (p >= 0.55 && p <= 0.65) return 1 - (p - 0.55) / 0.1; // sale
+  if (p < 0.2) return 0;
+
+  if (p >= 0.2 && p <= 0.3)
+    return (p - 0.2) / 0.1;
+
+  if (p > 0.3 && p < 0.36)
+    return 1;
+
+  if (p >= 0.36 && p <= 0.42)
+    return 1 - (p - 0.36) / 0.06;
+
   return 0;
 });
 
 const opacity3 = progress.p.to((p) => {
-  if (p < 0.6) return 0;
-  if (p > 0.8) return 1;
-  return (p - 0.6) / 0.2;
+  if (p < 0.4) return 0;
+
+  if (p >= 0.4 && p <= 0.5)
+    return (p - 0.4) / 0.1;
+
+  return 1;
 });
 
   /* ================= SHAPES ================= */
@@ -163,7 +174,7 @@ const opacity3 = progress.p.to((p) => {
 /* ================= STYLES ================= */
 
 const Wrapper = styled.section`
-  height: 300vh;
+  height: 200vh;
   background: #f6f3ef;
 `;
 

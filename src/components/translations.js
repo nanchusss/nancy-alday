@@ -89,6 +89,7 @@ a multidisciplinary approach to building interfaces.`,
     },
     projectsData: {
   taller: {
+    Id: "taller",
     title: "El Taller Aguaymanto",
     description: [
       "Digital platform for an artistic studio focused on contemporary ceramics.",
@@ -99,6 +100,7 @@ a multidisciplinary approach to building interfaces.`,
   },
 
   finestra: {
+    Id: "finestra",
     title: "Finestra Serveis",
     description: [
       "Corporate website focused on conversion for aluminum and PVC services.",
@@ -109,6 +111,7 @@ a multidisciplinary approach to building interfaces.`,
   },
 
   mendoza: {
+    Id: "mendoza",
     title: "Base Mendoza",
     description: [
       "Project developed for a logistics and transportation company.",
