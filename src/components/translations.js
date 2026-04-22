@@ -87,6 +87,11 @@ a multidisciplinary approach to building interfaces.`,
         }
       ]
     },
+    "projectTabs": {
+  "work": "WORK",
+  "love": "LOVE",
+  "logic": "LOGIC"
+},
     projectsData: {
   taller: {
     Id: "taller",
@@ -110,8 +115,8 @@ a multidisciplinary approach to building interfaces.`,
     tags: ["React", "UX/UI", "Design", "Styled Components"]
   },
 
-  mendoza: {
-    Id: "mendoza",
+  base: {
+    Id: "base",
     title: "Base Mendoza",
     description: [
       "Project developed for a logistics and transportation company.",
@@ -287,6 +292,12 @@ viewDetails: "Ver más",
       text: "El color y la forma crean la sensación detrás de la interfaz."
     }
   ]
+},
+
+"projectTabs": {
+  "work": "WORK",
+  "love": "LOVE",
+  "logic": "LOGIC"
 },
 
     interest: {

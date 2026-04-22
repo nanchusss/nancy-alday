@@ -9,6 +9,7 @@ export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useContext(LanguageContext);
+  
 
   const project = projects.find(p => p.id === id);
   const content = t?.projectsData?.[project.id];
@@ -303,6 +304,12 @@ const BigTitle = styled.h1`
   margin-bottom: 16px;
 
   color: ${({ theme }) => theme.text};
+
+  @media (max-width: 768px) {
+    font-size: 52px;
+    
+    margin-top: 20px;
+  }
 `;
 
 const Paragraph = styled.p`

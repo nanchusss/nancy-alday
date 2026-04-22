@@ -212,7 +212,7 @@ export default function ProjectsSection() {
 
 const Wrapper = styled.section`
   position: relative;
-  min-height: 80svh;
+  min-height: 100vh;  // 👈 esto es clave
 
   background: linear-gradient(
     to bottom,
@@ -226,21 +226,23 @@ const Layout = styled.div`
   grid-template-columns: 55% 45%;
   height: 100%;
 
-  @media (max-width: 768px) {
-    display: block;
-    width: 100%;
-  }
+ @media (max-width: 768px) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 `;
 
 const Left = styled.div`
   display: flex;
   gap: 20px;
-  padding: 0 20px;
+  padding: 40px 20px;  // 👈 añade vertical
   overflow: hidden;
 
   @media (max-width: 768px) {
     width: 100%;
     height: auto;
+    flex-direction: column;  // 👈 clave
   }
 `;
 
@@ -278,22 +280,25 @@ const ItemMeta = styled.div`
 `;
 
 const ItemTitle = styled.div`
-  font-size: 18px;
+  font-size: 28px;
+  margin-top: 12px;
+  text-transform: uppercase;
 `;
 
 const ItemSubtitle = styled.div`
-  font-size: 14px;
+  font-size: 24px;
   color: #666;
 `;
 
 const Right = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0 6vw;
+  height: 100%;
 
   @media (max-width: 768px) {
-    visibility: hidden;
+    display: none;  // 👈 esto es lo correcto
   }
 `;
 
@@ -315,10 +320,15 @@ const TitleTrack = styled.div`
 const Title = styled.h1`
   font-size: clamp(80px, 8vw, 140px);
   white-space: nowrap;
+  padding-top: 100px;
+  
 `;
 
 const Subtitle = styled.p`
   margin: 40px 0;
+  font-size: 28px;
+  color: black
+  text-transform: uppercase;
 `;
 
 const Video = styled.div`
