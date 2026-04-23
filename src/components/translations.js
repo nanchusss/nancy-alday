@@ -87,11 +87,11 @@ a multidisciplinary approach to building interfaces.`,
         }
       ]
     },
-    "projectTabs": {
-  "work": "WORK",
-  "love": "LOVE",
-  "logic": "LOGIC"
-},
+    projectTabs: {
+      work: "WORK",
+      love: "LOVE",
+      logic: "LOGIC"
+    },
     projectsData: {
   taller: {
     Id: "taller",
@@ -294,10 +294,10 @@ viewDetails: "Ver más",
   ]
 },
 
-"projectTabs": {
-  "work": "WORK",
-  "love": "LOVE",
-  "logic": "LOGIC"
+projectTabs: {
+  work: "WORK",
+  love: "LOVE",
+  logic: "LOGIC"
 },
 
     interest: {

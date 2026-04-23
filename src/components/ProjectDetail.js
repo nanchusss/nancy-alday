@@ -9,6 +9,8 @@ export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useContext(LanguageContext);
+
+  
   
 
   const project = projects.find(p => p.id === id);

@@ -10,42 +10,40 @@ export default function ProjectsSection() {
 
   const navigate = useNavigate();
 
- 
+  /* ================= CURSOR ================= */
 
   /* ================= CURSOR ================= */
 
-  const cursorRef = useRef(null);
-  const mouse = useRef({ x: 0, y: 0 });
-  const current = useRef({ x: 0, y: 0 });
+const cursorRef = useRef(null);
+const mouse = useRef({ x: 0, y: 0 });
+const current = useRef({ x: 0, y: 0 });
 
-  const handleMouseMove = (e) => {
-    mouse.current.x = e.clientX;
-    mouse.current.y = e.clientY;
+const handleMouseMove = (e) => {
+  mouse.current.x = e.clientX;
+  mouse.current.y = e.clientY;
+};
+
+const handleMouseLeave = () => {
+  setHovered(null);
+};
+
+useEffect(() => {
+  let raf;
+
+  const animate = () => {
+    current.current.x += (mouse.current.x - current.current.x) * 0.15;
+    current.current.y += (mouse.current.y - current.current.y) * 0.15;
 
     if (cursorRef.current) {
-      cursorRef.current.style.opacity = hovered !== null ? 1 : 0;
+      cursorRef.current.style.transform = `translate(${current.current.x}px, ${current.current.y}px)`;
     }
+
+    raf = requestAnimationFrame(animate);
   };
 
-  const handleMouseLeave = () => {
-    if (cursorRef.current) cursorRef.current.style.opacity = 0;
-  };
-
-  useEffect(() => {
-    let raf;
-    const animate = () => {
-      current.current.x += (mouse.current.x - current.current.x) * 0.15;
-      current.current.y += (mouse.current.y - current.current.y) * 0.15;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${current.current.x}px, ${current.current.y}px) translate(-50%, -50%)`;
-      }
-
-      raf = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => cancelAnimationFrame(raf);
-  }, []);
+  animate();
+  return () => cancelAnimationFrame(raf);
+}, []);
 
   /* ================= SCROLL ================= */
 
@@ -58,49 +56,45 @@ export default function ProjectsSection() {
   const ITEM_HEIGHT = 420;
 
   useEffect(() => {
-  let raf;
-  const isMobile = window.innerWidth < 768;
+    let raf;
+    const isMobile = window.innerWidth < 768;
 
-  let last = performance.now();
-  const speed = isMobile ? 0.02 : 0.03;
+    let last = performance.now();
+    const speed = isMobile ? 0.02 : 0.03;
 
-  const loop = (now) => {
-    const delta = now - last;
-    last = now;
+    const loop = (now) => {
+      const delta = now - last;
+      last = now;
 
-    // columna 1 SIEMPRE
-    offset1.current -= delta * speed * 0.5;
+      offset1.current -= delta * speed * 0.5;
 
-    // columna 2 SOLO desktop
-    if (!isMobile) {
-      offset2.current += delta * speed;
-    }
+      if (!isMobile) {
+        offset2.current += delta * speed;
+      }
 
-    const limit = 3 * ITEM_HEIGHT;
+      const limit = 3 * ITEM_HEIGHT;
 
-    if (offset1.current < -limit) offset1.current = 0;
-    if (!isMobile && offset2.current > 0) offset2.current = -limit;
+      if (offset1.current < -limit) offset1.current = 0;
+      if (!isMobile && offset2.current > 0) offset2.current = -limit;
 
-    if (track1.current) {
-      track1.current.style.transform = `translateY(${offset1.current}px)`;
-    }
+      if (track1.current) {
+        track1.current.style.transform = `translateY(${offset1.current}px)`;
+      }
 
-    if (!isMobile && track2.current) {
-      track2.current.style.transform = `translateY(${offset2.current}px)`;
-    }
+      if (!isMobile && track2.current) {
+        track2.current.style.transform = `translateY(${offset2.current}px)`;
+      }
+
+      raf = requestAnimationFrame(loop);
+    };
 
     raf = requestAnimationFrame(loop);
-  };
 
-  raf = requestAnimationFrame(loop);
-
-  return () => cancelAnimationFrame(raf);
-}, []);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <Wrapper>
-
-      {/* SWITCH */}
       <Switch>
         <Toggle>
           <button
@@ -119,11 +113,8 @@ export default function ProjectsSection() {
       </Switch>
 
       {mode === "gallery" ? (
-
         <Layout onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-
           <Left>
-
             <Column>
               <Track ref={track1}>
                 {[...projects, ...projects].map((_, i) => {
@@ -131,11 +122,11 @@ export default function ProjectsSection() {
 
                   return (
                     <ItemWrapper
-  key={i}
-  onMouseEnter={() => setHovered(i)}
-  onMouseLeave={() => setHovered(null)}
-  onClick={() => navigate(`/projects/${p.id}`)}
->
+                      key={i}
+                      onMouseEnter={() => setHovered(i)}
+                      onMouseLeave={() => setHovered(null)}
+                      onClick={() => navigate(`/projects/${p.id}`)}
+                    >
                       <Item style={{ backgroundImage: `url(${p.image[0]})` }} />
                       <ItemMeta>
                         <ItemTitle>{p.title}</ItemTitle>
@@ -153,11 +144,13 @@ export default function ProjectsSection() {
                   const p = projects[i % projects.length];
 
                   return (
-                    <ItemWrapper
-                      key={i}
-                      onClick={() => navigate(`/projects/${p.id}`)}
-                    >
-                     <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
+                   <ItemWrapper
+  key={i}
+  onMouseEnter={() => setHovered(i)}
+  onMouseLeave={() => setHovered(null)}
+  onClick={() => navigate(`/projects/${p.id}`)}
+>
+                      <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
                       <ItemMeta>
                         <ItemTitle>{p.title}</ItemTitle>
                         <ItemSubtitle>{p.subtitle}</ItemSubtitle>
@@ -167,7 +160,6 @@ export default function ProjectsSection() {
                 })}
               </Track>
             </Column>
-
           </Left>
 
           <Right>
@@ -178,17 +170,12 @@ export default function ProjectsSection() {
               </TitleTrack>
             </TitleWrapper>
 
-            <Subtitle>
-              A curated ceramic experience blending craft, material and space.
-            </Subtitle>
+            <Subtitle>{projects[1]?.subtitle}</Subtitle>
 
             <Video />
           </Right>
-
         </Layout>
-
       ) : (
-
         <ListView>
           {projects.map((p, i) => (
             <ListRow
@@ -199,11 +186,16 @@ export default function ProjectsSection() {
             </ListRow>
           ))}
         </ListView>
-
       )}
 
-      <Cursor ref={cursorRef}>VIEW ↗</Cursor>
-
+   <Cursor
+  ref={cursorRef}
+  className={hovered !== null ? "active" : ""}
+>
+  <CursorInner>
+    {hovered !== null ? "VIEW ↗" : ""}
+  </CursorInner>
+</Cursor>
     </Wrapper>
   );
 }
@@ -212,7 +204,8 @@ export default function ProjectsSection() {
 
 const Wrapper = styled.section`
   position: relative;
-  min-height: 100vh;  // 👈 esto es clave
+ height: 100vh;
+overflow: hidden;
 
   background: linear-gradient(
     to bottom,
@@ -226,23 +219,23 @@ const Layout = styled.div`
   grid-template-columns: 55% 45%;
   height: 100%;
 
- @media (max-width: 768px) {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Left = styled.div`
   display: flex;
   gap: 20px;
-  padding: 40px 20px;  // 👈 añade vertical
+  padding: 40px 20px;
   overflow: hidden;
 
   @media (max-width: 768px) {
     width: 100%;
     height: auto;
-    flex-direction: column;  // 👈 clave
+    flex-direction: column;
   }
 `;
 
@@ -298,7 +291,7 @@ const Right = styled.div`
   height: 100%;
 
   @media (max-width: 768px) {
-    display: none;  // 👈 esto es lo correcto
+    display: none;
   }
 `;
 
@@ -321,13 +314,12 @@ const Title = styled.h1`
   font-size: clamp(80px, 8vw, 140px);
   white-space: nowrap;
   padding-top: 100px;
-  
 `;
 
 const Subtitle = styled.p`
   margin: 40px 0;
   font-size: 28px;
-  color: black
+  color: black;
   text-transform: uppercase;
 `;
 
@@ -388,11 +380,33 @@ const ListRow = styled.div`
 
 const Cursor = styled.div`
   position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
+  z-index: 9999;
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.active {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const CursorInner = styled.div`
   background: #111;
   color: #fff;
   padding: 8px 14px;
   border-radius: 999px;
-  opacity: 0;
-`;
 
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: transform 0.2s ease;
+
+  ${Cursor}.active & {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+`;
