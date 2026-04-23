@@ -337,10 +337,6 @@ const Subtitle = styled.p`
   text-transform: uppercase;
 `;
 
-const Video = styled.div`
-  height: 500px;
-  background: #ddd;
-`;
 
 const Switch = styled.div`
   position: absolute;
