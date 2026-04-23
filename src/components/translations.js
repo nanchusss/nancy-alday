@@ -140,7 +140,10 @@ a multidisciplinary approach to building interfaces.`,
     {
       title: "Then emotion",
       text: "Color and form create the feeling behind the interface."
-    }
+    },
+      {title: "See Projects",
+        text: "Explore how I apply my design and development philosophy in real projects."
+      }
   ]
 },
 
@@ -290,7 +293,10 @@ viewDetails: "Ver más",
     {
       title: "Luego emoción",
       text: "El color y la forma crean la sensación detrás de la interfaz."
-    }
+    },
+      {title: "Ver Proyectos",
+        text: "Explora cómo aplico mi filosofía de diseño y desarrollo en proyectos reales."
+      }
   ]
 },
 

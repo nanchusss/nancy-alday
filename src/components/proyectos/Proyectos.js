@@ -211,7 +211,7 @@ const Wrapper = styled.section`
 
   background: linear-gradient(
     to bottom,
-    #6FA8DC 20%,
+    #4A90E2 20%,
     #FCF1E7 40%
   );
 `;

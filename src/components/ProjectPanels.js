@@ -89,7 +89,7 @@ const Meta = styled.div`
   margin-bottom: 20px;
 
   span {
-    background: #e6d9ff;
+    background: #4A90E2;
     padding: 4px 10px;
     border-radius: 4px;
     font-size: 12px;

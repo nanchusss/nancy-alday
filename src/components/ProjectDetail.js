@@ -33,46 +33,45 @@ export default function ProjectDetail() {
       : project.image;
 
   return (
-    <Wrapper>
+    <Wrapper onMouseLeave={() => setHoveredSection(null)}>
 
       {/* DESKTOP IMAGE */}
       {!isMobile && (
         <FloatingImage
           isHovered={hoveredSection === 'image'}
           onMouseEnter={() => setHoveredSection('image')}
-          onMouseLeave={() => setHoveredSection(null)}
         >
-          <img src={images[0]} alt="" />
+          <img src={images[0]} alt="Project preview" />
         </FloatingImage>
       )}
 
       <SidePanel
         isHovered={hoveredSection === 'panel'}
         onMouseEnter={() => setHoveredSection('panel')}
-        onMouseLeave={() => setHoveredSection(null)}
       >
 
         <PanelHeader>
           <CloseText onClick={() => navigate(-1)}>Close</CloseText>
           <Visit href={project.url} target="_blank">
+            Visit Site 
             Visit Site ↗
           </Visit>
         </PanelHeader>
 
-        <PanelBody isHovered={hoveredSection === 'image'}>
+        <PanelBody isHovered={hoveredSection === 'panel'}>
 
           <TagsRow>
             {project.tags.map((tag, i) => (
-              <Tag key={i}>{tag}</Tag>
+              <Tag key={i} isHovered={hoveredSection === 'panel'}>{tag}</Tag>
             ))}
           </TagsRow>
 
-          <BigTitle>
+          <BigTitle isHovered={hoveredSection === 'panel'}>
             {content?.title || project.title}
           </BigTitle>
 
           {(content?.description || project.description).map((text, i) => (
-            <Paragraph key={i}>{text}</Paragraph>
+            <Paragraph key={i} isHovered={hoveredSection === 'panel'}>{text}</Paragraph>
           ))}
 
           {/* TOGGLE */}
@@ -118,18 +117,7 @@ export default function ProjectDetail() {
             
             <EditorialGrid>
               {images.map((img, i) => (
-                <EditorialBlock
-                  key={i}
-                  className={
-                    i === 0 ? "hero" :
-                    i === 1 ? "large" :
-                    i === 2 ? "wide" :
-                    i === 3 ? "tall" :
-                    i === 4 ? "medium" :
-                    i === 5 ? "full" :
-                    "small"
-                  }
-                >
+                <EditorialBlock key={i}>
                   <EditorialImage src={img} alt={`Gallery image ${i + 1}`} />
                 </EditorialBlock>
               ))}
@@ -166,6 +154,7 @@ export default function ProjectDetail() {
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -174,49 +163,55 @@ const Wrapper = styled.div`
 `;
 
 const FloatingImage = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 50%;
-  height: 100vh;
-  overflow: hidden;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: ${({ isHovered }) => (isHovered ? 10 : 1)};
+  position: relative;
+  height: 100%;
+  
+  /*  */
+  flex: ${({ isHovered }) => (isHovered ? "7" : "5")};
 
-  ${({ isHovered }) =>
-    isHovered &&
-    `
-    width: 62.5%;
-  `}
+  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
+    
+    /*  */
     object-fit: cover;
-  }
-`;
+    object-position: center;
 
-const SidePanel = styled.div`
-  margin-left: 50%;
-  width: 50%;
-  height: 100%;
-  background: #f6f3ef;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: ${({ isHovered }) => (isHovered ? 11 : 2)};
-  container-type: inline-size;
+    transition: transform 0.6s ease;
+  }
 
   ${({ isHovered }) =>
     isHovered &&
     `
-    margin-left: 37.5%;
-    width: 62.5%;
+    img {
+      transform: scale(1.05); /*  */
+    }
   `}
 
   @media (max-width: 768px) {
-    margin-left: 0;
+    height: 50vh;
+    flex: none;
+  }
+`;
+
+const SidePanel = styled.div`
+  height: 100%;
+  
+  flex: ${({ isHovered }) => (isHovered ? "7" : "5")};
+
+  background: #f6f3ef;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 768px) {
+    flex: none;
     width: 100%;
   }
 `;
@@ -232,73 +227,125 @@ const PanelHeader = styled.div`
 
 const CloseText = styled.span`
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 `;
 
 const Visit = styled.a`
   text-decoration: none;
   border-bottom: 1px solid #000;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 `;
 
 /* ================= BODY ================= */
 
 const PanelBody = styled.div`
-  padding: 30px 24px;
-  max-width: 100%;
-  width: 100%;
-  transform: scale(${({ isHovered }) => (isHovered ? 1 : 0.6)});
+  padding: ${({ isHovered }) =>
+    isHovered ? "clamp(24px, 3vw, 60px)" : "clamp(16px, 2vw, 32px)"};
+
+  max-width: ${({ isHovered }) =>
+    isHovered ? "720px" : "420px"};
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  transform: ${({ isHovered }) =>
+    isHovered ? "scale(1)" : "scale(0.94)"};
+
   transform-origin: top center;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  height: ${({ isHovered }) => (isHovered ? 'auto' : '166vh')};
-  overflow: visible;
-  opacity: ${({ isHovered }) => (isHovered ? 1 : 0.9)};
+
+  opacity: ${({ isHovered }) => (isHovered ? 1 : 0.85)};
+
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const TagsRow = styled.div`
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
+  flex-wrap: ${({ isHovered }) => (isHovered ? "wrap" : "nowrap")};
+  overflow-x: ${({ isHovered }) => (isHovered ? "visible" : "auto")};
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 400px;
+  max-width: 100%;
+  padding-right: 10px;
 `;
 
 const Tag = styled.span`
-  font-size: 10px;
-  padding: 6px 10px;
+  font-size: ${({ isHovered }) =>
+    isHovered ? "13px" : "11px"};
+
+  padding: ${({ isHovered }) =>
+    isHovered ? "8px 12px" : "6px 10px"};
+
   border-radius: 999px;
   background: #eae6df;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  transition: all 0.4s ease;
 `;
 
 const BigTitle = styled.h1`
   font-family: "Playfair Display", serif;
-  font-size: clamp(24px, 15cqw, 56px);
-  line-height: 1.05;
+
+  font-size: ${({ isHovered }) =>
+    isHovered
+      ? "clamp(42px, 3.5vw, 56px)"
+      : "clamp(32px, 2vw, 36px)"};
+
+  line-height: 1.1;
   margin-bottom: 20px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  word-break: break-word;
-  max-width: 100%;
-  display: block;
+
+  transition: all 0.5s ease;
+  text-align: left;
+  max-width: ${({ isHovered }) => (isHovered ? "100%" : "80%")};
+  width: ${({ isHovered }) => (isHovered ? "100%" : "auto")};
+  text-transform: uppercase;
 
   @media (max-width: 768px) {
     text-align: center;
     font-size: 56px;
-  }
-  
-  @supports not (font-size: clamp(1px, 1cqw, 1px)) {
-    font-size: clamp(24px, 3.5rem, 56px);
     max-width: 100%;
+    width: 100%;
   }
 `;
 
 const Paragraph = styled.p`
-  font-size: 14px;
+  font-size: ${({ isHovered }) =>
+    isHovered ? "18px" : "14px"};
+
   line-height: 1.6;
   margin-bottom: 12px;
-  color: #555;
+
+  color: #333;
+
+  max-width: ${({ isHovered }) =>
+    isHovered ? "100%" : "45ch"};
+
+  width: ${({ isHovered }) => (isHovered ? "100%" : "auto")};
+
+  transition: all 0.5s ease;
+  text-align: left;
+  text-transform: uppercase;
 
   @media (max-width: 768px) {
     text-align: center;
     font-size: 16px;
+    max-width: 100%;
+    width: 100%;
   }
 `;
 
@@ -306,11 +353,13 @@ const Paragraph = styled.p`
 
 const Toggle = styled.div`
   display: inline-flex;
-  background: #2b1a12;
-  border-radius: 999px;
-  padding: 4px;
+  background: #1a1a1a;
+  border-radius: 50px;
+  padding: 3px;
+  width: 240px;
   margin-top: 20px;
   margin-right: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   
   @media (max-width: 768px) {
     margin-right: 50%;
@@ -319,18 +368,28 @@ const Toggle = styled.div`
 
 const Pill = styled.button`
   border: none;
-  padding: 8px 16px;
-  border-radius: 999px;
+  padding: 10px 18px;
+  border-radius: 50px;
+  flex: 1;
   cursor: pointer;
   font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 
   background: ${({ active }) =>
-    active ? "#f6f3ef" : "transparent"};
+    active ? "#ffffff" : "transparent"};
 
   color: ${({ active }) =>
-    active ? "#000" : "#fff"};
+    active ? "#1a1a1a" : "#ffffff"};
 
-  transition: 0.3s;
+  &:hover {
+    background: #ffffff;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+  }
 `;
 
 /* ================= VIDEO ================= */
@@ -480,7 +539,7 @@ const GalleryHeader = styled.div`
 
 const GalleryTitle = styled.h2`
   font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(36px, 5vw, 52px);
   font-weight: 700;
   letter-spacing: -2px;
   line-height: 0.9;
@@ -494,24 +553,26 @@ const GalleryTitle = styled.h2`
 `;
 
 const GallerySubtitle = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 `;
 
 const EditorialGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 120px;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   max-width: 1400px;
-  margin: 0 auto;
+  margin-left: 120px;
   
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 `;
 
@@ -519,115 +580,16 @@ const EditorialBlock = styled.div`
   overflow: hidden;
   position: relative;
   
-  &.hero {
-    grid-column: span 8;
-    grid-row: span 3;
-    
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
       height: 300px;
-    }
-  }
-  
-  &.large {
-    grid-column: span 6;
-    grid-row: span 2;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 240px;
-    }
-  }
-  
-  &.wide {
-    grid-column: span 7;
-    grid-row: span 2;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 200px;
-    }
-  }
-  
-  &.tall {
-    grid-column: span 4;
-    grid-row: span 3;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 320px;
-    }
-  }
-  
-  &.medium {
-    grid-column: span 5;
-    grid-row: span 2;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 220px;
-    }
-  }
-  
-  &.full {
-    grid-column: span 10;
-    grid-row: span 2;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 180px;
-    }
-  }
-  
-  &.small {
-    grid-column: span 3;
-    grid-row: span 2;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      height: 200px;
     }
   }
 `;
