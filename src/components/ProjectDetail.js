@@ -25,7 +25,7 @@ export default function ProjectDetail() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!project) return <div>Not found</div>;
+  if (!project) return <div>{t.projects.notFound}</div>;
 
   const images =
     isMobile && project.imageMobile?.length > 0
@@ -70,7 +70,7 @@ export default function ProjectDetail() {
             {content?.title || project.title}
           </BigTitle>
 
-          {(content?.description || project.description).map((text, i) => (
+          {(content?.description || project.description || []).map((text, i) => (
             <Paragraph key={i} isHovered={hoveredSection === 'panel'}>{text}</Paragraph>
           ))}
 

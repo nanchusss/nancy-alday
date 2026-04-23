@@ -92,6 +92,13 @@ a multidisciplinary approach to building interfaces.`,
       love: "LOVE",
       logic: "LOGIC"
     },
+
+    projects: {
+      gallery: "GALLERY",
+      list: "LIST",
+      viewProject: "VIEW ↗",
+      notFound: "Project not found"
+    },
     projectsData: {
   taller: {
     Id: "taller",
@@ -304,6 +311,13 @@ projectTabs: {
   work: "WORK",
   love: "LOVE",
   logic: "LOGIC"
+},
+
+projects: {
+  gallery: "GALERÍA",
+  list: "LISTA",
+  viewProject: "VER ↗",
+  notFound: "Proyecto no encontrado"
 },
 
     interest: {

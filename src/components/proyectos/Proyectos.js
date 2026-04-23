@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
+import { LanguageContext } from "../LanguageContext";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
   const [mode, setMode] = useState("gallery");
+  const { t } = useContext(LanguageContext);
 
   const navigate = useNavigate();
 
@@ -101,13 +103,13 @@ export default function ProjectsSection() {
             className={mode === "gallery" ? "active" : ""}
             onClick={() => setMode("gallery")}
           >
-            GALLERY
+            {t.projects.gallery}
           </button>
           <button
             className={mode === "list" ? "active" : ""}
             onClick={() => setMode("list")}
           >
-            LIST
+            {t.projects.list}
           </button>
         </Toggle>
       </Switch>
@@ -195,7 +197,7 @@ export default function ProjectsSection() {
         className={hovered !== null ? "active" : ""}
       >
         <CursorInner>
-          {hovered !== null ? "VIEW ↗" : ""}
+          {hovered !== null ? t.projects.viewProject : ""}
         </CursorInner>
       </Cursor>
     </Wrapper>
