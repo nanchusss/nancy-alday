@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import { projects } from "../../data/projects";
 
 export default function ProjectsSection() {
@@ -12,38 +11,36 @@ export default function ProjectsSection() {
 
   /* ================= CURSOR ================= */
 
-  /* ================= CURSOR ================= */
+  const cursorRef = useRef(null);
+  const mouse = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
 
-const cursorRef = useRef(null);
-const mouse = useRef({ x: 0, y: 0 });
-const current = useRef({ x: 0, y: 0 });
-
-const handleMouseMove = (e) => {
-  mouse.current.x = e.clientX;
-  mouse.current.y = e.clientY;
-};
-
-const handleMouseLeave = () => {
-  setHovered(null);
-};
-
-useEffect(() => {
-  let raf;
-
-  const animate = () => {
-    current.current.x += (mouse.current.x - current.current.x) * 0.15;
-    current.current.y += (mouse.current.y - current.current.y) * 0.15;
-
-    if (cursorRef.current) {
-      cursorRef.current.style.transform = `translate(${current.current.x}px, ${current.current.y}px)`;
-    }
-
-    raf = requestAnimationFrame(animate);
+  const handleMouseMove = (e) => {
+    mouse.current.x = e.clientX;
+    mouse.current.y = e.clientY;
   };
 
-  animate();
-  return () => cancelAnimationFrame(raf);
-}, []);
+  const handleMouseLeave = () => {
+    setHovered(null);
+  };
+
+  useEffect(() => {
+    let raf;
+
+    const animate = () => {
+      current.current.x += (mouse.current.x - current.current.x) * 0.15;
+      current.current.y += (mouse.current.y - current.current.y) * 0.15;
+
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${current.current.x}px, ${current.current.y}px)`;
+      }
+
+      raf = requestAnimationFrame(animate);
+    };
+
+    animate();
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   /* ================= SCROLL ================= */
 
@@ -66,8 +63,10 @@ useEffect(() => {
       const delta = now - last;
       last = now;
 
+      // columna 1 SUBE
       offset1.current -= delta * speed * 0.5;
 
+      // columna 2 BAJA
       if (!isMobile) {
         offset2.current += delta * speed;
       }
@@ -89,9 +88,10 @@ useEffect(() => {
     };
 
     raf = requestAnimationFrame(loop);
-
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  const activeProject = hovered || projects[0];
 
   return (
     <Wrapper>
@@ -115,69 +115,66 @@ useEffect(() => {
       {mode === "gallery" ? (
         <Layout onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <Left>
+
+            {/* COL 1 */}
             <Column>
               <Track ref={track1}>
-                {[...projects, ...projects].map((_, i) => {
-                  const p = projects[i % projects.length];
-
-                  return (
-                    <ItemWrapper
-                      key={i}
-                      onMouseEnter={() => setHovered(i)}
-                      onMouseLeave={() => setHovered(null)}
-                      onClick={() => navigate(`/projects/${p.id}`)}
-                    >
-                      <Item style={{ backgroundImage: `url(${p.image[0]})` }} />
-                      <ItemMeta>
-                        <ItemTitle>{p.title}</ItemTitle>
-                        <ItemSubtitle>{p.subtitle}</ItemSubtitle>
-                      </ItemMeta>
-                    </ItemWrapper>
-                  );
-                })}
+                {[...projects, ...projects].map((p, i) => (
+                  <ItemWrapper
+                    key={i}
+                    onMouseEnter={() => setHovered(p)}
+                    onMouseLeave={() => setHovered(null)}
+                    onClick={() => navigate(`/projects/${p.id}`)}
+                  >
+                    <Item style={{ backgroundImage: `url(${p.image[0]})` }} />
+                    <ItemMeta>
+                      <ItemTitle>{p.title}</ItemTitle>
+                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
+                    </ItemMeta>
+                  </ItemWrapper>
+                ))}
               </Track>
             </Column>
 
+            {/* COL 2 */}
             <Column>
               <Track ref={track2}>
-                {[...projects, ...projects].map((_, i) => {
-                  const p = projects[i % projects.length];
-
-                  return (
-                   <ItemWrapper
-  key={i}
-  onMouseEnter={() => setHovered(i)}
-  onMouseLeave={() => setHovered(null)}
-  onClick={() => navigate(`/projects/${p.id}`)}
->
-                      <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
-                      <ItemMeta>
-                        <ItemTitle>{p.title}</ItemTitle>
-                        <ItemSubtitle>{p.subtitle}</ItemSubtitle>
-                      </ItemMeta>
-                    </ItemWrapper>
-                  );
-                })}
+                {[...projects, ...projects].map((p, i) => (
+                  <ItemWrapper
+                    key={i}
+                    onMouseEnter={() => setHovered(p)}
+                    onMouseLeave={() => setHovered(null)}
+                    onClick={() => navigate(`/projects/${p.id}`)}
+                  >
+                    <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
+                    <ItemMeta>
+                      <ItemTitle>{p.title}</ItemTitle>
+                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
+                    </ItemMeta>
+                  </ItemWrapper>
+                ))}
               </Track>
             </Column>
+
           </Left>
 
           <Right>
+
             <TitleWrapper>
               <TitleTrack>
-              
-                <Title>{projects[hovered]?.title}</Title>
-                <Title>{projects[hovered]?.title}</Title>
+                <Title>{activeProject.title}</Title>
+                <Title>{activeProject.title}</Title>
               </TitleTrack>
             </TitleWrapper>
 
-            <Subtitle>{projects[1]?.subtitle}</Subtitle>
+            <Subtitle>{activeProject.subtitle}</Subtitle>
 
-           <Preview
-  style={{
-    backgroundImage: `url(${projects[hovered ?? 0]?.image[0]})`
-  }}
-/>
+            <Preview
+              style={{
+                backgroundImage: `url(${activeProject.image[0]})`,
+              }}
+            />
+
           </Right>
         </Layout>
       ) : (
@@ -193,14 +190,14 @@ useEffect(() => {
         </ListView>
       )}
 
-   <Cursor
-  ref={cursorRef}
-  className={hovered !== null ? "active" : ""}
->
-  <CursorInner>
-    {hovered !== null ? "VIEW ↗" : ""}
-  </CursorInner>
-</Cursor>
+      <Cursor
+        ref={cursorRef}
+        className={hovered !== null ? "active" : ""}
+      >
+        <CursorInner>
+          {hovered !== null ? "VIEW ↗" : ""}
+        </CursorInner>
+      </Cursor>
     </Wrapper>
   );
 }
@@ -209,13 +206,13 @@ useEffect(() => {
 
 const Wrapper = styled.section`
   position: relative;
- height: 100vh;
-overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 
   background: linear-gradient(
     to bottom,
-    #E4572E 20%,
-    #ffffff 40%
+    #6FA8DC 20%,
+    #FCF1E7 40%
   );
 `;
 
@@ -225,19 +222,10 @@ const Layout = styled.div`
   height: 100%;
 
   @media (max-width: 768px) {
-    display: block;
+    display: block;      /* 👈 CLAVE */
     width: 100%;
     height: auto;
   }
-`;
-
-const Preview = styled.div`
-  flex: 1;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 16px;
-  margin-top: 20px;
 `;
 
 const Left = styled.div`
@@ -248,8 +236,8 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
     flex-direction: column;
+    padding: 20px;        /* 👈 opcional: menos aire */
   }
 `;
 
@@ -258,6 +246,8 @@ const Column = styled.div`
   overflow: hidden;
 
   @media (max-width: 768px) {
+    width: 100%;          /* 👈 CLAVE */
+    
     &:nth-child(2) {
       display: none;
     }
@@ -276,6 +266,7 @@ const ItemWrapper = styled.div`
 
 const Item = styled.div`
   height: 400px;
+  width: 100%;            /* 👈 AÑADE ESTO */
   background-size: cover;
   border-radius: 16px;
   background-position: center;
@@ -300,9 +291,8 @@ const ItemSubtitle = styled.div`
 const Right = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   padding: 0 6vw;
-  height: 100%;
+  container-type: inline-size;
 
   @media (max-width: 768px) {
     display: none;
@@ -325,18 +315,32 @@ const TitleTrack = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: clamp(80px, 8vw, 140px);
-  white-space: nowrap;
+  font-size: clamp(60px, 12cqw, 120px);
   padding-top: 100px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 0.9;
+
+  @supports not (font-size: clamp(1px, 1cqw, 1px)) {
+    font-size: clamp(60px, 5rem, 120px);
+  }
 `;
 
 const Subtitle = styled.p`
   margin: 40px 0;
   font-size: 28px;
-  color: black;
   text-transform: uppercase;
 `;
 
+const Preview = styled.div`
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  max-height: 400px;
+  margin-top: 20px;
+`;
 
 const Switch = styled.div`
   position: absolute;
@@ -358,13 +362,10 @@ const Toggle = styled.div`
     padding: 8px 18px;
     border-radius: 999px;
     cursor: pointer;
-    font-size: 12px;
-    letter-spacing: 1px;
   }
 
   .active {
     background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 `;
 
@@ -380,12 +381,6 @@ const ListRow = styled.div`
   font-size: clamp(40px, 6vw, 80px);
   text-align: center;
   cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    opacity: 0.3;
-    transform: translateX(10px);
-  }
 `;
 
 const Cursor = styled.div`
@@ -400,10 +395,6 @@ const Cursor = styled.div`
 
   &.active {
     opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
   }
 `;
 
