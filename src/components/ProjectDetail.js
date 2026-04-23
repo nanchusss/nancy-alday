@@ -9,44 +9,41 @@ export default function ProjectDetail() {
   const navigate = useNavigate();
   const { t } = useContext(LanguageContext);
 
-  const project = projects.find(p => p.id === id);  
-  
+  const project = projects.find(p => p.id === id);
+  const content = t?.projectsData?.[project?.id];
+
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [mode, setMode] = useState("ficha"); // 👈 toggle
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (!project) return <div>Not found</div>;
 
-  const content = t?.projectsData?.[project.id];
-
-
-
   const images =
-    isMobile && project.imageMobile && project.imageMobile.length > 0
+    isMobile && project.imageMobile?.length > 0
       ? project.imageMobile
       : project.image;
 
   return (
     <Wrapper>
 
-      <FloatingImage>
-        <img src={images[0]} alt="" />
-      </FloatingImage>
+      {/* DESKTOP IMAGE */}
+      {!isMobile && (
+        <FloatingImage>
+          <img src={images[0]} alt="" />
+        </FloatingImage>
+      )}
 
       <SidePanel>
 
         <PanelHeader>
-          <CloseText onClick={() => navigate(-1)}>
-            Close
-          </CloseText>
-
+          <CloseText onClick={() => navigate(-1)}>Close</CloseText>
           <Visit href={project.url} target="_blank">
             Visit Site ↗
           </Visit>
@@ -68,26 +65,55 @@ export default function ProjectDetail() {
             <Paragraph key={i}>{text}</Paragraph>
           ))}
 
+          {/* TOGGLE */}
+          {project.videoMobile && (
+            <Toggle>
+              <Pill
+                active={mode === "ficha"}
+                onClick={() => setMode("ficha")}
+              >
+                Gallery
+              </Pill>
+              <Pill
+                active={mode === "video"}
+                onClick={() => setMode("video")}
+              >
+                Video
+              </Pill>
+            </Toggle>
+          )}
+
         </PanelBody>
 
-        <ProjectGallery>
-          {images.map((img, i) => (
-            <GalleryBlock
-              key={i}
-              className={
-                i === 0 ? "main" :
-                i === 1 ? "vertical" :
-                i === 2 ? "horizontal" :
-                "small"
-              }
-            >
-              <img src={img} alt="" />
-            </GalleryBlock>
-          ))}
-        </ProjectGallery>
+        {/* CONTENT SWITCH */}
+        {mode === "video" && project.videoMobile ? (
+          <MobileVideo>
+            <video autoPlay muted loop playsInline preload="auto">
+              <source
+                src={project.videoMobile.src}
+                type={project.videoMobile.type}
+              />
+            </video>
+          </MobileVideo>
+        ) : (
+          <ProjectGallery>
+            {images.map((img, i) => (
+              <GalleryBlock
+                key={i}
+                className={
+                  i === 0 ? "main" :
+                  i === 1 ? "vertical" :
+                  i === 2 ? "horizontal" :
+                  "small"
+                }
+              >
+                <img src={img} alt="" />
+              </GalleryBlock>
+            ))}
+          </ProjectGallery>
+        )}
 
       </SidePanel>
-
     </Wrapper>
   );
 }
@@ -99,7 +125,7 @@ const Wrapper = styled.div`
   display: flex;
 
   @media (max-width: 768px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
     height: auto;
   }
 `;
@@ -111,22 +137,11 @@ const FloatingImage = styled.div`
   width: 50%;
   height: 100vh;
   overflow: hidden;
-  z-index: 1;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  @media (max-width: 768px) {
-    position: relative;
-    width: 100%;
-    height: auto;
-
-    img {
-      height: 60vh;
-    }
   }
 `;
 
@@ -135,7 +150,6 @@ const SidePanel = styled.div`
   width: 50%;
   height: 100%;
   background: #f6f3ef;
-
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -157,23 +171,17 @@ const PanelHeader = styled.div`
 
 const CloseText = styled.span`
   cursor: pointer;
-  letter-spacing: 0.5px;
 `;
 
 const Visit = styled.a`
   text-decoration: none;
   border-bottom: 1px solid #000;
-  padding-bottom: 2px;
 `;
 
 /* ================= BODY ================= */
 
 const PanelBody = styled.div`
   padding: 30px 24px;
-
-  @media (max-width: 768px) {
-    text-align: center;
-  }
 `;
 
 const TagsRow = styled.div`
@@ -181,10 +189,6 @@ const TagsRow = styled.div`
   gap: 8px;
   margin-bottom: 20px;
   flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
 `;
 
 const Tag = styled.span`
@@ -192,45 +196,71 @@ const Tag = styled.span`
   padding: 6px 10px;
   border-radius: 999px;
   background: #eae6df;
-  color: #3a3a3a;
-  letter-spacing: 0.5px;
 `;
 
 const BigTitle = styled.h1`
   font-family: "Playfair Display", serif;
-  font-size: clamp(72px, 7vw, 72px);
-  font-weight: 400;
+  font-size: clamp(32px, 7vw, 72px);
   line-height: 1.05;
   margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-
 
   @media (max-width: 768px) {
-    font-size: 68px;
     text-align: center;
-    letter-spacing: -4px;
-    margin-top: 60px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
+    font-size: 56px;
   }
 `;
 
 const Paragraph = styled.p`
-  font-size: 34px;
+  font-size: 14px;
   line-height: 1.6;
   margin-bottom: 12px;
-  max-width: auto;
   color: #555;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 20px;
     text-align: center;
-    text-transform: uppercase;
-    max-width: 100%;
-    
+    font-size: 16px;
+  }
+`;
+
+/* ================= TOGGLE ================= */
+
+const Toggle = styled.div`
+  display: inline-flex;
+  background: #2b1a12;
+  border-radius: 999px;
+  padding: 4px;
+  margin-top: 20px;
+  margin-right: 50%;
+  
+  @media (max-width: 768px) {
+    margin-right: 50%;
+  }
+`;
+
+const Pill = styled.button`
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+
+  background: ${({ active }) =>
+    active ? "#f6f3ef" : "transparent"};
+
+  color: ${({ active }) =>
+    active ? "#000" : "#fff"};
+
+  transition: 0.3s;
+`;
+
+/* ================= VIDEO ================= */
+
+const MobileVideo = styled.div`
+  padding: 20px;
+
+  video {
+    width: 100%;
+    border-radius: 6px;
   }
 `;
 
@@ -252,9 +282,6 @@ const ProjectGallery = styled.div`
 
 const GalleryBlock = styled.div`
   overflow: hidden;
-
-
-  
 
   img {
     width: 100%;
@@ -283,10 +310,8 @@ const GalleryBlock = styled.div`
   }
 
   @media (max-width: 768px) {
-  img {
-    width: 100%;
-    height: auto;
+    img {
+      height: auto;
+    }
   }
-}
-  
 `;

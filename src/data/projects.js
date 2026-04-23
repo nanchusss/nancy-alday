@@ -42,7 +42,11 @@ export const projects = [
     image: [taller1, taller2, taller3, taller4],
     imageMobile: [mobiletaller1, mobiletaller2, mobiletaller3, mobiletaller4, mobiletaller5, mobiletaller6, mobiletaller7],
     url: "https://eltaller-aguaymanto.com",
-    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
+    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"],
+    videoMobile: {
+  src: "/videos/videoeltallermobile.mp4",
+  type: "video/mp4"
+}
   },
   {
     id: "finestra",

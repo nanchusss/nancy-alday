@@ -165,14 +165,19 @@ useEffect(() => {
           <Right>
             <TitleWrapper>
               <TitleTrack>
-                <Title>{projects[0]?.title}</Title>
+              
+                <Title>{projects[hovered]?.title}</Title>
                 <Title>{projects[hovered]?.title}</Title>
               </TitleTrack>
             </TitleWrapper>
 
             <Subtitle>{projects[1]?.subtitle}</Subtitle>
 
-            <Video />
+           <Preview
+  style={{
+    backgroundImage: `url(${projects[hovered ?? 0]?.image[0]})`
+  }}
+/>
           </Right>
         </Layout>
       ) : (
@@ -180,7 +185,7 @@ useEffect(() => {
           {projects.map((p, i) => (
             <ListRow
               key={i}
-              onClick={() => navigate(`/project/${p.id}`)}
+              onClick={() => navigate(`/projects/${p.id}`)}
             >
               {p.title}
             </ListRow>
@@ -224,6 +229,15 @@ const Layout = styled.div`
     width: 100%;
     height: auto;
   }
+`;
+
+const Preview = styled.div`
+  flex: 1;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  margin-top: 20px;
 `;
 
 const Left = styled.div`
