@@ -106,10 +106,9 @@ const Container = styled.header`
   width: 100%;
   height: 90px;
   backdrop-filter: blur(18px);
-  background: rgba(243, 241, 236, 0);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(${props => props.theme.background === "#0b0b0c" ? "11, 11, 12" : "243, 241, 236"}, 0);
+  border-bottom: 1px solid ${props => props.theme.background === "#0b0b0c" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"};
   display: flex;
-  border-bottom: white 1px solid;
   align-items: center;
   z-index: 1000;
 
@@ -161,7 +160,7 @@ const LangButton = styled.button`
   border: none;
   font-size: 17px;
   letter-spacing: 2px;
-  color: #333;
+  color: ${props => props.theme.text};
   cursor: pointer;
 
   @media (max-width: 768px) {
@@ -173,13 +172,13 @@ const LangButton = styled.button`
 const ContactButton = styled.button`
   position: relative;
   overflow: hidden;
-  border: white 1px solid;
+  border: ${props => props.theme.text} 1px solid;
   padding: 12px 24px;
   border-radius: 40px;
   font-size: 17px;
   opacity: 0.5;
-  color: black;
-  border-color: black;
+  color: ${props => props.theme.text};
+  border-color: ${props => props.theme.text};
   background: transparent;
   cursor: pointer;
   width: 180px;
@@ -200,8 +199,7 @@ const StaticText = styled.div`
   position: absolute;
   inset: 0;
   display: flex;
-  color: white;
-  color: black;
+  color: ${props => props.theme.text};
   opacity: 0.7;
   font-size: 17px;
   align-items: center;
@@ -221,7 +219,7 @@ const MarqueeWrapper = styled.div`
   position: absolute;
   inset: 0;
   display: flex;
-  color: black; 
+  color: ${props => props.theme.text}; 
   align-items: center;
   white-space: nowrap;
   animation: ${marqueeMove} 12s linear infinite;

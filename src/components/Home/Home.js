@@ -3,11 +3,15 @@ import styled from "styled-components";
 import { useScroll, useSpring, animated } from "@react-spring/web";
 import image from "../proyectos/images/fondo.png";
 import mobileimage from "../proyectos/images/fondomobile.png";
+import nightImage from "./images/fondonoche.png";
+import nightMobileImage from "./images/fondonochecolor.png";
 
 import { LanguageContext } from "../LanguageContext";
+import { useTheme } from "styled-components";
 
 export default function HeroSection() {
   const { t } = useContext(LanguageContext);
+  const theme = useTheme();
   const ref = useRef();
   
   const { scrollYProgress } = useScroll({
@@ -18,10 +22,10 @@ export default function HeroSection() {
   /* ================= FORMAS ANIMADAS DEL BACKGROUND ================= */
   
   const shapes = [
-    { color: "#E4572E", size: 120, x: 20, y: 15 }, // Subí de 30 a 15 para no tapar la cara
-    { color: "#4A90E2", size: 80, x: 70, y: 60 },
-    { color: "#F2C94C", size: 100, x: 40, y: 80 },
-    { color: "#3A7D44", size: 90, x: 85, y: 25 },
+    { color: theme.shapes[0], size: 120, x: 20, y: 15 }, // Subí de 30 a 15 para no tapar la cara
+    { color: theme.shapes[1], size: 80, x: 70, y: 60 },
+    { color: theme.shapes[2], size: 100, x: 40, y: 80 },
+    { color: theme.shapes[3], size: 90, x: 85, y: 25 },
   ];
   
   // Springs individuales para cada forma con movimiento autónomo + scroll reactivo
@@ -238,8 +242,8 @@ export default function HeroSection() {
 
       <HeroImageWrapper>
         <picture>
-          <source media="(max-width: 768px)" srcSet={mobileimage} />
-          <img src={image} alt="" />
+          <source media="(max-width: 768px)" srcSet={theme.background === "#0b0b0c" ? nightMobileImage : mobileimage} />
+          <img src={theme.background === "#0b0b0c" ? nightImage : image} alt="" />
         </picture>
         
         {/* FORMAS ANIMADAS CORREGIDAS */}
@@ -337,7 +341,7 @@ export default function HeroSection() {
 
 const Wrapper = styled.section`
   position: relative;
-  background: #FCF1E7;
+  background: ${props => props.theme.background};
 
   /* MOBILE FIRST */
   min-height: 100svh;
@@ -412,7 +416,7 @@ const Title = styled.h1`
   letter-spacing: -0.03em;
 
   font-family: "Canela", serif;
-  color: #111;
+  color: ${props => props.theme.text};
 
   margin: 20px 20px 0px 0;
 
@@ -425,7 +429,7 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   font-size: 18px;
   line-height: 1.6;
-  color: #555;
+  color: ${props => props.theme.secondaryText};
 
   max-width: 520px;
 
@@ -442,13 +446,13 @@ const Signature = styled.div`
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
-  color: #111;
+  color: ${props => props.theme.text};
 
   span {
     display: block;
     margin-top: 6px;
     font-size: 12px;
-    color: #666;
+    color: ${props => props.theme.secondaryText};
     letter-spacing: 0.04em;
   }
 
@@ -456,10 +460,10 @@ const Signature = styled.div`
     align-self: flex-start;
     margin-top: 40px;
 
-    color: white;
+    color: ${props => props.theme.bubbleColor};
 
     span {
-      color: rgba(255, 255, 255, 0.8);
+      color: ${props => props.theme.bubbleColor === "#ffffff" ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)"};
     }
   }
 `;

@@ -211,8 +211,8 @@ const Wrapper = styled.section`
 
   background: linear-gradient(
     to bottom,
-    #4A90E2 20%,
-    #FCF1E7 40%
+    ${props => props.theme.gradientStart} 20%,
+    ${props => props.theme.gradientEnd} 40%
   );
 `;
 
@@ -281,11 +281,12 @@ const ItemTitle = styled.div`
   font-size: 28px;
   margin-top: 12px;
   text-transform: uppercase;
+  color: ${props => props.theme.text};
 `;
 
 const ItemSubtitle = styled.div`
   font-size: 24px;
-  color: #666;
+  color: ${props => props.theme.secondaryText};
 `;
 
 const Right = styled.div`
@@ -321,6 +322,7 @@ const Title = styled.h1`
   overflow-wrap: break-word;
   hyphens: auto;
   line-height: 0.9;
+  color: ${props => props.theme.text};
 
   @supports not (font-size: clamp(1px, 1cqw, 1px)) {
     font-size: clamp(60px, 5rem, 120px);
@@ -331,6 +333,7 @@ const Subtitle = styled.p`
   margin: 40px 0;
   font-size: 28px;
   text-transform: uppercase;
+  color: ${props => props.theme.secondaryText};
 `;
 
 const Preview = styled.div`
@@ -352,7 +355,7 @@ const Switch = styled.div`
 
 const Toggle = styled.div`
   display: flex;
-  background: #eee;
+  background: ${props => props.theme.card};
   border-radius: 999px;
   padding: 6px;
 
@@ -362,10 +365,11 @@ const Toggle = styled.div`
     padding: 8px 18px;
     border-radius: 999px;
     cursor: pointer;
+    color: ${props => props.theme.text};
   }
 
   .active {
-    background: #fff;
+    background: ${props => props.theme.accent};
   }
 `;
 
@@ -381,6 +385,7 @@ const ListRow = styled.div`
   font-size: clamp(40px, 6vw, 80px);
   text-align: center;
   cursor: pointer;
+  color: ${props => props.theme.text};
 `;
 
 const Cursor = styled.div`
@@ -399,8 +404,8 @@ const Cursor = styled.div`
 `;
 
 const CursorInner = styled.div`
-  background: #111;
-  color: #fff;
+  background: ${props => props.theme.text};
+  color: ${props => props.theme.background};
   padding: 8px 14px;
   border-radius: 999px;
 

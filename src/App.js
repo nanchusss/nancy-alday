@@ -26,14 +26,24 @@ const lightTheme = {
   secondaryText: "#555",
   accent: "#c2a98a",
   card: "#ffffff",
+  bubbleColor: "#ffffff",
+  overlayColors: ["#F8E71C", "#FF6B35", "#4A90E2"],
+  gradientStart: "#4A90E2",
+  gradientEnd: "#FCF1E7",
+  shapes: ["#E4572E", "#4A90E2", "#F2C94C", "#3A7D44", "#9B59B6"],
 };
 
 const darkTheme = {
   background: "#0b0b0c",
-  text: "#F5F1EA",
-  secondaryText: "rgba(245,241,234,0.65)",
-  accent: "#d6bfa3",
-  card: "#161616",
+  text: "#ffffff",
+  secondaryText: "rgba(255,255,255,0.7)",
+  accent: "#888888",
+  card: "#1a1a1a",
+  bubbleColor: "#ffffff",
+  overlayColors: ["#333333", "#555555", "#777777"],
+  gradientStart: "#333333",
+  gradientEnd: "#0b0b0c",
+  shapes: ["#ffffff", "#cccccc", "#999999", "#666666", "#333333"],
 };
 
 function App() {

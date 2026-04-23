@@ -2,10 +2,12 @@ import React, { useRef, useContext } from "react";
 import { useScroll, useSpring, animated } from "@react-spring/web";
 import styled from "styled-components";
 import { LanguageContext } from "../../LanguageContext";
+import { useTheme } from "styled-components";
 
 export default function HowIThink() {
   const ref = useRef();
   const { t } = useContext(LanguageContext);
+  const theme = useTheme();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -82,11 +84,11 @@ const opacity4 = progress.p.to((p) => {
   /* ================= SHAPES ================= */
 
   const shapes = [
-    { color: "#E4572E", size: 150, path: "M60,10 C90,20 110,60 80,90 C50,120 10,100 10,60 C10,30 30,0 60,10 Z" },
-    { color: "#4A90E2", size: 120, path: "M50,10 C80,20 90,60 60,80 C30,100 0,80 10,50 C20,20 30,0 50,10 Z" },
-    { color: "#F2C94C", size: 150, path: "M70,10 C110,30 120,80 80,110 C40,140 0,110 10,60 C20,20 40,0 70,10 Z" },
-    { color: "#3A7D44", size: 120, path: "M40,10 C60,20 80,50 60,70 C40,90 10,80 10,50 C10,20 20,0 40,10 Z" },
-    { color: "#9B59B6", size: 120, path: "M35,10 C60,20 70,50 50,70 C30,90 0,70 10,40 C20,20 20,0 35,10 Z" }, // Cambié #111111 por #9B59B6 (morado)
+    { color: theme.shapes[0], size: 150, path: "M60,10 C90,20 110,60 80,90 C50,120 10,100 10,60 C10,30 30,0 60,10 Z" },
+    { color: theme.shapes[1], size: 120, path: "M50,10 C80,20 90,60 60,80 C30,100 0,80 10,50 C20,20 30,0 50,10 Z" },
+    { color: theme.shapes[2], size: 150, path: "M70,10 C110,30 120,80 80,110 C40,140 0,110 10,60 C20,20 40,0 70,10 Z" },
+    { color: theme.shapes[3], size: 120, path: "M40,10 C60,20 80,50 60,70 C40,90 10,80 10,50 C10,20 20,0 40,10 Z" },
+    { color: theme.shapes[4], size: 120, path: "M35,10 C60,20 70,50 50,70 C30,90 0,70 10,40 C20,20 20,0 35,10 Z" },
   ];
 
   return (
@@ -94,9 +96,9 @@ const opacity4 = progress.p.to((p) => {
       <Sticky>
 
         {/* BACKGROUNDS */}
-        <YellowOverlay style={{ clipPath: yellowReveal }} />
-        <OrangeOverlay style={{ clipPath: orangeReveal }} />
-        <BlueOverlay style={{ clipPath: blueReveal }} />
+        <YellowOverlay style={{ clipPath: yellowReveal, background: theme.overlayColors[0] }} />
+        <OrangeOverlay style={{ clipPath: orangeReveal, background: theme.overlayColors[1] }} />
+        <BlueOverlay style={{ clipPath: blueReveal, background: theme.overlayColors[2] }} />
 
         {/* BLOBS (SIN CAMBIOS) */}
         <SemiCircle>
@@ -131,23 +133,23 @@ const opacity4 = progress.p.to((p) => {
         {/* TEXT */}
         <Content>
 
-          <Section style={{ opacity: opacity1, color: "#2c2c2c" }}>
+          <Section style={{ opacity: opacity1, color: theme.text }}>
             <h2>{t.howIThink.sections[0].title}</h2>
             <p>{t.howIThink.sections[0].text}</p>
           </Section>
 
-          <Section style={{ opacity: opacity2, color: "#2c2c2c" }}>
+          <Section style={{ opacity: opacity2, color: theme.text }}>
             <h2>{t.howIThink.sections[1].title}</h2>
             <p>{t.howIThink.sections[1].text}</p>
           </Section>
 
-          <Section style={{ opacity: opacity3, color: "#1a1a1a" }}>
+          <Section style={{ opacity: opacity3, color: theme.text }}>
             <h2>{t.howIThink.sections[2].title}</h2>
             <p>{t.howIThink.sections[2].text}</p>
           </Section>
 
           {/* 👉 NUEVO BLOQUE AZUL */}
-          <Section style={{ opacity: opacity4, color: "#1a1a1a" }}>
+          <Section style={{ opacity: opacity4, color: theme.text }}>
             <h2>{t.howIThink.sections[3].title}</h2>
             <p>{t.howIThink.sections[3].text}</p>
           </Section>
@@ -163,7 +165,7 @@ const opacity4 = progress.p.to((p) => {
 
 const Wrapper = styled.section`
   height: 260vh;
-  background: #f6f3ef;
+  background: ${props => props.theme.background};
 `;
 
 const Sticky = styled.div`
@@ -204,21 +206,21 @@ const Section = styled(animated.div)`
 const YellowOverlay = styled(animated.div)`
   position: absolute;
   inset: 0;
-  background: #F8E71C;
+  background: ${props => props.theme.overlayColors[0]};
   z-index: 0;
 `;
 
 const OrangeOverlay = styled(animated.div)`
   position: absolute;
   inset: 0;
-  background: #FF6B35;
+  background: ${props => props.theme.overlayColors[1]};
   z-index: 1;
 `;
 
 const BlueOverlay = styled(animated.div)`
   position: absolute;
   inset: 0;
-  background: #4A90E2;
+  background: ${props => props.theme.overlayColors[2]};
   z-index: 2;
 `;
 
