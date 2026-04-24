@@ -22,18 +22,18 @@ export default function HowIThink() {
   /* ================= BACKGROUNDS ================= */
 
   const yellowReveal = progress.p.to((p) => {
-    const t = Math.max(0, Math.min(1, (p - 0.2) / 0.25));
+    const t = Math.max(0, Math.min(1, (p - 0.05) / 0.25));
     return `circle(${t * 200}% at 50% 50%)`;
   });
 
   const orangeReveal = progress.p.to((p) => {
-    const t = Math.max(0, Math.min(1, (p - 0.32) / 0.3));
+    const t = Math.max(0, Math.min(1, (p - 0.2) / 0.3));
     return `circle(${t * 150}% at 50% 50%)`;
   });
 
   // 👉 NUEVO AZUL (NO TOCA LO ANTERIOR)
   const blueReveal = progress.p.to((p) => {
-    const t = Math.max(0, Math.min(1, (p - 0.6) / 0.3));
+    const t = Math.max(0, Math.min(1, (p - 0.4) / 0.35));
     return `circle(${t * 150}% at 50% 50%)`;
   });
 

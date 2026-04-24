@@ -43,7 +43,7 @@ export default function HeroSection() {
     y: scrollYProgress.to((p) => {
       const baseY = shapes[0].y;
       const autonomousMovement = Math.cos(Date.now() * 0.0008) * 3; // Movimiento autónomo
-      const scrollMovement = Math.cos(p * Math.PI * 3) * 10; // Movimiento por scroll
+      const scrollMovement = p * 400; // Movimiento drástico hacia abajo
       return baseY + autonomousMovement + scrollMovement;
     }),
     config: { tension: 120, friction: 30 }
@@ -81,7 +81,7 @@ export default function HeroSection() {
     y: scrollYProgress.to((p) => {
       const baseY = shapes[1].y;
       const autonomousMovement = Math.cos(Date.now() * 0.0009 + 1) * 4;
-      const scrollMovement = Math.cos(p * Math.PI * 3 + 1) * 10;
+      const scrollMovement = p * 350; // Movimiento drástico hacia abajo
       return baseY + autonomousMovement + scrollMovement;
     }),
     config: { tension: 120, friction: 30 }
@@ -119,7 +119,7 @@ export default function HeroSection() {
     y: scrollYProgress.to((p) => {
       const baseY = shapes[2].y;
       const autonomousMovement = Math.cos(Date.now() * 0.001 + 2) * 5;
-      const scrollMovement = Math.cos(p * Math.PI * 3 + 2) * 10;
+      const scrollMovement = p * 380; // Movimiento drástico hacia abajo
       return baseY + autonomousMovement + scrollMovement;
     }),
     config: { tension: 120, friction: 30 }
@@ -157,7 +157,7 @@ export default function HeroSection() {
     y: scrollYProgress.to((p) => {
       const baseY = shapes[3].y;
       const autonomousMovement = Math.cos(Date.now() * 0.0012 + 3) * 3;
-      const scrollMovement = Math.cos(p * Math.PI * 3 + 3) * 10;
+      const scrollMovement = p * 420; // Movimiento drástico hacia abajo
       return baseY + autonomousMovement + scrollMovement;
     }),
     config: { tension: 120, friction: 30 }

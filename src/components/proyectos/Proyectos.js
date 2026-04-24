@@ -6,6 +6,7 @@ import { LanguageContext } from "../LanguageContext";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
+  const [hoveredListItem, setHoveredListItem] = useState(null);
   const [mode, setMode] = useState("gallery");
   const { t } = useContext(LanguageContext);
 
@@ -131,7 +132,6 @@ export default function ProjectsSection() {
                     <Item style={{ backgroundImage: `url(${p.image[0]})` }} />
                     <ItemMeta>
                       <ItemTitle>{p.title}</ItemTitle>
-                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
                     </ItemMeta>
                   </ItemWrapper>
                 ))}
@@ -151,7 +151,6 @@ export default function ProjectsSection() {
                     <Item style={{ backgroundImage: `url(${p.image[2]})` }} />
                     <ItemMeta>
                       <ItemTitle>{p.title}</ItemTitle>
-                      <ItemSubtitle>{p.subtitle}</ItemSubtitle>
                     </ItemMeta>
                   </ItemWrapper>
                 ))}
@@ -169,7 +168,7 @@ export default function ProjectsSection() {
               </TitleTrack>
             </TitleWrapper>
 
-            <Subtitle>{activeProject.subtitle}</Subtitle>
+            <Subtitle>{activeProject.title}</Subtitle>
 
             <Preview
               style={{
@@ -185,8 +184,16 @@ export default function ProjectsSection() {
             <ListRow
               key={i}
               onClick={() => navigate(`/projects/${p.id}`)}
+              onMouseEnter={() => setHoveredListItem(p)}
+              onMouseLeave={() => setHoveredListItem(null)}
+              isHovered={hoveredListItem === p}
             >
-              {p.title}
+              <ProjectTitle>{p.title}</ProjectTitle>
+              {hoveredListItem === p && (
+                <AnimatedImage 
+                  style={{ backgroundImage: `url(${p.image[0]})` }}
+                />
+              )}
             </ListRow>
           ))}
         </ListView>
@@ -212,10 +219,30 @@ const Wrapper = styled.section`
   overflow: hidden;
 
   background: linear-gradient(
-    to bottom,
-    ${props => props.theme.overlayColors[2]} 0%,
-    ${props => props.theme.background} 100%
+    180deg,
+    ${props => props.theme.background} 0%,
+    ${props => props.theme.background === "#0b0b0c" 
+      ? "rgba(107, 70, 193, 0.15)" 
+      : "rgba(139, 92, 246, 0.12)"} 30%,
+    ${props => props.theme.background === "#0b0b0c" 
+      ? "rgba(107, 70, 193, 0.25)" 
+      : "rgba(139, 92, 246, 0.20)"} 70%,
+    ${props => props.theme.background === "#0b0b0c" ? "#6B46C1" : "#8B5CF6"} 100%
   );
+  transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(107, 70, 193, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
 `;
 
 const Layout = styled.div`
@@ -284,11 +311,6 @@ const ItemTitle = styled.div`
   margin-top: 12px;
   text-transform: uppercase;
   color: ${props => props.theme.text};
-`;
-
-const ItemSubtitle = styled.div`
-  font-size: 24px;
-  color: ${props => props.theme.secondaryText};
 `;
 
 const Right = styled.div`
@@ -384,10 +406,54 @@ const ListView = styled.div`
 `;
 
 const ListRow = styled.div`
-  font-size: clamp(40px, 6vw, 80px);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+  
+  ${props => props.isHovered && `
+    transform: translateX(10px);
+  `}
+`;
+
+const ProjectTitle = styled.div`
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 700;
+  text-transform: uppercase;
   color: ${props => props.theme.text};
+  transition: color 0.3s ease;
+  
+  ${ListRow}:hover & {
+    color: ${props => props.theme.accent};
+  }
+`;
+
+const AnimatedImage = styled.div`
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(30px) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 60px;
+  }
 `;
 
 const Cursor = styled.div`

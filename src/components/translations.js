@@ -99,6 +99,11 @@ a multidisciplinary approach to building interfaces.`,
       viewProject: "VIEW ↗",
       notFound: "Project not found"
     },
+
+    tech: {
+      title: "Tech Stack",
+      subtitle: "Tools I use to build"
+    },
     projectsData: {
   taller: {
     Id: "taller",
@@ -305,6 +310,11 @@ projects: {
   list: "LISTA",
   viewProject: "VER ↗",
   notFound: "Proyecto no encontrado"
+},
+
+tech: {
+  title: "Stack Tecnológico",
+  subtitle: "Herramientas que uso para construir"
 },
 
     interest: {

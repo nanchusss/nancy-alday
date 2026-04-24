@@ -411,9 +411,9 @@ const MobileVideo = styled.div`
 
   video {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     height: auto;
-    aspect-ratio: 9/19.5;
+    aspect-ratio: 16/9;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     object-fit: cover;
@@ -431,7 +431,7 @@ const MobileVideo = styled.div`
     
     video {
       max-width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 9/19.5;
       border-radius: 8px;
     }
   }
@@ -441,7 +441,7 @@ const MobileVideo = styled.div`
     
     video {
       max-width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 9/19.5;
       border-radius: 6px;
     }
   }
