@@ -95,17 +95,25 @@ export default function ProjectDetail() {
         </PanelBody>
 
         {/* CONTENT SWITCH */}
-        {mode === "video" && project.videoMobile ? (
+        {mode === "video" && (project.videoDesktop || project.videoMobile) ? (
           <MobileVideo onClick={() => setIsVideoModalOpen(true)}>
-            <video autoPlay muted loop playsInline preload="auto">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline 
+              preload="metadata"
+              onClick={(e) => e.stopPropagation()}
+            >
               <source
-                src={project.videoMobile.src}
-                type={project.videoMobile.type}
+                src={isMobile ? project.videoMobile?.src : project.videoDesktop?.src}
+                type={isMobile ? project.videoMobile?.type : project.videoDesktop?.type}
               />
+              Tu navegador no soporta el video.
             </video>
             <VideoOverlay>
               <PlayIcon>▶</PlayIcon>
-              <ClickText>Click to play with controls</ClickText>
+              <ClickText>Click para ver con controles</ClickText>
             </VideoOverlay>
           </MobileVideo>
         ) : (
@@ -134,13 +142,15 @@ export default function ProjectDetail() {
             <CloseModal onClick={() => setIsVideoModalOpen(false)}>×</CloseModal>
             <VideoPlayer
               controls
-              autoPlay
-              preload="auto"
+              autoPlay={false}
+              preload="metadata"
+              playsInline
             >
               <source
-                src={project.videoMobile.src}
-                type={project.videoMobile.type}
+                src={isMobile ? project.videoMobile?.src : project.videoDesktop?.src}
+                type={isMobile ? project.videoMobile?.type : project.videoDesktop?.type}
               />
+              Tu navegador no soporta el video.
             </VideoPlayer>
           </VideoModalContent>
         </VideoModal>
@@ -409,14 +419,30 @@ const MobileVideo = styled.div`
     object-fit: cover;
     display: block;
     margin: 0 auto;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover video {
+    transform: scale(1.02);
   }
 
   @media (max-width: 768px) {
     padding: 16px;
     
     video {
-      max-width: 280px;
-      aspect-ratio: 9/19.5;
+      max-width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    
+    video {
+      max-width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 6px;
     }
   }
 `;
@@ -466,25 +492,39 @@ const VideoModal = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const VideoModalContent = styled.div`
   position: relative;
-  max-width: 400px;
+  max-width: 90vw;
   width: 100%;
+  max-height: 90vh;
   background: white;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 768px) {
-    max-width: 320px;
+    max-width: 95vw;
+    max-height: 80vh;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 98vw;
+    max-height: 70vh;
+    border-radius: 8px;
   }
 `;
 
@@ -514,7 +554,18 @@ const CloseModal = styled.button`
 const VideoPlayer = styled.video`
   width: 100%;
   height: auto;
+  max-height: 80vh;
   display: block;
+  object-fit: contain;
+  background: #000;
+
+  @media (max-width: 768px) {
+    max-height: 70vh;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 60vh;
+  }
 `;
 
 /* ================= EDITORIAL GALLERY ================= */

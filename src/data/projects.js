@@ -46,6 +46,10 @@ export const projects = [
     videoMobile: {
   src: "/videos/videoeltallermobile.mp4",
   type: "video/mp4"
+},
+videoDesktop: {
+  src: "/videos/videoeltallerdesktop.mp4",
+  type: "video/mp4"
 }
   },
   {
