@@ -272,10 +272,12 @@ const ItemWrapper = styled.div`
 
 const Item = styled.div`
   height: 400px;
-  width: 100%;            /* 👈 AÑADE ESTO */
+  width: 100%;            
   background-size: cover;
-  border-radius: 16px;
   background-position: center;
+  border: 6px solid #000;
+  border-radius: 12px;
+  box-sizing: border-box;
 `;
 
 const ItemMeta = styled.div`
@@ -415,6 +417,8 @@ const AnimatedImage = styled.div`
   background-position: center;
   animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex-shrink: 0;
+  border: 4px solid #000;
+  box-sizing: border-box;
   
   @keyframes slideInRight {
     0% {

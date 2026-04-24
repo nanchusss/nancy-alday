@@ -419,10 +419,19 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  width: 100%;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     background-image: url(${fondobajomobile});
-    background-attachment: fixed;
+    background-attachment: scroll;
+    min-height: 100vh;
+  }
+
+  @media (max-width: 480px) {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
   }
 `;
 
@@ -430,6 +439,16 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 160px);
   gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 120px);
+    gap: 15px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 100px);
+    gap: 10px;
+  }
 `;
 
 const CardWrapper = styled(motion.div)`
@@ -437,6 +456,16 @@ const CardWrapper = styled(motion.div)`
   height: 160px;
   perspective: 1000px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const FlipCard = styled(motion.div)`
