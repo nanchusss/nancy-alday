@@ -157,13 +157,14 @@ export default function TechArsenal() {
   return (
     <Container>
       {gameState === "intro" && (
-        <CenterText>
+        <CenterText onClick={startGame}>
           <h1>tap to play</h1>
         </CenterText>
       )}
 
-      <Grid>
-        {cards.map((card, index) => {
+      {gameStarted && (
+        <Grid>
+          {cards.map((card, index) => {
           const isMatched = matchedPairs.includes(card.pairId);
           const isFlipped =
             flippedCards.includes(card.cardId) || isMatched;
@@ -207,7 +208,8 @@ export default function TechArsenal() {
             </CardWrapper>
           );
         })}
-      </Grid>
+        </Grid>
+      )}
     </Container>
   );
 }
@@ -283,6 +285,10 @@ const Animal = styled.img`
 
 const CenterText = styled.div`
   position: absolute;
-  font-size: 40px;
-  pointer-events: none;
+  font-size: 80px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  user-select: none;
 `;
