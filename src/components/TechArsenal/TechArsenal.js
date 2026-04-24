@@ -27,6 +27,7 @@ import visualImg from "./images/visual.png";
 
 import cardBack from "./images/carta.png";
 import fondobajo from "./images/fondobajo.png";
+import fondobajomobile from "./images/fondobajomobile.png";
 
 export default function TechArsenal() {
   const [gameState, setGameState] = useState("intro");
@@ -217,9 +218,17 @@ const Container = styled.div`
   min-height: 100vh;
   background-image: url(${fondobajo});
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    background-image: url(${fondobajomobile});
+    background-attachment: fixed;
+  }
 `;
 
 const Grid = styled.div`
