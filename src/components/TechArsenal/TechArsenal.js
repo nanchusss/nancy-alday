@@ -364,6 +364,16 @@ const FloatingElement = styled.img`
       transform: translate(-50%, -50%) rotate(-13deg) translateY(-8px);
     }
   }
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 const FloatingElement2 = styled.img`
@@ -378,11 +388,21 @@ const FloatingElement2 = styled.img`
       transform: translate(50%, -50%) rotate(13deg) translateY(-12px);
     }
     50% {
-      transform: translate(50%, -50%) rotate(8deg) translateY(0px);
+      transform: translate(50%, -50%) rotate(7deg) translateY(0px);
     }
     75% {
-      transform: translate(50%, -50%) rotate(12deg) translateY(-6px);
+      transform: translate(50%, -50%) rotate(12deg) translateY(-8px);
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
+
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -403,6 +423,16 @@ const FloatingElement3 = styled.img`
     75% {
       transform: translate(-50%, 50%) rotate(7deg) translateY(-10px);
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media (max-width: 480px) {
+    width: 70px;
+    height: 70px;
   }
 `;
 
