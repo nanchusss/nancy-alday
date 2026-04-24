@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll, useSpring, animated } from '@react-spring/web';
-import { LanguageContext } from '../LanguageContext';
 
 // Import animal images directly
 import bird from "./images/bird.png";
@@ -18,7 +17,6 @@ import element3 from "./images/element3.png";
 import fondobajo from "./images/fondobajo.png";
 
 export default function TechArsenal() {
-  const { t } = React.useContext(LanguageContext);
   const ref = useRef();
   
   const [gameStarted, setGameStarted] = useState(false);
@@ -29,11 +27,7 @@ export default function TechArsenal() {
     offset: ["start start", "end end"]
   });
 
-  const scrollProgress = useSpring({
-    p: scrollYProgress,
-    config: { tension: 120, friction: 30 },
-  });
-
+  
   // Home style blob shapes - same size, colors and behavior
   const backgroundShapes = [
     { color: '#667eea', size: 120, x: 20, y: 15 },
@@ -205,19 +199,7 @@ export default function TechArsenal() {
   const [isChecking, setIsChecking] = useState(false);
   const [introPositions, setIntroPositions] = useState([]);
   const [showCelebration, setShowCelebration] = useState(false);
-  const [lastMatchedPair, setLastMatchedPair] = useState(null);
-
   
-  // Color palette for card backs
-  const cardColors = [
-    "#FFE5E5", // Soft pink
-    "#E5F5FF", // Soft blue  
-    "#F0FFE5", // Soft green
-    "#FFF5E5", // Soft peach
-    "#F5E5FF", // Soft lavender
-    "#E5FFF5", // Soft mint
-  ];
-
   // Generate random offsets for each card
   const generateRandomOffset = () => ({
     x: Math.random() * 400 - 200, // -200 to 200
@@ -344,7 +326,7 @@ export default function TechArsenal() {
       zIndex: Math.floor(Math.random() * 10) + 1
     }));
     setIntroPositions(positions);
-  }, []);
+  }, [techCards]);
 
   // Add Enter key listener
   useEffect(() => {
@@ -734,18 +716,6 @@ const Container = styled.div`
   perspective: 1000px;
 `;
 
-// How I Think style blob shapes with SVG paths
-const OrganicShape = styled(motion.div)`
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-`;
-
-const BlobSVG = styled.svg`
-  display: block;
-  width: 100%;
-  height: 100%;
-`;
 
 // Floating element background
 const FloatingElement = styled(motion.div)`
@@ -789,60 +759,6 @@ const FloatingElement3 = styled(motion.div)`
   z-index: 0;
   opacity: 0.4;
   filter: saturate(1.5) contrast(1.1);
-`;
-
-// How I Think style shapes data
-const shapes = [
-  {
-    path: "M30,20 Q50,10 70,20 T90,40 Q80,60 60,70 T30,60 Q10,40 30,20",
-    color: "#667eea",
-    size: 200
-  },
-  {
-    path: "M20,30 Q40,15 60,25 T80,45 Q70,65 50,75 T20,65 Q5,45 20,30",
-    color: "#f093fb", 
-    size: 180
-  },
-  {
-    path: "M25,25 Q45,10 65,25 T85,50 Q70,70 45,75 T25,70 Q10,50 25,25",
-    color: "#4facfe",
-    size: 220
-  },
-  {
-    path: "M35,20 Q55,5 75,20 T95,45 Q80,65 60,70 T35,65 Q15,45 35,20",
-    color: "#43e97b",
-    size: 190
-  },
-  {
-    path: "M30,15 Q50,5 70,15 T90,35 Q75,55 55,65 T30,60 Q10,40 30,15",
-    color: "#fa709a",
-    size: 210
-  },
-  {
-    path: "M25,30 Q45,15 65,30 T85,55 Q70,75 45,80 T25,75 Q5,55 25,30",
-    color: "#30cfd0",
-    size: 170
-  }
-];
-
-const PlayButton = styled.button`
-  font-family: "Canela", serif;
-  font-size: 24px;
-  font-weight: 300;
-  color: #1d1d1d;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 16px 48px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: -0.01em;
-  border-radius: 4px;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 const GameStats = styled.div`

@@ -159,12 +159,6 @@ a multidisciplinary approach to building interfaces.`,
   ]
 },
 
-    tech: {
-      title: "Technology Ecosystem",
-      subtitle:
-        "Systems built through modular architecture and structured integration."
-    },
-
     interest: {
       sideTextLine1: "LET'S",
       sideTextLine2: "CONNECT",
