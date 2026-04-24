@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScroll, useSpring, animated } from '@react-spring/web';
@@ -36,7 +37,9 @@ export default function TechArsenal() {
     { color: '#43e97b', size: 90, x: 85, y: 25 },
   ];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // Scroll-reactive animations like in Home
+  /* eslint-disable react-hooks/exhaustive-deps */
   const shape1X = useSpring({
     x: scrollYProgress.to((p) => {
       const baseX = backgroundShapes[0].x;
@@ -59,8 +62,8 @@ export default function TechArsenal() {
 
   const shape1Scale = useSpring({
     scale: scrollYProgress.to((p) => {
-      const baseScale = 1 + Math.sin(Date.now() * 0.0012) * 0.05;
-      const scrollScale = Math.sin(p * Math.PI * 4) * 0.2;
+      const baseScale = 1;
+      const scrollScale = 1 + (p * 0.2);
       return baseScale + scrollScale;
     }),
     config: { tension: 120, friction: 30 }
@@ -98,8 +101,8 @@ export default function TechArsenal() {
 
   const shape2Scale = useSpring({
     scale: scrollYProgress.to((p) => {
-      const baseScale = 1 + Math.sin(Date.now() * 0.0011 + 1) * 0.06;
-      const scrollScale = Math.sin(p * Math.PI * 4 + 1) * 0.2;
+      const baseScale = 1;
+      const scrollScale = 1 + (p * 0.15);
       return baseScale + scrollScale;
     }),
     config: { tension: 120, friction: 30 }
@@ -137,8 +140,8 @@ export default function TechArsenal() {
 
   const shape3Scale = useSpring({
     scale: scrollYProgress.to((p) => {
-      const baseScale = 1 + Math.sin(Date.now() * 0.0011 + 2) * 0.06;
-      const scrollScale = Math.sin(p * Math.PI * 4 + 2) * 0.2;
+      const baseScale = 1;
+      const scrollScale = 1 + (p * 0.18);
       return baseScale + scrollScale;
     }),
     config: { tension: 120, friction: 30 }
@@ -176,8 +179,8 @@ export default function TechArsenal() {
 
   const shape4Scale = useSpring({
     scale: scrollYProgress.to((p) => {
-      const baseScale = 1 + Math.sin(Date.now() * 0.0011 + 3) * 0.06;
-      const scrollScale = Math.sin(p * Math.PI * 4 + 3) * 0.2;
+      const baseScale = 1;
+      const scrollScale = 1 + (p * 0.16);
       return baseScale + scrollScale;
     }),
     config: { tension: 120, friction: 30 }
@@ -210,6 +213,40 @@ export default function TechArsenal() {
   });
 
   const [randomOffsets, setRandomOffsets] = useState([]);
+
+  // Define techCards early to avoid dependency issues
+  const techCards = useMemo(() => [
+    { id: 1, name: "React", techIcon: "https://img.icons8.com/color/96/react-native.png", image: bird, category: "frontend" },
+    { id: 2, name: "TypeScript", techIcon: "https://img.icons8.com/color/96/typescript.png", image: bird, category: "frontend" },
+    { id: 3, name: "Node.js", techIcon: "https://img.icons8.com/color/96/nodejs.png", image: elefante, category: "backend" },
+    { id: 4, name: "JavaScript", techIcon: "https://img.icons8.com/color/96/javascript--v1.png", image: elefante, category: "backend" },
+    { id: 5, name: "Python", techIcon: "https://img.icons8.com/color/96/python--v1.png", image: gato, category: "design" },
+    { id: 6, name: "Django", techIcon: "https://img.icons8.com/color/96/django.png", image: gato, category: "design" },
+    { id: 7, name: "HTML5", techIcon: "https://img.icons8.com/color/96/html-5--v1.png", image: jirafa, category: "frontend" },
+    { id: 8, name: "CSS3", techIcon: "https://img.icons8.com/color/96/css3.png", image: jirafa, category: "frontend" },
+    { id: 9, name: "Docker", techIcon: "https://img.icons8.com/color/96/docker.png", image: leon, category: "backend" },
+    { id: 10, name: "Kubernetes", techIcon: "https://img.icons8.com/color/96/kubernetes.png", image: leon, category: "backend" },
+    { id: 11, name: "Git", techIcon: "https://img.icons8.com/color/96/git.png", image: serpiente, category: "ai" },
+    { id: 12, name: "GitHub", techIcon: "https://img.icons8.com/color/96/github--v1.png", image: serpiente, category: "ai" }
+  ], []);
+
+  // Define startGame before useEffect to avoid "used before defined" warning
+  const startGame = useCallback(() => {
+    console.log('Starting grid arrangement animation...');
+    setGameStarted(true);
+    
+    // After cards arrange in grid, start gameplay
+    setTimeout(() => {
+      setGameState("playing");
+      // Flip all cards to show backs briefly
+      setFlippedCards(cards.map(card => card.id));
+      
+      // Then flip back to start gameplay
+      setTimeout(() => {
+        setFlippedCards([]);
+      }, 800);
+    }, 6000); // Wait for 5-second animation to complete
+  }, [cards]);
 
   // Animation variants for cards
   const cardVariants = {
@@ -288,21 +325,6 @@ export default function TechArsenal() {
     }
   };
 
-  const techCards = [
-    { id: 1, name: "React", techIcon: "https://img.icons8.com/color/96/react-native.png", image: bird, category: "frontend" },
-    { id: 2, name: "TypeScript", techIcon: "https://img.icons8.com/color/96/typescript.png", image: bird, category: "frontend" },
-    { id: 3, name: "Node.js", techIcon: "https://img.icons8.com/color/96/nodejs.png", image: elefante, category: "backend" },
-    { id: 4, name: "JavaScript", techIcon: "https://img.icons8.com/color/96/javascript--v1.png", image: elefante, category: "backend" },
-    { id: 5, name: "Python", techIcon: "https://img.icons8.com/color/96/python--v1.png", image: gato, category: "design" },
-    { id: 6, name: "Django", techIcon: "https://img.icons8.com/color/96/django.png", image: gato, category: "design" },
-    { id: 7, name: "HTML5", techIcon: "https://img.icons8.com/color/96/html-5--v1.png", image: jirafa, category: "frontend" },
-    { id: 8, name: "CSS3", techIcon: "https://img.icons8.com/color/96/css3.png", image: jirafa, category: "frontend" },
-    { id: 9, name: "Docker", techIcon: "https://img.icons8.com/color/96/docker.png", image: leon, category: "backend" },
-    { id: 10, name: "Kubernetes", techIcon: "https://img.icons8.com/color/96/kubernetes.png", image: leon, category: "backend" },
-    { id: 11, name: "Git", techIcon: "https://img.icons8.com/color/96/git.png", image: serpiente, category: "ai" },
-    { id: 12, name: "GitHub", techIcon: "https://img.icons8.com/color/96/github--v1.png", image: serpiente, category: "ai" }
-  ];
-
   useEffect(() => {
     const gameCards = techCards.map((tech, index) => ({
       ...tech,
@@ -338,7 +360,7 @@ export default function TechArsenal() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [gameState]);
+  }, [gameState, startGame]);
 
   const handleCardClick = (cardId) => {
     console.log('Card clicked:', cardId, 'gameState:', gameState, 'isChecking:', isChecking);
@@ -373,7 +395,6 @@ export default function TechArsenal() {
 
       if (firstCard.pairId === secondCard.pairId) {
         // Trigger celebration!
-        setLastMatchedPair(firstCard.pairId);
         setShowCelebration(true);
         
         setTimeout(() => {
@@ -413,23 +434,6 @@ export default function TechArsenal() {
         }, 1000);
       }
     }
-  };
-
-  const startGame = () => {
-    console.log('Starting grid arrangement animation...');
-    setGameStarted(true);
-    
-    // After cards arrange in grid, start gameplay
-    setTimeout(() => {
-      setGameState("playing");
-      // Flip all cards to show backs briefly
-      setFlippedCards(cards.map(card => card.id));
-      
-      // Then flip back to start gameplay
-      setTimeout(() => {
-        setFlippedCards([]);
-      }, 800);
-    }, 6000); // Wait for 5-second animation to complete
   };
 
   return (
@@ -840,51 +844,6 @@ const Subtitle = styled.p`
   opacity: 0.7;
 `;
 
-const CinematicCard = styled.div`
-  position: ${props => props.gameState === "intro" ? "absolute" : "relative"};
-  width: ${props => props.gameState === "intro" ? "400px" : "100%"};
-  height: ${props => props.gameState === "intro" ? "400px" : "0"};
-  padding-bottom: ${props => props.gameState === "intro" ? "0" : "100%"};
-  cursor: ${props => (props.gameState === "playing" || props.gameState === "intro") ? "pointer" : "default"};
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: ${props => props.gameState === "intro" ? "floating 6s ease-in-out infinite" : "none"};
-  
-  ${props => props.gameState === "intro" && props.introPos && `
-    top: ${props.introPos.top};
-    left: ${props.introPos.left};
-    transform: rotate(${props.introPos.rotation}deg) scale(${props.introPos.scale});
-    z-index: ${props.introPos.zIndex};
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  `}
-  
-  ${props => (props.gameState === "playing" || props.gameState === "finished") && `
-    transform: rotate(0deg) scale(1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  `}
-  
-  ${props => props.isFlipped && `
-    transform: rotateY(180deg);
-  `}
-  
-  ${props => props.isMatched && `
-    opacity: 0.9;
-    transform: rotateY(180deg) scale(0.98);
-    box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
-  `}
-  
-  @media (max-width: 768px) {
-    ${props => props.gameState === "intro" && `
-      width: 300px;
-      height: 300px;
-    `}
-  }
-  
-  @keyframes floating {
-    0%, 100% { transform: translateY(0px) rotate(${props => props.introPos?.rotation || 0}deg) scale(${props => props.introPos?.scale || 1}); }
-    50% { transform: translateY(-8px) rotate(${props => props.introPos?.rotation || 0}deg) scale(${props => props.introPos?.scale || 1}); }
-  }
-`;
 
 const CardFace = styled.div`
   position: absolute;
