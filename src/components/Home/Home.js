@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useScroll, useSpring, animated } from "@react-spring/web";
 import image from "../proyectos/images/fondo.png";
 import mobileimage from "../proyectos/images/fondomobile.png";
-const nightImage = "/fondonoche.png";
-const nightMobileImage = "/fondonochecolor.png";
-
 import { LanguageContext } from "../LanguageContext";
 import { useTheme } from "styled-components";
+
+const nightImage = "/fondonoche.png";
+const nightMobileImage = "/fondonochecolor.png";
 
 export default function HeroSection() {
   const { t } = useContext(LanguageContext);
