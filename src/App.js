@@ -41,7 +41,7 @@ const darkTheme = {
   accent: "#888888",
   card: "#1a1a1a",
   bubbleColor: "#ffffff",
-  overlayColors: ["#333333", "#555555", "#777777"],
+  overlayColors: ["#333333", "#555555", "#000000"],
   gradientStart: "#333333",
   gradientEnd: "#0b0b0c",
   shapes: ["#ffffff", "#cccccc", "#999999", "#666666", "#333333"],

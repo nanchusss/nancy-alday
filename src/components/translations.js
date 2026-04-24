@@ -104,6 +104,21 @@ a multidisciplinary approach to building interfaces.`,
       title: "Tech Stack",
       subtitle: "Tools I use to build"
     },
+
+    techArsenal: {
+      tapToPlay: "tap to play",
+      time: "Time",
+      scoreText: "Score",
+      victory: "You won and discovered my technologies!",
+      playAgain: "Play Again",
+      instructions: "Find matching pairs of technologies to discover my tech stack. Click cards to flip them and match the pairs!",
+      score: {
+        lightning: "⚡ Lightning Fast!",
+        master: "🚀 Tech Master!",
+        great: "🌟 Great Job!",
+        didIt: "🎯 You Did It!"
+      }
+    },
     projectsData: {
   taller: {
     Id: "taller",
@@ -309,6 +324,21 @@ projects: {
 tech: {
   title: "Stack Tecnológico",
   subtitle: "Herramientas que uso para construir"
+},
+
+techArsenal: {
+  tapToPlay: "tocá para jugar",
+  time: "Tiempo",
+  scoreText: "Puntuación",
+  victory: "¡Ganaste y descubrí mis tecnologías!",
+  playAgain: "Volver a jugar",
+  instructions: "Encontrá pares de tecnologías para descubrir mi stack. Hacé clic en las cartas para darlas vuelta y encontrar los pares!",
+  score: {
+    lightning: "⚡ ¡Velocidad relámpago!",
+    master: "🚀 ¡Maestro tecnológico!",
+    great: "🌟 ¡Excelente trabajo!",
+    didIt: "🎯 ¡Lo lograste!"
+  }
 },
 
     interest: {
