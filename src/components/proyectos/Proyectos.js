@@ -218,31 +218,8 @@ const Wrapper = styled.section`
   height: 100vh;
   overflow: hidden;
 
-  background: linear-gradient(
-    180deg,
-    ${props => props.theme.background} 0%,
-    ${props => props.theme.background === "#0b0b0c" 
-      ? "rgba(107, 70, 193, 0.15)" 
-      : "rgba(139, 92, 246, 0.12)"} 30%,
-    ${props => props.theme.background === "#0b0b0c" 
-      ? "rgba(107, 70, 193, 0.25)" 
-      : "rgba(139, 92, 246, 0.20)"} 70%,
-    ${props => props.theme.background === "#0b0b0c" ? "#6B46C1" : "#8B5CF6"} 100%
-  );
+  background: ${props => props.theme.background};
   transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 70% 70%, rgba(107, 70, 193, 0.06) 0%, transparent 50%);
-    pointer-events: none;
-  }
 `;
 
 const Layout = styled.div`
