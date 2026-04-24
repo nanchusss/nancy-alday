@@ -569,62 +569,6 @@ const GameInstructions = styled.div`
   }
 `;
 
-const VictoryScreen = styled.div`
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 100;
-
-  h1 {
-    font-size: 32px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    animation: victoryPulse 1s ease-in-out infinite;
-  }
-
-  .score-info {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(4px);
-
-    div {
-      margin: 8px 0;
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .time {
-      color: #666;
-    }
-
-    .score {
-      color: #4CAF50;
-      font-size: 18px;
-    }
-
-    .message {
-      color: #FF6B35;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-  }
-
-  @keyframes victoryPulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-  }
-`;
 
 const PlayAgainButton = styled.button`
   margin-top: 25px;
