@@ -213,8 +213,8 @@ const Wrapper = styled.section`
 
   background: linear-gradient(
     to bottom,
-    ${props => props.theme.gradientStart} 20%,
-    ${props => props.theme.gradientEnd} 40%
+    ${props => props.theme.overlayColors[2]} 0%,
+    ${props => props.theme.background} 100%
   );
 `;
 
