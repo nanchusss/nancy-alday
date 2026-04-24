@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useScroll, useSpring, animated } from "@react-spring/web";
 import image from "../proyectos/images/fondo.png";
 import mobileimage from "../proyectos/images/fondomobile.png";
-import nightImage from "./images/fondonoche.png";
-import nightMobileImage from "./images/fondonochecolor.png";
+const nightImage = "/fondonoche.png";
+const nightMobileImage = "/fondonochecolor.png";
 
 import { LanguageContext } from "../LanguageContext";
 import { useTheme } from "styled-components";
@@ -356,8 +356,8 @@ const Wrapper = styled.section`
 const HeroImageWrapper = styled.div`
   position: absolute;
 
-  top: 57%;
-  left: 50%;
+  top: 59%;
+  left: 55%;
   transform: translate(-50%, -50%);
 
   width: 90%;
