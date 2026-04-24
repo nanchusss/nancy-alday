@@ -241,20 +241,7 @@ viewDetails: "Ver más",
       ]
     },
 
-    projects: {
-      projectsPart1: "Pro",
-      projectsPart2: "Yectos",
-      viewProject: "Ver Proyecto →",
-      items: [
-        {
-          title: "Finestracat",
-          description:
-            "Sitio corporativo desarrollado con React...",
-          stack: "React · Styled Components · Node · Express"
-        }
-      ]
-    },
-
+    
     projectsData: {
   taller: {
     title: "El Taller Aguaymanto",
