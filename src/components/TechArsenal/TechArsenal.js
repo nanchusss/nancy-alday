@@ -551,44 +551,44 @@ const Container = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 160px);
-  gap: 20px;
+  grid-template-columns: repeat(4, 220px);
+  gap: 25px;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 120px);
-    gap: 15px;
+    grid-template-columns: repeat(3, 140px);
+    gap: 18px;
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 100px);
-    gap: 10px;
+    grid-template-columns: repeat(3, 110px);
+    gap: 12px;
   }
 
   @media (min-width: 421px) and (max-width: 480px) {
-    grid-template-columns: repeat(3, 110px);
-    gap: 12px;
+    grid-template-columns: repeat(3, 120px);
+    gap: 14px;
   }
 `;
 
 const CardWrapper = styled(motion.div)`
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   perspective: 1000px;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
 
   @media (max-width: 480px) {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
   }
 
   @media (min-width: 421px) and (max-width: 480px) {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
   }
 `;
 
@@ -690,7 +690,7 @@ const GameInstructions = styled.div`
 
   @media (max-width: 768px) {
     font-size: 20px;
-    top: 80px;
+    top: 40px;
     max-width: 500px;
     padding: 10px 15px;
 
@@ -709,7 +709,7 @@ const GameInstructions = styled.div`
 
   @media (max-width: 480px) {
     font-size: 16px;
-    top: 60px;
+    top: 30px;
     max-width: 350px;
     padding: 8px 12px;
 
@@ -804,13 +804,16 @@ const TitleSection = styled.div`
   width: 100%;
   text-align: center;
   gap: 15px;
+  margin-bottom: 60px;
   
   @media (max-width: 768px) {
     gap: 12px;
+    margin-bottom: 15px;
   }
   
   @media (max-width: 480px) {
     gap: 10px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -888,20 +891,23 @@ const TimerTitle = styled(motion.div)`
   align-items: center;
   justify-content: center;
   gap: 12px;
+  padding-bottom: 20px;
   
   @media (max-width: 768px) {
     font-size: clamp(40px, 7vw, 72px);
     gap: 10px;
+    padding-bottom: 15px;
   }
   
   @media (max-width: 480px) {
     font-size: clamp(36px, 8vw, 64px);
     gap: 8px;
+    padding-bottom: 12px;
   }
   
   img {
-    width: clamp(24px, 3vw, 36px);
-    height: clamp(24px, 3vw, 36px);
+    width: clamp(96px, 12vw, 144px);
+    height: clamp(96px, 12vw, 144px);
   }
 `;
 
