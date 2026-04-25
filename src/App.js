@@ -18,6 +18,7 @@ import CursorTrail from "./components/cursor/CursorTrail";
 import ScrollRevealSection from "./components/Home/Home";
 import TechArsenal from "./components/TechArsenal/TechArsenal";
 import ProjectsReveal from "./components/ProjectsReveal/ProjectsReveal";
+import FinalSection from "./components/FinalSection/FinalSection";
 
 
 
@@ -80,6 +81,7 @@ function App() {
                        <HowIThink />
                        <TechArsenal />
                        <ProjectsReveal />
+                       <FinalSection />
                         <Header
             isDark={isDark}
             toggleTheme={toggleTheme}

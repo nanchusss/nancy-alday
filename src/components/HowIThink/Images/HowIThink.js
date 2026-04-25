@@ -140,7 +140,7 @@ const opacity4 = progress.p.to((p) => {
                   d={shape.path} 
                   fill={shape.color}
                   opacity="0.2"
-                  filter="blur(8px)"
+                  filter="blur(6.4px)"
                 />
               </BlobSVG>
             </BackgroundBlob>
@@ -176,7 +176,7 @@ const opacity4 = progress.p.to((p) => {
                   <filter id={`blob-filter-${i}`}>
                     <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="turbulence"/>
                     <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G"/>
-                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feGaussianBlur stdDeviation="0.4"/>
                   </filter>
                 </defs>
                 <path 
