@@ -11,43 +11,7 @@ export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
   const [hoveredListItem, setHoveredListItem] = useState(null);
   const [mode, setMode] = useState("gallery");
-  const [animateBirds, setAnimateBirds] = useState(false);
-  const [showProjects, setShowProjects] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const projectsRef = useRef(null);
-
-  // Detectar cuando Projects está en viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Resetear estados para mostrar pájaros siempre como primera vista
-          setShowProjects(false);
-          setAnimateBirds(false);
-        }
-      },
-      { threshold: 0.6 }
-    );
-
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Datos de pájaros
-  const birds = [pajaro];
-
-  // Trigger para animación al hacer click
-  const handleStart = () => {
-    setAnimateBirds(true);
-    
-    setTimeout(() => {
-      setShowProjects(true);
-    }, 1300);
-  };
+  const [showProjects, setShowProjects] = useState(true); // Siempre visible
 
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
@@ -136,51 +100,9 @@ export default function ProjectsSection() {
 
   const activeProject = hovered || projects[0];
 
-  // Variantes de animación
-  const birdVariants = {
-    initial: (i) => ({
-      x: Math.random() * 40 - 20,
-      y: Math.random() * 40 - 20,
-      scale: 1,
-      rotate: Math.random() * 10 - 5,
-      opacity: 1,
-    }),
-    fly: (i) => {
-      const angle = (i / 6) * Math.PI * 2;
-      const radius = 500 + Math.random() * 300;
-
-      return {
-        x: Math.cos(angle) * radius,
-        y: Math.sin(angle) * radius,
-        rotate: Math.random() * 120 - 60,
-        scale: 0.6,
-        opacity: 0,
-        transition: {
-          duration: 1.2 + Math.random() * 0.4,
-          ease: "easeOut",
-        },
-      };
-    },
-  };
-
   return (
-    <div ref={projectsRef}>
+    <div>
       <ProjectsSectionWrapper>
-        {isInView && !showProjects && (
-          <BirdOverlay onClick={handleStart}>
-            {birds.map((bird, i) => (
-              <Bird
-                key={i}
-                src={bird}
-                custom={i}
-                variants={birdVariants}
-                initial="initial"
-                animate={animateBirds ? "fly" : "initial"}
-              />
-            ))}
-          </BirdOverlay>
-        )}
-
         <Wrapper>
           {showProjects && (
             <Switch>
