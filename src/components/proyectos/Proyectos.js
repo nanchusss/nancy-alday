@@ -9,7 +9,6 @@ import fondoverde from "./images/fondoverde.png";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
-  const [hoveredListItem, setHoveredListItem] = useState(null);
   const [mode, setMode] = useState("gallery");
   const [showProjects, setShowProjects] = useState(true); // Siempre visible
 
@@ -194,17 +193,9 @@ export default function ProjectsSection() {
             <ListRow
               key={i}
               onClick={() => navigate(`/projects/${p.id}`)}
-              onMouseEnter={() => setHoveredListItem(p)}
-              onMouseLeave={() => setHoveredListItem(null)}
-              isHovered={hoveredListItem === p}
             >
               <ProjectTitle>{p.title}</ProjectTitle>
-              {hoveredListItem === p && (
-                <AnimatedImage 
-                  style={{ backgroundImage: `url(${p.image[0]})` }}
-                />
-              )}
-            </ListRow>
+                          </ListRow>
           ))}
         </ListView>
       )}
@@ -495,37 +486,7 @@ const ProjectsSectionWrapper = styled.div`
   overflow: hidden;
 `;
 
-const BirdOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  cursor: pointer;
-  background-image: url(${fondoverde});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding-top: 15vh;
-`;
 
-const Bird = styled(motion.img)`
-  position: absolute;
-  width: 500px;
-  pointer-events: none;
-
-  @media (max-width: 768px) {
-    width: 350px;
-  }
-
-  @media (max-width: 480px) {
-    width: 250px;
-  }
-`;
 
 
 
@@ -536,16 +497,11 @@ justify-content: space-between;
 cursor: pointer;
 padding: 20px 0;
 transition: all 0.3s ease;
-  justify-content: space-between;
-  cursor: pointer;
-  padding: 20px 0;
-  transition: all 0.3s ease;
   
   @media (max-width: 768px) {
     padding: 15px 0;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
     position: relative;
   }
 
@@ -585,42 +541,6 @@ const ProjectTitle = styled.div`
   }
 `;
 
-const AnimatedImage = styled.div`
-  width: 200px;
-  height: 130px;
-  border-radius: 8px;
-  background-size: cover;
-  background-position: center;
-  animation: ${slideInRight} 0.2s ease-out;
-  flex-shrink: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  @media (max-width: 768px) {
-    width: 240px;
-    height: 160px;
-    border-radius: 12px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-10%, -50%);
-    z-index: 5;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  @media (max-width: 480px) {
-    width: 180px;
-    height: 120px;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-10%, -50%);
-    z-index: 5;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-`;
 
 const Cursor = styled.div`
   position: fixed;
