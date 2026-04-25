@@ -6,7 +6,6 @@ import { projects } from "../../data/projects";
 import { LanguageContext } from "../LanguageContext";
 import pajaro from "./images/pajaro.png";
 import fondoverde from "./images/fondoverde.png";
-import fondoblanco from "./images/fondoblanco.png";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
@@ -321,10 +320,7 @@ const Wrapper = styled.section`
   height: 100vh;
   overflow: hidden;
 
-  background-image: url(${fondoblanco});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #FFFFFF;
   transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   
   &::before {
