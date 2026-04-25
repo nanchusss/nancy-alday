@@ -84,11 +84,11 @@ const opacity4 = progress.p.to((p) => {
   /* ================= SHAPES ================= */
 
   const shapes = [
-    { color: theme.shapes[0], size: 150, path: "M60,10 C90,20 110,60 80,90 C50,120 10,100 10,60 C10,30 30,0 60,10 Z" },
-    { color: theme.shapes[1], size: 120, path: "M50,10 C80,20 90,60 60,80 C30,100 0,80 10,50 C20,20 30,0 50,10 Z" },
-    { color: theme.shapes[2], size: 150, path: "M70,10 C110,30 120,80 80,110 C40,140 0,110 10,60 C20,20 40,0 70,10 Z" },
-    { color: theme.shapes[3], size: 120, path: "M40,10 C60,20 80,50 60,70 C40,90 10,80 10,50 C10,20 20,0 40,10 Z" },
-    { color: theme.shapes[4], size: 120, path: "M35,10 C60,20 70,50 50,70 C30,90 0,70 10,40 C20,20 20,0 35,10 Z" },
+    { color: theme.shapes[0], size: 150 },
+    { color: theme.shapes[1], size: 120 },
+    { color: theme.shapes[2], size: 150 },
+    { color: theme.shapes[3], size: 120 },
+    { color: theme.shapes[4], size: 120 },
   ];
 
   return (
@@ -123,8 +123,8 @@ const opacity4 = progress.p.to((p) => {
                 ),
               }}
             >
-            <BlobSVG viewBox="-20 -20 160 160" style={{ width: shape.size, height: shape.size }}>
-                <path d={shape.path} fill={shape.color} />
+            <BlobSVG viewBox="0 0 100 100" style={{ width: shape.size, height: shape.size }}>
+                <circle cx="50" cy="50" r="40" fill={shape.color} />
               </BlobSVG>
             </BlobWrapper>
           ))}

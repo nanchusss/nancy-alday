@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback, useContext } from "re
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../LanguageContext";
+import { useTheme } from "styled-components";
 
 // animales
 import bird from "./images/bird.png";
@@ -36,6 +37,7 @@ import reloj from "./images/reloj.png";
 
 export default function TechArsenal() {
   const { t } = useContext(LanguageContext);
+  const theme = useTheme();
   const [gameState, setGameState] = useState("intro");
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -536,10 +538,32 @@ const Container = styled.div`
   width: 100%;
   overflow: hidden;
 
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    background-image: url(${fondobajo});
+    background-color: #0b0b0c;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 11, 12, 0.85);
+      z-index: 1;
+    }
+  ` : ''}
+
   @media (max-width: 768px) {
     background-image: url(${fondobajomobile});
     background-attachment: scroll;
     min-height: 100vh;
+
+    ${props => props.theme.background === "#0b0b0c" ? `
+      background-image: url(${fondobajomobile});
+      
+      &::before {
+        background: rgba(11, 11, 12, 0.9);
+      }
+    ` : ''}
   }
 
   @media (max-width: 480px) {
@@ -669,6 +693,25 @@ const GameInstructions = styled.div`
   white-space: pre-line;
   z-index: 60;
 
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+
+    .time {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .score {
+      color: #4CAF50;
+    }
+
+    .message {
+      color: #FF6B35;
+    }
+  ` : ''}
+
   .time {
     font-size: 18px;
     color: rgba(8, 8, 8, 0.7);
@@ -780,6 +823,8 @@ const GameContainer = styled.div`
   min-height: 600px;
   gap: 30px;
   padding: 20px 0;
+  position: relative;
+  z-index: 2;
   
   @media (max-width: 768px) {
     max-width: 90%;
@@ -850,6 +895,11 @@ const IntroTitle = styled(motion.h1)`
   letter-spacing: -0.02em;
   color: rgba(34, 34, 34, 0.9);
   margin: 0;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.95);
+  ` : ''}
 `;
 
 const IntroSubtitle = styled(motion.h2)`
@@ -861,6 +911,11 @@ const IntroSubtitle = styled(motion.h2)`
   color: rgba(34, 34, 34, 0.65);
   margin: 0;
   margin-top: 10px;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.7);
+  ` : ''}
 `;
 
 const IntroCTA = styled(motion.a)`
@@ -877,6 +932,15 @@ const IntroCTA = styled(motion.a)`
   &:hover {
     transform: translateX(6px);
   }
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.8);
+    
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+  ` : ''}
 `;
 
 const TimerTitle = styled(motion.div)`
@@ -892,6 +956,11 @@ const TimerTitle = styled(motion.div)`
   justify-content: center;
   gap: 12px;
   padding-bottom: 20px;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.95);
+  ` : ''}
   
   @media (max-width: 768px) {
     font-size: clamp(40px, 7vw, 72px);
