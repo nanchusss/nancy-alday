@@ -210,7 +210,7 @@ export default function TechArsenal() {
           setIsChecking(false);
 
           // win
-          if (matchedPairs.length + 1 === 6) {
+          if (matchedPairs.length + 1 === techCards.length / 2) {
             const scoreData = calculateScore(elapsedTime);
             setFinalScore(scoreData);
             setTimeout(() => setGameState("finished"), 500);

@@ -24,9 +24,12 @@ export default function ProjectsSection() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
+          // Resetear estados para mostrar pájaros siempre como primera vista
+          setShowProjects(false);
+          setAnimateBirds(false);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.6 }
     );
 
     if (projectsRef.current) {
@@ -164,40 +167,45 @@ export default function ProjectsSection() {
 
   return (
     <div ref={projectsRef}>
-      {isInView && !showProjects && (
-        <BirdOverlay onClick={handleStart}>
-          {birds.map((bird, i) => (
-            <Bird
-              key={i}
-              src={bird}
-              custom={i}
-              variants={birdVariants}
-              initial="initial"
-              animate={animateBirds ? "fly" : "initial"}
-            />
-          ))}
-        </BirdOverlay>
-      )}
+      <ProjectsSectionWrapper>
+        {isInView && !showProjects && (
+          <BirdOverlay onClick={handleStart}>
+            {birds.map((bird, i) => (
+              <Bird
+                key={i}
+                src={bird}
+                custom={i}
+                variants={birdVariants}
+                initial="initial"
+                animate={animateBirds ? "fly" : "initial"}
+              />
+            ))}
+          </BirdOverlay>
+        )}
 
-      <Wrapper>
-          <Switch>
-            <Toggle>
-              <button
-                className={mode === "gallery" ? "active" : ""}
-                onClick={() => setMode("gallery")}
-              >
-                {t.projects.gallery}
-              </button>
-              <button
-                className={mode === "list" ? "active" : ""}
-                onClick={() => setMode("list")}
-              >
-                {t.projects.list}
-              </button>
-            </Toggle>
-          </Switch>
+        <Wrapper>
+          {showProjects && (
+            <Switch>
+              <Toggle>
+                <button
+                  className={mode === "gallery" ? "active" : ""}
+                  onClick={() => setMode("gallery")}
+                >
+                  {t.projects.gallery}
+                </button>
+                <button
+                  className={mode === "list" ? "active" : ""}
+                  onClick={() => setMode("list")}
+                >
+                  {t.projects.list}
+                </button>
+              </Toggle>
+            </Switch>
+          )}
 
-      {mode === "gallery" ? (
+          {showProjects && (
+            <>
+              {mode === "gallery" ? (
         <Layout onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
           <Left>
 
@@ -280,6 +288,8 @@ export default function ProjectsSection() {
           ))}
         </ListView>
       )}
+            </>
+          )}
 
       <Cursor
         ref={cursorRef}
@@ -290,6 +300,7 @@ export default function ProjectsSection() {
         </CursorInner>
       </Cursor>
     </Wrapper>
+      </ProjectsSectionWrapper>
     </div>
   );
 }
@@ -341,6 +352,11 @@ const Layout = styled.div`
   grid-template-columns: 55% 45%;
   height: 100%;
 
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    grid-template-columns: 60% 40%;
+  }
+
   @media (max-width: 768px) {
     display: block;      /* 👈 CLAVE */
     width: 100%;
@@ -353,6 +369,11 @@ const Left = styled.div`
   gap: 20px;
   padding: 40px 20px;
   overflow: hidden;
+
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding: 30px 15px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -411,6 +432,11 @@ const ItemTitle = styled.div`
   letter-spacing: -0.03em;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 26px;
+  }
+
   @media (max-width: 768px) {
     font-size: 24px;
   }
@@ -538,20 +564,31 @@ padding-top: 10vh;
 `;
 
 
+const ProjectsSectionWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BirdOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   cursor: pointer;
-  background: transparent;
+  background: #F5F1EA;
+  padding-top: 15vh;
 `;
 
 const Bird = styled(motion.img)`
   position: absolute;
-  width: 80px;
+  width: 800px;
   pointer-events: none;
 `;
 

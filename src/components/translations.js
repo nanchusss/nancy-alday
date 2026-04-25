@@ -381,6 +381,7 @@ techArsenal: {
     lightning: "⚡ ¡Velocidad relámpago!",
     master: "🚀 ¡Maestro tecnológico!",
     great: "🌟 ¡Excelente trabajo!",
+    good: "👍 ¡Buen trabajo!",
     didIt: "🎯 ¡Lo lograste!"
   }
 },

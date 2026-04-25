@@ -5,6 +5,7 @@ import image from "../proyectos/images/fondo.png";
 import mobileimage from "../proyectos/images/fondomobile.png";
 import { LanguageContext } from "../LanguageContext";
 import { useTheme } from "styled-components";
+import { useDeviceDetection } from "../../utils/viewportDebug";
 
 const nightImage = "/fondonoche.png";
 const nightMobileImage = "/fondonochecolor.png";
@@ -13,6 +14,7 @@ export default function HeroSection() {
   const { t } = useContext(LanguageContext);
   const theme = useTheme();
   const ref = useRef();
+  const { isIOSMobile, isAndroidMobile, isSafariMobile, isSmallMobile } = useDeviceDetection();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -240,7 +242,12 @@ export default function HeroSection() {
   return (
     <Wrapper ref={ref}>
 
-      <HeroImageWrapper>
+      <HeroImageWrapper 
+        isIOSMobile={isIOSMobile}
+        isAndroidMobile={isAndroidMobile}
+        isSafariMobile={isSafariMobile}
+        isSmallMobile={isSmallMobile}
+      >
         <picture>
           <source media="(max-width: 768px)" srcSet={theme.background === "#0b0b0c" ? nightMobileImage : mobileimage} />
           <img src={theme.background === "#0b0b0c" ? nightImage : image} alt="" />
@@ -374,7 +381,47 @@ const HeroImageWrapper = styled.div`
     object-fit: contain;
   }
 
-  /* MOBILE */
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 90%;
+    top: 62%;
+    left: 54%;
+    opacity: 0.88;
+  }
+
+  /* MOBILE REAL - iOS Safari */
+  ${props => props.isIOSMobile ? `
+    width: 115%;
+    top: 52%;
+    left: 56%;
+    opacity: 0.82;
+  ` : ''}
+
+  /* MOBILE REAL - Android */
+  ${props => props.isAndroidMobile ? `
+    width: 108%;
+    top: 57%;
+    left: 59%;
+    opacity: 0.87;
+  ` : ''}
+
+  /* MOBILE REAL - Safari Mobile */
+  ${props => props.isSafariMobile ? `
+    width: 112%;
+    top: 53%;
+    left: 57%;
+    opacity: 0.84;
+  ` : ''}
+
+  /* MOBILE PEQUEÑO (iPhone SE, etc) */
+  ${props => props.isSmallMobile ? `
+    width: 120%;
+    top: 50%;
+    left: 55%;
+    opacity: 0.80;
+  ` : ''}
+
+  /* MOBILE GENERAL (fallback) */
   @media (max-width: 768px) {
     width: 110%;
     top: 55%;
@@ -395,6 +442,11 @@ const Content = styled.div`
   min-height: 100svh;
   padding: 6vh 8vw;
 
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding: 5vh 7vw;
+  }
+
   @media (min-width: 768px) {
     height: 100%;
   }
@@ -404,6 +456,12 @@ const Content = styled.div`
 const TextBlock = styled.div`
   max-width: 720px;
   margin-top: 20px;
+
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    max-width: 650px;
+    margin-top: 15px;
+  }
 
   @media (max-width: 768px) {
     margin-top: 10px;
@@ -421,8 +479,14 @@ const Title = styled.h1`
 
   margin: 20px 20px 0px 0;
 
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: clamp(38px, 5.5vw, 76px);
+    margin: 15px 15px 0px 0;
+  }
+
   @media (max-width: 768px) {
-    margin-top: 10px;
+    margin-top: 25px;
   }
 `;
 
@@ -433,6 +497,12 @@ const Subtitle = styled.p`
   color: ${props => props.theme.secondaryText};
 
   max-width: 520px;
+
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 17px;
+    max-width: 480px;
+  }
 
   @media (max-width: 768px) {
     font-size: 16px;
@@ -455,6 +525,12 @@ const Signature = styled.div`
     font-size: 12px;
     color: ${props => props.theme.secondaryText};
     letter-spacing: 0.04em;
+  }
+
+  /* TABLET */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 13px;
+    margin-top: 10px;
   }
 
   @media (max-width: 768px) {
