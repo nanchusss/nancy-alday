@@ -233,30 +233,10 @@ const Wrapper = styled.section`
   height: 100vh;
   overflow: hidden;
 
-  background: #FFFFFF;
+  background: ${props => props.theme.background === "#0b0b0c" ? "#000000" : "#FFFFFF"};
   transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      linear-gradient(180deg, 
-        rgba(245, 241, 234, 0) 0%, 
-        rgba(245, 241, 234, 0.8) 50%, 
-        rgba(245, 241, 234, 0) 100%);
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    pointer-events: none;
-  }
-  
-  &:hover::before {
-    opacity: 1;
-  }
-`;
+  `;
 
 const Layout = styled.div`
   display: grid;
