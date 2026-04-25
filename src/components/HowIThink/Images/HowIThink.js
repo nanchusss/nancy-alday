@@ -183,7 +183,7 @@ const opacity4 = progress.p.to((p) => {
                   d={shape.path} 
                   fill={shape.color}
                   filter={`url(#blob-filter-${i})`}
-                  opacity="0.8"
+                  opacity="0.95"
                 />
               </BlobSVG>
             </BlobWrapper>
