@@ -273,20 +273,59 @@ export default function TechArsenal() {
       <GameContainer>
           {gameState === "intro" && (
             <TitleSection>
-              <CenterText onClick={startGame}>
-                <h1>{t.techArsenal.tapToPlay}</h1>
-              </CenterText>
+              <IntroContainer
+                onClick={startGame}
+                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                transition={{ 
+                  duration: 1.2, 
+                  ease: "easeOut"
+                }}
+              >
+                <IntroTitle
+                  initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: "easeOut",
+                    delay: 0.1
+                  }}
+                >
+                  Match the system.
+                </IntroTitle>
+                <IntroSubtitle
+                  initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: "easeOut",
+                    delay: 0.2
+                  }}
+                >
+                  Find the pairs and reveal my tech stack.
+                </IntroSubtitle>
+                <IntroCTA
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    startGame();
+                  }}
+                  initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: "easeOut",
+                    delay: 0.3
+                  }}
+                >
+                  Start →
+                </IntroCTA>
+              </IntroContainer>
             </TitleSection>
           )}
 
           {gameStarted && (
             <>
-              {/* Display del score durante el juego */}
-              {gameState === "playing" && (
-                <ScoreDisplay>
-                  <div><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
-                </ScoreDisplay>
-              )}
 
               <TitleSection>
                 <GameInstructions>
@@ -339,7 +378,18 @@ export default function TechArsenal() {
                       </WinPlayAgain>
                     </WinContainer>
                   ) : (
-                    t.techArsenal.instructions
+                    <TimerTitle
+                      initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{ 
+                        duration: 0.8, 
+                        ease: "easeOut",
+                        delay: 0.8
+                      }}
+                    >
+                      <img src={reloj} alt="reloj" />
+                      {formatTime(elapsedTime)}
+                    </TimerTitle>
                   )}
                 </GameInstructions>
               </TitleSection>
@@ -764,6 +814,96 @@ const TitleSection = styled.div`
   }
 `;
 
+const TitleBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 70px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 50px;
+  }
+`;
+
+const IntroContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+`;
+
+const IntroTitle = styled(motion.h1)`
+  font-family: "Canela", serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: rgba(34, 34, 34, 0.9);
+  margin: 0;
+`;
+
+const IntroSubtitle = styled(motion.h2)`
+  font-family: "Canela", serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: rgba(34, 34, 34, 0.65);
+  margin: 0;
+  margin-top: 10px;
+`;
+
+const IntroCTA = styled(motion.a)`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(16px, 2.5vw, 18px);
+  font-weight: 400;
+  color: rgba(34, 34, 34, 0.8);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  margin-top: 30px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  
+  &:hover {
+    transform: translateX(6px);
+  }
+`;
+
+const TimerTitle = styled(motion.div)`
+  font-family: "Canela", serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: rgba(34, 34, 34, 0.9);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(40px, 7vw, 72px);
+    gap: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(36px, 8vw, 64px);
+    gap: 8px;
+  }
+  
+  img {
+    width: clamp(24px, 3vw, 36px);
+    height: clamp(24px, 3vw, 36px);
+  }
+`;
 
 const CenterText = styled.div`
   position: absolute;
