@@ -356,14 +356,14 @@ const Wrapper = styled.section`
 const HeroImageWrapper = styled.div`
   position: absolute;
 
-  top: 59%;
-  left: 55%;
+  top: 65%;
+  left: 52%;
   transform: translate(-50%, -50%);
 
-  width: 90%;
-  max-width: 1200px;
+  width: 85%;
+  max-width: 1100px;
 
-  opacity: 0.95;
+  opacity: 0.9;
   pointer-events: none;
 
   picture,
@@ -376,9 +376,10 @@ const HeroImageWrapper = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 120%;
-    top: 48%;
-    opacity: 0.9;
+    width: 110%;
+    top: 55%;
+    left: 58%;
+    opacity: 0.85;
   }
 `;
 
