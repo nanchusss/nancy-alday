@@ -328,9 +328,7 @@ export default function TechArsenal() {
 
           {gameStarted && (
             <>
-
-              <TitleSection>
-                <GameInstructions>
+              <GameInstructions>
                   {gameState === "finished" && finalScore ? (
                     <WinContainer>
                       <WinTitle
@@ -394,7 +392,6 @@ export default function TechArsenal() {
                     </TimerTitle>
                   )}
                 </GameInstructions>
-              </TitleSection>
 
               <Grid>
             {cards.map((card, index) => {
@@ -575,44 +572,46 @@ const Container = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 220px);
-  gap: 25px;
+  grid-template-columns: repeat(4, 200px);
+  gap: 20px;
+  max-width: 100%;
+  justify-content: center;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 140px);
-    gap: 18px;
+    grid-template-columns: repeat(3, 130px);
+    gap: 15px;
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(3, 110px);
-    gap: 12px;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
   }
 
   @media (min-width: 421px) and (max-width: 480px) {
-    grid-template-columns: repeat(3, 120px);
-    gap: 14px;
+    grid-template-columns: repeat(3, 110px);
+    gap: 12px;
   }
 `;
 
 const CardWrapper = styled(motion.div)`
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
   perspective: 1000px;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
 
   @media (max-width: 480px) {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
   }
 
   @media (min-width: 421px) and (max-width: 480px) {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
   }
 `;
 
@@ -673,9 +672,20 @@ const ScoreDisplay = styled.div`
   }
 `;
 
+const GameSection = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+`;
+
 const GameInstructions = styled.div`
   position: absolute;
-  top: 100px;
+  top: -140px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -691,13 +701,22 @@ const GameInstructions = styled.div`
   max-width: 700px;
   line-height: 1.3;
   white-space: pre-line;
-  z-index: 60;
+  z-index: 10;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    top: -100px !important;
+    transform: translateX(calc(-50% - 20px)) !important;
+  }
+
+  @media (max-width: 480px) {
+    top: -120px !important;
+    transform: translateX(calc(-50% - 20px)) !important;
+  }
 
   /* MODO NOCTURNO */
   ${props => props.theme.background === "#0b0b0c" ? `
     color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
 
     .time {
       color: rgba(255, 255, 255, 0.7);
@@ -820,24 +839,24 @@ const GameContainer = styled.div`
   justify-content: flex-start;
   width: 100%;
   max-width: 800px;
-  min-height: 600px;
-  gap: 30px;
-  padding: 20px 0;
+  min-height: 500px;
+  gap: 20px;
+  padding: 20px 20px 20px 20px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   
   @media (max-width: 768px) {
     max-width: 90%;
-    min-height: 500px;
-    gap: 25px;
-    padding: 15px 0;
+    min-height: 450px;
+    gap: 15px;
+    padding: 50px 15px 15px 15px;
   }
   
   @media (max-width: 480px) {
     max-width: 95%;
-    min-height: 400px;
-    gap: 20px;
-    padding: 10px 0;
+    min-height: 350px;
+    gap: 12px;
+    padding: 40px 10px 10px 10px;
   }
 `;
 
@@ -849,16 +868,19 @@ const TitleSection = styled.div`
   width: 100%;
   text-align: center;
   gap: 15px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  margin-top: 20px;
   
   @media (max-width: 768px) {
     gap: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
   }
   
   @media (max-width: 480px) {
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 10px;
   }
 `;
 
