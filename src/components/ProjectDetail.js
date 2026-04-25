@@ -25,6 +25,13 @@ export default function ProjectDetail() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Scroll to top on mobile when component mounts
+  useEffect(() => {
+    if (isMobile) {
+      window.scrollTo(0, 0);
+    }
+  }, [isMobile]);
+
   if (!project) return <div>{t.projects.notFound}</div>;
 
   const images =
@@ -96,13 +103,12 @@ export default function ProjectDetail() {
 
         {/* CONTENT SWITCH */}
         {mode === "video" && (project.videoDesktop || project.videoMobile) ? (
-          <MobileVideo onClick={() => setIsVideoModalOpen(true)}>
+          <MobileVideo onClick={() => !isMobile && setIsVideoModalOpen(true)}>
             <video 
               autoPlay 
               muted 
               loop 
-              playsInline 
-              preload="metadata"
+              playsInline
               onClick={(e) => e.stopPropagation()}
             >
               <source
@@ -111,10 +117,12 @@ export default function ProjectDetail() {
               />
               Tu navegador no soporta el video.
             </video>
-            <VideoOverlay>
-              <PlayIcon>▶</PlayIcon>
-              <ClickText>Click para ver con controles</ClickText>
-            </VideoOverlay>
+            {!isMobile && (
+              <VideoOverlay>
+                <PlayIcon></PlayIcon>
+                <ClickText>Click para ver con controles</ClickText>
+              </VideoOverlay>
+            )}
           </MobileVideo>
         ) : (
           <EditorialGallery>
@@ -241,6 +249,12 @@ const CloseText = styled.span`
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
 `;
 
 const Visit = styled.a`
@@ -250,6 +264,17 @@ const Visit = styled.a`
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: center;
+    border-bottom: none;
+    padding: 8px 16px;
+    background: #000;
+    color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
 `;
 
 /* ================= BODY ================= */
@@ -275,6 +300,14 @@ const PanelBody = styled.div`
   opacity: ${({ isHovered }) => (isHovered ? 1 : 0.85)};
 
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 768px) {
+    padding: clamp(16px, 2vw, 32px);
+    max-width: 420px;
+    transform: scale(1);
+    opacity: 1;
+    transition: none;
+  }
 `;
 
 const TagsRow = styled.div`
@@ -288,6 +321,15 @@ const TagsRow = styled.div`
   min-width: 400px;
   max-width: 100%;
   padding-right: 10px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    min-width: auto;
+    padding-right: 0;
+    justify-content: center;
+    gap: 6px;
+  }
 `;
 
 const Tag = styled.span`
@@ -302,10 +344,17 @@ const Tag = styled.span`
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+
   white-space: nowrap;
   flex-shrink: 0;
 
   transition: all 0.4s ease;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    padding: 6px 10px;
+    transition: none;
+  }
 `;
 
 const BigTitle = styled.h1`
@@ -327,9 +376,16 @@ const BigTitle = styled.h1`
 
   @media (max-width: 768px) {
     text-align: center;
-    font-size: 56px;
+    font-size: clamp(40px, 8vw, 52px);
     max-width: 100%;
     width: 100%;
+    line-height: 1.1;
+    transition: none;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(36px, 9vw, 48px);
+    line-height: 1.0;
   }
 `;
 
@@ -353,9 +409,16 @@ const Paragraph = styled.p`
 
   @media (max-width: 768px) {
     text-align: center;
-    font-size: 16px;
+    font-size: clamp(15px, 3.5vw, 17px);
     max-width: 100%;
     width: 100%;
+    line-height: 1.5;
+    transition: none;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.4;
   }
 `;
 
@@ -372,7 +435,15 @@ const Toggle = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   
   @media (max-width: 768px) {
-    margin-right: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    width: 200px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 25px auto;
+    width: 180px;
   }
 `;
 
@@ -588,19 +659,27 @@ const GalleryHeader = styled.div`
   }
 `;
 
-const GalleryTitle = styled.h2`
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
-  font-size: clamp(36px, 5vw, 52px);
+const GalleryTitle = styled.h1`
+  font-family: "Playfair Display", serif;
+  font-size: clamp(42px, 3.5vw, 56px);
   font-weight: 700;
-  letter-spacing: -2px;
-  line-height: 0.9;
-  color: #000;
-  margin-bottom: 12px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  transition: all 0.5s ease;
+  text-align: center;
   text-transform: uppercase;
-  background: linear-gradient(45deg, #000 25%, #333 50%, #000 75%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000;
+
+  @media (max-width: 768px) {
+    font-size: clamp(36px, 7vw, 48px);
+    line-height: 1.1;
+    transition: none;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(32px, 8vw, 42px);
+    line-height: 1.0;
+  }
 `;
 
 const GallerySubtitle = styled.p`
@@ -608,7 +687,18 @@ const GallerySubtitle = styled.p`
   color: #666;
   font-weight: 500;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: clamp(16px, 3.5vw, 18px);
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(14px, 4vw, 16px);
+    margin-bottom: 25px;
+  }
 `;
 
 const EditorialGrid = styled.div`
