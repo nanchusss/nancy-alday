@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
 import { LanguageContext } from "../LanguageContext";
-import fondoproyectos from "../TechArsenal/images/fondoproyectos.png";
 import bird1 from "../TechArsenal/images/pajaro1.png";
 import bird2 from "../TechArsenal/images/pajaro2.png";
 import bird3 from "../TechArsenal/images/pajaro3.png";
@@ -592,30 +591,7 @@ const Bird = styled(motion.img)`
   pointer-events: none;
 `;
 
-const InitialOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: #F5F1EA;
-`;
 
-const ClickPrompt = styled.div`
-  font-family: "Canela", serif;
-  font-size: 32px;
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(34, 34, 34, 0.9);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateX(10px);
-    color: rgba(34, 34, 34, 1);
-  }
-`;
 
 const ListRow = styled.div`
 display: flex;

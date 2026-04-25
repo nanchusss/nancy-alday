@@ -3,7 +3,6 @@ import React, { useState, useEffect, useMemo, useCallback, useContext } from "re
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../LanguageContext";
-import { useTheme } from "styled-components";
 
 // animales
 import bird from "./images/bird.png";
@@ -37,7 +36,6 @@ import reloj from "./images/reloj.png";
 
 export default function TechArsenal() {
   const { t } = useContext(LanguageContext);
-  const theme = useTheme();
   const [gameState, setGameState] = useState("intro");
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -652,36 +650,7 @@ const Animal = styled.img`
   object-fit: cover;
 `;
 
-const ScoreDisplay = styled.div`
-  position: absolute;
-  top: 60px;
-  right: 60px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  backdrop-filter: blur(4px);
-  
-  @media (max-width: 768px) {
-    top: 30px;    // ↑ 30px más arriba
-    right: 30px;  // ← 30px más a la derecha
-  }
-`;
 
-const GameSection = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-`;
 
 const GameInstructions = styled.div`
   position: absolute;
@@ -809,28 +778,6 @@ const GameInstructions = styled.div`
 `;
 
 
-const PlayAgainButton = styled.button`
-  margin-top: 25px;
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
 
 const GameContainer = styled.div`
   display: flex;
@@ -884,21 +831,6 @@ const TitleSection = styled.div`
   }
 `;
 
-const TitleBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 70px;
-  
-  @media (max-width: 768px) {
-    margin-bottom: 60px;
-  }
-  
-  @media (max-width: 480px) {
-    margin-bottom: 50px;
-  }
-`;
 
 const IntroContainer = styled(motion.div)`
   display: flex;
@@ -1002,31 +934,6 @@ const TimerTitle = styled(motion.div)`
   }
 `;
 
-const CenterText = styled.div`
-  position: absolute;
-  font-size: clamp(42px, 6vw, 88px);
-  font-family: "Canela", serif;
-  font-weight: 400;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  
-  @media (max-width: 768px) {
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  @media (max-width: 480px) {
-    font-size: clamp(52px, 8vw, 104px);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  }
-`;
 
 // Win state ONLY - New components for game finished state
 const WinContainer = styled.div`
