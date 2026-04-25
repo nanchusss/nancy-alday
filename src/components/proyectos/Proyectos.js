@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
 import { LanguageContext } from "../LanguageContext";
@@ -213,6 +213,16 @@ export default function ProjectsSection() {
 
 /* ================= STYLES ================= */
 
+// Keyframes declaration - must be before styled components that use it
+const slideInRight = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Wrapper = styled.section`
   position: relative;
   height: 100vh;
@@ -354,6 +364,14 @@ const Switch = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+
+  @media (max-width: 768px) {
+    top: 80px;
+  }
+
+  @media (max-width: 480px) {
+    top: 60px;
+  }
 `;
 
 const Toggle = styled.div`
@@ -382,6 +400,24 @@ const ListView = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
+  padding: 0 5vw;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    padding: 0 8vw;
+    justify-content: flex-start;
+    padding-top: 16vh;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    gap: 8px;
+    padding: 0 6vw;
+    justify-content: flex-start;
+    padding-top: 14vh;
+    align-items: center;
+  }
 `;
 
 const ListRow = styled.div`
@@ -395,6 +431,30 @@ const ListRow = styled.div`
   ${props => props.isHovered && `
     transform: translateX(10px);
   `}
+
+  @media (max-width: 768px) {
+    padding: 15px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    
+    ${props => props.isHovered && `
+      transform: translateX(5px);
+    `}
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    
+    ${props => props.isHovered && `
+      transform: translateX(3px);
+    `}
+  }
 `;
 
 const ProjectTitle = styled.div`
@@ -403,9 +463,24 @@ const ProjectTitle = styled.div`
   text-transform: uppercase;
   color: ${props => props.theme.text};
   transition: color 0.3s ease;
+  line-height: 1.1;
   
   ${ListRow}:hover & {
     color: ${props => props.theme.accent};
+  }
+
+  @media (max-width: 768px) {
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.0;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(24px, 4.5vw, 36px);
+    line-height: 1.0;
+    text-align: center;
+    width: 100%;
   }
 `;
 
@@ -415,25 +490,33 @@ const AnimatedImage = styled.div`
   border-radius: 8px;
   background-size: cover;
   background-position: center;
-  animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ${slideInRight} 0.2s ease-out;
   flex-shrink: 0;
   border: 4px solid #000;
   box-sizing: border-box;
-  
-  @keyframes slideInRight {
-    0% {
-      opacity: 0;
-      transform: translateX(30px) scale(0.8);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0) scale(1);
-    }
-  }
-  
+
   @media (max-width: 768px) {
-    width: 80px;
-    height: 60px;
+    width: 200px;
+    height: 140px;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -50%);
+    z-index: 5;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -50%);
+    z-index: 5;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 `;
 

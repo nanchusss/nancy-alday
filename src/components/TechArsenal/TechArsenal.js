@@ -479,6 +479,11 @@ const Grid = styled.div`
     grid-template-columns: repeat(2, 100px);
     gap: 10px;
   }
+
+  @media (min-width: 421px) and (max-width: 480px) {
+    grid-template-columns: repeat(3, 110px);
+    gap: 12px;
+  }
 `;
 
 const CardWrapper = styled(motion.div)`
@@ -495,6 +500,11 @@ const CardWrapper = styled(motion.div)`
   @media (max-width: 480px) {
     width: 100px;
     height: 100px;
+  }
+
+  @media (min-width: 421px) and (max-width: 480px) {
+    width: 110px;
+    height: 110px;
   }
 `;
 
@@ -624,6 +634,25 @@ const GameInstructions = styled.div`
 
     .message {
       font-size: 14px;
+    }
+  }
+
+  @media (min-width: 421px) and (max-width: 480px) {
+    font-size: 18px;
+    top: 80px;
+    max-width: 400px;
+    padding: 10px 15px;
+
+    .time {
+      font-size: 16px;
+    }
+
+    .score {
+      font-size: 18px;
+    }
+
+    .message {
+      font-size: 16px;
     }
   }
 `;
