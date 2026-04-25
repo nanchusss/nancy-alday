@@ -654,7 +654,11 @@ const EditorialGallery = styled.div`
   background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
   
   @media (max-width: 768px) {
-    padding: 40px 24px;
+    padding: 24px 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 12px;
   }
 `;
 
@@ -719,9 +723,15 @@ const EditorialGrid = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    gap: 20px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 16px;
+    margin-left: 12px;
+    margin-right: 12px;
   }
 `;
 
@@ -755,11 +765,11 @@ const FeatureBlock = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 40px 20px;
+    padding: 30px 20px;
   }
 
   @media (max-width: 480px) {
-    padding: 30px 16px;
+    padding: 25px 16px;
   }
 `;
 
@@ -773,13 +783,13 @@ const FeatureTitle = styled.h3`
   margin-bottom: 16px;
 
   @media (max-width: 768px) {
-    font-size: clamp(20px, 5vw, 28px);
-    margin-bottom: 12px;
+    font-size: clamp(18px, 4.5vw, 26px);
+    margin-bottom: 10px;
   }
 
   @media (max-width: 480px) {
-    font-size: clamp(18px, 6vw, 24px);
-    margin-bottom: 10px;
+    font-size: clamp(16px, 5vw, 22px);
+    margin-bottom: 8px;
   }
 `;
 
@@ -791,11 +801,11 @@ const FeatureDescription = styled.p`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    font-size: clamp(15px, 3.5vw, 17px);
+    font-size: clamp(14px, 3vw, 16px);
     max-width: 100%;
   }
 
   @media (max-width: 480px) {
-    font-size: clamp(14px, 4vw, 16px);
+    font-size: clamp(13px, 3.5vw, 15px);
   }
 `;

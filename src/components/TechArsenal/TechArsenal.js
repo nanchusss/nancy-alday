@@ -220,7 +220,7 @@ export default function TechArsenal() {
 
   return (
     <Container>
-      {/* Elementos flotantes en los costados - solo en TechArsenal */}
+      {/* Elementos flotantes - solo en desktop */}
       <FloatingElement
         src={element}
         style={{
@@ -263,37 +263,42 @@ export default function TechArsenal() {
         }}
       />
 
-      {gameState === "intro" && (
-        <CenterText onClick={startGame}>
-          <h1>{t.techArsenal.tapToPlay}</h1>
-        </CenterText>
-      )}
+      <GameContainer>
+          {gameState === "intro" && (
+            <TitleSection>
+              <CenterText onClick={startGame}>
+                <h1>{t.techArsenal.tapToPlay}</h1>
+              </CenterText>
+            </TitleSection>
+          )}
 
-      {/* Display del score durante el juego */}
-      {gameState === "playing" && (
-        <ScoreDisplay>
-          <div><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
-        </ScoreDisplay>
-      )}
+          {gameStarted && (
+            <>
+              {/* Display del score durante el juego */}
+              {gameState === "playing" && (
+                <ScoreDisplay>
+                  <div><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
+                </ScoreDisplay>
+              )}
 
-      
-      {gameStarted && (
-        <>
-          <GameInstructions>
-            {gameState === "finished" && finalScore ? (
-              <>
-                <div className="time"><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
-                <div className="score">🏆 {t.techArsenal.scoreText}: {finalScore.points}</div>
-                <div className="message">{finalScore.message}</div>
-                <PlayAgainButton onClick={resetGame}>
-                  🔄 {t.techArsenal.playAgain}
-                </PlayAgainButton>
-              </>
-            ) : (
-              t.techArsenal.instructions
-            )}
-          </GameInstructions>
-          <Grid>
+              <TitleSection>
+                <GameInstructions>
+                  {gameState === "finished" && finalScore ? (
+                    <>
+                      <div className="time"><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
+                      <div className="score">🏆 {t.techArsenal.scoreText}: {finalScore.points}</div>
+                      <div className="message">{finalScore.message}</div>
+                      <PlayAgainButton onClick={resetGame}>
+                        🔄 {t.techArsenal.playAgain}
+                      </PlayAgainButton>
+                    </>
+                  ) : (
+                    t.techArsenal.instructions
+                  )}
+                </GameInstructions>
+              </TitleSection>
+
+              <Grid>
             {cards.map((card, index) => {
               const isMatched = matchedPairs.includes(card.pairId);
               const isFlipped =
@@ -339,8 +344,9 @@ export default function TechArsenal() {
               );
             })}
           </Grid>
-        </>
-      )}
+            </>
+          )}
+      </GameContainer>
     </Container>
   );
 }
@@ -366,13 +372,7 @@ const FloatingElement = styled.img`
   }
 
   @media (max-width: 768px) {
-    width: 80px;
-    height: 80px;
-  }
-
-  @media (max-width: 480px) {
-    width: 60px;
-    height: 60px;
+    display: none;
   }
 `;
 
@@ -396,13 +396,7 @@ const FloatingElement2 = styled.img`
   }
 
   @media (max-width: 768px) {
-    width: 70px;
-    height: 70px;
-  }
-
-  @media (max-width: 480px) {
-    width: 50px;
-    height: 50px;
+    display: none;
   }
 `;
 
@@ -426,13 +420,7 @@ const FloatingElement3 = styled.img`
   }
 
   @media (max-width: 768px) {
-    width: 90px;
-    height: 90px;
-  }
-
-  @media (max-width: 480px) {
-    width: 70px;
-    height: 70px;
+    display: none;
   }
 `;
 
@@ -487,8 +475,8 @@ const Grid = styled.div`
 `;
 
 const CardWrapper = styled(motion.div)`
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   perspective: 1000px;
   cursor: pointer;
 
@@ -547,8 +535,8 @@ const Animal = styled.img`
 
 const ScoreDisplay = styled.div`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 60px;
+  right: 60px;
   background: rgba(255, 255, 255, 0.85);
   padding: 6px 12px;
   border-radius: 15px;
@@ -558,6 +546,11 @@ const ScoreDisplay = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 100;
   backdrop-filter: blur(4px);
+  
+  @media (max-width: 768px) {
+    top: 30px;    // ↑ 30px más arriba
+    right: 30px;  // ← 30px más a la derecha
+  }
 `;
 
 const GameInstructions = styled.div`
@@ -681,6 +674,51 @@ const PlayAgainButton = styled.button`
   }
 `;
 
+const GameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 800px;
+  min-height: 600px;
+  gap: 30px;
+  padding: 20px 0;
+  
+  @media (max-width: 768px) {
+    max-width: 90%;
+    min-height: 500px;
+    gap: 25px;
+    padding: 15px 0;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 95%;
+    min-height: 400px;
+    gap: 20px;
+    padding: 10px 0;
+  }
+`;
+
+const TitleSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  gap: 15px;
+  
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 10px;
+  }
+`;
+
+
 const CenterText = styled.div`
   position: absolute;
   font-size: clamp(42px, 6vw, 88px);
@@ -691,4 +729,18 @@ const CenterText = styled.div`
   text-align: center;
   line-height: 1.05;
   letter-spacing: -0.03em;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(52px, 8vw, 104px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
 `;
