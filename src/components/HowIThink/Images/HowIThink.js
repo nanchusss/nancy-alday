@@ -84,11 +84,30 @@ const opacity4 = progress.p.to((p) => {
   /* ================= SHAPES ================= */
 
   const shapes = [
-    { color: theme.shapes[0], size: 150 },
-    { color: theme.shapes[1], size: 120 },
-    { color: theme.shapes[2], size: 150 },
-    { color: theme.shapes[3], size: 120 },
-    { color: theme.shapes[4], size: 120 },
+    { 
+      color: "#FF6B35", // Naranja
+      size: 150,
+      path: "M45,15 Q75,5 85,25 T90,55 Q85,75 65,85 Q45,90 25,80 Q10,65 15,45 Q20,25 35,15 Q40,10 45,15 Z",
+      gradient: `radial-gradient(circle at 30% 30%, #FF6B35, #FF6B35dd, #FF6B3599)`
+    },
+    { 
+      color: "#9B59B6", // Lila
+      size: 120,
+      path: "M35,20 Q60,10 70,30 T75,55 Q70,70 50,75 Q30,78 15,65 Q5,50 10,35 Q15,20 25,18 Q30,15 35,20 Z",
+      gradient: `radial-gradient(circle at 40% 40%, #9B59B6, #9B59B6dd, #9B59B699)`
+    },
+    { 
+      color: "#F1C40F", // Amarillo
+      size: 150,
+      path: "M50,10 Q80,15 85,35 T80,65 Q75,80 55,85 Q35,88 20,75 Q10,60 15,40 Q20,20 35,12 Q42,8 50,10 Z",
+      gradient: `radial-gradient(circle at 35% 35%, #F1C40F, #F1C40Fdd, #F1C40F99)`
+    },
+    { 
+      color: "#3498DB", // Azul
+      size: 120,
+      path: "M30,25 Q50,15 60,30 T65,50 Q60,65 45,70 Q30,72 20,60 Q15,45 20,30 Q25,20 30,25 Z",
+      gradient: `radial-gradient(circle at 45% 30%, #3498DB, #3498DBdd, #3498DB99)`
+    },
   ];
 
   return (
@@ -100,7 +119,35 @@ const opacity4 = progress.p.to((p) => {
         <OrangeOverlay style={{ clipPath: orangeReveal, background: theme.overlayColors[1] }} />
         <BlueOverlay style={{ clipPath: blueReveal, background: theme.overlayColors[2] }} />
 
-        {/* BLOBS (SIN CAMBIOS) */}
+        {/* BACKGROUND LAYER - Muy suave */}
+        <BackgroundLayer>
+          {shapes.slice(0, 2).map((shape, i) => (
+            <BackgroundBlob
+              key={`bg-${i}`}
+              style={{
+                transform: progress.p.to((p) => {
+                  const reveal = Math.max(0, Math.min(1, (p - i * 0.1) * 2));
+                  const x = -100 + i * 80 + reveal * 150;
+                  const y = -80 + i * 30 + reveal * 180;
+                  const scale = 0.6 + reveal * 1.5;
+                  return `translate(${x}px, ${y}px) scale(${scale})`;
+                }),
+                opacity: progress.p.to((p) => Math.max(0, Math.min(0.3, (p - i * 0.08) * 2))),
+              }}
+            >
+              <BlobSVG viewBox="0 0 100 100" style={{ width: shape.size * 1.2, height: shape.size * 1.2 }}>
+                <path 
+                  d={shape.path} 
+                  fill={shape.color}
+                  opacity="0.2"
+                  filter="blur(8px)"
+                />
+              </BlobSVG>
+            </BackgroundBlob>
+          ))}
+        </BackgroundLayer>
+
+        {/* MAIN BLOBS */}
         <SemiCircle>
           {shapes.map((shape, i) => (
             <BlobWrapper
@@ -115,8 +162,9 @@ const opacity4 = progress.p.to((p) => {
                   const x = -120 + i * 60 + reveal * 180;
                   const y = -120 + i * 40 + reveal * 220;
                   const scale = 0.4 + reveal * 2.2;
+                  const float = Math.sin(p * 2 + i) * 3;
 
-                  return `translate(${x}px, ${y}px) scale(${scale})`;
+                  return `translate(${x}px, ${y + float}px) scale(${scale})`;
                 }),
                 opacity: progress.p.to((p) =>
                   Math.max(0, Math.min(1, (p - i * 0.06) * 3))
@@ -124,7 +172,19 @@ const opacity4 = progress.p.to((p) => {
               }}
             >
             <BlobSVG viewBox="0 0 100 100" style={{ width: shape.size, height: shape.size }}>
-                <circle cx="50" cy="50" r="40" fill={shape.color} />
+                <defs>
+                  <filter id={`blob-filter-${i}`}>
+                    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="turbulence"/>
+                    <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                  </filter>
+                </defs>
+                <path 
+                  d={shape.path} 
+                  fill={shape.color}
+                  filter={`url(#blob-filter-${i})`}
+                  opacity="0.8"
+                />
               </BlobSVG>
             </BlobWrapper>
           ))}
@@ -239,4 +299,18 @@ const BlobWrapper = styled(animated.div)`
 
 const BlobSVG = styled(animated.svg)`
   display: block;
+`;
+
+const BackgroundLayer = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 60vw;
+  height: 40vw;
+  pointer-events: none;
+`;
+
+const BackgroundBlob = styled(animated.div)`
+  position: absolute;
+  left: 50%;
+  top: 20%;
 `;
