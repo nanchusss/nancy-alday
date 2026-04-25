@@ -138,6 +138,13 @@ export default function TechArsenal() {
     return { points: 100, message: t.techArsenal.score.didIt };
   };
 
+  // 👇 formatear tiempo para win state
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
   // 👇 reiniciar el juego
   const resetGame = () => {
     setGameState("intro");
@@ -284,14 +291,53 @@ export default function TechArsenal() {
               <TitleSection>
                 <GameInstructions>
                   {gameState === "finished" && finalScore ? (
-                    <>
-                      <div className="time"><img src={reloj} alt="reloj" style={{width: "18px", height: "18px", marginRight: "5px", verticalAlign: "middle"}} /> {t.techArsenal.time}: {elapsedTime}s</div>
-                      <div className="score">🏆 {t.techArsenal.scoreText}: {finalScore.points}</div>
-                      <div className="message">{finalScore.message}</div>
-                      <PlayAgainButton onClick={resetGame}>
-                        🔄 {t.techArsenal.playAgain}
-                      </PlayAgainButton>
-                    </>
+                    <WinContainer>
+                      <WinTitle
+                        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ 
+                          duration: 0.8, 
+                          ease: "easeOut",
+                          delay: 0.1
+                        }}
+                      >
+                        That was fast.
+                      </WinTitle>
+                      <WinSubtitle
+                        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ 
+                          duration: 0.8, 
+                          ease: "easeOut",
+                          delay: 0.3
+                        }}
+                      >
+                        You matched them all.
+                      </WinSubtitle>
+                      <WinTime
+                        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ 
+                          duration: 0.8, 
+                          ease: "easeOut",
+                          delay: 0.5
+                        }}
+                      >
+                        {formatTime(elapsedTime)}
+                      </WinTime>
+                      <WinPlayAgain
+                        onClick={resetGame}
+                        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ 
+                          duration: 0.8, 
+                          ease: "easeOut",
+                          delay: 0.7
+                        }}
+                      >
+                        Play again →
+                      </WinPlayAgain>
+                    </WinContainer>
                   ) : (
                     t.techArsenal.instructions
                   )}
@@ -742,5 +788,67 @@ const CenterText = styled.div`
     font-weight: 700;
     letter-spacing: -0.01em;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+`;
+
+// Win state ONLY - New components for game finished state
+const WinContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px 20px;
+`;
+
+const WinTitle = styled(motion.h1)`
+  font-family: "Canela", serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: rgba(34, 34, 34, 0.9);
+  margin: 0;
+  margin-bottom: 12px;
+`;
+
+const WinSubtitle = styled(motion.h2)`
+  font-family: "Canela", serif;
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: rgba(34, 34, 34, 0.65);
+  margin: 0;
+  margin-bottom: 24px;
+`;
+
+const WinTime = styled(motion.div)`
+  font-family: "Canela", serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: rgba(34, 34, 34, 0.8);
+  margin: 0;
+  margin-bottom: 32px;
+`;
+
+const WinPlayAgain = styled(motion.a)`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(16px, 2.5vw, 18px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(34, 34, 34, 0.8);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateX(6px);
   }
 `;
