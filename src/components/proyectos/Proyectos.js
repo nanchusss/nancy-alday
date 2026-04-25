@@ -528,12 +528,16 @@ const Toggle = styled.div`
     background: transparent;
     padding: 8px 18px;
     border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.3s ease;
     color: ${props => props.theme.text};
   }
 
   .active {
-    background: ${props => props.theme.accent};
+    background: #FF006E;
+    color: white;
   }
 `;
 
@@ -615,20 +619,12 @@ transition: all 0.3s ease;
   padding: 20px 0;
   transition: all 0.3s ease;
   
-  ${props => props.isHovered && `
-    transform: translateX(10px);
-  `}
-
   @media (max-width: 768px) {
     padding: 15px 0;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     position: relative;
-    
-    ${props => props.isHovered && `
-      transform: translateX(5px);
-    `}
   }
 
   @media (max-width: 480px) {
@@ -637,10 +633,6 @@ transition: all 0.3s ease;
     align-items: center;
     gap: 8px;
     position: relative;
-    
-    ${props => props.isHovered && `
-      transform: translateX(3px);
-    `}
   }
 `;
 
@@ -653,7 +645,7 @@ const ProjectTitle = styled.div`
   line-height: 1.1;
   
   ${ListRow}:hover & {
-    color: ${props => props.theme.accent};
+    color: #000000;
   }
 
   @media (max-width: 768px) {
@@ -672,8 +664,8 @@ const ProjectTitle = styled.div`
 `;
 
 const AnimatedImage = styled.div`
-  width: 150px;
-  height: 100px;
+  width: 200px;
+  height: 130px;
   border-radius: 8px;
   background-size: cover;
   background-position: center;
@@ -684,8 +676,8 @@ const AnimatedImage = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   @media (max-width: 768px) {
-    width: 200px;
-    height: 140px;
+    width: 240px;
+    height: 160px;
     border-radius: 12px;
     position: absolute;
     top: 50%;
@@ -726,13 +718,15 @@ const Cursor = styled.div`
 const CursorInner = styled.div`
   background: ${props => props.theme.text};
   color: ${props => props.theme.background};
-  padding: 8px 14px;
+  padding: 6px 10px;
   border-radius: 999px;
-
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
   transform: translate(-50%, -50%) scale(0.8);
   transition: transform 0.2s ease;
 
   ${Cursor}.active & {
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.1);
   }
 `;
