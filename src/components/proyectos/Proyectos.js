@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
 import { LanguageContext } from "../LanguageContext";
-import bird1 from "../TechArsenal/images/pajaro1.png";
-import bird2 from "../TechArsenal/images/pajaro2.png";
-import bird3 from "../TechArsenal/images/pajaro3.png";
+import pajaro from "./images/pajaro.png";
+import fondoverde from "./images/fondoverde.png";
+import fondoblanco from "./images/fondoblanco.png";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
@@ -39,7 +39,7 @@ export default function ProjectsSection() {
   }, []);
 
   // Datos de pájaros
-  const birds = [bird1, bird2, bird3];
+  const birds = [pajaro];
 
   // Trigger para animación al hacer click
   const handleStart = () => {
@@ -321,7 +321,10 @@ const Wrapper = styled.section`
   height: 100vh;
   overflow: hidden;
 
-  background: #F5F1EA;
+  background-image: url(${fondoblanco});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   
   &::before {
@@ -581,14 +584,25 @@ const BirdOverlay = styled.div`
   align-items: flex-start;
   justify-content: center;
   cursor: pointer;
-  background: #F5F1EA;
+  background-image: url(${fondoverde});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding-top: 15vh;
 `;
 
 const Bird = styled(motion.img)`
   position: absolute;
-  width: 800px;
+  width: 500px;
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    width: 350px;
+  }
+
+  @media (max-width: 480px) {
+    width: 250px;
+  }
 `;
 
 
