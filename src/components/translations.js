@@ -128,7 +128,29 @@ a multidisciplinary approach to building interfaces.`,
       "I designed a visual experience combining editorial narrative with clear navigation.",
       "Built in React with a strong focus on performance and visual refinement."
     ],
-    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
+    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"],
+    features: [
+      {
+        title: "Reservation Management",
+        description: "Complete booking system for workshop sessions and ceramic classes."
+      },
+      {
+        title: "Payment Processing",
+        description: "Secure payment gateway integration for seamless transactions."
+      },
+      {
+        title: "Calendar System",
+        description: "Interactive calendar showing available slots and scheduled events."
+      },
+      {
+        title: "Custom Chatbot",
+        description: "AI-powered assistant for customer inquiries and booking guidance."
+      },
+      {
+        title: "React & Styled Components",
+        description: "Modern React architecture with styled-components for design consistency."
+      }
+    ]
   },
 
   finestra: {
@@ -262,9 +284,31 @@ viewDetails: "Ver más",
     description: [
       "Plataforma digital para un estudio artístico centrado en cerámica contemporánea.",
       "Diseñé una experiencia visual que combina narrativa editorial con navegación clara.",
-      "Desarrollado en React con foco en rendimiento y estética."
+      "Desarrollado en React con fuerte enfoque en rendimiento y refinamiento visual."
     ],
-    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"]
+    tags: ["React", "UX/UI", "Design", "Styled Components", "Calendar"],
+    features: [
+      {
+        title: "Gestión de Reservas",
+        description: "Sistema completo de reservas para talleres y clases de cerámica."
+      },
+      {
+        title: "Gestión de Pagos",
+        description: "Integración segura de pasarela de pago para transacciones sin interrupciones."
+      },
+      {
+        title: "Sistema de Calendario",
+        description: "Calendario interactivo mostrando disponibilidad y eventos programados."
+      },
+      {
+        title: "Chatbot Personalizado",
+        description: "Asistente IA para consultas de clientes y guía de reservas."
+      },
+      {
+        title: "React & Styled Components",
+        description: "Arquitectura React moderna con styled-components para consistencia de diseño."
+      }
+    ]
   },
 
   finestra: {

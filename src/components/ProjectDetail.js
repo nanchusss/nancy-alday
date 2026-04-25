@@ -133,9 +133,17 @@ export default function ProjectDetail() {
             
             <EditorialGrid>
               {images.map((img, i) => (
-                <EditorialBlock key={i}>
-                  <EditorialImage src={img} alt={`Gallery image ${i + 1}`} />
-                </EditorialBlock>
+                <React.Fragment key={i}>
+                  <EditorialBlock>
+                    <EditorialImage src={img} alt={`Gallery image ${i + 1}`} />
+                  </EditorialBlock>
+                  {content?.features && content.features[i] && (
+                    <FeatureBlock>
+                      <FeatureTitle>{content.features[i].title}</FeatureTitle>
+                      <FeatureDescription>{content.features[i].description}</FeatureDescription>
+                    </FeatureBlock>
+                  )}
+                </React.Fragment>
               ))}
             </EditorialGrid>
           </EditorialGallery>
@@ -723,18 +731,71 @@ const EditorialBlock = styled.div`
   
   img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
+    height: auto;
+    display: block;
   }
   
   @media (max-width: 768px) {
     img {
-      height: 300px;
+      height: auto;
+      object-fit: cover;
     }
   }
 `;
 
 const EditorialImage = styled.img`
   display: block;
+`;
+
+const FeatureBlock = styled.div`
+  padding: 60px 40px;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 30px 16px;
+  }
+`;
+
+const FeatureTitle = styled.h3`
+  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    font-size: clamp(20px, 5vw, 28px);
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(18px, 6vw, 24px);
+    margin-bottom: 10px;
+  }
+`;
+
+const FeatureDescription = styled.p`
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.6;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    font-size: clamp(15px, 3.5vw, 17px);
+    max-width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(14px, 4vw, 16px);
+  }
 `;
