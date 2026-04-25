@@ -1,15 +1,54 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
 import { LanguageContext } from "../LanguageContext";
+import fondoproyectos from "../TechArsenal/images/fondoproyectos.png";
+import bird1 from "../TechArsenal/images/pajaro1.png";
+import bird2 from "../TechArsenal/images/pajaro2.png";
+import bird3 from "../TechArsenal/images/pajaro3.png";
 
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(null);
   const [hoveredListItem, setHoveredListItem] = useState(null);
   const [mode, setMode] = useState("gallery");
-  const { t } = useContext(LanguageContext);
+  const [animateBirds, setAnimateBirds] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const projectsRef = useRef(null);
 
+  // Detectar cuando Projects está en viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (projectsRef.current) {
+      observer.observe(projectsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Datos de pájaros
+  const birds = [bird1, bird2, bird3];
+
+  // Trigger para animación al hacer click
+  const handleStart = () => {
+    setAnimateBirds(true);
+    
+    setTimeout(() => {
+      setShowProjects(true);
+    }, 1300);
+  };
+
+  const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   /* ================= CURSOR ================= */
@@ -96,24 +135,67 @@ export default function ProjectsSection() {
 
   const activeProject = hovered || projects[0];
 
+  // Variantes de animación
+  const birdVariants = {
+    initial: (i) => ({
+      x: Math.random() * 40 - 20,
+      y: Math.random() * 40 - 20,
+      scale: 1,
+      rotate: Math.random() * 10 - 5,
+      opacity: 1,
+    }),
+    fly: (i) => {
+      const angle = (i / 6) * Math.PI * 2;
+      const radius = 500 + Math.random() * 300;
+
+      return {
+        x: Math.cos(angle) * radius,
+        y: Math.sin(angle) * radius,
+        rotate: Math.random() * 120 - 60,
+        scale: 0.6,
+        opacity: 0,
+        transition: {
+          duration: 1.2 + Math.random() * 0.4,
+          ease: "easeOut",
+        },
+      };
+    },
+  };
+
   return (
-    <Wrapper>
-      <Switch>
-        <Toggle>
-          <button
-            className={mode === "gallery" ? "active" : ""}
-            onClick={() => setMode("gallery")}
-          >
-            {t.projects.gallery}
-          </button>
-          <button
-            className={mode === "list" ? "active" : ""}
-            onClick={() => setMode("list")}
-          >
-            {t.projects.list}
-          </button>
-        </Toggle>
-      </Switch>
+    <div ref={projectsRef}>
+      {isInView && !showProjects && (
+        <BirdOverlay onClick={handleStart}>
+          {birds.map((bird, i) => (
+            <Bird
+              key={i}
+              src={bird}
+              custom={i}
+              variants={birdVariants}
+              initial="initial"
+              animate={animateBirds ? "fly" : "initial"}
+            />
+          ))}
+        </BirdOverlay>
+      )}
+
+      <Wrapper>
+          <Switch>
+            <Toggle>
+              <button
+                className={mode === "gallery" ? "active" : ""}
+                onClick={() => setMode("gallery")}
+              >
+                {t.projects.gallery}
+              </button>
+              <button
+                className={mode === "list" ? "active" : ""}
+                onClick={() => setMode("list")}
+              >
+                {t.projects.list}
+              </button>
+            </Toggle>
+          </Switch>
 
       {mode === "gallery" ? (
         <Layout onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
@@ -208,6 +290,7 @@ export default function ProjectsSection() {
         </CursorInner>
       </Cursor>
     </Wrapper>
+    </div>
   );
 }
 
@@ -228,8 +311,29 @@ const Wrapper = styled.section`
   height: 100vh;
   overflow: hidden;
 
-  background: ${props => props.theme.background};
-  transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #F5F1EA;
+  transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(180deg, 
+        rgba(245, 241, 234, 0) 0%, 
+        rgba(245, 241, 234, 0.8) 50%, 
+        rgba(245, 241, 234, 0) 100%);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
 `;
 
 const Layout = styled.div`
@@ -282,12 +386,13 @@ const ItemWrapper = styled.div`
 
 const Item = styled.div`
   height: 400px;
-  width: 100%;            
+  width: 120%;            
   background-size: cover;
   background-position: center;
-  border: 6px solid #000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 `;
 
 const ItemMeta = styled.div`
@@ -298,8 +403,22 @@ const ItemMeta = styled.div`
 const ItemTitle = styled.div`
   font-size: 28px;
   margin-top: 12px;
-  text-transform: uppercase;
+  font-family: "Canela", serif;
+  font-weight: 300;
+  font-style: italic;
   color: ${props => props.theme.text};
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 20px;
+    text-align: center;
+  }
 `;
 
 const Right = styled.div`
@@ -403,26 +522,71 @@ const ListView = styled.div`
   padding: 0 5vw;
   align-items: center;
 
-  @media (max-width: 768px) {
-    gap: 10px;
-    padding: 0 8vw;
-    justify-content: flex-start;
-    padding-top: 16vh;
-    align-items: center;
-  }
+@media (max-width: 768px) {
+gap: 10px;
+padding: 0 8vw;
+justify-content: flex-start;
+padding-top: 15vh;
+}
 
-  @media (max-width: 480px) {
-    gap: 8px;
-    padding: 0 6vw;
-    justify-content: flex-start;
-    padding-top: 14vh;
-    align-items: center;
+@media (max-width: 480px) {
+gap: 8px;
+padding: 0 6vw;
+justify-content: flex-start;
+padding-top: 10vh;
+}
+`;
+
+
+const BirdOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+`;
+
+const Bird = styled(motion.img)`
+  position: absolute;
+  width: 80px;
+  pointer-events: none;
+`;
+
+const InitialOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #F5F1EA;
+`;
+
+const ClickPrompt = styled.div`
+  font-family: "Canela", serif;
+  font-size: 32px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(34, 34, 34, 0.9);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateX(10px);
+    color: rgba(34, 34, 34, 1);
   }
 `;
 
 const ListRow = styled.div`
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
+justify-content: space-between;
+cursor: pointer;
+padding: 20px 0;
+transition: all 0.3s ease;
   justify-content: space-between;
   cursor: pointer;
   padding: 20px 0;
@@ -485,15 +649,16 @@ const ProjectTitle = styled.div`
 `;
 
 const AnimatedImage = styled.div`
-  width: 120px;
-  height: 80px;
+  width: 150px;
+  height: 100px;
   border-radius: 8px;
   background-size: cover;
   background-position: center;
   animation: ${slideInRight} 0.2s ease-out;
   flex-shrink: 0;
-  border: 4px solid #000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   @media (max-width: 768px) {
     width: 200px;

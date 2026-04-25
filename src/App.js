@@ -79,7 +79,7 @@ function App() {
                     <ScrollRevealSection /> {/* 🔥 AQUÍ */}
                        <HowIThink />
                        <TechArsenal />
-<ProjectsSection />
+                       <ProjectsSection />
                         <Header
             isDark={isDark}
             toggleTheme={toggleTheme}
