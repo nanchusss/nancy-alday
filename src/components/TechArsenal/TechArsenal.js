@@ -1039,6 +1039,23 @@ const WinContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
   padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  ` : ''}
+
+  @media (max-width: 768px) {
+    margin-left: 20px;
+  }
 `;
 
 const WinTitle = styled(motion.h1)`
@@ -1050,6 +1067,11 @@ const WinTitle = styled(motion.h1)`
   color: rgba(34, 34, 34, 0.9);
   margin: 0;
   margin-bottom: 12px;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.95);
+  ` : ''}
 `;
 
 const WinSubtitle = styled(motion.h2)`
@@ -1068,10 +1090,15 @@ const WinTime = styled(motion.div)`
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: 0.02em;
-  color: rgba(34, 34, 34, 0.8);
+  letter-spacing: -0.01em;
+  color: rgba(34, 34, 34, 0.65);
   margin: 0;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.7);
+  ` : ''}
 `;
 
 const WinPlayAgain = styled(motion.a)`
@@ -1084,6 +1111,15 @@ const WinPlayAgain = styled(motion.a)`
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s ease;
+
+  /* MODO NOCTURNO */
+  ${props => props.theme.background === "#0b0b0c" ? `
+    color: rgba(255, 255, 255, 0.8);
+    
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+  ` : ''}
   
   &:hover {
     transform: translateX(6px);
