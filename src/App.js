@@ -128,6 +128,35 @@ function App() {
     };
   }, [cursorX, cursorY]);
 
+  useEffect(() => {
+    let frame;
+    const updateProjectDepth = () => {
+      document.querySelectorAll(".editorial-cover").forEach((cover) => {
+        const rect = cover.getBoundingClientRect();
+        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        const depth = Math.max(-1, Math.min(1, progress * 2 - 1));
+        const mobile = window.innerWidth <= 800;
+        cover.style.setProperty("--backdrop-y", `${depth * (mobile ? 18 : 55)}px`);
+        cover.style.setProperty("--frame-y", `${depth * (mobile ? -14 : -42)}px`);
+        cover.style.setProperty("--word-x", `${depth * (mobile ? 2 : 5)}%`);
+        cover.style.setProperty("--word-x-reverse", `${depth * (mobile ? -2 : -5)}%`);
+        cover.style.setProperty("--word-y", `${depth * (mobile ? -8 : -22)}px`);
+      });
+      frame = null;
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(updateProjectDepth);
+    };
+    updateProjectDepth();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
   const hover = (active) => cursorScale.set(active ? 3.4 : 1);
   const scrollTo = (id) => {
     setMenuOpen(false);

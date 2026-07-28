@@ -139,24 +139,12 @@ footer{padding:120px var(--pad) 35px;background:var(--acid);min-height:88vh;disp
 .editorial-cover:hover .browser-frame{transform:translateY(-5px);box-shadow:0 45px 115px rgba(0,0,0,.34)}
 .editorial-cover .cover-index{color:#fff;opacity:.65}
 
-/* Scroll-driven depth for project stories */
-@supports (animation-timeline:view()){
-  .editorial-cover .cover-backdrop{animation:coverBackdropParallax linear both;animation-timeline:view(block);animation-range:entry -10% exit 110%}
-  .editorial-cover .browser-frame{animation:coverFrameParallax linear both;animation-timeline:view(block);animation-range:entry 0% exit 100%}
-  .editorial-cover .cover-word{animation:coverWordParallax linear both;animation-timeline:view(block);animation-range:entry -5% exit 105%}
-  .project:nth-child(even) .editorial-cover .cover-word{animation-name:coverWordParallaxReverse}
-  @keyframes coverBackdropParallax{from{translate:0 -5%}to{translate:0 5%}}
-  @keyframes coverFrameParallax{from{translate:0 34px}to{translate:0 -34px}}
-  @keyframes coverWordParallax{from{translate:-3.5% 18px}to{translate:3.5% -18px}}
-  @keyframes coverWordParallaxReverse{from{translate:3.5% 18px}to{translate:-3.5% -18px}}
-}
-@media(max-width:800px){
-  @supports (animation-timeline:view()){
-    @keyframes coverFrameParallax{from{translate:0 12px}to{translate:0 -12px}}
-    @keyframes coverWordParallax{from{translate:-1.5% 8px}to{translate:1.5% -8px}}
-    @keyframes coverWordParallaxReverse{from{translate:1.5% 8px}to{translate:-1.5% -8px}}
-  }
-}
+/* Cross-browser scroll-driven depth for project stories */
+.editorial-cover{--backdrop-y:0px;--frame-y:0px;--word-x:0%;--word-x-reverse:0%;--word-y:0px}
+.editorial-cover .cover-backdrop{translate:0 var(--backdrop-y);will-change:translate}
+.editorial-cover .browser-frame{translate:0 var(--frame-y);will-change:translate}
+.editorial-cover .cover-word{translate:var(--word-x) var(--word-y);will-change:translate}
+.project:nth-child(even) .editorial-cover .cover-word{translate:var(--word-x-reverse) var(--word-y)}
 
 @media(max-width:800px){
   .editorial-cover .browser-frame,.editorial-cover .project:nth-child(even) .browser-frame{width:90%;height:91%;max-width:none;aspect-ratio:auto;border-radius:16px}
