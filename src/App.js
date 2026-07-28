@@ -296,15 +296,19 @@ function App() {
               </button>
             ))}
           </div>
-          <div className={`kinetic-system kinetic-${activeSystem}`}>
-            <div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orbit orbit-three"/>
-            <div className="system-core">
-              <span>0{activeSystem + 1}</span>
-              <motion.strong key={`${language}-${activeSystem}`} initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{systemItems[activeSystem][0]}</motion.strong>
-              <motion.small key={`stack-${language}-${activeSystem}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{systemItems[activeSystem][1]}</motion.small>
+          <div className={`editorial-system editorial-${activeSystem}`}>
+            <span className="editorial-count">0{activeSystem + 1} / 06</span>
+            <motion.div className="editorial-word" key={`${language}-${activeSystem}`} initial={{ x: "22%", rotate: 3 }} animate={{ x: 0, rotate: 0 }} transition={{ duration: .75, ease }}>
+              {systemItems[activeSystem][0]}
+            </motion.div>
+            <div className="editorial-window">
+              <span>NANCY® / SYSTEM</span>
+              <motion.strong key={`stack-${language}-${activeSystem}`} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>{systemItems[activeSystem][1]}</motion.strong>
+              <div className="signal-bars"><i/><i/><i/><i/><i/></div>
             </div>
-            <motion.p key={`desc-${language}-${activeSystem}`} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{systemItems[activeSystem][2]}</motion.p>
-            <span className="system-satellite sat-a">UI</span><span className="system-satellite sat-b">API</span><span className="system-satellite sat-c">AI</span>
+            <motion.p key={`desc-${language}-${activeSystem}`} initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{systemItems[activeSystem][2]}</motion.p>
+            <div className="editorial-cross">+</div>
+            <div className="editorial-rail"><span>DESIGN</span><span>CODE</span><span>INTELLIGENCE</span></div>
           </div>
         </div>
       </section>
