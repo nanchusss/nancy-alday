@@ -80,6 +80,19 @@ footer{padding:120px var(--pad) 35px;background:var(--acid);min-height:88vh;disp
   .system-stage{grid-template-columns:1fr;min-height:auto;padding-bottom:70px}.system-menu button{grid-template-columns:38px 1fr 20px}.system-menu button>small{display:none}.system-menu button>strong{font-size:34px}.kinetic-system{position:relative;width:min(86vw,540px);margin:70px auto 0}.kinetic-system>p{font-size:12px}
 }
 
+/* Disruptive N/A identity machine */
+.identity-machine{--ix:0px;--iy:0px;position:relative;isolation:isolate;background:#ff7757;overflow:hidden;cursor:crosshair}
+.identity-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(36,28,24,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(36,28,24,.14) 1px,transparent 1px);background-size:12.5% 12.5%;transform:perspective(700px) rotateX(7deg) scale(1.12);transform-origin:center bottom}
+.identity-letter{position:absolute;z-index:2;top:50%;font-family:"Manrope",sans-serif;font-size:clamp(230px,30vw,470px);font-weight:600;line-height:.7;letter-spacing:-.16em;transition:transform .6s cubic-bezier(.2,.8,.2,1);user-select:none}
+.letter-n{left:-5%;color:#241c18;transform:translate(calc(var(--ix) * -.55),calc(-50% + var(--iy) * -.35)) rotate(-8deg)}
+.letter-a{right:-3%;color:#f5efe5;mix-blend-mode:difference;-webkit-text-stroke:2px #f5efe5;background:linear-gradient(150deg,#f5efe5 0 48%,transparent 48%);background-clip:text;-webkit-background-clip:text;transform:translate(calc(var(--ix) * .7),calc(-50% + var(--iy) * .55)) rotate(7deg)}
+.identity-machine:hover .letter-n{transform:translate(calc(var(--ix) * -.55 - 10px),calc(-50% + var(--iy) * -.35)) rotate(-11deg) scale(1.04)}.identity-machine:hover .letter-a{transform:translate(calc(var(--ix) * .7 + 10px),calc(-50% + var(--iy) * .55)) rotate(10deg) scale(1.04)}
+.identity-stamp{position:absolute;z-index:4;left:50%;top:50%;width:150px;aspect-ratio:1;transform:translate(-50%,-50%) rotate(-12deg);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--butter);box-shadow:0 16px 40px rgba(36,28,24,.22)}.identity-stamp:before{content:"";position:absolute;inset:8px;border:1px dashed var(--ink);border-radius:50%}.identity-stamp b{font-size:17px;letter-spacing:-.04em}.identity-stamp span{margin-top:8px;font:7px "DM Mono";text-transform:uppercase}
+.identity-ticker{position:absolute;z-index:5;left:0;bottom:50px;width:max-content;display:flex;background:var(--ink);color:#fff;padding:10px 0;transform:rotate(-4deg) translateX(-3%);font:9px "DM Mono";text-transform:uppercase;letter-spacing:.13em}.identity-ticker span{min-width:max-content;animation:identityTicker 13s linear infinite}
+@keyframes identityTicker{to{transform:translateX(-100%)}}
+.identity-machine>small{position:absolute;z-index:6;right:22px;top:20px;margin:0;writing-mode:vertical-rl}
+@media(max-width:800px){.identity-machine{min-height:560px}.identity-letter{font-size:80vw}.identity-stamp{width:125px}.identity-ticker{bottom:65px}}
+
 /* Art-directed project covers */
 .cover-stage{position:absolute;inset:0;padding:3.5%;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .project.nido .cover-stage{background:#d7d0c2}.project.umbral .cover-stage{background:#231a18}.project.finestra .cover-stage{background:#b7c9b7}.project.base .cover-stage{background:#f0b85b}.project.taller .cover-stage{background:#aab7a2}

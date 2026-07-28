@@ -310,8 +310,24 @@ function App() {
       </section>
 
       <section className="about" id="about">
-        <div className="about-mark" aria-hidden="true">
-          <div className="mark-orbit"><span>N</span><i/><i/><i/></div>
+        <div
+          className="about-mark identity-machine"
+          aria-hidden="true"
+          onPointerMove={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect();
+            event.currentTarget.style.setProperty("--ix", `${((event.clientX - rect.left) / rect.width - 0.5) * 34}px`);
+            event.currentTarget.style.setProperty("--iy", `${((event.clientY - rect.top) / rect.height - 0.5) * 34}px`);
+          }}
+          onPointerLeave={(event) => {
+            event.currentTarget.style.setProperty("--ix", "0px");
+            event.currentTarget.style.setProperty("--iy", "0px");
+          }}
+        >
+          <div className="identity-grid"/>
+          <span className="identity-letter letter-n">N</span>
+          <span className="identity-letter letter-a">A</span>
+          <div className="identity-stamp"><b>Full—stack</b><span>Design / Code / AI</span></div>
+          <div className="identity-ticker"><span>Nancy Alday — digital systems — human ideas — </span><span>Nancy Alday — digital systems — human ideas — </span></div>
           <small>{es ? "Diseño × Código × IA" : "Design × Code × AI"}</small>
         </div>
         <div className="about-copy">
