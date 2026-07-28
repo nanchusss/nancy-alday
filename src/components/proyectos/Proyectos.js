@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
