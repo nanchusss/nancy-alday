@@ -99,6 +99,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("es");
   const [activeSystem, setActiveSystem] = useState(0);
+  const [projectCursor, setProjectCursor] = useState(false);
   const [time, setTime] = useState("");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -118,8 +119,8 @@ function App() {
     update();
     const timer = setInterval(update, 30000);
     const pointer = (event) => {
-      cursorX.set(event.clientX - 7);
-      cursorY.set(event.clientY - 7);
+      cursorX.set(event.clientX);
+      cursorY.set(event.clientY);
     };
     window.addEventListener("pointermove", pointer);
     return () => {
@@ -188,7 +189,9 @@ function App() {
 
   return (
     <main>
-      <motion.div className="cursor" style={{ x: smoothX, y: smoothY, scale: smoothScale }} />
+      <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
+        <span>{es ? "Visitar proyecto" : "Visit project"} ↗</span>
+      </motion.div>
 
       <header className="nav">
         <button className="wordmark" onClick={() => scrollTo("#top")} onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>
@@ -258,7 +261,7 @@ function App() {
         <div className="project-list">
           {projects.map((project, i) => (
             <motion.article className={`project ${project.tone}`} key={project.title} initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.9, ease }}>
-              <a href={project.url} target="_blank" rel="noreferrer" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>
+              <a href={project.url} target="_blank" rel="noreferrer" onMouseEnter={() => { setProjectCursor(true); cursorScale.set(1); }} onMouseLeave={() => { setProjectCursor(false); cursorScale.set(1); }}>
                 <div className="project-meta"><span>{project.index}</span><span>{es ? project.type : project.typeEn}</span><span>{project.year}</span></div>
                 <div className="project-visual">
                   {project.image ? (
@@ -281,7 +284,6 @@ function App() {
                       <b>BASE</b><small>Mendoza · Logística en movimiento</small>
                     </div>
                   )}
-                  <div className="view-pill">{es ? "Visitar proyecto" : "Visit project"} <Arrow diagonal /></div>
                 </div>
                 <div className="project-info">
                   <h3>{project.title}</h3>
