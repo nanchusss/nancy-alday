@@ -25,7 +25,7 @@ const projects = [
     tone: "nido",
     description: "Un portal pensado para convertir procesos dispersos en una experiencia simple, clara y útil.",
     descriptionEn: "A portal designed to turn scattered processes into a simple, clear and useful experience.",
-    tags: ["Product design", "React", "Automation"],
+    tags: ["React", "MongoDB", "Cloudinary", "Product design"],
   },
   {
     index: "02",
@@ -40,7 +40,7 @@ const projects = [
     tone: "umbral",
     description: "Una presencia premium donde la percepción de marca, el ritmo y la conversión trabajan juntos.",
     descriptionEn: "A premium presence where brand perception, rhythm and conversion work as one.",
-    tags: ["Art direction", "Frontend", "UX/UI"],
+    tags: ["React", "Motion", "Art direction", "UX/UI"],
   },
   {
     index: "03",
@@ -55,7 +55,7 @@ const projects = [
     tone: "finestra",
     description: "Una web de servicios directa y cercana, diseñada para hacer fácil lo que suele sentirse complejo.",
     descriptionEn: "A direct and approachable service website, designed to make complex things feel simple.",
-    tags: ["Strategy", "React", "Multilingual"],
+    tags: ["React", "EmailJS", "Strategy", "Multilingual"],
   },
   {
     index: "04",
@@ -257,7 +257,10 @@ function App() {
                 <div className="project-info">
                   <h3>{project.title}</h3>
                   <p>{es ? project.description : project.descriptionEn}</p>
-                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <div className="project-stack">
+                    <small>{es ? "Stack + aportación" : "Stack + contribution"}</small>
+                    <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  </div>
                 </div>
               </a>
             </motion.article>
