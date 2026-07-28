@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import "./App.css";
 
-import taller from "./IMAGES/projectsdesktop/portada el taller.png";
-import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.png";
-import finestra from "./IMAGES/projectsdesktop/finestracat.png";
+import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
+import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
+import finestra from "./IMAGES/projectsdesktop/finestracat.jpg";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
-import nidoCover from "./IMAGES/projectsdesktop/nidoportada.png";
-import nidoMobile from "./IMAGES/projectsmobile/nidomobile.png";
-import umbralCover from "./IMAGES/projectsdesktop/umbralportada.png";
-import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.png";
+import nidoCover from "./IMAGES/projectsdesktop/nidoportada.jpg";
+import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
+import umbralCover from "./IMAGES/projectsdesktop/umbralportada.jpg";
+import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
 
 const projects = [
   {
