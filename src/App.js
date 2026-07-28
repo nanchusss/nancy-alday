@@ -244,7 +244,6 @@ function App() {
                         <div className="editorial-foot"><span>{project.url.replace("https://", "")}</span><span>{es ? "Diseño & desarrollo" : "Design & development"}</span></div>
                       </div>
                       <strong className="cover-word">{project.coverTitle}</strong>
-                      <span className="cover-index">{project.index}</span>
                     </div>
                   ) : (
                     <div className="project-art base-art" aria-hidden="true">
