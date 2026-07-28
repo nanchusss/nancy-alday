@@ -371,7 +371,13 @@ function App() {
         </div>
         <div className="automation">
           <div className="automation-copy"><span>Build smarter</span><h3>{es ? <>Una web bonita.<br />Y mucho más detrás.</> : <>A beautiful website.<br />And much more behind it.</>}</h3><p>{es ? "Puedo conectar cada proyecto con reservas, seguimiento de leads, correos, bases de datos o asistentes inteligentes. La interfaz atrae; el sistema hace avanzar el negocio." : "I can connect every project to bookings, lead tracking, email, databases or intelligent assistants. The interface attracts; the system moves the business forward."}</p><ul>{["MongoDB", "Render", "Cloudinary", "EmailJS", "APIs"].map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div className="automation-screen"><img src={finestra} alt="Flujo automatizado desarrollado para Finestra" loading="lazy" /><div className="flow-chip chip-a">{es ? "Nuevo lead" : "New lead"}</div><div className="flow-chip chip-b">CRM {es ? "actualizado" : "updated"} ✓</div><div className="flow-chip chip-c">{es ? "Email enviado" : "Email sent"}</div></div>
+          <div className="automation-screen">
+            <div className="automation-browser"><i/><i/><i/><span>nidoportal.com / live system</span></div>
+            <img src={nidoCover} alt="Plataforma Nido Portal conectada a automatizaciones" loading="lazy" />
+            <div className="flow-chip chip-a">{es ? "Nuevo lead" : "New lead"}</div>
+            <div className="flow-chip chip-b">CRM {es ? "actualizado" : "updated"} ✓</div>
+            <div className="flow-chip chip-c">{es ? "Email enviado" : "Email sent"}</div>
+          </div>
         </div>
       </section>
 
