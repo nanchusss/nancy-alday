@@ -98,6 +98,7 @@ function Arrow({ diagonal = false }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("es");
+  const [activeSystem, setActiveSystem] = useState(0);
   const [time, setTime] = useState("");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -139,6 +140,21 @@ function App() {
     nav: es ? ["Trabajo", "Sobre mí", "Servicios", "Contacto"] : ["Work", "About", "Services", "Contact"],
     role: es ? "Desarrolladora frontend & diseñadora digital" : "Frontend developer & digital designer",
   };
+  const systemItems = es ? [
+    ["Experiencia", "React · JavaScript · Motion", "Interfaces sensibles, accesibles y rápidas."],
+    ["Lógica", "APIs · Node · Full-stack", "La arquitectura que convierte pantallas en productos."],
+    ["Datos", "MongoDB · Cloudinary", "Información organizada, disponible y segura."],
+    ["Operaciones", "Render · EmailJS", "Infraestructura que trabaja aunque nadie la mire."],
+    ["Automatización", "Workflows · CRM · AI", "Menos tareas repetidas. Más tiempo para decidir."],
+    ["Evolución", "Measure · Learn · Iterate", "Productos vivos que aprenden con el negocio."],
+  ] : [
+    ["Experience", "React · JavaScript · Motion", "Sensitive, accessible and fast interfaces."],
+    ["Logic", "APIs · Node · Full-stack", "The architecture that turns screens into products."],
+    ["Data", "MongoDB · Cloudinary", "Information that stays organised, available and safe."],
+    ["Operations", "Render · EmailJS", "Infrastructure that works when nobody is watching."],
+    ["Automation", "Workflows · CRM · AI", "Fewer repeated tasks. More time to make decisions."],
+    ["Evolution", "Measure · Learn · Iterate", "Living products that learn with the business."],
+  ];
 
   return (
     <main>
@@ -255,20 +271,41 @@ function App() {
           <h2>{es ? <>Una interfaz bonita es solo <em>el principio.</em></> : <>A beautiful interface is only <em>the beginning.</em></>}</h2>
           <p>{es ? "También construyo la lógica, los datos y las conexiones que convierten una web en una herramienta real." : "I also build the logic, data and connections that turn a website into a real tool."}</p>
         </div>
-        <div className="system-map">
-          {[
-            ["01", es ? "Experiencia" : "Experience", "React · JavaScript · Motion"],
-            ["02", es ? "Lógica" : "Logic", "APIs · Node · Full-stack"],
-            ["03", es ? "Datos" : "Data", "MongoDB · Cloudinary"],
-            ["04", es ? "Operaciones" : "Operations", "Render · EmailJS"],
-            ["05", es ? "Automatización" : "Automation", "Workflows · CRM · AI"],
-            ["06", es ? "Producto vivo" : "Living product", es ? "Mide · aprende · evoluciona" : "Measure · learn · evolve"],
-          ].map(([number, title, stack], i) => (
-            <motion.div className={`system-node node-${i + 1}`} key={title} whileHover={{ scale: 1.07, rotate: i % 2 ? 2 : -2 }}>
-              <small>{number}</small><b>{title}</b><span>{stack}</span>
-            </motion.div>
-          ))}
-          <div className="connection c1"/><div className="connection c2"/><div className="connection c3"/><div className="connection c4"/><div className="connection c5"/>
+        <div
+          className="system-stage"
+          onPointerMove={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect();
+            event.currentTarget.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width - 0.5) * 24}px`);
+            event.currentTarget.style.setProperty("--my", `${((event.clientY - rect.top) / rect.height - 0.5) * 24}px`);
+          }}
+          onPointerLeave={(event) => {
+            event.currentTarget.style.setProperty("--mx", "0px");
+            event.currentTarget.style.setProperty("--my", "0px");
+          }}
+        >
+          <div className="system-menu">
+            {systemItems.map(([title, stack], i) => (
+              <button
+                className={activeSystem === i ? "active" : ""}
+                key={title}
+                onMouseEnter={() => setActiveSystem(i)}
+                onFocus={() => setActiveSystem(i)}
+                onClick={() => setActiveSystem(i)}
+              >
+                <span>0{i + 1}</span><strong>{title}</strong><small>{stack}</small><i>↗</i>
+              </button>
+            ))}
+          </div>
+          <div className={`kinetic-system kinetic-${activeSystem}`}>
+            <div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orbit orbit-three"/>
+            <div className="system-core">
+              <span>0{activeSystem + 1}</span>
+              <motion.strong key={`${language}-${activeSystem}`} initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{systemItems[activeSystem][0]}</motion.strong>
+              <motion.small key={`stack-${language}-${activeSystem}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{systemItems[activeSystem][1]}</motion.small>
+            </div>
+            <motion.p key={`desc-${language}-${activeSystem}`} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{systemItems[activeSystem][2]}</motion.p>
+            <span className="system-satellite sat-a">UI</span><span className="system-satellite sat-b">API</span><span className="system-satellite sat-c">AI</span>
+          </div>
         </div>
       </section>
 

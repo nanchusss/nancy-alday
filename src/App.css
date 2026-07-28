@@ -62,6 +62,24 @@ footer{padding:120px var(--pad) 35px;background:var(--acid);min-height:88vh;disp
   .ai-statement{grid-template-columns:1fr;min-height:auto;padding-top:100px}.ai-orbit{width:78vw}.ai-steps{grid-template-columns:1fr}
 }
 
+/* Interactive capability system */
+.system-stage{--mx:0px;--my:0px;position:relative;display:grid;grid-template-columns:1.12fr .88fr;min-height:760px;margin-top:95px;border-top:1px solid rgba(36,28,24,.28);border-bottom:1px solid rgba(36,28,24,.28)}
+.system-menu{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center}
+.system-menu button{display:grid;grid-template-columns:48px minmax(210px,1fr) minmax(150px,.7fr) 24px;gap:16px;align-items:center;width:100%;padding:22px 8px 22px 0;border:0;border-bottom:1px solid rgba(36,28,24,.2);background:transparent;color:rgba(36,28,24,.38);text-align:left;cursor:pointer;transition:color .35s,padding-left .45s var(--ease),background .35s}
+.system-menu button:first-child{border-top:1px solid rgba(36,28,24,.2)}
+.system-menu button.active{padding-left:18px;background:rgba(255,255,255,.24);color:var(--ink)}
+.system-menu button>span,.system-menu button>small{font:8px "DM Mono";text-transform:uppercase;letter-spacing:.1em}.system-menu button>strong{font-size:clamp(29px,3.5vw,52px);font-weight:300;letter-spacing:-.055em}.system-menu button>i{font-style:normal;font-size:18px;transform:rotate(45deg);opacity:0;transition:.35s}.system-menu button.active>i{transform:rotate(0);opacity:1}
+.kinetic-system{position:sticky;top:0;align-self:center;justify-self:center;width:min(38vw,560px);aspect-ratio:1;transform:translate(var(--mx),var(--my));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.kinetic-system:before{content:"";position:absolute;inset:6%;border-radius:44% 56% 62% 38%;background:#ff8065;transition:background .55s,border-radius .7s,transform .7s;box-shadow:0 35px 80px rgba(100,60,20,.16)}.kinetic-1:before{background:#f5f0e7;border-radius:50%}.kinetic-2:before{background:#c4afe9;border-radius:62% 38% 44% 56%}.kinetic-3:before{background:#9eb8a2;border-radius:38% 62% 55% 45%}.kinetic-4:before{background:#ff8065;border-radius:57% 43% 36% 64%;transform:rotate(8deg)}.kinetic-5:before{background:#2a1e1a;border-radius:50% 34% 50% 40%}
+.system-core{position:absolute;z-index:3;inset:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:50%;background:var(--paper);box-shadow:0 20px 65px rgba(36,28,24,.18)}.system-core>span{position:absolute;top:15%;font:8px "DM Mono"}.system-core>strong{max-width:90%;font-size:clamp(25px,3vw,46px);font-weight:400;letter-spacing:-.055em}.system-core>small{max-width:80%;margin-top:12px;font:8px "DM Mono";line-height:1.55;text-transform:uppercase}.kinetic-system>p{position:absolute;z-index:4;left:3%;bottom:5%;width:45%;margin:0;font-size:13px;line-height:1.55}
+.orbit{position:absolute;z-index:2;inset:1%;border:1px solid rgba(36,28,24,.35);border-radius:50%;animation:systemOrbit 13s linear infinite}.orbit:after{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;border-radius:50%;background:var(--ink)}.orbit-two{inset:14%;animation-duration:9s;animation-direction:reverse}.orbit-two:after{background:#fff}.orbit-three{inset:30%;animation-duration:6s;border-style:dashed}.orbit-three:after{background:var(--acid)}
+@keyframes systemOrbit{to{transform:rotate(360deg)}}
+.system-satellite{position:absolute;z-index:5;display:grid;place-items:center;width:48px;aspect-ratio:1;border-radius:50%;background:var(--ink);color:#fff;font:8px "DM Mono";box-shadow:0 10px 30px rgba(0,0,0,.2)}.sat-a{right:3%;top:20%}.sat-b{right:12%;bottom:7%;background:var(--lilac);color:var(--ink)}.sat-c{left:4%;top:14%;background:var(--acid);color:var(--ink)}
+
+@media(max-width:900px){
+  .system-stage{grid-template-columns:1fr;min-height:auto;padding-bottom:70px}.system-menu button{grid-template-columns:38px 1fr 20px}.system-menu button>small{display:none}.system-menu button>strong{font-size:34px}.kinetic-system{position:relative;width:min(86vw,540px);margin:70px auto 0}.kinetic-system>p{font-size:12px}
+}
+
 /* Art-directed project covers */
 .cover-stage{position:absolute;inset:0;padding:3.5%;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .project.nido .cover-stage{background:#d7d0c2}.project.umbral .cover-stage{background:#231a18}.project.finestra .cover-stage{background:#b7c9b7}.project.base .cover-stage{background:#f0b85b}.project.taller .cover-stage{background:#aab7a2}
