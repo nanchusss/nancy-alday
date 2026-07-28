@@ -107,6 +107,7 @@ function App() {
   const smoothY = useSpring(cursorY, { stiffness: 700, damping: 45 });
   const smoothScale = useSpring(cursorScale, { stiffness: 500, damping: 28 });
   const heroRef = useRef(null);
+  const systemTouchX = useRef(0);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "24%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
@@ -298,8 +299,18 @@ function App() {
               </button>
             ))}
           </div>
-          <div className={`editorial-system editorial-${activeSystem}`}>
+          <div
+            className={`editorial-system editorial-${activeSystem}`}
+            onTouchStart={(event) => { systemTouchX.current = event.touches[0].clientX; }}
+            onTouchEnd={(event) => {
+              const distance = event.changedTouches[0].clientX - systemTouchX.current;
+              if (Math.abs(distance) > 45) {
+                setActiveSystem((current) => distance < 0 ? (current + 1) % systemItems.length : (current - 1 + systemItems.length) % systemItems.length);
+              }
+            }}
+          >
             <span className="editorial-count">0{activeSystem + 1} / 06</span>
+            <span className="swipe-hint">{es ? "Deslizá" : "Swipe"} ↔</span>
             <motion.div className="editorial-word" key={`${language}-${activeSystem}`} initial={{ x: "22%", rotate: 3 }} animate={{ x: 0, rotate: 0 }} transition={{ duration: .75, ease }}>
               {systemItems[activeSystem][0]}
             </motion.div>
@@ -370,13 +381,20 @@ function App() {
           ))}
         </div>
         <div className="automation">
-          <div className="automation-copy"><span>Build smarter</span><h3>{es ? <>Una web bonita.<br />Y mucho más detrás.</> : <>A beautiful website.<br />And much more behind it.</>}</h3><p>{es ? "Puedo conectar cada proyecto con reservas, seguimiento de leads, correos, bases de datos o asistentes inteligentes. La interfaz atrae; el sistema hace avanzar el negocio." : "I can connect every project to bookings, lead tracking, email, databases or intelligent assistants. The interface attracts; the system moves the business forward."}</p><ul>{["MongoDB", "Render", "Cloudinary", "EmailJS", "APIs"].map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div className="automation-screen">
-            <div className="automation-browser"><i/><i/><i/><span>nidoportal.com / live system</span></div>
-            <img src={nidoCover} alt="Plataforma Nido Portal conectada a automatizaciones" loading="lazy" />
-            <div className="flow-chip chip-a">{es ? "Nuevo lead" : "New lead"}</div>
-            <div className="flow-chip chip-b">CRM {es ? "actualizado" : "updated"} ✓</div>
-            <div className="flow-chip chip-c">{es ? "Email enviado" : "Email sent"}</div>
+          <div className="automation-copy"><span>Build smarter</span><h3>{es ? <>Lo visible atrae.<br /><em>Lo invisible trabaja.</em></> : <>What’s visible attracts.<br /><em>What’s invisible works.</em></>}</h3><p>{es ? "Conecto formularios, reservas y consultas con APIs, bases de datos, CRM y respuestas automáticas. Menos tareas repetidas; más tiempo para hacer crecer el negocio." : "I connect forms, bookings and enquiries with APIs, databases, CRM and automatic responses. Less repetitive work; more time to grow the business."}</p><ul>{["MongoDB", "Render", "Cloudinary", "EmailJS", "APIs"].map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className="automation-lab">
+            <div className="lab-head"><span>NA / AUTOMATION ENGINE</span><span><i/> LIVE</span></div>
+            <div className="lab-metric"><small>{es ? "TIEMPO RECUPERADO" : "TIME RECOVERED"}</small><strong>+12<em>h</em></strong><span>{es ? "por semana" : "per week"}</span></div>
+            <div className="lab-events">
+              <div><span>19:42:08</span><b>{es ? "Formulario recibido" : "Form received"}</b><i>200</i></div>
+              <div><span>19:42:09</span><b>MongoDB / lead.created</b><i>OK</i></div>
+              <div><span>19:42:10</span><b>{es ? "CRM sincronizado" : "CRM synchronised"}</b><i>OK</i></div>
+              <div><span>19:42:11</span><b>EmailJS / confirmation</b><i>SENT</i></div>
+            </div>
+            <div className="lab-flow">
+              <span>FORM</span><i/><span>API</span><i/><span>DATA</span><i/><span>ACTION</span>
+            </div>
+            <div className="lab-signal" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></div>
           </div>
         </div>
       </section>
