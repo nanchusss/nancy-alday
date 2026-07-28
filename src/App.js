@@ -431,7 +431,28 @@ function App() {
       </section>
 
       <section className="ai-statement">
-        <div className="ai-orbit" aria-hidden="true"><span>AI</span><i/><i/><i/></div>
+        <div
+          className="ai-visual"
+          aria-hidden="true"
+          onPointerMove={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width - .5) * 28;
+            const y = ((event.clientY - rect.top) / rect.height - .5) * 28;
+            event.currentTarget.style.setProperty("--ai-ax", `${x * -.6}px`);
+            event.currentTarget.style.setProperty("--ai-ay", `${y * -.35}px`);
+            event.currentTarget.style.setProperty("--ai-ix", `${x * .7}px`);
+            event.currentTarget.style.setProperty("--ai-iy", `${y * .45}px`);
+          }}
+          onPointerLeave={(event) => {
+            ["--ai-ax", "--ai-ay", "--ai-ix", "--ai-iy"].forEach((property) => event.currentTarget.style.setProperty(property, "0px"));
+          }}
+        >
+          <span className="ai-letter ai-a">A</span>
+          <span className="ai-letter ai-i">I</span>
+          <div className="ai-scan"/>
+          <small>HUMAN × MACHINE<br/>CREATIVE PARTNERSHIP</small>
+          <b>05 / 2026</b>
+        </div>
         <div className="ai-copy">
           <p className="section-no">05 / {es ? "Inteligencia amplificada" : "Augmented intelligence"}</p>
           <h2>{es ? <>Trabajo con IA.<br />El criterio sigue siendo <em>humano.</em></> : <>I work with AI.<br />The judgement stays <em>human.</em></>}</h2>
