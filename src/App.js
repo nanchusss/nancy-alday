@@ -100,6 +100,7 @@ function App() {
   const [language, setLanguage] = useState("es");
   const [activeSystem, setActiveSystem] = useState(0);
   const [projectCursor, setProjectCursor] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
   const [time, setTime] = useState("");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -109,6 +110,7 @@ function App() {
   const smoothScale = useSpring(cursorScale, { stiffness: 500, damping: 28 });
   const heroRef = useRef(null);
   const systemTouchX = useRef(0);
+  const cursorTimer = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "24%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
@@ -121,11 +123,18 @@ function App() {
     const pointer = (event) => {
       cursorX.set(event.clientX);
       cursorY.set(event.clientY);
+      setCursorVisible(true);
+      clearTimeout(cursorTimer.current);
+      cursorTimer.current = setTimeout(() => setCursorVisible(false), 1100);
     };
+    const pointerOut = (event) => { if (!event.relatedTarget) setCursorVisible(false); };
     window.addEventListener("pointermove", pointer);
+    window.addEventListener("mouseout", pointerOut);
     return () => {
       clearInterval(timer);
+      clearTimeout(cursorTimer.current);
       window.removeEventListener("pointermove", pointer);
+      window.removeEventListener("mouseout", pointerOut);
     };
   }, [cursorX, cursorY]);
 
@@ -189,8 +198,8 @@ function App() {
 
   return (
     <main>
-      <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
-        <span>{es ? "Visitar proyecto" : "Visit project"} ↗</span>
+      <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""} ${cursorVisible ? "" : "cursor-hidden"}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
+        <span>{es ? "Visitar proyecto" : "Visit project"}</span>
       </motion.div>
 
       <header className="nav">
@@ -447,11 +456,12 @@ function App() {
             ["--ai-ax", "--ai-ay", "--ai-ix", "--ai-iy"].forEach((property) => event.currentTarget.style.setProperty(property, "0px"));
           }}
         >
-          <span className="ai-letter ai-a">A</span>
-          <span className="ai-letter ai-i">I</span>
-          <div className="ai-scan"/>
-          <small>HUMAN × MACHINE<br/>CREATIVE PARTNERSHIP</small>
-          <b>05 / 2026</b>
+          <div className="ai-object">
+            <span/><span/><span/>
+            <i/>
+          </div>
+          <small>HUMAN JUDGEMENT<br/>AUGMENTED INTELLIGENCE</small>
+          <b>AI / 05</b>
         </div>
         <div className="ai-copy">
           <p className="section-no">05 / {es ? "Inteligencia amplificada" : "Augmented intelligence"}</p>
