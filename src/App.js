@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./App.css";
 
 import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
@@ -10,7 +12,19 @@ import nidoCover from "./IMAGES/projectsdesktop/nidoportada.jpg";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
 import umbralCover from "./IMAGES/projectsdesktop/umbralportada.jpg";
 import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
-import aiNeuralNature from "./IMAGES/ai-neural-nature-3d.png";
+import nidoScene1 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.17.59.png";
+import nidoScene2 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.18.25.png";
+import nidoScene3 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.18.44.png";
+import nidoScene6 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.20.02.png";
+import umbralScene1 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.21.03.png";
+import umbralScene2 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.21.31.png";
+import umbralScene3 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.21.46.png";
+import umbralScene4 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.16.png";
+import umbralScene5 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.28.png";
+import umbralScene6 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.51.png";
+import umbralScene7 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.59.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -26,6 +40,18 @@ const projects = [
     tone: "nido",
     description: "Un portal pensado para convertir procesos dispersos en una experiencia simple, clara y útil.",
     descriptionEn: "A portal designed to turn scattered processes into a simple, clear and useful experience.",
+    story: "Una plataforma inmobiliaria end-to-end. Diseñé y desarrollé el ecosistema completo: publicación y búsqueda de propiedades, perfiles, mensajería, automatización de correos, integraciones externas y cobros online.",
+    storyEn: "An end-to-end real estate platform. I designed and developed the full ecosystem: property publishing and search, profiles, messaging, email automation, external integrations and online payments.",
+    features: ["Búsqueda + filtros", "Perfiles + mensajes", "Email automation", "WhatsApp + Maps", "Pagos online"],
+    scenes: [nidoCover, nidoScene1, nidoScene2, nidoScene3, nidoScene6],
+    sceneCaptions: ["El portal inmobiliario de Cuyo", "Descubrimiento y búsqueda", "Filtros que reducen la fricción", "Fichas pensadas para decidir", "Un ecosistema conectado"],
+    narrative: [
+      ["Visión", "Un portal inmobiliario completo", "Una experiencia que reúne publicación, descubrimiento y gestión de propiedades en un único producto digital."],
+      ["Problema", "Demasiados procesos dispersos", "Búsquedas, consultas y seguimiento vivían en canales separados, generando fricción para usuarios y operadores."],
+      ["Solución", "Encontrar mejor, decidir antes", "Búsqueda avanzada, filtros, mapas y fichas claras organizan la información alrededor de decisiones reales."],
+      ["Sistema", "Personas, mensajes y automatización", "Perfiles, favoritos, mensajería, correo, WhatsApp y pagos conectan el recorrido completo."],
+      ["Resultado", "Un ecosistema preparado para crecer", "Una arquitectura modular en React y MongoDB que puede evolucionar junto al negocio."],
+    ],
     tags: ["React", "MongoDB", "Cloudinary", "Product design"],
   },
   {
@@ -41,6 +67,18 @@ const projects = [
     tone: "umbral",
     description: "Una presencia premium donde la percepción de marca, el ritmo y la conversión trabajan juntos.",
     descriptionEn: "A premium presence where brand perception, rhythm and conversion work as one.",
+    story: "Una experiencia digital premium construida para transformar arquitectura y precisión técnica en deseo, confianza y consultas comerciales.",
+    storyEn: "A premium digital experience built to turn architecture and technical precision into desire, trust and qualified enquiries.",
+    features: ["Dirección de arte", "UX/UI", "Catálogo", "Multilingüe", "Conversión"],
+    scenes: [umbralCover, umbralScene1, umbralScene2, umbralScene3, umbralScene4, umbralScene5, umbralScene6, umbralScene7],
+    sceneCaptions: ["Arquitectura exterior para habitar", "Una entrada de marca precisa", "Producto y materialidad", "Sistemas explicados con claridad", "Diseño que genera confianza", "Detalle, ritmo y respiración", "Conversión sin romper la experiencia", "Una presencia premium completa"],
+    narrative: [
+      ["Visión", "Arquitectura exterior con presencia digital", "Una experiencia premium que traduce precisión constructiva, calma mediterránea y confianza."],
+      ["Dirección", "La marca antes que la interfaz", "Tipografía, ritmo, fotografía y espacio trabajan juntos para elevar la percepción del producto."],
+      ["Experiencia", "Comprender sin perder emoción", "La información técnica se organiza con claridad sin convertir la experiencia en un catálogo frío."],
+      ["Conversión", "El contacto forma parte del relato", "Cada recorrido conduce hacia una consulta comercial sin interrumpir la atmósfera de marca."],
+      ["Resultado", "Una presencia reconocible y coherente", "Un sistema visual y digital preparado para presentar productos, proyectos y nuevas colecciones."],
+    ],
     tags: ["React", "Motion", "Art direction", "UX/UI"],
   },
   {
@@ -56,6 +94,14 @@ const projects = [
     tone: "finestra",
     description: "Una web de servicios directa y cercana, diseñada para hacer fácil lo que suele sentirse complejo.",
     descriptionEn: "A direct and approachable service website, designed to make complex things feel simple.",
+    story: "Reorganicé una oferta técnica compleja en una experiencia clara, rápida y cercana, conectada con formularios, correo y captación de oportunidades.",
+    storyEn: "I reorganised a complex technical offer into a clear, fast and approachable experience connected to forms, email and lead generation.",
+    features: ["Arquitectura UX", "EmailJS", "Leads", "Multilingüe", "Responsive"],
+    narrative: [
+      ["Problema", "Servicios complejos, decisiones rápidas", "La oferta necesitaba ser entendida con facilidad por personas que buscan una solución concreta."],
+      ["Solución", "Claridad, cercanía y acción", "Reorganicé contenidos y recorridos para convertir información técnica en oportunidades comerciales."],
+      ["Resultado", "Una web útil para el negocio", "Formularios, EmailJS y una experiencia multilingüe conectan cada consulta con el equipo."],
+    ],
     tags: ["React", "EmailJS", "Strategy", "Multilingual"],
   },
   {
@@ -71,6 +117,14 @@ const projects = [
     tone: "base",
     description: "Una interfaz robusta para una empresa logística: confianza, velocidad y contacto sin fricción.",
     descriptionEn: "A robust interface for a logistics company: trust, speed and frictionless contact.",
+    story: "Una plataforma de servicios con lenguaje directo, jerarquía operativa y recorridos pensados para convertir necesidades logísticas en contactos concretos.",
+    storyEn: "A service platform with direct language, operational hierarchy and journeys designed to turn logistics needs into qualified contacts.",
+    features: ["Estrategia", "UX/UI", "Performance", "Contacto", "Desarrollo"],
+    narrative: [
+      ["Dirección", "Confianza desde el primer contacto", "Una identidad digital directa para comunicar capacidad operativa y respuesta."],
+      ["Sistema", "Información que conduce a la acción", "Jerarquía, servicios y contacto forman un recorrido corto y sin fricción."],
+      ["Resultado", "Una presencia robusta y rápida", "El producto prioriza rendimiento, claridad y generación de oportunidades."],
+    ],
     tags: ["UX/UI", "Development", "Performance"],
   },
   {
@@ -86,6 +140,14 @@ const projects = [
     tone: "taller",
     description: "Un espacio digital sensible y cálido para descubrir talleres, reservar y formar comunidad.",
     descriptionEn: "A warm, sensitive digital space to discover workshops, book and build community.",
+    story: "Identidad, contenido y experiencia de reserva conviven en un espacio cálido que convierte la artesanía en una comunidad digital viva.",
+    storyEn: "Identity, content and booking coexist in a warm space that turns craft into a living digital community.",
+    features: ["Identidad", "E-commerce", "Reservas", "Contenido", "Comunidad"],
+    narrative: [
+      ["Visión", "Artesanía que también se vive online", "Una experiencia cálida para descubrir talleres, reservar y sentirse parte de una comunidad."],
+      ["Experiencia", "Contenido, identidad y reserva", "Cada detalle acompaña el proceso desde la curiosidad inicial hasta la participación."],
+      ["Resultado", "Un espacio digital con sensibilidad", "La plataforma convierte actividad, producto y comunidad en una experiencia coherente."],
+    ],
     tags: ["E-commerce", "Booking", "Creative dev"],
   },
 ];
@@ -96,40 +158,454 @@ function Arrow({ diagonal = false }) {
   return <span className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} aria-hidden="true" />;
 }
 
-function MineralPattern({ es }) {
+function SequenceFrame({ image, caption, index, timelineIndex, timelineTotal, progress, title }) {
+  const step = 1 / Math.max(timelineTotal - 1, 1);
+  const revealEnd = timelineIndex === 0 ? .001 : timelineIndex * step;
+  const revealStart = timelineIndex === 0 ? 0 : Math.max(0, revealEnd - step * .64);
+  const nextStart = timelineIndex === timelineTotal - 1 ? 1 : Math.min(1, (timelineIndex + 1) * step - step * .64);
+  const nextEnd = timelineIndex === timelineTotal - 1 ? 1 : Math.min(1, (timelineIndex + 1) * step);
+  const clipPath = useTransform(
+    progress,
+    [revealStart, Math.max(revealStart + .001, revealEnd)],
+    timelineIndex === 0 ? ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"] : ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
+  );
+  const imageY = useTransform(progress, [revealStart, Math.max(revealStart + .001, revealEnd)], timelineIndex === 0 ? ["0%", "0%"] : ["9%", "0%"]);
+  const scale = useTransform(progress, [revealStart, Math.max(revealStart + .001, revealEnd)], [1.055, 1]);
+  const isLast = timelineIndex === timelineTotal - 1;
+  const captionInput = isLast
+    ? [revealStart, 1]
+    : [revealStart, Math.max(revealStart + .001, revealEnd), Math.max(revealEnd + .002, nextStart), Math.max(revealEnd + .003, nextEnd)];
+  const captionOpacity = useTransform(progress, captionInput, isLast ? [0, 1] : [0, 1, 1, 0]);
+  const captionY = useTransform(progress, [revealStart, Math.max(revealStart + .001, revealEnd)], [24, 0]);
+
   return (
-    <section className="mineral-pattern" aria-label={es ? "Naturaleza, diseño y tecnología" : "Nature, design and technology"}>
-      <svg viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g className="pattern-layer pattern-leaves">
-          <path d="M-80 500C90 150 280 90 454 188C304 221 183 322 103 515Z"/>
-          <path d="M184 635C248 350 416 207 640 242C494 327 390 449 356 635Z"/>
-          <path d="M1210-70C1053 142 1025 339 1138 492C1170 318 1268 176 1434 58Z"/>
-          <path d="M1431 161C1282 263 1217 403 1262 610C1345 468 1461 369 1648 320Z"/>
-        </g>
-        <g className="pattern-layer pattern-blooms">
-          <g transform="translate(515 177)">
-            <ellipse rx="76" ry="150"/><ellipse rx="76" ry="150" transform="rotate(72)"/><ellipse rx="76" ry="150" transform="rotate(144)"/>
-            <circle r="39"/>
-          </g>
-          <g transform="translate(1001 480) scale(.74)">
-            <ellipse rx="76" ry="150"/><ellipse rx="76" ry="150" transform="rotate(72)"/><ellipse rx="76" ry="150" transform="rotate(144)"/>
-            <circle r="39"/>
-          </g>
-        </g>
-        <g className="pattern-layer pattern-cells">
-          <path d="M727 41C814-21 942 21 960 125C980 238 868 294 771 238C681 186 649 96 727 41Z"/>
-          <path d="M689 366C764 292 884 312 921 404C963 507 872 596 764 562C653 527 611 443 689 366Z"/>
-          <path d="M1133 142C1194 75 1301 91 1331 173C1365 267 1280 341 1194 306C1101 269 1072 209 1133 142Z"/>
-        </g>
-        <g className="pattern-dots">
-          {[[88,94],[168,143],[282,82],[354,145],[610,86],[1071,88],[1404,102],[1518,168],[80,558],[475,540],[1178,560],[1512,535]].map(([cx,cy], index) => <circle key={index} cx={cx} cy={cy} r={index % 3 === 0 ? 17 : 9}/>)}
-        </g>
-      </svg>
-      <div className="pattern-type">
-        <small>01½ / ORGANIC SYSTEM</small>
-        <strong>{es ? <>Naturalmente<br/><em>digital.</em></> : <>Naturally<br/><em>digital.</em></>}</strong>
-        <span>{es ? "Sensibilidad humana · precisión técnica" : "Human sensitivity · technical precision"}</span>
+    <motion.figure className="sequence-frame" style={{ clipPath, zIndex: timelineIndex + 1 }} aria-hidden={index > 0}>
+      <motion.img src={image} alt={`${title} — ${caption}`} style={{ scale, y: imageY }} draggable="false"/>
+      <motion.figcaption style={{ y: captionY, opacity: captionOpacity }}>
+        <b>{String(index + 1).padStart(2, "0")}</b>
+        <span>{caption}</span>
+      </motion.figcaption>
+    </motion.figure>
+  );
+}
+
+function SequenceReview({ project, es, progress, timelineTotal }) {
+  const step = 1 / Math.max(timelineTotal - 1, 1);
+  const revealEnd = step;
+  const revealStart = revealEnd - step * .64;
+  const clipPath = useTransform(progress, [revealStart, revealEnd], ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]);
+  const contentY = useTransform(progress, [revealStart, revealEnd], [70, 0]);
+  const contentOpacity = useTransform(progress, [revealStart, revealStart + (revealEnd - revealStart) * .68, revealEnd], [0, 0, 1]);
+  const story = es ? project.story : project.storyEn;
+
+  return (
+    <motion.section className="sequence-review" style={{ clipPath, zIndex: 2 }}>
+      <motion.div className="sequence-review-inner" style={{ y: contentY, opacity: contentOpacity }}>
+        <p className="sequence-review-kicker">{es ? "Producto digital completo" : "Complete digital product"}</p>
+        <h4>{es ? "Un portal completo. Un negocio conectado." : "A complete portal. A connected business."}</h4>
+        <div className="sequence-review-copy">
+          <p>{story}</p>
+          <ul>{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <div>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+function ProjectSequence({ project, es, onEnter, onLeave }) {
+  const sequenceRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sequenceRef,
+    offset: ["start start", "end end"],
+  });
+  const scenes = project.scenes || [project.image];
+  const timelineTotal = scenes.length + 1;
+  const captions = project.sceneCaptions || scenes.map(() => es ? "Vista del proyecto" : "Project view");
+  const type = es ? project.type : project.typeEn;
+
+  return (
+    <article
+      ref={sequenceRef}
+      className={`project-sequence sequence-${project.tone}`}
+      style={{ height: `${Math.max(420, scenes.length * 78)}svh` }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
+      <div className="sequence-sticky">
+        <a className="sequence-link" href={project.url} target="_blank" rel="noreferrer" aria-label={`${es ? "Visitar" : "Visit"} ${project.title}`}>
+          <div className="sequence-images">
+            {scenes.map((image, index) => (
+              <SequenceFrame
+                key={image}
+                image={image}
+                caption={captions[index]}
+                index={index}
+                timelineIndex={index === 0 ? 0 : index + 1}
+                timelineTotal={timelineTotal}
+                progress={scrollYProgress}
+                title={project.title}
+              />
+            ))}
+            <SequenceReview project={project} es={es} progress={scrollYProgress} timelineTotal={timelineTotal}/>
+          </div>
+          <header className="sequence-title">
+            <span>{project.index} / {project.year}</span>
+            <h3>{project.title}</h3>
+            <small>{type}</small>
+          </header>
+          <div className="sequence-progress">
+            <motion.i style={{ scaleX: scrollYProgress }}/>
+          </div>
+        </a>
       </div>
+    </article>
+  );
+}
+
+function ProjectSection({ project, index, es, onEnter, onLeave }) {
+  const tileRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: tileRef, offset: ["start end", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
+  const imageScale = useTransform(scrollYProgress, [0, .5, 1], [1.07, 1.02, 1.07]);
+  const description = es ? project.description : project.descriptionEn;
+  const type = es ? project.type : project.typeEn;
+  const portrait = index === 0 || index === 2 || index === 4;
+  const displayImage = portrait && project.imageMobile ? project.imageMobile : project.image;
+
+  return (
+    <motion.article
+      ref={tileRef}
+      className={`project-tile tile-${index + 1} ${portrait ? "tile-portrait" : "tile-landscape"}`}
+      initial={{ opacity: 0, y: 70 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: .16 }}
+      transition={{ duration: .9, ease }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
+      <a className="tile-link" href={project.url} target="_blank" rel="noreferrer" aria-label={`${es ? "Visitar" : "Visit"} ${project.title}`}>
+        <div className="tile-media">
+          {displayImage ? (
+            <motion.picture style={{ y: imageY, scale: imageScale }}>
+              <source media="(max-width: 800px) and (orientation: portrait)" srcSet={project.imageMobile || displayImage}/>
+              <img src={displayImage} alt={`Portada del proyecto ${project.title}`} loading={index > 1 ? "lazy" : "eager"}/>
+            </motion.picture>
+          ) : (
+            <motion.div className="tile-base-visual" style={{ y: imageY, scale: imageScale }} aria-hidden="true">
+              <span>BASE</span><i/><i/><i/>
+            </motion.div>
+          )}
+          <span className="tile-number">{project.index}</span>
+        </div>
+        <div className="tile-heading">
+          <h3>{project.title}</h3>
+          <Arrow diagonal/>
+        </div>
+      </a>
+      <p className="tile-description">{description}</p>
+      <div className="tile-meta"><span>{type}</span><span>{project.year}</span></div>
+      <ul className="tile-tags">{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+    </motion.article>
+  );
+}
+
+function ImmersiveProject({ project, index, total, progress, es }) {
+  const center = index / Math.max(total - 1, 1);
+  const segment = 1 / Math.max(total - 1, 1);
+  const start = Math.max(0, center - segment * .82);
+  const enter = Math.max(.001, center - segment * .34);
+  const exit = Math.min(.999, center + segment * .34);
+  const end = Math.min(1, center + segment * .82);
+  const opacityInput = index === 0
+    ? [0, .001, exit, end]
+    : index === total - 1
+      ? [start, enter, .999, 1]
+      : [start, enter, exit, end];
+  const opacity = useTransform(progress, opacityInput, index === 0 ? [1, 1, 1, 0] : index === total - 1 ? [0, 1, 1, 1] : [0, 1, 1, 0]);
+  const imageY = useTransform(progress, [start, Math.max(start + .001, end)], ["4.5%", "-4.5%"]);
+  const imageScale = useTransform(progress, [start, enter, exit, end], [1.07, 1, 1, .965]);
+  const titleY = useTransform(progress, [start, enter, exit, end], [45, 0, 0, -32]);
+  const copyY = useTransform(progress, [start, enter, exit, end], [30, 0, 0, -18]);
+  const description = es ? project.description : project.descriptionEn;
+  const type = es ? project.type : project.typeEn;
+
+  return (
+    <motion.article className={`immersive-project immersive-${project.tone} ${index % 2 ? "immersive-reverse" : ""}`} style={{ opacity }}>
+      <motion.header className="immersive-title" style={{ y: titleY }}>
+        <span>{project.index}</span>
+        <h3>{project.title}</h3>
+      </motion.header>
+      <span className="immersive-type">{type}</span>
+      <span className="immersive-year">{project.year}</span>
+      <div className="immersive-media">
+        {project.image ? (
+          <motion.picture style={{ y: imageY, scale: imageScale }}>
+            <source media="(max-width: 800px)" srcSet={project.imageMobile || project.image}/>
+            <img src={project.image} alt={`Proyecto ${project.title}`} loading={index > 1 ? "lazy" : "eager"}/>
+          </motion.picture>
+        ) : (
+          <motion.div className="immersive-base-visual" style={{ y: imageY, scale: imageScale }} aria-hidden="true"><span>BASE</span><i/><i/></motion.div>
+        )}
+      </div>
+      <motion.div className="immersive-copy" style={{ y: copyY }}>
+        <p>{description}</p>
+        <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+      </motion.div>
+      <div className="immersive-count">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</div>
+    </motion.article>
+  );
+}
+
+function ProjectExperience({ es, onEnter, onLeave }) {
+  const experienceRef = useRef(null);
+  const [activeProject, setActiveProject] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: experienceRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const next = Math.min(projects.length - 1, Math.max(0, Math.round(latest * (projects.length - 1))));
+    setActiveProject((current) => current === next ? current : next);
+  });
+
+  return (
+    <div ref={experienceRef} className="project-experience">
+      <div className="project-experience-sticky" onMouseEnter={onEnter} onMouseLeave={onLeave}>
+        {projects.map((project, index) => (
+          <ImmersiveProject project={project} index={index} total={projects.length} progress={scrollYProgress} es={es} key={project.title}/>
+        ))}
+        <a
+          className="project-experience-link"
+          href={projects[activeProject].url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${es ? "Visitar" : "Visit"} ${projects[activeProject].title}`}
+        />
+        <div className="experience-progress" aria-hidden="true"><motion.i style={{ scaleX: scrollYProgress }}/></div>
+      </div>
+    </div>
+  );
+}
+
+function NarrativePanel({ panel, index, project }) {
+  return (
+    <section className={`narrative-panel narrative-panel-${panel.kind}`}>
+      <div className="narrative-panel-content">
+        <div className="narrative-panel-head"><span>{String(index + 1).padStart(2, "0")}</span><small>{panel.eyebrow}</small></div>
+        {panel.title && <h4>{panel.title}</h4>}
+        {panel.copy && <p>{panel.copy}</p>}
+        {panel.kind === "system" && (
+          <div className="narrative-system">
+            <ul>{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+            <div>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+          </div>
+        )}
+        {panel.kind === "cta" && <span className="narrative-cta-label">Visitar proyecto</span>}
+      </div>
+    </section>
+  );
+}
+
+function NarrativeBackdrop({ image, index, count, progress, title }) {
+  const boundary = index / count;
+  const start = index === 0 ? 0 : Math.max(0, boundary - .025);
+  const end = index === 0 ? .001 : Math.min(1, boundary + .025);
+  const clipPath = useTransform(progress, [start, end], index === 0
+    ? ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
+    : ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]);
+  const scale = useTransform(progress, [start, Math.max(end, .999)], [1.035, 1]);
+  return <motion.img className="narrative-backdrop" src={image} alt={`${title} — vista ${index + 1}`} style={{ clipPath, scale, zIndex: index + 1 }}/>;
+}
+
+function ProjectNarrative({ project, es, onEnter, onLeave }) {
+  const narrativeRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: narrativeRef,
+    offset: ["start start", "end end"],
+  });
+  const blocks = project.narrative || [["Proyecto", project.title, es ? project.description : project.descriptionEn]];
+  const availableScenes = project.scenes || [project.image];
+  const scenes = availableScenes.filter(Boolean);
+  const type = es ? project.type : project.typeEn;
+  const description = es ? project.description : project.descriptionEn;
+  const panels = [
+    { kind: "hero", eyebrow: es ? "Introducción" : "Introduction", image: scenes[0], title: project.title },
+    { kind: "system", eyebrow: es ? "Rol + tecnologías" : "Role + technologies", image: scenes[0], title: blocks[0]?.[1] || type, copy: blocks[0]?.[2] || description },
+    { kind: "visual", eyebrow: es ? "Producto en uso" : "Product in use", image: scenes[1] || scenes[0] },
+    { kind: "statement", eyebrow: blocks[1]?.[0] || (es ? "El problema" : "The problem"), image: scenes[1] || scenes[0], title: blocks[1]?.[1] || type, copy: blocks[1]?.[2] || description },
+    { kind: "visual", eyebrow: es ? "Detalle de interfaz" : "Interface detail", image: scenes[2] || project.imageMobile || scenes[0] },
+    { kind: "result", eyebrow: blocks[blocks.length - 1]?.[0] || (es ? "Resultado" : "Result"), title: blocks[blocks.length - 1]?.[1], copy: blocks[blocks.length - 1]?.[2] || description, image: scenes[3] },
+    { kind: "cta", eyebrow: `${type} · ${project.year}`, title: es ? "Explorar el proyecto completo." : "Explore the complete project.", image: scenes[4] || scenes[scenes.length - 1] },
+  ];
+  const trackY = useTransform(scrollYProgress, [0, 1], ["0svh", `-${(panels.length - 1) * 100}svh`]);
+
+  return (
+    <article
+      ref={narrativeRef}
+      className={`project-narrative narrative-${project.tone}`}
+      style={{ height: "480svh", backgroundImage: `url("${scenes[0]}")`, backgroundSize: "cover", backgroundPosition: "center top" }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
+      <div className="narrative-sticky" style={{ backgroundImage: `url("${scenes[0]}")`, backgroundSize: "cover", backgroundPosition: "center top" }}>
+        <a className="narrative-project-link" href={project.url} target="_blank" rel="noreferrer" aria-label={`${es ? "Visitar" : "Visit"} ${project.title}`}/>
+        <div className="narrative-backdrops">
+          {scenes.map((image, index) => <NarrativeBackdrop key={image} image={image} index={index} count={scenes.length} progress={scrollYProgress} title={project.title}/>)}
+        </div>
+        <div className="narrative-panels">
+          <motion.div className="narrative-track" style={{ y: trackY }}>
+            {panels.map((panel, index) => <NarrativePanel key={`${project.title}-${index}`} panel={panel} index={index} project={project}/>)}
+          </motion.div>
+        </div>
+        <header className="narrative-project-title">
+          <span>{project.index}</span>
+          <h3>{project.title}</h3>
+          <small>{type} · {project.year}</small>
+        </header>
+        <div className="narrative-progress"><motion.i style={{ scaleX: scrollYProgress }}/></div>
+      </div>
+    </article>
+  );
+}
+
+function GsapProjects({ es, onEnter, onLeave }) {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return undefined;
+
+    const context = gsap.context(() => {
+      const media = gsap.matchMedia();
+
+      media.add("(min-width: 801px) and (prefers-reduced-motion: no-preference)", () => {
+        const cards = gsap.utils.toArray(".gsap-project-card", track);
+        const travel = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+        const horizontal = gsap.to(track, {
+          x: () => -travel(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${travel() + window.innerHeight * 0.75}`,
+            pin: true,
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+          },
+        });
+
+        cards.forEach((card) => {
+          const image = card.querySelector(".gsap-project-image");
+          const copy = card.querySelector(".gsap-project-copy");
+          gsap.fromTo(image, { xPercent: -7, scale: 1.08 }, {
+            xPercent: 7,
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: horizontal,
+              start: "left right",
+              end: "right left",
+              scrub: true,
+            },
+          });
+          gsap.from(copy, {
+            y: 70,
+            autoAlpha: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: horizontal,
+              start: "left 78%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+      });
+
+      media.add("(max-width: 800px), (prefers-reduced-motion: reduce)", () => {
+        gsap.utils.toArray(".gsap-project-card", track).forEach((card) => {
+          gsap.from(card, {
+            y: 55,
+            autoAlpha: 0,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 84%",
+              once: true,
+            },
+          });
+        });
+      });
+
+      return () => media.revert();
+    }, section);
+
+    return () => context.revert();
+  }, [es]);
+
+  return (
+    <section ref={sectionRef} className="gsap-projects" id="work" aria-labelledby="projects-title">
+      <header className="gsap-projects-head">
+        <p className="section-no">01 / {es ? "Proyectos seleccionados" : "Selected projects"}</p>
+        <p>{es ? "Desliza para recorrer" : "Scroll to explore"} <span aria-hidden="true">→</span></p>
+      </header>
+      <div ref={trackRef} className="gsap-projects-track">
+        <div className="gsap-projects-intro">
+          <span>{es ? "Trabajo" : "Work"}</span>
+          <h2 id="projects-title">{es ? <>Ideas que se vuelven <em>experiencias.</em></> : <>Ideas turned into <em>experiences.</em></>}</h2>
+          <p>{es ? "Diseño y desarrollo productos digitales completos: desde la dirección visual hasta la lógica que los hace funcionar." : "I design and build complete digital products, from visual direction to the logic that makes them work."}</p>
+        </div>
+        {projects.map((project, index) => {
+          const description = es ? project.description : project.descriptionEn;
+          const type = es ? project.type : project.typeEn;
+          return (
+            <article
+              className={`gsap-project-card gsap-project-${project.tone}`}
+              key={project.title}
+              onMouseEnter={onEnter}
+              onMouseLeave={onLeave}
+            >
+              <a href={project.url} target="_blank" rel="noreferrer" aria-label={`${es ? "Visitar" : "Visit"} ${project.title}`}>
+                <div className="gsap-project-media">
+                  {project.image ? (
+                    <picture className="gsap-project-image">
+                      <source media="(max-width: 800px)" srcSet={project.imageMobile || project.image}/>
+                      <img src={project.image} alt={`${project.title} — ${type}`} loading={index > 1 ? "lazy" : "eager"}/>
+                    </picture>
+                  ) : (
+                    <div className="gsap-project-image gsap-project-base" aria-hidden="true"><span>BASE</span><i/><i/></div>
+                  )}
+                  <span className="gsap-project-index">{project.index} / {project.year}</span>
+                  <span className="gsap-project-open">{es ? "Ver proyecto" : "View project"} ↗</span>
+                </div>
+                <div className="gsap-project-copy">
+                  <div>
+                    <h3>{project.title}</h3>
+                    <span>{type}</span>
+                  </div>
+                  <p>{description}</p>
+                  <ul>{project.tags.slice(0, 3).map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                </div>
+              </a>
+            </article>
+          );
+        })}
+        <div className="gsap-projects-outro">
+          <p>{es ? "Cinco proyectos. Un mismo criterio:" : "Five projects. One principle:"}</p>
+          <h3>{es ? "que se vea bien y funcione mejor." : "look good, work better."}</h3>
+          <a href="#contact">{es ? "Hablemos" : "Let's talk"} <Arrow/></a>
+        </div>
+      </div>
+      <div className="gsap-scroll-line" aria-hidden="true"><i/></div>
     </section>
   );
 }
@@ -176,35 +652,6 @@ function App() {
       window.removeEventListener("mouseout", pointerOut);
     };
   }, [cursorX, cursorY]);
-
-  useEffect(() => {
-    let frame;
-    const updateProjectDepth = () => {
-      document.querySelectorAll(".editorial-cover").forEach((cover) => {
-        const rect = cover.getBoundingClientRect();
-        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        const depth = Math.max(-1, Math.min(1, progress * 2 - 1));
-        const mobile = window.innerWidth <= 800;
-        cover.style.setProperty("--backdrop-y", `${depth * (mobile ? 18 : 55)}px`);
-        cover.style.setProperty("--frame-y", `${depth * (mobile ? -14 : -42)}px`);
-        cover.style.setProperty("--word-x", `${depth * (mobile ? 2 : 5)}%`);
-        cover.style.setProperty("--word-x-reverse", `${depth * (mobile ? -2 : -5)}%`);
-        cover.style.setProperty("--word-y", `${depth * (mobile ? -8 : -22)}px`);
-      });
-      frame = null;
-    };
-    const requestUpdate = () => {
-      if (!frame) frame = requestAnimationFrame(updateProjectDepth);
-    };
-    updateProjectDepth();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
 
   const hover = (active) => cursorScale.set(active ? 3.4 : 1);
   const scrollTo = (id) => {
@@ -300,54 +747,7 @@ function App() {
         </motion.h2>
       </section>
 
-      <section className="work" id="work">
-        <div className="section-head">
-          <div><span>01</span><h2>{es ? "Trabajo seleccionado" : "Selected work"}</h2></div>
-          <p>{es ? "Una selección de plataformas, marcas y negocios a los que he ayudado a ocupar mejor su espacio digital." : "A selection of platforms, brands and businesses I have helped claim a stronger digital presence."}</p>
-        </div>
-
-        <div className="project-list">
-          {projects.map((project, i) => (
-            <motion.article className={`project ${project.tone}`} key={project.title} initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.9, ease }}>
-              <a href={project.url} target="_blank" rel="noreferrer" onMouseEnter={() => { setProjectCursor(true); cursorScale.set(1); }} onMouseLeave={() => { setProjectCursor(false); cursorScale.set(1); }}>
-                <div className="project-meta"><span>{project.index}</span><span>{es ? project.type : project.typeEn}</span><span>{project.year}</span></div>
-                <div className="project-visual">
-                  {project.image ? (
-                    <div className="cover-stage editorial-cover" style={{ "--cover-image": `url("${project.image}")` }}>
-                      <div className="cover-backdrop" />
-                      <div className="cover-label"><span>{project.title}</span><span>nancy alday® / 2026</span></div>
-                      <div className="browser-frame">
-                        <div className="editorial-meta"><span>{project.index} / {es ? project.type : project.typeEn}</span><span>{project.year}</span></div>
-                        <picture>
-                          <source media="(max-width: 600px) and (orientation: portrait)" srcSet={project.imageMobile || project.image} />
-                          <img src={project.image} alt={`Vista del proyecto ${project.title}`} loading={i > 1 ? "lazy" : "eager"} />
-                        </picture>
-                        <div className="editorial-foot"><span>{project.url.replace("https://", "")}</span><span>{es ? "Diseño & desarrollo" : "Design & development"}</span></div>
-                      </div>
-                      <strong className="cover-word">{project.coverTitle}</strong>
-                    </div>
-                  ) : (
-                    <div className="project-art base-art" aria-hidden="true">
-                      <span className="route-line"/><span className="route-dot dot-a"/><span className="route-dot dot-b"/>
-                      <b>BASE</b><small>Mendoza · Logística en movimiento</small>
-                    </div>
-                  )}
-                </div>
-                <div className="project-info">
-                  <h3>{project.title}</h3>
-                  <p>{es ? project.description : project.descriptionEn}</p>
-                  <div className="project-stack">
-                    <small>{es ? "Stack + aportación" : "Stack + contribution"}</small>
-                    <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                  </div>
-                </div>
-              </a>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <MineralPattern es={es} />
+      <GsapProjects es={es} onEnter={() => setProjectCursor(true)} onLeave={() => setProjectCursor(false)}/>
 
       <section className="under-the-hood" id="systems">
         <div className="systems-intro">
@@ -481,35 +881,6 @@ function App() {
       </section>
 
       <section className="ai-statement">
-        <div
-          className="ai-visual"
-          aria-hidden="true"
-          onPointerMove={(event) => {
-            const rect = event.currentTarget.getBoundingClientRect();
-            const x = ((event.clientX - rect.left) / rect.width - .5) * 28;
-            const y = ((event.clientY - rect.top) / rect.height - .5) * 28;
-            event.currentTarget.style.setProperty("--ai-ax", `${x * -.6}px`);
-            event.currentTarget.style.setProperty("--ai-ay", `${y * -.35}px`);
-            event.currentTarget.style.setProperty("--ai-ix", `${x * .7}px`);
-            event.currentTarget.style.setProperty("--ai-iy", `${y * .45}px`);
-            event.currentTarget.style.setProperty("--ai-rx", `${y * -.32}deg`);
-            event.currentTarget.style.setProperty("--ai-ry", `${x * .42}deg`);
-          }}
-          onPointerLeave={(event) => {
-            ["--ai-ax", "--ai-ay", "--ai-ix", "--ai-iy"].forEach((property) => event.currentTarget.style.setProperty(property, "0px"));
-            ["--ai-rx", "--ai-ry"].forEach((property) => event.currentTarget.style.setProperty(property, "0deg"));
-          }}
-        >
-          <div className="ai-organic-orbit">
-            <div className="ai-organic-scene">
-              <img className="ai-organic-network" src={aiNeuralNature} alt="" />
-              <span className="ai-organic-depth"/>
-              <span className="ai-organic-light"/>
-            </div>
-          </div>
-          <small>HUMAN JUDGEMENT<br/>AUGMENTED INTELLIGENCE</small>
-          <b>AI / 05</b>
-        </div>
         <div className="ai-copy">
           <p className="section-no">05 / {es ? "Inteligencia amplificada" : "Augmented intelligence"}</p>
           <h2>{es ? <>Trabajo con IA.<br />El criterio sigue siendo <em>humano.</em></> : <>I work with AI.<br />The judgement stays <em>human.</em></>}</h2>
