@@ -10,6 +10,7 @@ import nidoCover from "./IMAGES/projectsdesktop/nidoportada.jpg";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
 import umbralCover from "./IMAGES/projectsdesktop/umbralportada.jpg";
 import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
+import aiNeuralNature from "./IMAGES/ai-neural-nature-3d.png";
 
 const projects = [
   {
@@ -92,7 +93,7 @@ const projects = [
 const ease = [0.16, 1, 0.3, 1];
 
 function Arrow({ diagonal = false }) {
-  return <span aria-hidden="true">{diagonal ? "↗" : "→"}</span>;
+  return <span className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} aria-hidden="true" />;
 }
 
 function App() {
@@ -335,7 +336,7 @@ function App() {
                 onFocus={() => setActiveSystem(i)}
                 onClick={() => setActiveSystem(i)}
               >
-                <span>0{i + 1}</span><strong>{title}</strong><small>{stack}</small><i>↗</i>
+                <span>0{i + 1}</span><strong>{title}</strong><small>{stack}</small><i aria-hidden="true"/>
               </button>
             ))}
           </div>
@@ -350,7 +351,7 @@ function App() {
             }}
           >
             <span className="editorial-count">0{activeSystem + 1} / 06</span>
-            <span className="swipe-hint">{es ? "Deslizá" : "Swipe"} ↔</span>
+            <span className="swipe-hint">{es ? "Deslizá" : "Swipe"} <i aria-hidden="true"/></span>
             <motion.div className="editorial-word" key={`${language}-${activeSystem}`} initial={{ x: "22%", rotate: 3 }} animate={{ x: 0, rotate: 0 }} transition={{ duration: .75, ease }}>
               {systemItems[activeSystem][0]}
             </motion.div>
@@ -416,7 +417,7 @@ function App() {
             ["End-to-end product", "From first idea to launch: prototype, development, measurement and evolution."],
           ]).map(([title, text], i) => (
             <motion.div className="service-row" key={title} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.7 }}>
-              <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><i>↗</i>
+              <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><i aria-hidden="true"/>
             </motion.div>
           ))}
         </div>
@@ -451,14 +452,20 @@ function App() {
             event.currentTarget.style.setProperty("--ai-ay", `${y * -.35}px`);
             event.currentTarget.style.setProperty("--ai-ix", `${x * .7}px`);
             event.currentTarget.style.setProperty("--ai-iy", `${y * .45}px`);
+            event.currentTarget.style.setProperty("--ai-rx", `${y * -.32}deg`);
+            event.currentTarget.style.setProperty("--ai-ry", `${x * .42}deg`);
           }}
           onPointerLeave={(event) => {
             ["--ai-ax", "--ai-ay", "--ai-ix", "--ai-iy"].forEach((property) => event.currentTarget.style.setProperty(property, "0px"));
+            ["--ai-rx", "--ai-ry"].forEach((property) => event.currentTarget.style.setProperty(property, "0deg"));
           }}
         >
-          <div className="ai-object">
-            <span/><span/><span/>
-            <i/>
+          <div className="ai-organic-orbit">
+            <div className="ai-organic-scene">
+              <img className="ai-organic-network" src={aiNeuralNature} alt="" />
+              <span className="ai-organic-depth"/>
+              <span className="ai-organic-light"/>
+            </div>
           </div>
           <small>HUMAN JUDGEMENT<br/>AUGMENTED INTELLIGENCE</small>
           <b>AI / 05</b>
