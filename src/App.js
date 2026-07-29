@@ -96,6 +96,44 @@ function Arrow({ diagonal = false }) {
   return <span className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} aria-hidden="true" />;
 }
 
+function MineralPattern({ es }) {
+  return (
+    <section className="mineral-pattern" aria-label={es ? "Naturaleza, diseño y tecnología" : "Nature, design and technology"}>
+      <svg viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g className="pattern-layer pattern-leaves">
+          <path d="M-80 500C90 150 280 90 454 188C304 221 183 322 103 515Z"/>
+          <path d="M184 635C248 350 416 207 640 242C494 327 390 449 356 635Z"/>
+          <path d="M1210-70C1053 142 1025 339 1138 492C1170 318 1268 176 1434 58Z"/>
+          <path d="M1431 161C1282 263 1217 403 1262 610C1345 468 1461 369 1648 320Z"/>
+        </g>
+        <g className="pattern-layer pattern-blooms">
+          <g transform="translate(515 177)">
+            <ellipse rx="76" ry="150"/><ellipse rx="76" ry="150" transform="rotate(72)"/><ellipse rx="76" ry="150" transform="rotate(144)"/>
+            <circle r="39"/>
+          </g>
+          <g transform="translate(1001 480) scale(.74)">
+            <ellipse rx="76" ry="150"/><ellipse rx="76" ry="150" transform="rotate(72)"/><ellipse rx="76" ry="150" transform="rotate(144)"/>
+            <circle r="39"/>
+          </g>
+        </g>
+        <g className="pattern-layer pattern-cells">
+          <path d="M727 41C814-21 942 21 960 125C980 238 868 294 771 238C681 186 649 96 727 41Z"/>
+          <path d="M689 366C764 292 884 312 921 404C963 507 872 596 764 562C653 527 611 443 689 366Z"/>
+          <path d="M1133 142C1194 75 1301 91 1331 173C1365 267 1280 341 1194 306C1101 269 1072 209 1133 142Z"/>
+        </g>
+        <g className="pattern-dots">
+          {[[88,94],[168,143],[282,82],[354,145],[610,86],[1071,88],[1404,102],[1518,168],[80,558],[475,540],[1178,560],[1512,535]].map(([cx,cy], index) => <circle key={index} cx={cx} cy={cy} r={index % 3 === 0 ? 17 : 9}/>)}
+        </g>
+      </svg>
+      <div className="pattern-type">
+        <small>01½ / ORGANIC SYSTEM</small>
+        <strong>{es ? <>Naturalmente<br/><em>digital.</em></> : <>Naturally<br/><em>digital.</em></>}</strong>
+        <span>{es ? "Sensibilidad humana · precisión técnica" : "Human sensitivity · technical precision"}</span>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("es");
@@ -308,6 +346,8 @@ function App() {
           ))}
         </div>
       </section>
+
+      <MineralPattern es={es} />
 
       <section className="under-the-hood" id="systems">
         <div className="systems-intro">

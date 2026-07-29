@@ -200,6 +200,12 @@ footer{background:var(--clay)}
 .route-line{border-color:rgba(183,110,67,.75)}
 .route-dot{background:var(--clay);box-shadow:0 0 0 10px rgba(183,110,67,.18)}
 
+.mineral-pattern{position:relative;height:clamp(390px,52vw,690px);overflow:hidden;background:var(--paper);isolation:isolate}.mineral-pattern svg{position:absolute;inset:-4%;width:108%;height:108%}.pattern-layer{transform-box:fill-box;transform-origin:center}.pattern-leaves{fill:var(--jade-deep);animation:patternDrift 13s ease-in-out infinite alternate}.pattern-blooms{fill:var(--clay);animation:patternDrift 10s ease-in-out -4s infinite alternate-reverse}.pattern-blooms circle{fill:var(--mint)}.pattern-cells{fill:var(--sage);animation:patternCells 16s ease-in-out infinite alternate}.pattern-dots{fill:var(--jade)}@keyframes patternDrift{to{transform:translate3d(2.5%,-2%,0) rotate(2deg)}}@keyframes patternCells{to{transform:translate3d(-2%,2.5%,0) rotate(-3deg)}}.pattern-type{position:absolute;z-index:2;inset:0;display:grid;place-content:center;text-align:center;color:var(--paper);mix-blend-mode:difference;pointer-events:none}.pattern-type small,.pattern-type>span{font:8px "DM Mono";text-transform:uppercase;letter-spacing:.16em}.pattern-type strong{margin:22px 0 28px;font-size:clamp(70px,11vw,170px);font-weight:300;line-height:.72;letter-spacing:-.075em}.pattern-type strong em{font:400 italic 1.05em "Instrument Serif",serif}
+
 @media(max-width:900px){
   .system-menu button.active{background:var(--jade-deep);color:var(--paper)}
+}
+
+@media(max-width:800px){
+  .mineral-pattern{height:540px}.mineral-pattern svg{inset:-15%;width:130%;height:130%;transform:rotate(90deg) scale(1.08)}.pattern-type strong{font-size:clamp(64px,22vw,102px)}.pattern-type>span{max-width:230px;justify-self:center;line-height:1.6}
 }
