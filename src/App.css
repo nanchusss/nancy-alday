@@ -496,11 +496,14 @@ footer{background:var(--clay)}
 .gsap-projects-intro h2{align-self:center;max-width:7.2ch;margin:0;font-size:clamp(74px,8.3vw,150px);font-weight:300;line-height:.81;letter-spacing:-.075em}
 .gsap-projects-intro h2 em{font-family:"Instrument Serif",serif;font-weight:400}
 .gsap-projects-intro>p{justify-self:end;max-width:400px;margin:0;font-size:14px;line-height:1.55}
-.gsap-project-card{flex:0 0 72vw;height:100%;box-sizing:border-box;padding:12vh 5vw 6vh;border-right:1px solid rgba(238,233,225,.18)}
-.gsap-project-card>a{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.55fr);gap:3vw;height:100%;color:inherit}
-.gsap-project-media{position:relative;height:100%;overflow:hidden;background:#173e37}
+.gsap-project-card{flex:0 0 86vw;height:100%;box-sizing:border-box;padding:12vh 5vw 6vh;border-right:1px solid rgba(238,233,225,.18)}
+.gsap-project-card>a{display:grid;grid-template-columns:minmax(0,2fr) minmax(250px,.58fr);gap:3vw;align-items:center;height:100%;color:inherit}
+.gsap-project-media{position:relative;width:100%;height:auto;aspect-ratio:16/10;overflow:hidden;background:#173e37}
 .gsap-project-image{position:absolute;inset:-4% -8%;display:block;will-change:transform}
 .gsap-project-image img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+@media(min-width:801px){
+  .gsap-project-nido .gsap-project-image img{transform:scale(2.75);transform-origin:50% 53%}
+}
 .gsap-project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent 35%,transparent 67%,rgba(0,0,0,.38));pointer-events:none}
 .gsap-project-index,.gsap-project-open{position:absolute;z-index:3;top:18px;font:8px "DM Mono";text-transform:uppercase;letter-spacing:.12em}
 .gsap-project-index{left:18px}.gsap-project-open{right:18px;padding:8px 10px;background:rgba(13,38,33,.28);border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}

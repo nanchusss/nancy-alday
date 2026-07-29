@@ -8,9 +8,9 @@ import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
 import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
 import finestra from "./IMAGES/projectsdesktop/finestracat.jpg";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
-import nidoCover from "./IMAGES/projectsdesktop/nidoportada.jpg";
+import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
-import umbralCover from "./IMAGES/projectsdesktop/umbralportada.jpg";
+import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
 import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
 import nidoScene1 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.17.59.png";
 import nidoScene2 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.18.25.png";
@@ -20,7 +20,6 @@ import umbralScene1 from "./IMAGES/projectsdesktop/umbral generales/Captura de p
 import umbralScene2 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.21.31.png";
 import umbralScene3 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.21.46.png";
 import umbralScene4 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.16.png";
-import umbralScene5 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.28.png";
 import umbralScene6 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.51.png";
 import umbralScene7 from "./IMAGES/projectsdesktop/umbral generales/Captura de pantalla 2026-07-29 a las 18.22.59.png";
 
@@ -70,7 +69,7 @@ const projects = [
     story: "Una experiencia digital premium construida para transformar arquitectura y precisión técnica en deseo, confianza y consultas comerciales.",
     storyEn: "A premium digital experience built to turn architecture and technical precision into desire, trust and qualified enquiries.",
     features: ["Dirección de arte", "UX/UI", "Catálogo", "Multilingüe", "Conversión"],
-    scenes: [umbralCover, umbralScene1, umbralScene2, umbralScene3, umbralScene4, umbralScene5, umbralScene6, umbralScene7],
+    scenes: [umbralCover, umbralScene1, umbralScene2, umbralScene3, umbralScene4, umbralCover, umbralScene6, umbralScene7],
     sceneCaptions: ["Arquitectura exterior para habitar", "Una entrada de marca precisa", "Producto y materialidad", "Sistemas explicados con claridad", "Diseño que genera confianza", "Detalle, ritmo y respiración", "Conversión sin romper la experiencia", "Una presencia premium completa"],
     narrative: [
       ["Visión", "Arquitectura exterior con presencia digital", "Una experiencia premium que traduce precisión constructiva, calma mediterránea y confianza."],
@@ -88,7 +87,7 @@ const projects = [
     type: "Servicios · Web corporativa",
     typeEn: "Services · Corporate website",
     year: "2026",
-    url: "https://finestra-serveis.com",
+    url: "https://finestraserveis.com",
     image: finestra,
     imageMobile: finestraMobile,
     tone: "finestra",
