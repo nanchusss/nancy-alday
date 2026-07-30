@@ -213,6 +213,7 @@ function SequenceReview({ project, es, progress, timelineTotal }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function ProjectSequence({ project, es, onEnter, onLeave }) {
   const sequenceRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -263,6 +264,7 @@ function ProjectSequence({ project, es, onEnter, onLeave }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function ProjectSection({ project, index, es, onEnter, onLeave }) {
   const tileRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: tileRef, offset: ["start end", "end start"] });
@@ -357,6 +359,7 @@ function ImmersiveProject({ project, index, total, progress, es }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function ProjectExperience({ es, onEnter, onLeave }) {
   const experienceRef = useRef(null);
   const [activeProject, setActiveProject] = useState(0);
@@ -419,6 +422,7 @@ function NarrativeBackdrop({ image, index, count, progress, title }) {
   return <motion.img className="narrative-backdrop" src={image} alt={`${title} — vista ${index + 1}`} style={{ clipPath, scale, zIndex: index + 1 }}/>;
 }
 
+// eslint-disable-next-line no-unused-vars
 function ProjectNarrative({ project, es, onEnter, onLeave }) {
   const narrativeRef = useRef(null);
   const { scrollYProgress } = useScroll({
