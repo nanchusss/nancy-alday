@@ -580,14 +580,10 @@ function GsapProjects({ es, onEnter, onLeave }) {
             >
               <a href={project.url} target="_blank" rel="noreferrer" aria-label={`${es ? "Visitar" : "Visit"} ${project.title}`}>
                 <div className="gsap-project-media">
-                  {project.image ? (
-                    <picture className="gsap-project-image">
-                      <source media="(max-width: 800px)" srcSet={project.imageMobile || project.image}/>
-                      <img src={project.image} alt={`${project.title} — ${type}`} loading={index > 1 ? "lazy" : "eager"}/>
-                    </picture>
-                  ) : (
-                    <div className="gsap-project-image gsap-project-base" aria-hidden="true"><span>BASE</span><i/><i/></div>
-                  )}
+                  <picture className="gsap-project-image">
+                    <source media="(max-width: 800px)" srcSet={project.imageMobile || project.image}/>
+                    <img src={project.image} alt={`${project.title} — ${type}`} loading={index > 1 ? "lazy" : "eager"}/>
+                  </picture>
                   <span className="gsap-project-index">{project.index} / {project.year}</span>
                   <span className="gsap-project-open">{es ? "Ver proyecto" : "View project"} ↗</span>
                 </div>
