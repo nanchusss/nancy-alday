@@ -503,7 +503,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
             scrollTrigger: {
               trigger: card,
               containerAnimation: horizontal,
-              start: "left 78%",
+              start: card.classList.contains("gsap-project-taller") ? "left 94%" : "left 78%",
               toggleActions: "play none none reverse",
             },
           });
