@@ -8,6 +8,7 @@ import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
 import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
 import finestra from "./IMAGES/finestraserveis.png";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
+import baseMendoza from "./IMAGES/base-mendoza.png";
 import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
 import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
@@ -128,10 +129,38 @@ const projects = [
   },
 ];
 
+const umbralClone = {
+  index: "03",
+  title: "Base Mendoza",
+  coverTitle: "BASE",
+  type: "Logística · Plataforma web",
+  typeEn: "Logistics · Web platform",
+  year: "2026",
+  url: "https://www.base-mendoza.com",
+  image: baseMendoza,
+  imageMobile: baseMendoza,
+  tone: "base-mendoza",
+  description: "Una plataforma logística pensada para conectar empresas y mercancías en toda la región de Cuyo, con recorridos claros, respuesta ágil y operaciones sin fricción.",
+  descriptionEn: "A logistics platform designed to connect businesses and goods across the Cuyo region through clear journeys, agile service and frictionless operations.",
+  tags: ["UX/UI", "Development", "Logistics"],
+};
+
+const projectCards = [
+  projects[0],
+  projects[1],
+  umbralClone,
+  { ...projects[2], index: "04" },
+  { ...projects[3], index: "05" },
+];
+
 const ease = [0.16, 1, 0.3, 1];
 
 function Arrow({ diagonal = false }) {
-  return <span className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} aria-hidden="true" />;
+  return (
+    <svg className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} viewBox="0 0 24 14" aria-hidden="true">
+      <path d="M1 7H22M16 1L22 7L16 13" />
+    </svg>
+  );
 }
 
 function SequenceFrame({ image, caption, index, timelineIndex, timelineTotal, progress, title }) {
@@ -503,7 +532,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
             scrollTrigger: {
               trigger: card,
               containerAnimation: horizontal,
-              start: card.classList.contains("gsap-project-taller") ? "left 94%" : "left 78%",
+              start: "left 65%",
               toggleActions: "play none none reverse",
             },
           });
@@ -544,13 +573,13 @@ function GsapProjects({ es, onEnter, onLeave }) {
           <h2 id="projects-title">{es ? <>Ideas que se vuelven <em>experiencias.</em></> : <>Ideas turned into <em>experiences.</em></>}</h2>
           <p>{es ? "Diseño y desarrollo productos digitales completos: desde la dirección visual hasta la lógica que los hace funcionar." : "I design and build complete digital products, from visual direction to the logic that makes them work."}</p>
         </div>
-        {projects.map((project, index) => {
+        {projectCards.map((project, index) => {
           const description = es ? project.description : project.descriptionEn;
           const type = es ? project.type : project.typeEn;
           return (
             <article
               className={`gsap-project-card gsap-project-${project.tone}`}
-              key={project.title}
+              key={`${project.title}-${index}`}
               onMouseEnter={onEnter}
               onMouseLeave={onLeave}
             >
@@ -576,7 +605,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
           );
         })}
         <div className="gsap-projects-outro">
-          <p>{es ? "Cuatro proyectos. Un mismo criterio:" : "Four projects. One principle:"}</p>
+          <p>{es ? "Cinco proyectos. Un mismo criterio:" : "Five projects. One principle:"}</p>
           <h3>{es ? "que se vea bien y funcione mejor." : "look good, work better."}</h3>
           <a href="#contact">{es ? "Hablemos" : "Let's talk"} <Arrow/></a>
         </div>
