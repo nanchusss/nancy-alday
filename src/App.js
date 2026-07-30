@@ -8,7 +8,6 @@ import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
 import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
 import finestra from "./IMAGES/finestraserveis.png";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
-import baseMendoza from "./IMAGES/base-mendoza.png";
 import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
 import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
@@ -106,29 +105,6 @@ const projects = [
   },
   {
     index: "04",
-    title: "Base Mendoza",
-    coverTitle: "BASE",
-    type: "Logística · Plataforma web",
-    typeEn: "Logistics · Web platform",
-    year: "2026",
-    url: "https://base-mendoza.com",
-    image: baseMendoza,
-    imageMobile: baseMendoza,
-    tone: "base",
-    description: "Una interfaz robusta para una empresa logística: confianza, velocidad y contacto sin fricción.",
-    descriptionEn: "A robust interface for a logistics company: trust, speed and frictionless contact.",
-    story: "Una plataforma de servicios con lenguaje directo, jerarquía operativa y recorridos pensados para convertir necesidades logísticas en contactos concretos.",
-    storyEn: "A service platform with direct language, operational hierarchy and journeys designed to turn logistics needs into qualified contacts.",
-    features: ["Estrategia", "UX/UI", "Performance", "Contacto", "Desarrollo"],
-    narrative: [
-      ["Dirección", "Confianza desde el primer contacto", "Una identidad digital directa para comunicar capacidad operativa y respuesta."],
-      ["Sistema", "Información que conduce a la acción", "Jerarquía, servicios y contacto forman un recorrido corto y sin fricción."],
-      ["Resultado", "Una presencia robusta y rápida", "El producto prioriza rendimiento, claridad y generación de oportunidades."],
-    ],
-    tags: ["UX/UI", "Development", "Performance"],
-  },
-  {
-    index: "05",
     title: "El Taller",
     coverTitle: "EL TALLER",
     type: "Artesanía · E-commerce",
@@ -600,7 +576,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
           );
         })}
         <div className="gsap-projects-outro">
-          <p>{es ? "Cinco proyectos. Un mismo criterio:" : "Five projects. One principle:"}</p>
+          <p>{es ? "Cuatro proyectos. Un mismo criterio:" : "Four projects. One principle:"}</p>
           <h3>{es ? "que se vea bien y funcione mejor." : "look good, work better."}</h3>
           <a href="#contact">{es ? "Hablemos" : "Let's talk"} <Arrow/></a>
         </div>
