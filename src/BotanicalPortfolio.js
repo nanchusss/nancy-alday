@@ -18,11 +18,11 @@ import flowerCosmos from "./IMAGES/flower-cosmos.jpg";
 import "./BotanicalPortfolio.css";
 
 const botanicalProjects = [
-  { name: "Nido Portal", latin: "Habitat digitalis", type: "Producto digital", description: "Una plataforma que reúne hogares, profesionales y servicios en una experiencia simple y cercana.", image: nido, flower: flowerProtea, url: "https://www.nidoportal.com", color: "coral" },
-  { name: "Umbral Premium", latin: "Limen mediterraneum", type: "Identidad & experiencia", description: "Identidad y experiencia digital para descubrir propiedades singulares con calma, claridad y carácter.", image: umbral, flower: flowerDelphinium, url: "https://umbral-premium.com", color: "violet" },
-  { name: "Base Mendoza", latin: "Logistica cuyana", type: "Plataforma web", description: "Una presencia digital clara para una empresa de logística que conecta Mendoza con todo el país.", image: baseMendoza, flower: flowerDahlia, url: "https://www.base-mendoza.com", color: "blue" },
-  { name: "Finestra Serveis", latin: "Fenestra clara", type: "Web corporativa", description: "Web corporativa enfocada en explicar servicios, transmitir confianza y convertir consultas en oportunidades.", image: finestra, flower: flowerPoppy, url: "https://finestraserveis.com", color: "yellow" },
-  { name: "El Taller", latin: "Officina communis", type: "Artesanía & reservas", description: "Una experiencia cálida para conocer el espacio, explorar la cerámica y reservar una plaza en el taller.", image: taller, flower: flowerCosmos, url: "https://eltaller-aguaymanto.com", color: "pink" },
+  { name: "Nido Portal", latin: "Habitat digitalis", type: "Full-stack · End-to-end", description: "Producto inmobiliario completo: estrategia, diseño, frontend, backend y operación conectados.", features: ["Automatización", "Mensajería interna", "Perfiles por rol", "Pagos online", "Emails", "Dominios propios"], stack: ["React", "Node", "MongoDB", "Cloudinary", "APIs", "IA aplicada"], image: nido, flower: flowerProtea, url: "https://www.nidoportal.com", color: "coral" },
+  { name: "Umbral Premium", latin: "Limen mediterraneum", type: "Full-stack · End-to-end", description: "Experiencia premium y herramienta comercial construidas como un único producto digital.", features: ["Gestor de presupuestos", "Envío desde la app", "Gestión de productos", "Backend", "Emails", "SEO"], stack: ["React", "APIs", "Backend", "Motion", "IA aplicada", "Dominio propio"], image: umbral, flower: flowerDelphinium, url: "https://umbral-premium.com", color: "violet" },
+  { name: "Base Mendoza", latin: "Logistica cuyana", type: "Plataforma web", description: "Una presencia clara y ágil para conectar servicios logísticos con nuevas oportunidades.", features: ["Arquitectura UX", "Servicios", "Contacto directo", "SEO", "Diseño responsive"], stack: ["React", "Motion", "Forms", "Analytics"], image: baseMendoza, flower: flowerDahlia, url: "https://www.base-mendoza.com", color: "blue" },
+  { name: "Finestra Serveis", latin: "Fenestra clara", type: "Web empresarial · Multipágina", description: "Sitio corporativo que organiza servicios, genera confianza y conecta consultas con el negocio.", features: ["Varias páginas", "Integraciones", "Captación de leads", "Multilingüe", "Formularios", "SEO"], stack: ["React", "EmailJS", "Responsive", "Analytics"], image: finestra, flower: flowerPoppy, url: "https://finestraserveis.com", color: "yellow" },
+  { name: "El Taller", latin: "Officina communis", type: "Full-stack · Reservas", description: "Una experiencia cálida con la lógica necesaria para gestionar la actividad diaria del taller.", features: ["Agenda online", "Gestor de reservas", "Pasarela de pago", "Talleres", "Contenido", "Comunidad"], stack: ["React", "Pagos", "Booking", "Backend", "Email", "Responsive"], image: taller, flower: flowerCosmos, url: "https://eltaller-aguaymanto.com", color: "pink" },
 ];
 
 function VersionSwitch() {
@@ -71,7 +71,11 @@ export default function BotanicalPortfolio() {
                   </div>
                   <div className="bot-card-face bot-card-back">
                     <div className="bot-card-back-media"><img src={project.image} alt={`Vista del proyecto ${project.name}`}/></div>
-                    <div className="bot-card-back-copy"><small>{project.type}</small><h3>{project.name}</h3><p>{project.description}</p><a className="bot-visit" href={project.url} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()}>Visitar proyecto <HiArrowUpRight/></a></div>
+                    <div className="bot-card-back-copy">
+                      <small>{project.type}</small><h3>{project.name}</h3><p>{project.description}</p>
+                      <div className="bot-card-details"><div className="bot-feature-list"><b>Lo que vive adentro</b><ul>{project.features.map((feature, featureIndex) => <li key={feature}><span>0{featureIndex + 1}</span>{feature}</li>)}</ul></div><div className="bot-stack-list"><b>Construido con</b><p>{project.stack.map((technology) => <span key={technology}>{technology}</span>)}</p></div></div>
+                      <a className="bot-visit" href={project.url} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()}>Visitar proyecto <HiArrowUpRight/></a>
+                    </div>
                   </div>
                 </div>
               </div>
