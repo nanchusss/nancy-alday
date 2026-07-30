@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiArrowRight, FiArrowUp, FiArrowUpRight } from "react-icons/fi";
 import "./App.css";
 
 import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
@@ -156,11 +157,8 @@ const projectCards = [
 const ease = [0.16, 1, 0.3, 1];
 
 function Arrow({ diagonal = false }) {
-  return (
-    <svg className={`line-arrow ${diagonal ? "line-arrow-diagonal" : ""}`} viewBox="0 0 24 14" aria-hidden="true">
-      <path d="M1 7H22M16 1L22 7L16 13" />
-    </svg>
-  );
+  const Icon = diagonal ? FiArrowUpRight : FiArrowRight;
+  return <Icon className="line-arrow" aria-hidden="true" focusable="false" />;
 }
 
 function SequenceFrame({ image, caption, index, timelineIndex, timelineTotal, progress, title }) {
@@ -565,7 +563,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
     <section ref={sectionRef} className="gsap-projects" id="work" aria-labelledby="projects-title">
       <header className="gsap-projects-head">
         <p className="section-no">01 / {es ? "Proyectos seleccionados" : "Selected projects"}</p>
-        <p>{es ? "Desliza para recorrer" : "Scroll to explore"} <span aria-hidden="true">→</span></p>
+        <p>{es ? "Desliza para recorrer" : "Scroll to explore"} <Arrow/></p>
       </header>
       <div ref={trackRef} className="gsap-projects-track">
         <div className="gsap-projects-intro">
@@ -590,7 +588,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
                     <img src={project.image} alt={`${project.title} — ${type}`} loading={index > 1 ? "lazy" : "eager"}/>
                   </picture>
                   <span className="gsap-project-index">{project.index} / {project.year}</span>
-                  <span className="gsap-project-open">{es ? "Ver proyecto" : "View project"} ↗</span>
+                  <span className="gsap-project-open">{es ? "Ver proyecto" : "View project"} <Arrow diagonal/></span>
                 </div>
                 <div className="gsap-project-copy">
                   <div>
@@ -900,7 +898,7 @@ function App() {
         <div className="footer-kicker"><span>06 / {es ? "Contacto" : "Contact"}</span><span>{es ? "¿Tienes una idea?" : "Have an idea?"}</span></div>
         <h2>{es ? <>Hagámosla<br /><em>imposible de ignorar.</em></> : <>Let's make it<br /><em>impossible to ignore.</em></>}</h2>
         <a className="mail-link" href="mailto:hola@nancyalday.com" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>hola@nancyalday.com <Arrow diagonal /></a>
-        <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} ↑</button></div>
+        <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} <FiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
       </footer>
     </main>
   );
