@@ -493,13 +493,15 @@ function GsapProjects({ es, onEnter, onLeave }) {
         const cards = gsap.utils.toArray(".gsap-project-card", track);
         const travel = () => Math.max(0, track.scrollWidth - window.innerWidth);
 
-        const horizontal = gsap.to(track, {
+        const horizontal = gsap.fromTo(track, {
+          x: 0,
+        }, {
           x: () => -travel(),
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: () => `+=${travel() + window.innerHeight * 0.75}`,
+            end: () => `+=${travel()}`,
             pin: true,
             scrub: 0.8,
             invalidateOnRefresh: true,
@@ -556,7 +558,17 @@ function GsapProjects({ es, onEnter, onLeave }) {
       return () => media.revert();
     }, section);
 
-    return () => context.revert();
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
+    section.querySelectorAll("img").forEach((image) => {
+      if (!image.complete) image.addEventListener("load", refresh, { once: true });
+    });
+
+    return () => {
+      window.removeEventListener("load", refresh);
+      context.revert();
+    };
   }, [es]);
 
   return (
@@ -686,6 +698,7 @@ function App() {
 
   return (
     <main>
+      <nav className="portfolio-switch" aria-label="Versión del portfolio"><a className="active" href="/v1">V1</a><a href="/v2">V2</a></nav>
       <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""} ${cursorVisible ? "" : "cursor-hidden"}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
         <span>{es ? "Visitar proyecto" : "Visit project"}</span>
       </motion.div>

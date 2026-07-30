@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import BotanicalPortfolio from './BotanicalPortfolio';
+import Welcome from './Welcome';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const path = window.location.pathname.replace(/\/$/, "");
+const Portfolio = path === "/v2" ? BotanicalPortfolio : path === "/v1" ? App : Welcome;
 root.render(
   <React.StrictMode>
-    <App />
+    <Portfolio />
   </React.StrictMode>
 );
 

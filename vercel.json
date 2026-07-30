@@ -1,5 +1,9 @@
 {
   "framework": "create-react-app",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/v1", "destination": "/" },
+    { "source": "/v2", "destination": "/" }
+  ]
 }
