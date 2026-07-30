@@ -11,7 +11,7 @@ import finestra from "./IMAGES/finestraserveis.png";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
 import baseMendoza from "./IMAGES/base-mendoza.png";
 import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
-import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
+import nidoMobile from "./IMAGES/19.png";
 import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
 import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
 import nidoScene1 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.17.59.png";
