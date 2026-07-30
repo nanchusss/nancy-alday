@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiArrowRight, FiArrowUp, FiArrowUpRight } from "react-icons/fi";
+import { HiArrowLongRight, HiArrowUp, HiArrowUpRight } from "react-icons/hi2";
 import "./App.css";
 
 import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
@@ -157,7 +157,7 @@ const projectCards = [
 const ease = [0.16, 1, 0.3, 1];
 
 function Arrow({ diagonal = false }) {
-  const Icon = diagonal ? FiArrowUpRight : FiArrowRight;
+  const Icon = diagonal ? HiArrowUpRight : HiArrowLongRight;
   return <Icon className="line-arrow" aria-hidden="true" focusable="false" />;
 }
 
@@ -588,7 +588,6 @@ function GsapProjects({ es, onEnter, onLeave }) {
                     <img src={project.image} alt={`${project.title} — ${type}`} loading={index > 1 ? "lazy" : "eager"}/>
                   </picture>
                   <span className="gsap-project-index">{project.index} / {project.year}</span>
-                  <span className="gsap-project-open">{es ? "Ver proyecto" : "View project"} <Arrow diagonal/></span>
                 </div>
                 <div className="gsap-project-copy">
                   <div>
@@ -779,7 +778,7 @@ function App() {
                 onFocus={() => setActiveSystem(i)}
                 onClick={() => setActiveSystem(i)}
               >
-                <span>0{i + 1}</span><strong>{title}</strong><small>{stack}</small><i aria-hidden="true"/>
+                <span>0{i + 1}</span><strong>{title}</strong><small>{stack}</small><HiArrowUpRight className="action-arrow" aria-hidden="true" focusable="false"/>
               </button>
             ))}
           </div>
@@ -838,7 +837,7 @@ function App() {
             <p>{es ? "Soy desarrolladora frontend y diseñadora digital. Me interesa el punto exacto donde una idea de negocio se convierte en algo que la gente entiende, recuerda y quiere usar." : "I am a frontend developer and digital designer. I care about the exact point where a business idea becomes something people understand, remember and want to use."}</p>
             <p>{es ? "Trabajo de principio a fin: estrategia, interfaz, código, animación, integraciones y automatizaciones. Eso me permite cuidar la experiencia completa, no solo su superficie." : "I work end to end: strategy, interface, code, animation, integrations and automation. That lets me shape the complete experience, not only its surface."}</p>
           </div>
-          <a href="mailto:hola@nancyalday.com">{es ? "Hablemos de tu proyecto" : "Let's talk about your project"} <Arrow /></a>
+          <a href="#contact">{es ? "Hablemos de tu proyecto" : "Let's talk about your project"} <Arrow /></a>
         </div>
       </section>
 
@@ -860,7 +859,7 @@ function App() {
             ["End-to-end product", "From first idea to launch: prototype, development, measurement and evolution."],
           ]).map(([title, text], i) => (
             <motion.div className="service-row" key={title} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.7 }}>
-              <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><i aria-hidden="true"/>
+              <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><HiArrowUpRight className="action-arrow" aria-hidden="true" focusable="false"/>
             </motion.div>
           ))}
         </div>
@@ -898,7 +897,7 @@ function App() {
         <div className="footer-kicker"><span>06 / {es ? "Contacto" : "Contact"}</span><span>{es ? "¿Tienes una idea?" : "Have an idea?"}</span></div>
         <h2>{es ? <>Hagámosla<br /><em>imposible de ignorar.</em></> : <>Let's make it<br /><em>impossible to ignore.</em></>}</h2>
         <a className="mail-link" href="mailto:hola@nancyalday.com" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>hola@nancyalday.com <Arrow diagonal /></a>
-        <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} <FiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
+        <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} <HiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
       </footer>
     </main>
   );
