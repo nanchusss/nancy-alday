@@ -6,8 +6,9 @@ import "./App.css";
 
 import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
 import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
-import finestra from "./IMAGES/projectsdesktop/finestracat.jpg";
+import finestra from "./IMAGES/finestraserveis.png";
 import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
+import baseMendoza from "./IMAGES/base-mendoza.png";
 import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
 import nidoMobile from "./IMAGES/projectsmobile/nidomobile.jpg";
 import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
@@ -111,8 +112,8 @@ const projects = [
     typeEn: "Logistics · Web platform",
     year: "2026",
     url: "https://base-mendoza.com",
-    image: null,
-    imageMobile: null,
+    image: baseMendoza,
+    imageMobile: baseMendoza,
     tone: "base",
     description: "Una interfaz robusta para una empresa logística: confianza, velocidad y contacto sin fricción.",
     descriptionEn: "A robust interface for a logistics company: trust, speed and frictionless contact.",
