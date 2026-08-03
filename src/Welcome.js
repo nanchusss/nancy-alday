@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { HiArrowLongRight } from "react-icons/hi2";
+import Seo from "./Seo";
 import "./Welcome.css";
 
 function MeadowFlower({ x, y, scale = 1, color = "#ef594f", delay = 0 }) {
@@ -48,6 +49,13 @@ export function DonkeyMeadow({ className = "" }) {
 export default function Welcome() {
   return (
     <main className="welcome-page welcome-neutral">
+      <Seo
+        language="es"
+        path="/"
+        title="Nancy Alday | Diseño web, desarrollo full-stack y productos digitales"
+        description="Nancy Alday diseña y desarrolla páginas web y productos digitales completos. Estrategia, UX/UI, React, backend, automatización e IA para profesionales y negocios que necesitan convertir una idea en una experiencia útil y memorable."
+        pageName="Nancy Alday — Diseño y desarrollo digital"
+      />
       <header><span>Nancy Alday</span><span>Portfolio / 2026</span></header>
       <section className="welcome-copy">
         <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Hola, bienvenida</motion.span>

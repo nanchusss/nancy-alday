@@ -519,7 +519,22 @@ footer{background:var(--clay)}
 .gsap-project-copy h3{margin:0 0 11px;font-size:clamp(45px,5.1vw,92px);font-weight:300;line-height:.82;letter-spacing:-.07em}
 .gsap-project-copy span{font:12px "DM Mono";text-transform:uppercase;letter-spacing:.08em;opacity:.72}
 .gsap-project-copy>p{margin:22px 0;font-size:clamp(13px,1vw,16px);line-height:1.55}
-.gsap-project-copy ul{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}.gsap-project-copy li{padding:7px 10px;border:1px solid rgba(238,233,225,.34);border-radius:100px;font:11px "DM Mono";text-transform:uppercase}
+.gsap-project-summary{font-family:"Syne","Manrope",sans-serif;letter-spacing:-.018em}
+.gsap-project-scope{margin:20px 0 18px;padding-top:15px;border-top:1px solid rgba(238,233,225,.28)}.gsap-project-scope>b{display:block;margin-bottom:9px;font:10px "DM Mono";text-transform:uppercase;letter-spacing:.11em;color:var(--acid)}.gsap-project-scope>p{margin:0 0 13px;font:400 clamp(12px,.86vw,14px)/1.45 "Syne","Manrope",sans-serif;color:rgba(238,233,225,.72)}.gsap-project-scope>ul{display:grid;grid-template-columns:1fr 1fr;column-gap:13px;margin:0;padding:0;list-style:none}.gsap-project-scope li{display:grid;grid-template-columns:19px 1fr;gap:5px;padding:6px 0;border-top:1px solid rgba(238,233,225,.16);font:10px/1.25 "Syne","Manrope",sans-serif}.gsap-project-scope li>span{font:8px "DM Mono";opacity:.5}
+.gsap-project-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}.gsap-project-tags>li{padding:6px 9px;border:1px solid rgba(238,233,225,.34);border-radius:100px;font:9px "DM Mono";text-transform:uppercase}
+@media(min-width:801px){
+  .gsap-project-index{font-size:16px}
+  .gsap-project-copy span{font-size:12px}
+  .gsap-project-copy>p{font-size:17px;line-height:1.55}
+  .gsap-project-scope{margin:14px 0 12px;padding-top:0;border-top:0}
+  .gsap-project-scope>b{margin-bottom:7px;font-size:14px}
+  .gsap-project-scope>p{font-size:16px;line-height:1.5}
+  .gsap-project-scope>ul{display:block}
+  .gsap-project-scope li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:7px;min-height:0;padding:7px 0;border:0;border-top:1px solid rgba(238,233,225,.16);font-size:16px;line-height:1.25}
+  .gsap-project-scope li>span{display:block;margin:0;font-size:11px;color:var(--acid);opacity:.75}
+  .gsap-project-tags{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;padding-top:8px;border-top:0}
+  .gsap-project-tags>li{min-width:0;padding:6px 0;border:0;border-bottom:1px solid rgba(238,233,225,.12);border-radius:0;font-size:11px;line-height:1.25;opacity:.78}
+}
 .gsap-project-base{display:grid;place-items:center;background:linear-gradient(135deg,#0a2924,#247568)}.gsap-project-base span{font-size:clamp(160px,25vw,460px);font-weight:300;letter-spacing:-.13em}.gsap-project-base i{position:absolute;width:42%;aspect-ratio:1;border:1px solid var(--clay);border-radius:50%}.gsap-project-base i:last-child{width:68%}
 .gsap-projects-outro{display:flex;flex-direction:column;justify-content:center;flex-basis:100vw;background:var(--paper);color:var(--ink)}
 .gsap-projects-outro p{margin:0 0 24px;font:12px "DM Mono";text-transform:uppercase;letter-spacing:.12em}
@@ -534,7 +549,7 @@ footer{background:var(--clay)}
   .gsap-projects-intro{display:block}.gsap-projects-intro h2{margin:27px 0 48px;font-size:clamp(62px,19vw,96px)}.gsap-projects-intro>p{max-width:310px;margin-left:auto;font-size:13px}
   .gsap-project-card{width:auto;height:auto;padding:0 var(--pad) 105px;border:0}
   .gsap-project-card>a{display:block;height:auto}.gsap-project-media{height:auto;aspect-ratio:.72}.gsap-project-image{inset:-3%}.gsap-project-copy{padding-top:18px}
-  .gsap-project-copy>div{display:block}.gsap-project-copy h3{font-size:clamp(49px,14.3vw,72px)}.gsap-project-copy>p{max-width:440px;font-size:13px}.gsap-project-copy li{font-size:6px}
+  .gsap-project-copy>div{display:block}.gsap-project-copy h3{font-size:clamp(49px,14.3vw,72px)}.gsap-project-copy>p{max-width:440px;font-size:16px}.gsap-project-scope{margin-top:24px}.gsap-project-scope>p{max-width:520px;font-size:16px;line-height:1.5}.gsap-project-scope li{padding:9px 0;font-size:14px}.gsap-project-scope li>span{font-size:10px}.gsap-project-tags>li{font-size:11px}
   .gsap-projects-outro{margin-top:0;padding-top:105px;padding-bottom:110px}.gsap-projects-outro h3{font-size:clamp(57px,16vw,82px)}.gsap-scroll-line{display:none}
 }
 
@@ -589,7 +604,7 @@ footer h2 em{
     font-size:16px;
   }
 
-  .gsap-project-copy li,.system-menu button,.lab-events div,.lab-flow span,
+  .gsap-project-tags>li,.system-menu button,.lab-events div,.lab-flow span,
   .footer-kicker,.footer-bottom{line-height:1.4}
 
   .automation-copy{padding-bottom:34px}.automation-copy ul{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}.automation-copy li{min-width:0;padding:9px 10px;font-size:12px;text-align:center}

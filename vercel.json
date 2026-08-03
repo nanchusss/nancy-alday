@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/v1", "destination": "/" },
+    { "source": "/en/v1", "destination": "/" },
     { "source": "/v2", "destination": "/" }
   ]
 }

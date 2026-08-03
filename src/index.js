@@ -8,10 +8,11 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const path = window.location.pathname.replace(/\/$/, "");
-const Portfolio = path === "/v2" ? BotanicalPortfolio : path === "/v1" ? App : Welcome;
+const isEnglishV1 = path === "/en/v1";
+const Portfolio = path === "/v2" ? BotanicalPortfolio : path === "/v1" || isEnglishV1 ? App : Welcome;
 root.render(
   <React.StrictMode>
-    <Portfolio />
+    <Portfolio initialLanguage={isEnglishV1 ? "en" : "es"} />
   </React.StrictMode>
 );
 

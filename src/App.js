@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useScroll, useTransform, useMotionVa
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HiArrowLongRight, HiArrowUp, HiArrowUpRight } from "react-icons/hi2";
+import Seo from "./Seo";
 import "./App.css";
 
 import taller from "./IMAGES/projectsmobile/tallerok-crop.png";
@@ -44,7 +45,8 @@ const projects = [
     descriptionEn: "A portal designed to turn scattered processes into a simple, clear and useful experience.",
     story: "Una plataforma inmobiliaria end-to-end. Diseñé y desarrollé el ecosistema completo: publicación y búsqueda de propiedades, perfiles, mensajería, automatización de correos, integraciones externas y cobros online.",
     storyEn: "An end-to-end real estate platform. I designed and developed the full ecosystem: property publishing and search, profiles, messaging, email automation, external integrations and online payments.",
-    features: ["Búsqueda + filtros", "Perfiles + mensajes", "Email automation", "WhatsApp + Maps", "Pagos online"],
+    features: ["Búsqueda + filtros", "Perfiles + mensajería", "Automatizaciones", "APIs + integraciones", "Backend + pagos"],
+    featuresEn: ["Search + filters", "Profiles + messaging", "Automations", "APIs + integrations", "Backend + payments"],
     scenes: [nidoCover, nidoScene1, nidoScene2, nidoScene3, nidoScene6],
     sceneCaptions: ["El portal inmobiliario de Cuyo", "Descubrimiento y búsqueda", "Filtros que reducen la fricción", "Fichas pensadas para decidir", "Un ecosistema conectado"],
     narrative: [
@@ -54,7 +56,7 @@ const projects = [
       ["Sistema", "Personas, mensajes y automatización", "Perfiles, favoritos, mensajería, correo, WhatsApp y pagos conectan el recorrido completo."],
       ["Resultado", "Un ecosistema preparado para crecer", "Una arquitectura modular en React y MongoDB que puede evolucionar junto al negocio."],
     ],
-    tags: ["React", "MongoDB", "Cloudinary", "Product design"],
+    tags: ["Frontend · React + JavaScript", "Backend · Node + MongoDB", "Media · Cloudinary", "Integraciones · APIs + EmailJS", "Infra · Render + Vercel", "Workflow · GitHub + IA"],
   },
   {
     index: "02",
@@ -72,6 +74,7 @@ const projects = [
     story: "Una experiencia digital premium construida para transformar arquitectura y precisión técnica en deseo, confianza y consultas comerciales.",
     storyEn: "A premium digital experience built to turn architecture and technical precision into desire, trust and qualified enquiries.",
     features: ["Dirección de arte", "UX/UI", "Catálogo", "Multilingüe", "Conversión"],
+    featuresEn: ["Art direction", "UX/UI", "Catalogue", "Multilingual", "Conversion"],
     scenes: [umbralCover, umbralScene1, umbralScene2, umbralScene3, umbralScene4, umbralCover, umbralScene6, umbralScene7],
     sceneCaptions: ["Arquitectura exterior para habitar", "Una entrada de marca precisa", "Producto y materialidad", "Sistemas explicados con claridad", "Diseño que genera confianza", "Detalle, ritmo y respiración", "Conversión sin romper la experiencia", "Una presencia premium completa"],
     narrative: [
@@ -99,6 +102,7 @@ const projects = [
     story: "Reorganicé una oferta técnica compleja en una experiencia clara, rápida y cercana, conectada con formularios, correo y captación de oportunidades.",
     storyEn: "I reorganised a complex technical offer into a clear, fast and approachable experience connected to forms, email and lead generation.",
     features: ["Arquitectura UX", "EmailJS", "Leads", "Multilingüe", "Responsive"],
+    featuresEn: ["UX architecture", "EmailJS", "Lead generation", "Multilingual", "Responsive"],
     narrative: [
       ["Problema", "Servicios complejos, decisiones rápidas", "La oferta necesitaba ser entendida con facilidad por personas que buscan una solución concreta."],
       ["Solución", "Claridad, cercanía y acción", "Reorganicé contenidos y recorridos para convertir información técnica en oportunidades comerciales."],
@@ -122,6 +126,7 @@ const projects = [
     story: "Identidad, contenido y experiencia de reserva conviven en un espacio cálido que convierte la artesanía en una comunidad digital viva.",
     storyEn: "Identity, content and booking coexist in a warm space that turns craft into a living digital community.",
     features: ["Identidad", "E-commerce", "Reservas", "Contenido", "Comunidad"],
+    featuresEn: ["Identity", "E-commerce", "Bookings", "Content", "Community"],
     narrative: [
       ["Visión", "Artesanía que también se vive online", "Una experiencia cálida para descubrir talleres, reservar y sentirse parte de una comunidad."],
       ["Experiencia", "Contenido, identidad y reserva", "Cada detalle acompaña el proceso desde la curiosidad inicial hasta la participación."],
@@ -144,6 +149,10 @@ const umbralClone = {
   tone: "base-mendoza",
   description: "Una plataforma logística pensada para conectar empresas y mercancías en toda la región de Cuyo, con recorridos claros, respuesta ágil y operaciones sin fricción.",
   descriptionEn: "A logistics platform designed to connect businesses and goods across the Cuyo region through clear journeys, agile service and frictionless operations.",
+  story: "Diseñé y desarrollé una presencia digital para ordenar la propuesta logística, explicar servicios con claridad y convertir consultas empresariales en oportunidades comerciales.",
+  storyEn: "I designed and developed a digital presence that organises the logistics offer, explains services clearly and turns business enquiries into commercial opportunities.",
+  features: ["Arquitectura UX", "Servicios logísticos", "Contacto directo", "Responsive", "SEO"],
+  featuresEn: ["UX architecture", "Logistics services", "Direct contact", "Responsive", "SEO"],
   tags: ["UX/UI", "Development", "Logistics"],
 };
 
@@ -585,8 +594,9 @@ function GsapProjects({ es, onEnter, onLeave }) {
           <p>{es ? "Diseño y desarrollo productos digitales completos: desde la dirección visual hasta la lógica que los hace funcionar." : "I design and build complete digital products, from visual direction to the logic that makes them work."}</p>
         </div>
         {projectCards.map((project, index) => {
-          const description = es ? project.description : project.descriptionEn;
           const type = es ? project.type : project.typeEn;
+          const story = es ? project.story || project.description : project.storyEn || project.descriptionEn;
+          const features = es ? project.features || [] : project.featuresEn || project.features || [];
           return (
             <article
               className={`gsap-project-card gsap-project-${project.tone}`}
@@ -607,8 +617,12 @@ function GsapProjects({ es, onEnter, onLeave }) {
                     <h3>{project.title}</h3>
                     <span>{type}</span>
                   </div>
-                  <p>{description}</p>
-                  <ul>{project.tags.slice(0, 3).map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <div className="gsap-project-scope">
+                    <b>{es ? "Qué construí" : "What I built"}</b>
+                    <p>{story}</p>
+                    <ul>{features.slice(0, 5).map((feature, featureIndex) => <li key={feature}><span>0{featureIndex + 1}</span>{feature}</li>)}</ul>
+                  </div>
+                  <ul className="gsap-project-tags">{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                 </div>
               </a>
             </article>
@@ -625,9 +639,9 @@ function GsapProjects({ es, onEnter, onLeave }) {
   );
 }
 
-function App() {
+function App({ initialLanguage = "es" }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("es");
+  const [language, setLanguage] = useState(initialLanguage);
   const [activeSystem, setActiveSystem] = useState(0);
   const [projectCursor, setProjectCursor] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
@@ -673,6 +687,10 @@ function App() {
     setMenuOpen(false);
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
+  const changeLanguage = (nextLanguage) => {
+    setLanguage(nextLanguage);
+    window.history.replaceState({}, "", nextLanguage === "en" ? "/en/v1" : "/v1");
+  };
   const es = language === "es";
   const copy = {
     available: es ? "Disponible para proyectos" : "Available for projects",
@@ -699,6 +717,14 @@ function App() {
 
   return (
     <main>
+      <Seo
+        language={language}
+        path={es ? "/v1" : "/en/v1"}
+        alternatePath={es ? "/en/v1" : "/v1"}
+        title={es ? "Nancy Alday | Diseñadora web y desarrolladora full-stack en Barcelona" : "Nancy Alday | Web Designer & Full-Stack Developer in Barcelona"}
+        description={es ? "Diseño y desarrollo páginas web y productos digitales de principio a fin: estrategia, UX/UI, React, backend, automatización e IA. Ayudo a negocios y profesionales a convertir sus ideas en experiencias rápidas, claras y preparadas para crecer." : "I design and develop websites and digital products end to end: strategy, UX/UI, React, backend, automation and AI. I help businesses and professionals turn ideas into fast, clear experiences built to grow."}
+        pageName={es ? "Portfolio de diseño web y desarrollo full-stack" : "Web design and full-stack development portfolio"}
+      />
       <nav className="portfolio-switch" aria-label="Versión del portfolio"><a className="active" href="/v1">V1</a><a href="/v2">V2</a></nav>
       <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""} ${cursorVisible ? "" : "cursor-hidden"}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
         <span>{es ? "Visitar proyecto" : "Visit project"}</span>
@@ -713,9 +739,9 @@ function App() {
           <span className="availability"><i /> {copy.available}</span>
         </div>
         <div className="language-switch" aria-label="Selector de idioma">
-          <button className={es ? "active" : ""} onClick={() => setLanguage("es")}>ES</button>
+          <button className={es ? "active" : ""} onClick={() => changeLanguage("es")}>ES</button>
           <span>/</span>
-          <button className={!es ? "active" : ""} onClick={() => setLanguage("en")}>EN</button>
+          <button className={!es ? "active" : ""} onClick={() => changeLanguage("en")}>EN</button>
         </div>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>
           <span>{menuOpen ? copy.close : copy.menu}</span>
@@ -906,6 +932,7 @@ function App() {
           </div>
         </div>
       </section>
+
 
       <footer id="contact">
         <div className="footer-kicker"><span>06 / {es ? "Contacto" : "Contact"}</span><span>{es ? "¿Tienes una idea?" : "Have an idea?"}</span></div>

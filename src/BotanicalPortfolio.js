@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { HiArrowLongRight, HiArrowUpRight } from "react-icons/hi2";
+import Seo from "./Seo";
 import nido from "./IMAGES/projectsmobile/nido-desktop-crop.png";
 import umbral from "./IMAGES/projectsmobile/umbralbuena.svg";
 import umbralMobile from "./IMAGES/projectsmobile/umbralpc-v2-crop.png";
@@ -43,6 +44,13 @@ export default function BotanicalPortfolio() {
 
   return (
     <main className="botanical-page">
+      <Seo
+        language="es"
+        path="/v2"
+        title="Nancy Alday | Diseño web creativo, desarrollo full-stack y automatización"
+        description="Portfolio creativo de Nancy Alday, diseñadora digital y desarrolladora full-stack en Barcelona. Diseño páginas web con identidad y construyo la tecnología que las hace funcionar: React, backend, APIs, reservas, pagos, automatización e IA."
+        pageName="Portfolio creativo de diseño y desarrollo digital"
+      />
       <VersionSwitch />
       <header className="bot-nav">
         <a className="bot-logo" href="#bot-top">Nancy Alday</a>
@@ -100,6 +108,7 @@ export default function BotanicalPortfolio() {
           {[["01","Estrategia","Entender el terreno, las personas y el objetivo."],["02","Diseño","Dar forma a una experiencia clara y memorable."],["03","Desarrollo","Construir con código sólido, accesible y vivo."],["04","Evolución","Medir, aprender y dejar espacio para crecer."]].map(([n,title,text], index) => <motion.div className="herbarium-row" key={n} initial={{ y: 26, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .7 }} transition={{ duration: .65, delay: .12 + index * .08, ease: [0.16, 1, 0.3, 1] }}><b>{n}</b><h3>{title}</h3><p>{text}</p></motion.div>)}
         </div>
       </section>
+
 
       <footer className="bot-footer" id="bot-contact">
         <img className="bot-footer-landscape" src={botanicalGarden} alt="" aria-hidden="true"/>
