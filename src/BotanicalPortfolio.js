@@ -45,7 +45,7 @@ export default function BotanicalPortfolio() {
       <VersionSwitch />
       <header className="bot-nav">
         <a className="bot-logo" href="#bot-top">Nancy Alday</a>
-        <p>Diseño digital<br/>con naturaleza propia</p>
+        <p>Diseño digital con naturaleza propia</p>
         <nav><a href="#bot-work">Proyectos</a><a href="#bot-about">Sobre mí</a><a href="#bot-contact">Contacto</a></nav>
       </header>
 
@@ -61,7 +61,7 @@ export default function BotanicalPortfolio() {
         <header><span>01 / Especies seleccionadas</span><h2>Proyectos<br/><em>en flor.</em></h2><p>Cada proyecto pide su propio clima: estrategia, identidad, tecnología y cuidado continuo.</p></header>
         <div className="bot-project-grid">
           {botanicalProjects.map((project, index) => (
-            <motion.article className={`bot-project bot-${project.color}${activeCard === index ? " is-flipped" : ""}`} key={project.name} initial={{ y: 80, opacity: 0, rotate: index % 2 ? 3 : -3 }} whileInView={{ y: 0, opacity: 1, rotate: index % 2 ? 1.4 : -1.2 }} whileHover={{ y: -14, rotate: 0, scale: 1.012 }} whileTap={{ scale: .985 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .8, delay: index * .04, ease: [0.16, 1, 0.3, 1] }}>
+            <motion.article className={`bot-project bot-${project.color}${activeCard === index ? " is-flipped" : ""}`} key={project.name} initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} whileHover={{ y: -14, scale: 1.012 }} whileTap={{ scale: .985 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .8, delay: index * .04, ease: [0.16, 1, 0.3, 1] }}>
               <div className="bot-card-link" role="button" tabIndex="0" aria-label={`Descubrir ${project.name}`} aria-pressed={activeCard === index} onClick={() => handleCardTap(index)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggleCard(index); } }}>
                 <div className="bot-card-inner">
                   <div className="bot-card-face bot-card-front">
@@ -84,10 +84,17 @@ export default function BotanicalPortfolio() {
         </div>
       </section>
 
+      <section className="bot-capabilities" aria-labelledby="bot-capabilities-title">
+        <header><span>02 / Qué hago</span><h2 id="bot-capabilities-title">Cultivo ideas.<br/><em>Construyo sistemas.</em></h2><p>Diseño lo visible y desarrollo la estructura que permite que una experiencia funcione, conecte y evolucione.</p></header>
+        <div className="bot-capability-list">
+          {[["01","Dirección digital","Concepto, narrativa, UX/UI e identidad para convertir una idea en una presencia reconocible."],["02","Desarrollo full-stack","Interfaces React, backend, datos, APIs e integraciones trabajando como un solo producto."],["03","Automatización & IA","Flujos, formularios, CRM, emails y asistentes que reducen tareas y multiplican posibilidades."],["04","Producto end-to-end","De la estrategia al lanzamiento: diseño, código, medición, mantenimiento y evolución continua."]].map(([number, title, text], index) => <motion.article key={title} initial={{ y: 45, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .55 }} transition={{ duration: .7, delay: index * .08, ease: [0.16, 1, 0.3, 1] }}><span>{number}</span><h3>{title}</h3><p>{text}</p><HiArrowUpRight/></motion.article>)}
+        </div>
+      </section>
+
       <section className="bot-herbarium" id="bot-about">
         <div className="herbarium-art"><motion.img className="herbarium-foliage" src={botanicalFoliage} alt="" initial={{ y: 70, rotate: -7, opacity: 0 }} whileInView={{ y: 0, rotate: -2, opacity: 1 }} viewport={{ once: true, amount: .48 }} transition={{ duration: .9, delay: .18, ease: [0.16, 1, 0.3, 1] }}/><motion.img className="herbarium-flowers" src={botanicalFlowers} alt="" initial={{ x: 70, rotate: 8, opacity: 0 }} whileInView={{ x: 0, rotate: 2, opacity: 1 }} viewport={{ once: true, amount: .48 }} transition={{ duration: .9, delay: .34, ease: [0.16, 1, 0.3, 1] }}/><span className="specimen-label">N.A / DIGITAL<br/>SPECIMEN 2026</span></div>
         <div className="herbarium-copy">
-          <span>02 / Cómo trabajo</span>
+          <span>03 / Cómo trabajo</span>
           <h2>De la semilla<br/><em>al sistema.</em></h2>
           {[["01","Estrategia","Entender el terreno, las personas y el objetivo."],["02","Diseño","Dar forma a una experiencia clara y memorable."],["03","Desarrollo","Construir con código sólido, accesible y vivo."],["04","Evolución","Medir, aprender y dejar espacio para crecer."]].map(([n,title,text], index) => <motion.div className="herbarium-row" key={n} initial={{ y: 26, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .7 }} transition={{ duration: .65, delay: .12 + index * .08, ease: [0.16, 1, 0.3, 1] }}><b>{n}</b><h3>{title}</h3><p>{text}</p></motion.div>)}
         </div>
@@ -96,7 +103,7 @@ export default function BotanicalPortfolio() {
       <footer className="bot-footer" id="bot-contact">
         <img className="bot-footer-landscape" src={botanicalGarden} alt="" aria-hidden="true"/>
         <div className="bot-footer-wash"/>
-        <motion.img className="footer-village" src={botanicalVillage} alt="" aria-hidden="true" initial={{ y: 90, rotate: 3 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}/><span>03 / Contacto</span>
+        <motion.img className="footer-village" src={botanicalVillage} alt="" aria-hidden="true" initial={{ y: 90, rotate: 3 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}/><span>04 / Contacto</span>
         <motion.h2 initial={{ y: 40, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .5 }} transition={{ duration: .8, ease: [0.16, 1, 0.3, 1] }}>¿Plantamos<br/><em>algo juntas?</em></motion.h2>
         <a href="mailto:hola@nancyalday.com">hola@nancyalday.com <HiArrowLongRight/></a>
         <div><span>© 2026 Nancy Alday</span><span>Barcelona / Disponible</span><a href="#bot-top">Volver arriba ↑</a></div>

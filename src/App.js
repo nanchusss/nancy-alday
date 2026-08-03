@@ -6,14 +6,15 @@ import { HiArrowLongRight, HiArrowUp, HiArrowUpRight } from "react-icons/hi2";
 import "./App.css";
 
 import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
-import tallerMobile from "./IMAGES/projectsmobile/portadaeltallermobile.jpg";
+import tallerMobile from "./IMAGES/projectsmobile/taller.png";
 import finestra from "./IMAGES/finestraserveis.png";
-import finestraMobile from "./IMAGES/projectsmobile/finestracatmobile2.jpg";
+import finestraMobile from "./IMAGES/projectsmobile/finestraserveismobile.png";
 import baseMendoza from "./IMAGES/base-mendoza.png";
 import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
-import nidoMobile from "./IMAGES/19.png";
+import nidoMobile from "./IMAGES/projectsmobile/nido.png";
 import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
-import umbralMobile from "./IMAGES/projectsmobile/umbralmobile.jpg";
+import umbralMobile from "./IMAGES/projectsmobile/umbral.png";
+import baseMobile from "./IMAGES/projectsmobile/basemobile.png";
 import nidoScene1 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.17.59.png";
 import nidoScene2 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.18.25.png";
 import nidoScene3 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.18.44.png";
@@ -139,7 +140,7 @@ const umbralClone = {
   year: "2026",
   url: "https://www.base-mendoza.com",
   image: baseMendoza,
-  imageMobile: baseMendoza,
+  imageMobile: baseMobile,
   tone: "base-mendoza",
   description: "Una plataforma logística pensada para conectar empresas y mercancías en toda la región de Cuyo, con recorridos claros, respuesta ágil y operaciones sin fricción.",
   descriptionEn: "A logistics platform designed to connect businesses and goods across the Cuyo region through clear journeys, agile service and frictionless operations.",

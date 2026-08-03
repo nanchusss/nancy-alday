@@ -506,6 +506,7 @@ footer{background:var(--clay)}
 .gsap-project-image img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
 @media(min-width:801px){
   .gsap-project-nido .gsap-project-image img{transform:scale(2.75);transform-origin:50% 53%}
+  .gsap-projects-outro{padding-left:52vw;padding-right:5vw}
 }
 .gsap-project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent 35%,transparent 67%,rgba(0,0,0,.38));pointer-events:none}
 .gsap-project-index{position:absolute;z-index:3;top:18px;left:18px;font:12px "DM Mono";text-transform:uppercase;letter-spacing:.12em}
@@ -556,8 +557,9 @@ footer{background:var(--clay)}
   .gsap-project-copy li,.system-menu button,.lab-events div,.lab-flow span,
   .footer-kicker,.footer-bottom{line-height:1.4}
 
-  .lab-flow{left:5%;right:5%;bottom:22px;display:grid;grid-template-columns:auto minmax(8px,1fr) auto minmax(8px,1fr) auto minmax(8px,1fr) auto;gap:5px}
-  .lab-flow span{min-width:0;padding:7px 6px;font-size:11px;line-height:1.2;text-align:center;white-space:nowrap}
-  .lab-flow>i{width:100%;min-width:8px}
+  .automation-copy{padding-bottom:34px}.automation-copy ul{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}.automation-copy li{min-width:0;padding:9px 10px;font-size:12px;text-align:center}
+  .automation-lab{display:flex;flex-direction:column;min-height:0;height:auto}.lab-events{margin-bottom:0}.lab-flow{position:relative;left:auto;right:auto;bottom:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;width:auto;margin:26px 5% 22px}
+  .lab-flow span{min-width:0;padding:11px 8px;font-size:12px;line-height:1.2;text-align:center;white-space:nowrap}
+  .lab-flow>i{display:none}
   .footer-kicker>span:last-child{font-size:clamp(22px,6.5vw,28px)}
 }
