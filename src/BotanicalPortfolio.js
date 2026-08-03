@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { HiArrowLongRight, HiArrowUpRight } from "react-icons/hi2";
-import nido from "./IMAGES/projectsdesktop/movil nido.png";
-import umbral from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
-import baseMendoza from "./IMAGES/base-mendoza.png";
-import finestra from "./IMAGES/finestraserveis.png";
-import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
+import nido from "./IMAGES/projectsmobile/nido-desktop-crop.png";
+import umbral from "./IMAGES/projectsmobile/umbralbuena.svg";
+import umbralMobile from "./IMAGES/projectsmobile/umbralpc-v2-crop.png";
+import baseMendoza from "./IMAGES/projectsmobile/basebueno.svg";
+import finestra from "./IMAGES/projectsmobile/finestra-svg-clean.png";
+import taller from "./IMAGES/projectsmobile/taller-v2-crop-hq.png";
 import botanicalGarden from "./IMAGES/botanical-garden-v2.jpg";
 import botanicalFoliage from "./IMAGES/botanical-foliage.png";
 import botanicalFlowers from "./IMAGES/botanical-flowers.png";
@@ -19,7 +20,7 @@ import "./BotanicalPortfolio.css";
 
 const botanicalProjects = [
   { name: "Nido Portal", latin: "Habitat digitalis", type: "Full-stack · End-to-end", description: "Producto inmobiliario completo: estrategia, diseño, frontend, backend y operación conectados.", features: ["Automatización", "Mensajería interna", "Perfiles por rol", "Pagos online", "Emails", "Dominios propios"], stack: ["React", "Node", "MongoDB", "Cloudinary", "APIs", "IA aplicada"], image: nido, flower: flowerProtea, url: "https://www.nidoportal.com", color: "coral" },
-  { name: "Umbral Premium", latin: "Limen mediterraneum", type: "Full-stack · End-to-end", description: "Experiencia premium y herramienta comercial construidas como un único producto digital.", features: ["Gestor de presupuestos", "Envío desde la app", "Gestión de productos", "Backend", "Emails", "SEO"], stack: ["React", "APIs", "Backend", "Motion", "IA aplicada", "Dominio propio"], image: umbral, flower: flowerDelphinium, url: "https://umbral-premium.com", color: "violet" },
+  { name: "Umbral Premium", latin: "Limen mediterraneum", type: "Full-stack · End-to-end", description: "Experiencia premium y herramienta comercial construidas como un único producto digital.", features: ["Gestor de presupuestos", "Envío desde la app", "Gestión de productos", "Backend", "Emails", "SEO"], stack: ["React", "APIs", "Backend", "Motion", "IA aplicada", "Dominio propio"], image: umbral, imageMobile: umbralMobile, flower: flowerDelphinium, url: "https://umbral-premium.com", color: "violet" },
   { name: "Base Mendoza", latin: "Logistica cuyana", type: "Plataforma web", description: "Una presencia clara y ágil para conectar servicios logísticos con nuevas oportunidades.", features: ["Arquitectura UX", "Servicios", "Contacto directo", "SEO", "Diseño responsive"], stack: ["React", "Motion", "Forms", "Analytics"], image: baseMendoza, flower: flowerDahlia, url: "https://www.base-mendoza.com", color: "blue" },
   { name: "Finestra Serveis", latin: "Fenestra clara", type: "Web empresarial · Multipágina", description: "Sitio corporativo que organiza servicios, genera confianza y conecta consultas con el negocio.", features: ["Varias páginas", "Integraciones", "Captación de leads", "Multilingüe", "Formularios", "SEO"], stack: ["React", "EmailJS", "Responsive", "Analytics"], image: finestra, flower: flowerPoppy, url: "https://finestraserveis.com", color: "yellow" },
   { name: "El Taller", latin: "Officina communis", type: "Full-stack · Reservas", description: "Una experiencia cálida con la lógica necesaria para gestionar la actividad diaria del taller.", features: ["Agenda online", "Gestor de reservas", "Pasarela de pago", "Talleres", "Contenido", "Comunidad"], stack: ["React", "Pagos", "Booking", "Backend", "Email", "Responsive"], image: taller, flower: flowerCosmos, url: "https://eltaller-aguaymanto.com", color: "pink" },
@@ -58,7 +59,7 @@ export default function BotanicalPortfolio() {
 
       <section className="bot-work" id="bot-work">
         <div className="bot-work-botanics" aria-hidden="true"><motion.img className="organic-foliage-one" src={botanicalFoliage} initial={{ y: 80, rotate: 8 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true }}/><motion.img className="organic-flowers-one" src={botanicalFlowers} initial={{ y: 90, rotate: -9 }} whileInView={{ y: 0, rotate: -2 }} viewport={{ once: true }}/></div>
-        <header><span>01 / Especies seleccionadas</span><h2>Proyectos<br/><em>en flor.</em></h2><p>Cada proyecto pide su propio clima: estrategia, identidad, tecnología y cuidado continuo.</p></header>
+        <header><span>01 / Especies seleccionadas</span><h2>Proyectos<br/><em>en flor.</em></h2></header>
         <div className="bot-project-grid">
           {botanicalProjects.map((project, index) => (
             <motion.article className={`bot-project bot-${project.color}${activeCard === index ? " is-flipped" : ""}`} key={project.name} initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} whileHover={{ y: -14, scale: 1.012 }} whileTap={{ scale: .985 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .8, delay: index * .04, ease: [0.16, 1, 0.3, 1] }}>
@@ -70,7 +71,7 @@ export default function BotanicalPortfolio() {
                     <div className="bot-specimen-copy"><small>{project.latin}</small><h3>{project.name}</h3><span>Descubrir ↻</span></div>
                   </div>
                   <div className="bot-card-face bot-card-back">
-                    <div className="bot-card-back-media"><img src={project.image} alt={`Vista del proyecto ${project.name}`}/></div>
+                    <div className="bot-card-back-media"><picture>{project.imageMobile && <source media="(max-width: 800px)" srcSet={project.imageMobile}/>}<img src={project.image} alt={`Vista del proyecto ${project.name}`}/></picture></div>
                     <div className="bot-card-back-copy">
                       <small>{project.type}</small><h3>{project.name}</h3><p>{project.description}</p>
                       <div className="bot-card-details"><div className="bot-feature-list"><b>Lo que vive adentro</b><ul>{project.features.map((feature, featureIndex) => <li key={feature}><span>0{featureIndex + 1}</span>{feature}</li>)}</ul></div><div className="bot-stack-list"><b>Construido con</b><p>{project.stack.map((technology) => <span key={technology}>{technology}</span>)}</p></div></div>

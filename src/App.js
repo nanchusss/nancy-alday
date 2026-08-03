@@ -5,14 +5,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HiArrowLongRight, HiArrowUp, HiArrowUpRight } from "react-icons/hi2";
 import "./App.css";
 
-import taller from "./IMAGES/projectsdesktop/portada-el-taller.jpg";
-import tallerMobile from "./IMAGES/projectsmobile/taller.png";
-import finestra from "./IMAGES/finestraserveis.png";
+import taller from "./IMAGES/projectsmobile/tallerok-crop.png";
+import tallerMobile from "./IMAGES/projectsmobile/taller-v2-crop-hq.png";
+import finestra from "./IMAGES/projectsmobile/finestradesktop.png";
 import finestraMobile from "./IMAGES/projectsmobile/finestraserveismobile.png";
-import baseMendoza from "./IMAGES/base-mendoza.png";
-import nidoCover from "./IMAGES/projectsdesktop/movil nido.png";
+import baseMendoza from "./IMAGES/projectsmobile/basebueno.svg";
+import nidoCover from "./IMAGES/projectsmobile/nido-desktop-crop.png";
 import nidoMobile from "./IMAGES/projectsmobile/nido.png";
-import umbralCover from "./IMAGES/projectsdesktop/umbral generales/umbralfotolinda.png";
+import umbralCover from "./IMAGES/projectsmobile/umbralbuena.svg";
 import umbralMobile from "./IMAGES/projectsmobile/umbral.png";
 import baseMobile from "./IMAGES/projectsmobile/basemobile.png";
 import nidoScene1 from "./IMAGES/projectsdesktop/nido generales/Captura de pantalla 2026-07-29 a las 18.17.59.png";
@@ -858,7 +858,7 @@ function App() {
       <section className="services" id="services">
         <div className="section-head inverse">
           <div><span>04</span><h2>{es ? "Lo que puedo construir" : "What I can build"}</h2></div>
-          <p>{es ? "Una mezcla poco habitual: sensibilidad visual, código sólido y mentalidad de producto." : "An uncommon blend: visual sensitivity, solid code and a product mindset."}</p>
+          <p>{es ? "Diseño la experiencia y construyo la tecnología que la sostiene, de la primera idea al producto en marcha." : "I design the experience and build the technology behind it, from the first idea to a product in motion."}</p>
         </div>
         <div className="service-list">
           {(es ? [
