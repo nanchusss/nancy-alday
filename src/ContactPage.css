@@ -195,7 +195,7 @@
   color:var(--contact-bg);
 }
 .contact-page form.is-sent{min-height:500px;display:grid;place-items:center;border:0}
-.contact-page form.is-sent>:not(.contact-sent){display:none}
+.contact-page form.is-sent>:not(.contact-sent){display:none!important}
 .contact-sent{width:100%;padding:clamp(30px,5vw,58px) 0;text-align:center;animation:contact-sent-in .55s cubic-bezier(.16,1,.3,1)}
 @keyframes contact-sent-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .contact-sent>i{display:grid;place-items:center;width:50px;height:50px;margin:0 auto 25px;border:1px solid var(--contact-ink);border-radius:50%;font-style:normal}
