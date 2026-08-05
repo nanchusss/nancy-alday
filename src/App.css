@@ -34,6 +34,21 @@ footer{padding:120px var(--pad) 35px;background:#92583f;min-height:88vh;display:
 @media(max-width:800px){.cursor{display:none}.nav{height:76px;grid-template-columns:1fr auto auto}.nav-meta{display:none}.language-switch{margin:0 20px}.hero{min-height:660px}.hero-inner{padding-top:110px}.title-line{font-size:clamp(54px,17vw,90px);line-height:.88}.title-indent{padding-left:0}.hero-bottom{align-items:flex-start;gap:45px;flex-direction:column}.hero-bottom p{font-size:15px;max-width:330px}.hero-bottom button{gap:45px}.scroll-cue{display:none}.statement{grid-template-columns:1fr;gap:50px}.statement h2{font-size:42px}.section-head{grid-template-columns:1fr;padding-bottom:55px}.section-head>p{font-size:13px}.project{margin-bottom:95px}.project-meta{grid-template-columns:35px 1fr auto}.project-visual{height:65vh;max-height:580px}.project-visual img{object-position:center}.project-info{grid-template-columns:1fr}.project-info h3{font-size:48px}.project-info ul{justify-content:flex-start}.about{grid-template-columns:1fr;padding-top:80px}.about-photo img{height:500px}.about h2{margin:50px 0}.about-columns{grid-template-columns:1fr}.service-row{grid-template-columns:35px 1fr 20px;gap:16px}.service-row p{grid-column:2 / 4}.automation{grid-template-columns:1fr;margin-top:90px}.automation-lab{min-height:520px}.lab-flow{gap:5px}.lab-flow span{padding:7px 6px;font-size:6px}.lab-events div{grid-template-columns:minmax(88px,auto) minmax(0,1fr) auto;gap:12px;font-size:7px}.lab-events span,.lab-events i{white-space:nowrap}.menu-panel{padding-top:110px}.menu-panel nav button{grid-template-columns:42px 1fr auto;font-size:48px}.menu-foot{gap:20px;flex-direction:column}.footer-bottom{grid-template-columns:1fr;gap:25px}.footer-bottom div{justify-content:flex-start}.footer-bottom button{justify-self:start}footer{min-height:760px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor{display:none}}
 
+/* Mobile navigation remains available without occupying extra hero space. */
+@media(max-width:800px){
+  .nav{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:100;
+    padding-top:env(safe-area-inset-top);
+    height:calc(76px + env(safe-area-inset-top));
+    background:rgba(19,35,31,.88);
+    -webkit-backdrop-filter:blur(16px) saturate(.9);
+    backdrop-filter:blur(16px) saturate(.9);
+  }
+}
+
 /* 2026 warm technical direction */
 :root{--ink:#13231f;--paper:#eee9e1;--acid:#b76e43;--butter:#d8c7bc;--lilac:#a9c5ad;--sage:#72a58d;--jade:#176b5d;--jade-deep:#0a463f;--mint:#bfd2b7;--clay:#a8663e;--stone:#d7c5bc;--line:rgba(19,35,31,.18)}
 .availability i{box-shadow:0 0 0 5px rgba(255,101,71,.12)}

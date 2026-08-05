@@ -26,4 +26,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url><loc>https://nancyalday.com/contacto</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/barcelona</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/granollers</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/vilanova-del-valles</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/vallromanes</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/alella</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/el-masnou</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/valles-oriental</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/maresme</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/espana</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nancyalday.com/diseno-web/portugal</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

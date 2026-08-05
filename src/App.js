@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HiArrowLongRight, HiArrowUp, HiArrowUpRight } from "react-icons/hi2";
 import Seo from "./Seo";
+import ProjectDiagnostic from "./ProjectDiagnostic";
 import "./App.css";
 
 import taller from "./IMAGES/projectsmobile/tallerok-crop.png";
@@ -726,6 +727,7 @@ function App({ initialLanguage = "es" }) {
         pageName={es ? "Portfolio de diseño web y desarrollo full-stack" : "Web design and full-stack development portfolio"}
       />
       <nav className="portfolio-switch" aria-label="Versión del portfolio"><a className="active" href="/v1">V1</a><a href="/v2">V2</a></nav>
+      <ProjectDiagnostic variant="v1" language={language}/>
       <motion.div className={`cursor ${projectCursor ? "cursor-project" : ""} ${cursorVisible ? "" : "cursor-hidden"}`} style={{ x: smoothX, y: smoothY, scale: smoothScale }}>
         <span>{es ? "Visitar proyecto" : "Visit project"}</span>
       </motion.div>
@@ -755,12 +757,12 @@ function App({ initialLanguage = "es" }) {
             ["01", copy.nav[0], "#work"],
             ["02", copy.nav[1], "#about"],
             ["03", copy.nav[2], "#services"],
-            ["04", copy.nav[3], "#contact"],
+            ["04", copy.nav[3], "/contacto?from=v1"],
           ].map(([n, label, href]) => (
-            <button key={href} onClick={() => scrollTo(href)}><small>{n}</small>{label}<Arrow /></button>
+            <button key={href} onClick={() => href.startsWith("/") ? window.location.assign(href) : scrollTo(href)}><small>{n}</small>{label}<Arrow /></button>
           ))}
         </nav>
-        <div className="menu-foot"><span>{copy.role}</span><a href="mailto:hola@nancyalday.com">hola@nancyalday.com</a></div>
+        <div className="menu-foot"><span>{copy.role}</span><a href="/contacto?from=v1">{es ? "Cuéntame tu proyecto" : "Tell me about your project"}</a></div>
       </motion.aside>
 
       <section className="hero" id="top" ref={heroRef}>
@@ -937,7 +939,7 @@ function App({ initialLanguage = "es" }) {
       <footer id="contact">
         <div className="footer-kicker"><span>06 / {es ? "Contacto" : "Contact"}</span><span>{es ? "¿Tienes una idea?" : "Have an idea?"}</span></div>
         <h2>{es ? <>Hagámosla<br /><em>imposible de ignorar.</em></> : <>Let's make it<br /><em>impossible to ignore.</em></>}</h2>
-        <a className="mail-link" href="mailto:hola@nancyalday.com" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>hola@nancyalday.com <Arrow diagonal /></a>
+        <a className="mail-link" href="/contacto?from=v1" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>{es ? "Cuéntame tu proyecto" : "Tell me about your project"} <Arrow diagonal /></a>
         <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} <HiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
       </footer>
     </main>

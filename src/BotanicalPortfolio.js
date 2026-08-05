@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { HiArrowLongRight, HiArrowUpRight } from "react-icons/hi2";
 import Seo from "./Seo";
+import ProjectDiagnostic from "./ProjectDiagnostic";
 import nido from "./IMAGES/projectsmobile/nido-desktop-crop.png";
 import umbral from "./IMAGES/projectsmobile/umbralbuena.svg";
 import umbralMobile from "./IMAGES/projectsmobile/umbralpc-v2-crop.png";
@@ -33,6 +34,7 @@ function VersionSwitch() {
 
 export default function BotanicalPortfolio() {
   const [activeCard, setActiveCard] = useState(null);
+  const [mobileMenu, setMobileMenu] = useState(false);
   const toggleCard = (index) => setActiveCard((current) => current === index ? null : index);
   const handleCardTap = (index) => {
     if (window.matchMedia("(hover: none)").matches) toggleCard(index);
@@ -41,6 +43,14 @@ export default function BotanicalPortfolio() {
   const { scrollYProgress: gardenProgress } = useScroll({ target: gardenRef, offset: ["start end", "end start"] });
   const gardenY = useTransform(gardenProgress, [0, 1], ["-7%", "7%"]);
   const gardenScale = useTransform(gardenProgress, [0, .5, 1], [1.08, 1, 1.08]);
+  useEffect(() => {
+    if (!mobileMenu) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const close = (event) => { if (event.key === "Escape") setMobileMenu(false); };
+    window.addEventListener("keydown", close);
+    return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", close); };
+  }, [mobileMenu]);
 
   return (
     <main className="botanical-page">
@@ -52,11 +62,18 @@ export default function BotanicalPortfolio() {
         pageName="Portfolio creativo de diseño y desarrollo digital"
       />
       <VersionSwitch />
+      <ProjectDiagnostic variant="v2" language="es"/>
       <header className="bot-nav">
         <a className="bot-logo" href="#bot-top">Nancy Alday</a>
         <p>Diseño digital con naturaleza propia</p>
-        <nav><a href="#bot-work">Proyectos</a><a href="#bot-about">Sobre mí</a><a href="#bot-contact">Contacto</a></nav>
+        <nav className="bot-desktop-nav"><a href="#bot-work">Proyectos</a><a href="#bot-about">Sobre mí</a><a href="/contacto?from=v2">Contacto</a></nav>
+        <button className={`bot-menu-toggle${mobileMenu ? " open" : ""}`} type="button" aria-label={mobileMenu ? "Cerrar menú" : "Abrir menú"} aria-expanded={mobileMenu} aria-controls="bot-mobile-menu" onClick={() => setMobileMenu((open) => !open)}><span/><span/></button>
       </header>
+      <motion.aside id="bot-mobile-menu" className="bot-mobile-menu" aria-hidden={!mobileMenu} animate={{ clipPath: mobileMenu ? "inset(0% 0% 0% 0% round 0px)" : "inset(0% 0% 100% 0% round 0px)" }} transition={{ duration: .55, ease: [0.16, 1, 0.3, 1] }}>
+        <span>Explorar / Portfolio 2026</span>
+        <nav>{[["01","Proyectos","#bot-work"],["02","Qué hago","#bot-capabilities"],["03","Sobre mí","#bot-about"],["04","Contacto","/contacto?from=v2"]].map(([number,label,href]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}><small>{number}</small><b>{label}</b><HiArrowUpRight/></a>)}</nav>
+        <div><a href="/contacto?from=v2">Cuéntame tu proyecto</a><span>Barcelona · Disponible</span></div>
+      </motion.aside>
 
       <section className="bot-garden" id="bot-top" ref={gardenRef} aria-label="Jardín imaginario">
         <motion.img src={botanicalGarden} alt="Paisaje botánico imaginario con flores, hojas y pequeñas casas" style={{ y: gardenY, scale: gardenScale }}/>
@@ -93,7 +110,7 @@ export default function BotanicalPortfolio() {
         </div>
       </section>
 
-      <section className="bot-capabilities" aria-labelledby="bot-capabilities-title">
+      <section className="bot-capabilities" id="bot-capabilities" aria-labelledby="bot-capabilities-title">
         <header><span>02 / Qué hago</span><h2 id="bot-capabilities-title">Cultivo ideas.<br/><em>Construyo sistemas.</em></h2><p>Diseño lo visible y desarrollo la estructura que permite que una experiencia funcione, conecte y evolucione.</p></header>
         <div className="bot-capability-list">
           {[["01","Dirección digital","Concepto, narrativa, UX/UI e identidad para convertir una idea en una presencia reconocible."],["02","Desarrollo full-stack","Interfaces React, backend, datos, APIs e integraciones trabajando como un solo producto."],["03","Automatización & IA","Flujos, formularios, CRM, emails y asistentes que reducen tareas y multiplican posibilidades."],["04","Producto end-to-end","De la estrategia al lanzamiento: diseño, código, medición, mantenimiento y evolución continua."]].map(([number, title, text], index) => <motion.article key={title} initial={{ y: 45, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .55 }} transition={{ duration: .7, delay: index * .08, ease: [0.16, 1, 0.3, 1] }}><span>{number}</span><h3>{title}</h3><p>{text}</p><HiArrowUpRight/></motion.article>)}
@@ -115,7 +132,7 @@ export default function BotanicalPortfolio() {
         <div className="bot-footer-wash"/>
         <motion.img className="footer-village" src={botanicalVillage} alt="" aria-hidden="true" initial={{ y: 90, rotate: 3 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}/><span>04 / Contacto</span>
         <motion.h2 initial={{ y: 40, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .5 }} transition={{ duration: .8, ease: [0.16, 1, 0.3, 1] }}>¿Plantamos<br/><em>algo juntas?</em></motion.h2>
-        <a href="mailto:hola@nancyalday.com">hola@nancyalday.com <HiArrowLongRight/></a>
+        <a href="/contacto?from=v2">Cuéntame tu proyecto <HiArrowLongRight/></a>
         <div><span>© 2026 Nancy Alday</span><span>Barcelona / Disponible</span><a href="#bot-top">Volver arriba ↑</a></div>
       </footer>
     </main>

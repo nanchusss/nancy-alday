@@ -24,7 +24,7 @@ function setLink(rel, href, hreflang) {
   if (hreflang) element.hreflang = hreflang;
 }
 
-export default function Seo({ title, description, path, language = "es", alternatePath, pageName }) {
+export default function Seo({ title, description, path, language = "es", alternatePath, pageName, areaServed, faqs = [] }) {
   useEffect(() => {
     const canonical = `${SITE_URL}${path}`;
     document.title = title;
@@ -62,9 +62,7 @@ export default function Seo({ title, description, path, language = "es", alterna
       schema.type = "application/ld+json";
       document.head.appendChild(schema);
     }
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
+    const graph = [
         {
           "@type": "WebSite",
           "@id": `${SITE_URL}/#website`,
@@ -80,20 +78,20 @@ export default function Seo({ title, description, path, language = "es", alterna
           email: "mailto:hola@nancyalday.com",
           jobTitle: language === "es" ? "Diseñadora digital y desarrolladora full-stack" : "Digital designer and full-stack developer",
           address: { "@type": "PostalAddress", addressLocality: "Barcelona", addressCountry: "ES" },
-          knowsAbout: ["Diseño web", "Desarrollo frontend", "Desarrollo full-stack", "React", "JavaScript", "UX/UI", "Automatización", "Inteligencia artificial", "APIs", "Productos digitales"],
+          knowsAbout: ["Diseño web", "Desarrollo frontend", "Desarrollo full-stack", "React", "JavaScript", "UX/UI", "SEO", "Auditoría SEO", "Automatización", "Inteligencia artificial", "APIs", "Productos digitales"],
           sameAs: ["https://github.com/nanchusss"]
         },
         {
           "@type": "ProfessionalService",
-          "@id": `${SITE_URL}/#services`,
+          "@id": `${canonical}#services`,
           name: "Nancy Alday — Diseño y desarrollo digital",
           url: canonical,
           description,
-          areaServed: ["Barcelona", "España", "Europa", "Remote"],
+          areaServed: areaServed || ["Barcelona", "Vallès Oriental", "Maresme", "España", "Portugal"],
           provider: { "@id": `${SITE_URL}/#nancy-alday` },
           serviceType: language === "es"
-            ? ["Diseño web", "Desarrollo de páginas web", "Desarrollo frontend y full-stack", "Automatización e IA", "Producto digital end-to-end"]
-            : ["Web design", "Website development", "Frontend and full-stack development", "Automation and AI", "End-to-end digital products"]
+            ? ["Diseño web", "Desarrollo de páginas web", "Auditoría SEO", "SEO técnico", "Desarrollo frontend y full-stack", "Automatización e IA", "Producto digital end-to-end"]
+            : ["Web design", "Website development", "SEO audit", "Technical SEO", "Frontend and full-stack development", "Automation and AI", "End-to-end digital products"]
         },
         {
           "@type": "WebPage",
@@ -105,9 +103,13 @@ export default function Seo({ title, description, path, language = "es", alterna
           isPartOf: { "@id": `${SITE_URL}/#website` },
           about: { "@id": `${SITE_URL}/#nancy-alday` }
         }
-      ]
+      ];
+    if (faqs.length) graph.push({ "@type": "FAQPage", "@id": `${canonical}#faq`, mainEntity: faqs.map(({ question, answer }) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) });
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": graph
     });
-  }, [alternatePath, description, language, pageName, path, title]);
+  }, [alternatePath, areaServed, description, faqs, language, pageName, path, title]);
 
   return null;
 }
