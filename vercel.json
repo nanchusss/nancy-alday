@@ -2,9 +2,19 @@
   "framework": "create-react-app",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/diseno-web/vilanova-del-valles", "destination": "/diseno-web/valles-oriental", "permanent": true },
+    { "source": "/diseno-web/vallromanes", "destination": "/diseno-web/valles-oriental", "permanent": true },
+    { "source": "/diseno-web/alella", "destination": "/diseno-web/maresme", "permanent": true },
+    { "source": "/diseno-web/el-masnou", "destination": "/diseno-web/maresme", "permanent": true },
+    { "source": "/diseno-web/portugal", "destination": "/diseno-web/europa", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/v1", "destination": "/" },
     { "source": "/en/v1", "destination": "/" },
-    { "source": "/v2", "destination": "/" }
+    { "source": "/v2", "destination": "/" },
+    { "source": "/diseno-web/:slug", "destination": "/" },
+    { "source": "/en/web-design/:slug", "destination": "/" },
+    { "source": "/contacto", "destination": "/" }
   ]
 }

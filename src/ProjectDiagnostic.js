@@ -14,6 +14,8 @@ const content = {
     namePlaceholder: "Tu nombre",
     askBusiness: "¿Qué tipo de negocio tienes?",
     businessPlaceholder: "Por ejemplo: estudio, tienda, consultoría…",
+    askCity: "¿Desde qué ciudad nos escribes?",
+    cityPlaceholder: "Tu ciudad",
     personalNote: "Vamos a encontrar el siguiente paso adecuado para ti.",
     back: "Atrás",
     progress: "Pregunta",
@@ -21,13 +23,15 @@ const content = {
     restart: "Repetir diagnóstico",
     ready: "Tu punto de partida",
     includes: "La propuesta debería incluir",
-    leadTitle: "Recibe este diagnóstico y los próximos pasos",
+    leadTitle: "Recibe tu plan por email",
     email: "Tu email",
-    send: "Enviarme la recomendación",
+    send: "Recibir mi plan",
     sending: "Enviando…",
     sent: "Listo. Tu diagnóstico quedó registrado; te escribiré muy pronto.",
     fallback: "No se pudo enviar. Inténtalo de nuevo.",
     privacy: "Solo usaré estos datos para responder sobre tu proyecto. Nada de spam.",
+    consent: "He leído la información de privacidad y autorizo el uso de mis datos para responder a mi solicitud y enviarme el diagnóstico.",
+    privacyInfo: "Información sobre privacidad",
     review: "Revisar respuestas",
     mailSubject: "Quiero conversar sobre mi diagnóstico digital",
     questions: [
@@ -53,7 +57,7 @@ const content = {
     },
   },
   en: {
-    trigger: "What does your business need?", intro: "Digital diagnosis · 2 minutes", title: <>Your next step should not<br/>be a <em>guess.</em></>, description: "Find out where your business is losing its biggest opportunity and what to build first. A concrete answer, without jargon.", start: "Start diagnosis", askName: "Before we begin, what is your name?", namePlaceholder: "Your name", askBusiness: "What type of business do you run?", businessPlaceholder: "For example: studio, shop, consultancy…", personalNote: "Let’s find the right next step for you.", back: "Back", progress: "Question", close: "Close diagnosis", restart: "Restart diagnosis", ready: "Your starting point", includes: "Your proposal should include", leadTitle: "Get this diagnosis and your next steps", email: "Your email", send: "Send me the recommendation", sending: "Sending…", sent: "Done. Your diagnosis is registered; I will be in touch soon.", fallback: "The message could not be sent. Please try again.", privacy: "I will only use these details to reply about your project. No spam.", review: "Review answers", mailSubject: "I want to discuss my digital diagnosis",
+    trigger: "What does your business need?", intro: "Digital diagnosis · 2 minutes", title: <>Your next step should not<br/>be a <em>guess.</em></>, description: "Find out where your business is losing its biggest opportunity and what to build first. A concrete answer, without jargon.", start: "Start diagnosis", askName: "Before we begin, what is your name?", namePlaceholder: "Your name", askBusiness: "What type of business do you run?", businessPlaceholder: "For example: studio, shop, consultancy…", askCity: "What city are you writing from?", cityPlaceholder: "Your city", personalNote: "Let’s find the right next step for you.", back: "Back", progress: "Question", close: "Close diagnosis", restart: "Restart diagnosis", ready: "Your starting point", includes: "Your proposal should include", leadTitle: "Get your plan by email", email: "Your email", send: "Get my plan", sending: "Sending…", sent: "Done. Your diagnosis is registered; I will be in touch soon.", fallback: "The message could not be sent. Please try again.", privacy: "I will only use these details to reply about your project. No spam.", consent: "I have read the privacy information and authorise the use of my data to respond to my request and send my diagnosis.", privacyInfo: "Privacy information", review: "Review answers", mailSubject: "I want to discuss my digital diagnosis",
     questions: [
       { title: "What stage is your project at?", options: [["I have an idea I need to shape", "strategy"], ["My business exists, but has no website", "presence"], ["I have a website, but it is not working", "optimize"], ["I need a custom digital tool", "product"]] },
       { title: "What is your main goal today?", options: [["Explain what I do more clearly", "presence"], ["Get more enquiries or sales", "conversion"], ["Automate tasks and save time", "product"], ["Differentiate my brand", "strategy"]] },
@@ -95,7 +99,7 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [pastHero, setPastHero] = useState(false);
-  const [lead, setLead] = useState({ name: "", business: "", email: "" });
+  const [lead, setLead] = useState({ name: "", business: "", city: "", email: "", consent: false });
   const [leadStatus, setLeadStatus] = useState("idle");
   const [transitioning, setTransitioning] = useState(false);
   const panelRef = useRef(null);
@@ -149,8 +153,7 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
       setTransitioning(false);
     }, 240);
   };
-  const reset = () => { setScreen("intro"); setStep(0); setAnswers([]); setLeadStatus("idle"); };
-  const mailBody = `${copy.ready}: ${diagnosis.label}\n\nNombre: ${lead.name}\nNegocio: ${lead.business}\nEmail: ${lead.email}\n\n${diagnosis.text}\n\n${copy.includes}:\n- ${diagnosis.items.join("\n- ")}`;
+  const mailBody = `${copy.ready}: ${diagnosis.label}\n\nNombre: ${lead.name}\nNegocio: ${lead.business}\nCiudad: ${lead.city}\nEmail: ${lead.email}\nConsentimiento: Sí\n\n${diagnosis.text}\n\n${copy.includes}:\n- ${diagnosis.items.join("\n- ")}`;
   const updateLead = ({ target }) => setLead((current) => ({ ...current, [target.name]: target.value }));
   const submitLead = async (event) => {
     event.preventDefault();
@@ -178,8 +181,8 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
 
         {screen === "intro" && <div className="diagnostic-intro">
           <span>{copy.intro}</span><h2 id="diagnostic-title">{copy.title}</h2><p>{copy.description}</p>
-          <div className="diagnostic-intro-fields"><label className="diagnostic-name"><span>{copy.askName}</span><input autoFocus autoComplete="given-name" name="name" placeholder={copy.namePlaceholder} value={lead.name} onChange={updateLead}/></label><label className="diagnostic-name"><span>{copy.askBusiness}</span><input name="business" placeholder={copy.businessPlaceholder} value={lead.business} onChange={updateLead} onKeyDown={(event) => { if (event.key === "Enter" && lead.name.trim() && lead.business.trim()) setScreen("questions"); }}/></label></div>
-          <button type="button" className="diagnostic-primary" disabled={!lead.name.trim() || !lead.business.trim()} onClick={() => setScreen("questions")}>{copy.start}<HiArrowLongRight/></button>
+          <div className="diagnostic-intro-fields"><label className="diagnostic-name"><span>{copy.askName}</span><input autoFocus autoComplete="given-name" name="name" placeholder={copy.namePlaceholder} value={lead.name} onChange={updateLead}/></label><label className="diagnostic-name"><span>{copy.askBusiness}</span><input name="business" placeholder={copy.businessPlaceholder} value={lead.business} onChange={updateLead}/></label><label className="diagnostic-name"><span>{copy.askCity}</span><input autoComplete="address-level2" name="city" placeholder={copy.cityPlaceholder} value={lead.city} onChange={updateLead} onKeyDown={(event) => { if (event.key === "Enter" && lead.name.trim() && lead.business.trim() && lead.city.trim()) setScreen("questions"); }}/></label></div>
+          <button type="button" className="diagnostic-primary" disabled={!lead.name.trim() || !lead.business.trim() || !lead.city.trim()} onClick={() => setScreen("questions")}>{copy.start}<HiArrowLongRight/></button>
         </div>}
 
         {screen === "questions" && <div className={`diagnostic-question${transitioning ? " is-transitioning" : ""}`}>
@@ -196,10 +199,11 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
           <form className="diagnostic-lead" onSubmit={submitLead}>
             <h3>{copy.leadTitle}</h3>
             <div><label><span>{copy.email}</span><input required autoComplete="email" type="email" name="email" value={lead.email} onChange={updateLead}/></label></div>
-            <small>{copy.privacy}</small>
-            {leadStatus === "sent" ? <p className="diagnostic-success">{copy.sent}</p> : leadStatus === "error" ? <button className="diagnostic-error" type="button" onClick={() => setLeadStatus("idle")}>{copy.fallback}</button> : <button className="diagnostic-primary" disabled={leadStatus === "sending"}>{leadStatus === "sending" ? copy.sending : copy.send}<HiArrowLongRight/></button>}
+            <label className="diagnostic-consent"><input required type="checkbox" checked={lead.consent} onChange={(event) => setLead((current) => ({ ...current, consent: event.target.checked }))}/><i/><span>{copy.consent}</span></label>
+            <details className="diagnostic-privacy"><summary>{copy.privacyInfo}</summary><p>Responsable: Nancy Alday. Finalidad: responder a tu solicitud y enviarte el diagnóstico. No se usarán tus datos para publicidad ni se cederán, salvo a los proveedores técnicos necesarios para prestar el servicio. Puedes solicitar acceso, rectificación o supresión mediante el formulario de contacto.</p></details>
+            {leadStatus === "sent" ? <p className="diagnostic-success">{copy.sent}</p> : leadStatus === "error" ? <button className="diagnostic-error" type="button" onClick={() => setLeadStatus("idle")}>{copy.fallback}</button> : <button className="diagnostic-primary" disabled={leadStatus === "sending" || !lead.consent}>{leadStatus === "sending" ? copy.sending : copy.send}<HiArrowLongRight/></button>}
           </form>
-          <div className="diagnostic-result-nav"><button type="button" onClick={() => { setStep(copy.questions.length - 1); setScreen("questions"); }}><HiArrowLongLeft/>{copy.review}</button><button type="button" onClick={reset}>{copy.restart}</button></div>
+          <div className="diagnostic-result-nav"><button type="button" onClick={() => { setStep(copy.questions.length - 1); setScreen("questions"); }}><HiArrowLongLeft/>{copy.review}</button></div>
         </div>}
       </section>
     </div>}

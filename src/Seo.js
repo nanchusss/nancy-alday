@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://nancyalday.com";
-const SOCIAL_IMAGE = `${SITE_URL}/LOGO.png`;
+const SOCIAL_IMAGE = `${SITE_URL}/logonan-social.jpg`;
 
 function setMeta(selector, attributes) {
   let element = document.head.querySelector(selector);
@@ -70,11 +70,12 @@ export default function Seo({ title, description, path, language = "es", alterna
           name: "Nancy Alday",
           inLanguage: ["es", "en"]
         },
-        {
-          "@type": "Person",
+      {
+        "@type": "Person",
           "@id": `${SITE_URL}/#nancy-alday`,
-          name: "Nancy Alday",
-          url: SITE_URL,
+        name: "Nancy Alday",
+        url: SITE_URL,
+        image: SOCIAL_IMAGE,
           email: "mailto:hola@nancyalday.com",
           jobTitle: language === "es" ? "Diseñadora digital y desarrolladora full-stack" : "Digital designer and full-stack developer",
           address: { "@type": "PostalAddress", addressLocality: "Barcelona", addressCountry: "ES" },
