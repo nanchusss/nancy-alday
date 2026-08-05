@@ -508,7 +508,7 @@ footer{background:var(--clay)}
 .gsap-projects-head{position:absolute;z-index:20;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);border-bottom:1px solid rgba(238,233,225,.22);pointer-events:none}
 .gsap-projects-head p{margin:0;font:12px "DM Mono";text-transform:uppercase;letter-spacing:.12em}.gsap-projects-head p:last-child{display:flex;gap:15px;align-items:center}.gsap-projects-head p:last-child span{font-size:17px}
 .gsap-projects-track{display:flex;width:max-content;height:100%;will-change:transform}
-.gsap-projects-intro,.gsap-projects-outro{position:relative;flex:0 0 58vw;height:100%;box-sizing:border-box;padding:19vh var(--pad) 8vh}
+.gsap-projects-intro,.gsap-projects-outro{position:relative;flex:0 0 48vw;height:100%;box-sizing:border-box;padding:15vh var(--pad) 7vh}
 .gsap-projects-intro{display:grid;grid-template-rows:auto 1fr auto;border-right:1px solid rgba(238,233,225,.18)}
 .gsap-projects-intro>span{font:12px "DM Mono";text-transform:uppercase;letter-spacing:.13em;color:var(--acid)}
 .gsap-projects-intro h2{align-self:center;max-width:7.2ch;margin:0;font-size:clamp(74px,8.3vw,150px);font-weight:300;line-height:.81;letter-spacing:-.075em}
