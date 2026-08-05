@@ -123,5 +123,5 @@
   .bot-project-image>img:not(.botanical-project-flower){width:84%;height:82%;margin:9% 8%}
   .botanical-project-flower{width:46%;right:-17%;bottom:-10%}.flower-position-2,.flower-position-4{left:-18%;right:auto}.flower-position-3,.flower-position-5{width:39%}
   .herbarium-foliage{height:82%;left:-20%;bottom:-4%}.herbarium-flowers{width:66%;right:-18%;top:8%}
-  .footer-village{width:95vw;right:-23%;bottom:-2%}
+  .footer-village{display:none}
 }
