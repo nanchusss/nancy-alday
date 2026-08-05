@@ -97,6 +97,7 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [pastHero, setPastHero] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
   const [lead, setLead] = useState({ name: "", business: "", email: "", consent: false });
   const [leadStatus, setLeadStatus] = useState("idle");
   const [transitioning, setTransitioning] = useState(false);
@@ -138,6 +139,14 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
     panelRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [screen, step]);
 
+  useEffect(() => {
+    const footer = document.querySelector(variant === "v2" ? ".bot-footer" : "footer");
+    if (!footer) return undefined;
+    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting), { threshold: 0.08 });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, [variant]);
+
   const choose = (key) => setAnswers((current) => {
     const next = [...current]; next[step] = key; return next;
   });
@@ -170,7 +179,7 @@ export default function ProjectDiagnostic({ variant = "v1", language = "es" }) {
   };
 
   return <>
-    {pastHero && !open && <button className={`diagnostic-trigger diagnostic-trigger-${variant}`} type="button" onClick={() => setOpen(true)}><ScrambleText text={copy.trigger}/><HiArrowLongRight/></button>}
+    {pastHero && !footerVisible && !open && <button className={`diagnostic-trigger diagnostic-trigger-${variant}`} type="button" onClick={() => setOpen(true)}><ScrambleText text={copy.trigger}/><HiArrowLongRight/></button>}
     {open && <div className={`diagnostic-shell diagnostic-${variant}`} role="dialog" aria-modal="true" aria-labelledby="diagnostic-title">
       <button className="diagnostic-backdrop" type="button" aria-label={copy.close} onClick={() => setOpen(false)}/>
       <section className="diagnostic-panel" ref={panelRef}>

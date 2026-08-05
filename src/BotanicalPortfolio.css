@@ -32,7 +32,7 @@
 
 @media(max-width:800px){
   .bot-pink .bot-card-back-media img{object-position:center 25%}
-  .portfolio-switch{right:14px;bottom:14px}.bot-nav{height:78px;grid-template-columns:1fr auto}.bot-nav>p{display:none}.bot-nav nav{gap:15px;font-size:12px}.bot-nav nav a:nth-child(2){display:none}
+  .portfolio-switch{right:12px;bottom:12px;padding:3px}.portfolio-switch a{width:40px;height:30px;font-size:10px}.bot-nav{height:78px;grid-template-columns:1fr auto}.bot-nav>p{display:none}.bot-nav nav{gap:15px;font-size:12px}.bot-nav nav a:nth-child(2){display:none}
   .bot-hero{height:240svh}.bot-hero-copy{inset:0;padding:105px 22px 45px}.bot-hero h1{font-size:clamp(61px,18.5vw,92px);line-height:.82}.bot-hero-art{height:100%;min-height:0;border-left:1px solid}.bot-hero-copy>span,.bot-manifesto>span,.bot-work header>span,.herbarium-copy>span,.bot-footer>span{font-size:12px}.bot-expand-note{right:14px;bottom:14px;font-size:9px}
   .bot-manifesto{padding-top:110px;padding-bottom:100px}.bot-manifesto h2{margin:50px 0 80px;font-size:clamp(48px,14vw,72px)}.bot-manifesto>div{display:block}.bot-manifesto>div p{font-size:18px}.bot-manifesto .bot-flower{width:125px;margin:55px 0 0 auto;display:block}
   .bot-garden{height:100svh;min-height:680px}.bot-garden>img{inset:-8% -35%;width:170%;height:116%}.bot-garden-title{left:22px;top:15vh}.bot-garden-title h2{font-size:clamp(83px,28vw,128px)}.bot-garden>p{right:18px;bottom:max(112px,calc(env(safe-area-inset-bottom) + 96px));width:min(270px,calc(100% - 44px));font-size:11px}

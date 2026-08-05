@@ -944,7 +944,7 @@ function App({ initialLanguage = "es" }) {
         <div className="footer-kicker"><span>06 / {es ? "Contacto" : "Contact"}</span><span>{es ? "¿Tienes una idea?" : "Have an idea?"}</span></div>
         <h2>{es ? <>Hagámosla<br /><em>imposible de ignorar.</em></> : <>Let's make it<br /><em>impossible to ignore.</em></>}</h2>
         <a className="mail-link" href="/contacto?from=v1" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>{es ? "Cuéntame tu proyecto" : "Tell me about your project"} <Arrow diagonal /></a>
-        <div className="footer-bottom"><span>© 2026 Nancy Alday</span><div><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/nanchusss" target="_blank" rel="noreferrer">GitHub</a></div><button onClick={() => scrollTo("#top")}>{es ? "Volver arriba" : "Back to top"} <HiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
+        <div className="footer-bottom"><span>NaN Estudio Digital / 2026</span><div><a href="https://www.linkedin.com/in/nancy-alday-rubio-5678a9235" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://www.instagram.com/nan.estudioweb" target="_blank" rel="noreferrer">Instagram ↗</a></div><button onClick={() => scrollTo("#top")}>{es ? "Inicio" : "Home"} <HiArrowUp className="line-arrow" aria-hidden="true" focusable="false"/></button></div>
       </footer>
     </main>
   );

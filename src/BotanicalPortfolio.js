@@ -133,7 +133,7 @@ export default function BotanicalPortfolio() {
         <motion.img className="footer-village" src={botanicalVillage} alt="" aria-hidden="true" initial={{ y: 90, rotate: 3 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}/><span>04 / Contacto</span>
         <motion.h2 initial={{ y: 40, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .5 }} transition={{ duration: .8, ease: [0.16, 1, 0.3, 1] }}>¿Plantamos<br/><em>algo juntas?</em></motion.h2>
         <a href="/contacto?from=v2">Cuéntame tu proyecto <HiArrowLongRight/></a>
-        <div><span>© 2026 Nancy Alday</span><span>Barcelona / Disponible</span><a href="#bot-top">Volver arriba ↑</a></div>
+        <div><span>2026 NaN Estudio Digital</span><span>Barcelona / Disponible</span><a href="#bot-top">Volver arriba ↑</a></div>
       </footer>
     </main>
   );
