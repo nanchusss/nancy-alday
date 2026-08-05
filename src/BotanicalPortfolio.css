@@ -44,15 +44,19 @@
 @media(max-width:800px){.bot-nav{position:relative;z-index:410}.bot-desktop-nav{display:none!important}.bot-menu-toggle{position:relative;z-index:2;justify-self:end;display:flex;width:46px;height:46px;padding:0;border:1px solid var(--forest);border-radius:50%;background:var(--cream);align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--forest)}.bot-menu-toggle span{display:block;width:20px;height:1px;background:currentColor;transition:transform .35s}.bot-menu-toggle.open span:first-child{transform:translateY(3.5px) rotate(45deg)}.bot-menu-toggle.open span:last-child{transform:translateY(-3.5px) rotate(-45deg)}.bot-mobile-menu{position:fixed;z-index:400;inset:0;display:flex;padding:118px 22px max(30px,env(safe-area-inset-bottom));background:var(--pink);color:var(--forest);flex-direction:column;justify-content:space-between}.bot-mobile-menu>span{font:10px "DM Mono";letter-spacing:.12em;text-transform:uppercase}.bot-mobile-menu nav{display:flex;flex-direction:column}.bot-mobile-menu nav a{display:grid;grid-template-columns:34px 1fr 28px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(23,61,45,.35)}.bot-mobile-menu nav a:first-child{border-top:1px solid rgba(23,61,45,.35)}.bot-mobile-menu small{font:10px "DM Mono"}.bot-mobile-menu b{font:300 clamp(45px,13vw,68px)/.9 "Anybody","Manrope",sans-serif;letter-spacing:-.06em}.bot-mobile-menu svg{width:25px;height:25px}.bot-mobile-menu>div{display:flex;flex-direction:column;gap:10px;font:11px "DM Mono";text-transform:uppercase}}
 
 @media(max-width:800px){
+  .botanical-page{padding-top:78px}
   .bot-nav{
-    position:sticky;
+    position:fixed;
     top:0;
+    left:0;
+    width:100%;
     z-index:410;
     background:rgba(245,237,221,.92);
     -webkit-backdrop-filter:blur(16px) saturate(.9);
     backdrop-filter:blur(16px) saturate(.9);
   }
 }
+@media(min-width:390px) and (max-width:480px){.botanical-page{padding-top:86px}}
 
 /* Botanical specimen project cards */
 .bot-card-link{display:block;perspective:1600px;outline:none}
