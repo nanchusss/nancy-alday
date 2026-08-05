@@ -30,7 +30,7 @@ export default function ContactPage() {
   };
   return <main className={`contact-page contact-${variant}`}>
     <Seo title="Contacto | Nancy Alday — Diseño web y desarrollo digital" description="Cuéntame qué necesita tu negocio. Diseño web, desarrollo full-stack, SEO, automatización y productos digitales en Barcelona y de forma remota." path="/contacto" language="es" pageName="Contacto y solicitud de proyecto"/>
-    <header><a href={`/${variant}`}><HiArrowLongLeft/> Portfolio</a><span>Nancy Alday®</span><small>Contacto / 2026</small></header>
+    <header><a href={`/${variant}`}><HiArrowLongLeft/> Portfolio</a><a className="contact-home" href={`/${variant}`}>Nancy Alday®</a><small>Contacto / 2026</small></header>
     <section>
       <div className="contact-intro"><span>Nuevo proyecto / 2026</span><h1>¿Qué quieres<br/><em>hacer posible?</em></h1><p>Cuéntame lo esencial. Yo me encargo de ayudarte a ordenar el siguiente paso.</p></div>
       <form className={status === "sent" ? "is-sent" : ""} onSubmit={submit}>

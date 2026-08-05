@@ -22,6 +22,7 @@
   text-transform:uppercase;
 }
 .contact-page>header a{display:flex;align-items:center;gap:8px;width:max-content}
+.contact-page>header .contact-home{justify-self:center}
 .contact-page>header svg{width:17px}
 .contact-page>header small{justify-self:end;font:inherit}
 .contact-page>section{
@@ -211,7 +212,7 @@
 
 @media(max-width:820px){
   .contact-page>header{height:62px;padding:0 18px;grid-template-columns:1fr auto}
-  .contact-page>header>span{display:none}
+  .contact-page>header>.contact-home{display:none}
   .contact-page>section{min-height:calc(100svh - 62px);padding:34px 18px 50px;grid-template-columns:1fr;gap:42px}
   .contact-intro{position:static}
   .contact-intro h1{margin:19px 0 17px;font-size:clamp(48px,13vw,66px)}
