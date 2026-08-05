@@ -203,7 +203,7 @@
 .contact-sent>small{font:9px "DM Mono",monospace;letter-spacing:.13em;text-transform:uppercase}
 .contact-sent h2{margin:24px 0 16px;font:300 clamp(42px,5vw,68px)/.9 "Manrope",sans-serif;letter-spacing:-.065em}
 .contact-sent p{margin:0 auto 34px;color:color-mix(in srgb,var(--contact-ink) 66%,transparent);font-size:15px;line-height:1.6}
-.contact-sent>a{display:flex;align-items:center;justify-content:space-between;width:min(330px,100%);min-height:62px;margin:auto;padding:16px 20px;border-radius:100px;background:var(--contact-ink);color:var(--contact-bg);font:9px "DM Mono",monospace;letter-spacing:.1em;text-transform:uppercase;transition:transform .25s}
+.contact-sent>a{display:flex;align-items:center;justify-content:space-between;width:min(330px,100%);min-height:62px;margin:auto;padding:16px 20px;border-radius:100px;background:var(--contact-ink);color:var(--contact-bg);font:10px "DM Mono",monospace;letter-spacing:.1em;text-transform:uppercase;transition:transform .25s}
 .contact-sent>a:hover{transform:translateY(-3px)}
 .contact-sent>a svg{width:21px}
 .contact-error b{font-size:13px;font-weight:500}
