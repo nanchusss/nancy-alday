@@ -729,7 +729,7 @@ function App({ initialLanguage = "es" }) {
         language={language}
         path={es ? "/v1" : "/en/v1"}
         alternatePath={es ? "/en/v1" : "/v1"}
-        title={es ? "Nancy Alday | Diseñadora web y desarrolladora full-stack en Barcelona" : "Nancy Alday | Web Designer & Full-Stack Developer in Barcelona"}
+        title={es ? "NaN Studio | Diseñadora web y desarrolladora full-stack en Barcelona" : "NaN Studio | Web Designer & Full-Stack Developer in Barcelona"}
         description={es ? "Diseño y desarrollo páginas web y productos digitales de principio a fin: estrategia, UX/UI, React, backend, automatización e IA. Ayudo a negocios y profesionales a convertir sus ideas en experiencias rápidas, claras y preparadas para crecer." : "I design and develop websites and digital products end to end: strategy, UX/UI, React, backend, automation and AI. I help businesses and professionals turn ideas into fast, clear experiences built to grow."}
         pageName={es ? "Portfolio de diseño web y desarrollo full-stack" : "Web design and full-stack development portfolio"}
       />

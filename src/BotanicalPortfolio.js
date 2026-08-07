@@ -57,7 +57,7 @@ export default function BotanicalPortfolio() {
       <Seo
         language="es"
         path="/v2"
-        title="Nancy Alday | Diseño web creativo, desarrollo full-stack y automatización"
+        title="NaN Studio | Diseño web creativo, desarrollo full-stack y automatización"
         description="Portfolio creativo de Nancy Alday, diseñadora digital y desarrolladora full-stack en Barcelona. Diseño páginas web con identidad y construyo la tecnología que las hace funcionar: React, backend, APIs, reservas, pagos, automatización e IA."
         pageName="Portfolio creativo de diseño y desarrollo digital"
       />

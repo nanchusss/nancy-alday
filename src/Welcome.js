@@ -52,7 +52,7 @@ export default function Welcome() {
       <Seo
         language="es"
         path="/"
-        title="Nancy Alday | Diseño web, desarrollo full-stack y productos digitales"
+        title="NaN Studio | Diseño web, desarrollo full-stack y productos digitales"
         description="Nancy Alday diseña y desarrolla páginas web y productos digitales completos. Estrategia, UX/UI, React, backend, automatización e IA para profesionales y negocios que necesitan convertir una idea en una experiencia útil y memorable."
         pageName="Nancy Alday — Diseño y desarrollo digital"
       />
