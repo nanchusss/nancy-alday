@@ -3,6 +3,18 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "nan-studio.com" }],
+      "destination": "https://nancyalday.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.nan-studio.com" }],
+      "destination": "https://nancyalday.com/:path*",
+      "permanent": true
+    },
     { "source": "/diseno-web/vilanova-del-valles", "destination": "/diseno-web/valles-oriental", "permanent": true },
     { "source": "/diseno-web/vallromanes", "destination": "/diseno-web/valles-oriental", "permanent": true },
     { "source": "/diseno-web/alella", "destination": "/diseno-web/maresme", "permanent": true },

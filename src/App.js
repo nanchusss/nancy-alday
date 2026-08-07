@@ -502,11 +502,14 @@ function GsapProjects({ es, onEnter, onLeave }) {
 
       media.add("(min-width: 801px) and (prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray(".gsap-project-card", track);
-        const travel = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        // Use layout dimensions rather than scrollWidth: Safari can include
+        // transformed child images in scrollWidth and move the track beyond
+        // the white closing panel, exposing the green section background.
+        const travel = () => Math.max(0, track.offsetWidth - section.clientWidth);
         // Keep the horizontal story consistent across standard and ultrawide
         // displays. Using `travel()` as vertical distance made wide Macs
         // produce several screens of empty-feeling pinned space.
-        const scrollDistance = () => Math.max(3000, document.documentElement.clientHeight * 4.25);
+        const scrollDistance = () => Math.max(1600, document.documentElement.clientHeight * 2);
 
         const horizontal = gsap.fromTo(track, {
           x: 0,
@@ -518,7 +521,7 @@ function GsapProjects({ es, onEnter, onLeave }) {
             start: "top top",
             end: () => `+=${scrollDistance()}`,
             pin: true,
-            scrub: 0.5,
+            scrub: true,
             invalidateOnRefresh: true,
             anticipatePin: 1,
           },

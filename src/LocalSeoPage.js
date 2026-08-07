@@ -13,10 +13,20 @@ export const seoLocations = {
     es: { name: "Granollers", region: "Vallès Oriental", context: "empresas de servicios, comercio y proyectos B2B conectados con todo el Vallès Oriental", angle: "Transformo ofertas complejas en experiencias digitales claras que generan oportunidades comerciales." },
     en: { name: "Granollers", region: "Vallès Oriental", context: "service companies, retailers and B2B projects connected to the wider Vallès Oriental area", angle: "I turn complex offers into clear digital experiences that generate business opportunities." }
   },
+  "vilanova-del-valles": {
+    enSlug: "vilanova-del-valles",
+    es: { name: "Vilanova del Vallès", region: "Vallès Oriental", context: "negocios locales, profesionales y empresas que necesitan visibilidad y captación digital en su zona", angle: "Diseño y desarrollo webs que convierten consultas locales en oportunidades reales de negocio." },
+    en: { name: "Vilanova del Valles", region: "Valles Oriental", context: "local businesses and professionals looking for stronger visibility and local lead generation", angle: "I design and build websites that turn local enquiries into real business opportunities." }
+  },
   "valles-oriental": {
     enSlug: "valles-oriental",
     es: { name: "Vallès Oriental", region: "Barcelona", context: "pymes, profesionales y empresas de Granollers, Vilanova del Vallès, Vallromanes y municipios cercanos", angle: "Creo sistemas digitales que permiten captar oportunidades locales y crecer hacia nuevos mercados." },
     en: { name: "Vallès Oriental", region: "Barcelona", context: "SMEs and professionals across Granollers, Vilanova del Vallès, Vallromanes and nearby towns", angle: "I build digital systems designed to capture local opportunities and support growth into wider markets." }
+  },
+  catalunya: {
+    enSlug: "catalonia",
+    es: { name: "Cataluña", region: "Cataluña", context: "empresas y profesionales que necesitan una presencia digital competitiva en todo el territorio catalán", angle: "Combino estrategia, diseño y desarrollo para escalar presencia digital en Cataluña con una base técnica sólida." },
+    en: { name: "Catalonia", region: "Catalonia", context: "businesses and professionals who need a competitive digital presence across the Catalan territory", angle: "I combine strategy, design and development to scale digital presence in Catalonia on a solid technical foundation." }
   },
   maresme: {
     enSlug: "maresme",
